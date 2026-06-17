@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shiyo ohashi — design portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="site.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { portfolio: { red: '#C83232' } },
+          fontFamily: {
+            script: ['Allura', 'cursive'],
+            sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html, body {
+      overflow-x: hidden;
+      background: #fff;
+    }
+
+    /* ── Paper texture system — clean glossy stock ── */
+    :root {
+      --paper-page: #fcfbfa;
+      --paper-cover: #f0ebe5;
+      --paper-endpaper: #f8f6f3;
+      --paper-edge: rgba(200, 192, 180, 0.22);
+      --book-stroke: rgba(190, 182, 172, 0.28);
+    }
+
+    .paper-grain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.1;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+    }
+
+    .paper-grain-coarse::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.08;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.42' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+      background-size: 280px 280px;
+    }
+
+    .paper-fibers::after {
+      display: none;
+    }
+
+    .paper-vignette {
+      box-shadow:
+        inset 0 0 40px rgba(120, 110, 95, 0.03),
+        inset 0 0 0 1px var(--paper-edge),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .page-cover-inner.paper-vignette {
+      box-shadow:
+        inset 0 0 48px rgba(120, 100, 70, 0.05),
+        inset 0 0 0 1px var(--paper-edge),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+
+    .page-paper-inner.paper-vignette {
+      box-shadow:
+        inset 0 0 48px rgba(120, 100, 70, 0.04),
+        inset 0 0 0 1px var(--paper-edge);
+    }
+
+    #intro-scene {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    #intro-scene.is-done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    #intro-stage {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    #sketchbook {
+      margin: 0 auto;
+      filter:
+        drop-shadow(0 20px 40px rgba(30, 25, 20, 0.1))
+        drop-shadow(0 6px 14px rgba(30, 25, 20, 0.06));
+    }
+
+    #sketchbook .page,
+    #sketchbook .stf__item {
+      border: none !important;
+      outline: none !important;
+      overflow: hidden;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    #sketchbook .stf__block {
+      border: none !important;
+    }
+
+    .page-inner {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .page-cover-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 1.25rem;
+      height: 100%;
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse 75% 55% at 30% 10%, rgba(255, 255, 255, 0.45) 0%, transparent 58%),
+        linear-gradient(155deg, #f4f0ea 0%, var(--paper-cover) 42%, #e8e2da 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .page-cover-inner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Photo cover — portrait + name overlay */
+    .page-cover-inner.page-cover-photo {
+      padding: 0;
+      justify-content: flex-end;
+      align-items: stretch;
+      background: #2a2a2a;
+    }
+
+    .page-cover-inner.page-cover-photo > * {
+      z-index: 2;
+    }
+
+    .cover-photo {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      filter: grayscale(100%) contrast(1.08);
+    }
+
+    .page-cover-inner.page-cover-photo.paper-grain-coarse::before,
+    .page-cover-inner.page-cover-photo.paper-fibers::after {
+      z-index: 1;
+    }
+
+    .page-cover-inner.page-cover-photo.paper-grain-coarse::before {
+      opacity: 0.2;
+      mix-blend-mode: overlay;
+    }
+
+    .cover-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0.28) 28%,
+        transparent 55%
+      );
+    }
+
+    .cover-title-img {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      bottom: 8%;
+      transform: translateX(-50%);
+      width: min(72%, 280px);
+      height: auto;
+      pointer-events: none;
+      object-fit: contain;
+      opacity: 0.72;
+      filter: contrast(0.92) brightness(1.04);
+    }
+
+    .page-paper-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 100%;
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse 100% 75% at 52% 14%, rgba(255, 255, 255, 0.98) 0%, transparent 58%),
+        linear-gradient(180deg, #fffffe 0%, var(--paper-page) 50%, #f6f4f1 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .page-welcome-text {
+      position: absolute;
+      left: 54%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      width: 72%;
+      max-width: 240px;
+      height: auto;
+      pointer-events: none;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0.98;
+    }
+
+    .page-endpaper-inner {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #fcfbfa 0%, var(--paper-endpaper) 55%, #f2efeb 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Homepage layout */
+    .homepage-main {
+      padding-top: 2rem;
+      padding-bottom: 0.5rem;
+      overflow: visible;
+    }
+
+    @media (min-width: 768px) {
+      .homepage-main {
+        padding-top: 3rem;
+        padding-bottom: 0.75rem;
+      }
+    }
+
+    .homepage-footer {
+      margin-top: 0.5rem;
+      padding-top: 0.75rem;
+      padding-bottom: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .homepage-footer {
+        padding-top: 0.85rem;
+        padding-bottom: 1.5rem;
+      }
+    }
+
+    /* Homepage open book — editorial spread with perspective + fold-out */
+    .book-scene {
+      position: relative;
+      width: 100%;
+      max-width: min(1040px, 83vw);
+      margin: 0 auto;
+      padding: 0.25rem 0 1.25rem;
+      perspective: 1500px;
+      perspective-origin: 48% 38%;
+      overflow: visible;
+    }
+
+    .book-scene::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0.35rem;
+      width: min(70%, 540px);
+      height: 13%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(
+        ellipse 100% 100% at 50% 18%,
+        rgba(30, 25, 20, 0.11) 0%,
+        rgba(30, 25, 20, 0.035) 52%,
+        transparent 76%
+      );
+    }
+
+    .book-open {
+      --book-inset-x: 11.5%;
+      --book-inset-y: 9.75%;
+      --book-spine-x: 50%;
+      --book-page-left: 8.7%;
+      --book-page-right: 6.5%;
+      --book-page-top: 4%;
+      --book-page-bottom: 4%;
+      --book-banner-height: 63%;
+      --book-content-push: 2.4%;
+      --book-banner-top: calc(50% - var(--book-banner-height) / 2 + var(--book-content-push));
+      position: relative;
+      width: min(
+        100%,
+        min(1040px, 83vw),
+        calc((100svh - 7.5rem) * (920 / 620))
+      );
+      margin-inline: auto;
+      aspect-ratio: 920 / 620;
+      isolation: isolate;
+      z-index: 1;
+      transform: rotateX(8deg) rotateZ(-1deg);
+      transform-origin: center 42%;
+      transform-style: preserve-3d;
+      filter:
+        drop-shadow(0 26px 46px rgba(30, 25, 20, 0.12))
+        drop-shadow(0 10px 22px rgba(30, 25, 20, 0.08));
+    }
+
+    .book-open::after {
+      content: '';
+      position: absolute;
+      left: var(--book-page-left);
+      right: var(--book-page-right);
+      top: var(--book-page-top);
+      bottom: var(--book-page-bottom);
+      z-index: 2;
+      pointer-events: none;
+      border-radius: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 42%,
+        rgba(0, 0, 0, 0.05) 47%,
+        rgba(0, 0, 0, 0.11) 49.2%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.11) 50.8%,
+        rgba(0, 0, 0, 0.05) 53%,
+        transparent 58%,
+        transparent 100%
+      );
+      box-shadow: inset 0 0 0 1px rgba(210, 200, 188, 0.16);
+    }
+
+    .book-open > svg {
+      position: relative;
+      z-index: 1;
+      shape-rendering: geometricPrecision;
+    }
+
+    .book-open .book-shadow-base {
+      fill: rgba(40, 35, 30, 0.17);
+      filter: url(#book-ambient-shadow);
+    }
+
+    .book-open .book-page-fill {
+      stroke: none;
+    }
+
+    .book-open .book-page-left,
+    .book-open .book-page-right {
+      filter: none;
+    }
+
+    .book-open .book-page-left {
+      fill: url(#paper-page-left);
+    }
+
+    .book-open .book-page-right {
+      fill: url(#paper-page-right);
+    }
+
+    .book-open .book-page-gloss {
+      pointer-events: none;
+    }
+
+    .book-open .book-page-gloss--left {
+      fill: url(#page-gloss-left);
+      mix-blend-mode: screen;
+      opacity: 1;
+    }
+
+    .book-open .book-page-gloss--right {
+      fill: url(#page-gloss-right);
+      mix-blend-mode: screen;
+      opacity: 1;
+    }
+
+    .book-open .book-page-specular {
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.62;
+    }
+
+    .book-open .book-page-specular--left {
+      fill: url(#page-specular-left);
+    }
+
+    .book-open .book-page-specular--right {
+      fill: url(#page-specular-right);
+    }
+
+    .book-open .book-page-edge {
+      opacity: 0.7;
+    }
+
+    .book-open .book-page-edge--left {
+      fill: url(#page-edge-left);
+    }
+
+    .book-open .book-page-edge--right {
+      fill: url(#page-edge-right);
+    }
+
+    .book-open .book-page-curve {
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    .book-open .book-spine-valley {
+      fill: url(#spine-valley-soft);
+      opacity: 0.96;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .book-open .book-spine-gutter {
+      display: none;
+    }
+
+    .book-open .book-spine {
+      display: none;
+    }
+
+    .book-open .book-spine-fold {
+      display: none;
+    }
+
+    .book-open .book-page-curve--left {
+      fill: url(#page-curve-left);
+      opacity: 0.58;
+    }
+
+    .book-open .book-page-curve--right {
+      fill: url(#page-curve-right);
+      opacity: 0.58;
+    }
+
+    .book-open .book-page-grid {
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .book-open .book-page-grid--left {
+      fill: url(#page-grid-left);
+    }
+
+    .book-open .book-page-grid--right {
+      fill: url(#page-grid-right);
+    }
+
+    .book-open .book-bottom-stack {
+      stroke: rgba(180, 172, 162, 0.35);
+      stroke-width: 0.35;
+      fill: none;
+    }
+
+    .book-open .book-page-stack {
+      fill: url(#paper-page-left);
+      stroke: rgba(210, 204, 196, 0.35);
+      stroke-width: 0.35;
+    }
+
+    .book-open .book-page-stack--1 { opacity: 0.92; }
+    .book-open .book-page-stack--2 { opacity: 0.78; }
+    .book-open .book-page-stack--3 { opacity: 0.62; }
+    .book-open .book-page-stack--4 { opacity: 0.48; }
+    .book-open .book-page-stack--5 { opacity: 0.34; }
+
+    .book-page-texture {
+      position: absolute;
+      left: var(--book-page-left);
+      right: var(--book-page-right);
+      top: var(--book-page-top);
+      bottom: var(--book-page-bottom);
+      z-index: 3;
+      pointer-events: none;
+      border-radius: 2px;
+      opacity: 0.11;
+      mix-blend-mode: multiply;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23f)' opacity='0.35'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)' opacity='0.28'/%3E%3C/svg%3E");
+      background-size: 180px 180px, 120px 120px, 240px 240px;
+    }
+
+    .book-page-texture::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.045;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23p)' opacity='0.5'/%3E%3C/svg%3E");
+      background-size: 320px 320px;
+    }
+
+    /* Handwritten section labels — graphite on paper */
+    .book-page-labels {
+      --label-script-height: clamp(1.78rem, 5.6vw, 2.62rem);
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .book-page-labels-row {
+      position: absolute;
+      left: var(--book-page-left);
+      right: var(--book-page-right);
+      top: calc(var(--book-banner-top) - var(--label-script-height) + 0.18rem);
+      height: var(--label-script-height);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: end;
+      gap: clamp(0.35rem, 1.5vw, 1rem);
+      pointer-events: none;
+    }
+
+    .book-page-label {
+      position: relative;
+      height: var(--label-script-height);
+      width: auto;
+      pointer-events: auto;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .book-page-label:nth-child(1) {
+      justify-self: start;
+    }
+
+    .book-page-label:nth-child(2) {
+      justify-self: center;
+    }
+
+    .book-page-label:nth-child(3),
+    .book-page-label--journalism {
+      justify-self: end;
+      transform: translateX(-0.85rem);
+    }
+
+    .book-page-label:hover {
+      opacity: 0.88;
+    }
+
+    .book-page-label__graphite {
+      position: relative;
+      display: block;
+      height: 100%;
+      width: auto;
+      isolation: isolate;
+    }
+
+    .book-page-label__graphite::after {
+      content: '';
+      position: absolute;
+      left: 8%;
+      right: 18%;
+      bottom: -6%;
+      height: 28%;
+      pointer-events: none;
+      opacity: 0.14;
+      mix-blend-mode: multiply;
+      background: radial-gradient(ellipse 80% 100% at 40% 50%, rgba(70, 65, 58, 0.55) 0%, transparent 72%);
+      filter: blur(2px);
+      transform: rotate(-2deg);
+    }
+
+    .book-page-label__ink,
+    .book-page-label__smear {
+      display: block;
+      height: 100%;
+      width: auto;
+    }
+
+    .book-page-label__ink {
+      position: relative;
+      z-index: 2;
+      mix-blend-mode: multiply;
+      opacity: 0.86;
+      filter: contrast(1.52) brightness(0.88) saturate(0.08);
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .book-page-label__smear {
+      position: absolute;
+      top: -4%;
+      left: -3%;
+      height: 108%;
+      width: auto;
+      z-index: 1;
+      mix-blend-mode: multiply;
+      opacity: 0.31;
+      filter: blur(1.4px) contrast(0.9) brightness(0.9);
+      transform: translate(0.8px, 1.2px) rotate(-0.35deg);
+      pointer-events: none;
+    }
+
+    .book-page-date {
+      position: absolute;
+      right: calc(var(--book-page-right) + 2.5%);
+      bottom: calc(var(--book-page-bottom) + 2%);
+      z-index: 3;
+      font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(0.5rem, 0.8vw, 0.6rem);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      color: rgba(0, 0, 0, 0.52);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* Insert strip — paper draped across the open journal */
+    .book-foldout {
+      --foldout-duration: 100s;
+      --foldout-width: 140%;
+      position: absolute;
+      left: var(--book-spine-x);
+      width: var(--foldout-width);
+      top: var(--book-banner-top);
+      height: var(--book-banner-height);
+      z-index: 4;
+      pointer-events: none;
+      transform: translateX(-50%);
+    }
+
+    .book-foldout-shadow {
+      position: absolute;
+      inset: 4% 4% -3% 4%;
+      z-index: 0;
+      pointer-events: none;
+      clip-path: url(#foldout-drape-clip);
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 55%, rgba(30, 25, 20, 0.28) 0%, transparent 72%),
+        radial-gradient(ellipse 5% 90% at 50% 54%, rgba(30, 25, 20, 0.24) 0%, transparent 82%);
+      filter: blur(15px);
+      transform: perspective(1000px) rotateX(-2deg) translateY(18px);
+      transform-origin: 50% 68%;
+      opacity: 1;
+    }
+
+    .book-foldout-drape {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      perspective: 1200px;
+      perspective-origin: 50% 56%;
+      transform-style: preserve-3d;
+      background: #faf9f7;
+      clip-path: url(#foldout-drape-clip);
+      transform: perspective(1000px) rotateX(-3deg);
+      transform-origin: 50% 68%;
+      pointer-events: auto;
+      box-shadow:
+        0 28px 54px rgba(30, 25, 20, 0.16),
+        0 12px 26px rgba(30, 25, 20, 0.11),
+        0 4px 10px rgba(30, 25, 20, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .book-foldout-drape::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg,
+          transparent 0%,
+          transparent 44%,
+          rgba(0, 0, 0, 0.04) 47.5%,
+          rgba(0, 0, 0, 0.1) 49.2%,
+          rgba(0, 0, 0, 0.16) 50%,
+          rgba(0, 0, 0, 0.1) 50.8%,
+          rgba(0, 0, 0, 0.04) 52.5%,
+          transparent 56%,
+          transparent 100%
+        ),
+        radial-gradient(ellipse 7% 94% at 50% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 80%);
+    }
+
+    .book-foldout-drape::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg,
+          rgba(255, 255, 255, 0.28) 0%,
+          transparent 8%,
+          transparent 92%,
+          rgba(0, 0, 0, 0.04) 100%
+        ),
+        linear-gradient(
+          168deg,
+          rgba(255, 255, 255, 0.34) 0%,
+          transparent 24%,
+          transparent 100%
+        );
+    }
+
+    .book-foldout-segment {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    .book-foldout-segment--left {
+      transform: rotateY(11deg) rotateX(2deg);
+      transform-origin: 100% 52%;
+    }
+
+    .book-foldout-segment--center {
+      transform: rotateX(-2deg) translateZ(1px);
+      transform-origin: 50% 60%;
+    }
+
+    .book-foldout-segment--center::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg,
+          rgba(0, 0, 0, 0.07) 0%,
+          rgba(0, 0, 0, 0.02) 5%,
+          transparent 12%
+        ),
+        linear-gradient(270deg,
+          rgba(0, 0, 0, 0.06) 0%,
+          rgba(0, 0, 0, 0.02) 5%,
+          transparent 12%
+        );
+    }
+
+    .book-foldout-segment--right {
+      transform: rotateY(-11deg) rotateX(2deg);
+      transform-origin: 0% 52%;
+    }
+
+    .book-foldout-segment--left::after,
+    .book-foldout-segment--right::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .book-foldout-segment--left::after {
+      right: 0;
+      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.09));
+      box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .book-foldout-segment--right::after {
+      left: 0;
+      background: linear-gradient(270deg, transparent, rgba(0, 0, 0, 0.08));
+      box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .book-foldout-row-offset {
+      height: 100%;
+      will-change: transform;
+    }
+
+    .book-foldout-row {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      width: max-content;
+      animation: foldout-marquee var(--foldout-duration) linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes foldout-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .book-foldout-slide {
+      flex: 0 0 auto;
+      height: 100%;
+      width: auto;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .book-foldout-slide__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.65rem 0.75rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.28s ease;
+      pointer-events: none;
+    }
+
+    .book-foldout-slide__title {
+      font-size: clamp(0.72rem, 1.35vw, 0.92rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .book-foldout-slide__desc {
+      font-size: clamp(0.62rem, 1.05vw, 0.78rem);
+      font-weight: 300;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.92);
+      max-width: 13rem;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.28s ease 0.04s, transform 0.28s ease 0.04s;
+    }
+
+    .book-foldout-slide:hover .book-foldout-slide__overlay {
+      background: rgba(0, 0, 0, 0.58);
+    }
+
+    .book-foldout-slide:hover .book-foldout-slide__title,
+    .book-foldout-slide:hover .book-foldout-slide__desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-foldout-slide img {
+      display: block;
+      height: 100%;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      object-position: center;
+      filter: contrast(1.02);
+    }
+
+    @media (max-width: 767px) {
+      .book-scene {
+        perspective: none;
+        max-width: min(960px, 94vw);
+        padding-bottom: 1rem;
+      }
+
+      .book-scene::after {
+        width: min(76%, 420px);
+        height: 11%;
+        opacity: 0.9;
+      }
+
+      .book-open {
+        transform: none;
+        filter:
+          drop-shadow(0 18px 34px rgba(30, 25, 20, 0.1))
+          drop-shadow(0 8px 16px rgba(30, 25, 20, 0.06));
+        width: min(
+          100%,
+          min(960px, 94vw),
+          calc((100svh - 6.5rem) * (920 / 620))
+        );
+        --book-banner-height: 58%;
+        --book-content-push: 2%;
+      }
+
+      .book-page-labels-row {
+        top: calc(var(--book-banner-top) - var(--label-script-height) + 0.14rem);
+        height: var(--label-script-height);
+        align-items: end;
+        gap: 0.25rem;
+      }
+
+      .book-foldout {
+        --foldout-width: 120%;
+        transform: translateX(-50%);
+      }
+
+      .book-foldout-shadow {
+        transform: translateY(8px);
+        filter: blur(8px);
+      }
+
+      .book-foldout-drape {
+        transform: none;
+        perspective: none;
+      }
+
+      .book-foldout-segment--left,
+      .book-foldout-segment--center,
+      .book-foldout-segment--right {
+        transform: none;
+      }
+
+      .book-foldout-segment--left::after,
+      .book-foldout-segment--right::after {
+        box-shadow: none;
+      }
+
+      .book-foldout-slide {
+        height: 100%;
+        width: auto;
+      }
+
+      .book-foldout-slide img {
+        height: 100%;
+        width: auto;
+      }
+
+      .book-page-labels {
+        --label-script-height: clamp(1.45rem, 6.5vw, 2.18rem);
+      }
+
+      .book-page-date {
+        font-size: clamp(0.46rem, 2.4vw, 0.56rem);
+      }
+
+      .book-page-label:nth-child(3),
+      .book-page-label--journalism {
+        transform: translateX(-0.45rem);
+      }
+    }
+
+    #page-root {
+      font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+      color: #000;
+      background: #fff;
+    }
+
+    #page-root a {
+      color: #000;
+    }
+
+    #page-root svg {
+      color: #000;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .contact-info .contact-sep {
+      opacity: 0.35;
+      user-select: none;
+    }
+
+    .skip-intro {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 60;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C83232;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .skip-intro.show {
+      opacity: 0.45;
+      pointer-events: auto;
+    }
+
+    .skip-intro.show:hover { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .book-foldout-drape {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .book-foldout-row {
+        animation: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-note-tab,
+      .resume-note-tab,
+      .about-note-panel,
+      .resume-note-panel,
+      .about-note-backdrop,
+      .resume-note-backdrop {
+        transition: none;
+      }
+
+      .about-note-panel,
+      .resume-note-panel {
+        transform: translate(-50%, -50%);
+      }
+
+      .about-note.is-open .about-note-panel,
+      .resume-note.is-open .resume-note-panel {
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #intro-scene { display: none !important; }
+      #page-root { opacity: 1 !important; }
+      .skip-intro { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-white font-sans text-portfolio-red antialiased">
+
+  <!-- SVG paper textures (visual only) -->
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+    <defs>
+      <clipPath id="foldout-drape-clip" clipPathUnits="objectBoundingBox">
+        <path d="M 0 0.04
+          L 0.44 0.04
+          C 0.472 0.052, 0.488 0.064, 0.5 0.068
+          C 0.512 0.064, 0.528 0.052, 0.56 0.04
+          L 1 0.04
+          L 1 0.96
+          L 0.56 0.96
+          C 0.528 0.948, 0.512 0.936, 0.5 0.932
+          C 0.488 0.936, 0.472 0.948, 0.44 0.96
+          L 0 0.96
+          Z"/>
+      </clipPath>
+      <linearGradient id="paper-page-base" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#fffdf8"/>
+        <stop offset="35%" stop-color="#fcf7ef"/>
+        <stop offset="100%" stop-color="#f3ebe0"/>
+      </linearGradient>
+      <linearGradient id="paper-page-left" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fffdf8"/>
+        <stop offset="40%" stop-color="#faf4ea"/>
+        <stop offset="100%" stop-color="#f0e8dc"/>
+      </linearGradient>
+      <linearGradient id="paper-page-right" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#fffdf8"/>
+        <stop offset="40%" stop-color="#faf4ea"/>
+        <stop offset="100%" stop-color="#f0e8dc"/>
+      </linearGradient>
+      <linearGradient id="page-curve-left" x1="100%" y1="0%" x2="58%" y2="0%">
+        <stop offset="0%" stop-color="rgba(0,0,0,0.09)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </linearGradient>
+      <linearGradient id="page-curve-right" x1="0%" y1="0%" x2="42%" y2="0%">
+        <stop offset="0%" stop-color="rgba(0,0,0,0.09)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </linearGradient>
+      <pattern id="page-grid-left" width="56" height="56" patternUnits="userSpaceOnUse">
+        <line x1="28" y1="0" x2="28" y2="56" stroke="rgba(0,0,0,0.045)" stroke-width="0.5"/>
+      </pattern>
+      <pattern id="page-grid-right" width="56" height="56" patternUnits="userSpaceOnUse">
+        <line x1="28" y1="0" x2="28" y2="56" stroke="rgba(0,0,0,0.045)" stroke-width="0.5"/>
+      </pattern>
+      <linearGradient id="page-gloss-left" x1="0%" y1="0%" x2="32%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.88"/>
+        <stop offset="20%" stop-color="#ffffff" stop-opacity="0.35"/>
+        <stop offset="55%" stop-color="#ffffff" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="page-gloss-right" x1="100%" y1="0%" x2="68%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.88"/>
+        <stop offset="20%" stop-color="#ffffff" stop-opacity="0.35"/>
+        <stop offset="55%" stop-color="#ffffff" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="page-specular-left" x1="10%" y1="4%" x2="38%" y2="52%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+        <stop offset="38%" stop-color="#ffffff" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="page-specular-right" x1="90%" y1="4%" x2="62%" y2="52%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+        <stop offset="38%" stop-color="#ffffff" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="page-edge-left" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ddd4c8"/>
+        <stop offset="40%" stop-color="#f5efe6"/>
+        <stop offset="100%" stop-color="#faf6ef"/>
+      </linearGradient>
+      <linearGradient id="page-edge-right" x1="100%" y1="0%" x2="0%" y2="0%">
+        <stop offset="0%" stop-color="#ddd4c8"/>
+        <stop offset="40%" stop-color="#f5efe6"/>
+        <stop offset="100%" stop-color="#faf6ef"/>
+      </linearGradient>
+      <linearGradient id="spine-valley-soft" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+        <stop offset="28%" stop-color="rgba(0,0,0,0.05)"/>
+        <stop offset="44%" stop-color="rgba(0,0,0,0.1)"/>
+        <stop offset="50%" stop-color="rgba(0,0,0,0.16)"/>
+        <stop offset="56%" stop-color="rgba(0,0,0,0.1)"/>
+        <stop offset="72%" stop-color="rgba(0,0,0,0.05)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </linearGradient>
+      <filter id="book-ambient-shadow" x="-20%" y="-10%" width="140%" height="130%">
+        <feGaussianBlur stdDeviation="16"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Intro: cover opens → zoom into white → homepage -->
+  <div id="intro-scene" aria-hidden="true">
+    <div id="intro-stage">
+      <div id="sketchbook">
+        <div class="page page-cover page-cover-top" data-density="hard">
+          <div class="page-inner page-cover-inner page-cover-photo paper-vignette">
+            <img src="images/cover-portrait.png" alt="" class="cover-photo" />
+            <div class="cover-scrim" aria-hidden="true"></div>
+            <img src="images/cover-title.png" alt="SHIYO OHASHI" class="cover-title-img" />
+          </div>
+        </div>
+        <div class="page page-paper">
+          <div class="page-inner page-paper-inner paper-vignette">
+            <img src="images/welcome-text.png" alt="Welcome to my portfolio" class="page-welcome-text" />
+          </div>
+        </div>
+        <div class="page page-cover page-cover-bottom" data-density="hard">
+          <div class="page-inner page-endpaper-inner paper-vignette"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="skip-intro" class="skip-intro" type="button">Skip intro</button>
+
+  <!-- Homepage -->
+  <div id="page-root" class="opacity-0 text-black">
+    <div id="about-note" class="about-note" hidden>
+      <button id="about-note-tab" class="about-note-tab" type="button" aria-expanded="false" aria-controls="about-note-panel">
+        about me
+      </button>
+      <div id="about-note-backdrop" class="about-note-backdrop" aria-hidden="true"></div>
+      <div
+        id="about-note-panel"
+        class="about-note-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="about-note-title"
+        aria-hidden="true"
+      >
+        <button id="about-note-close" class="about-note-close" type="button" aria-label="Close about me">×</button>
+        <h2 id="about-note-title" class="about-note-title">about me</h2>
+        <div class="about-note-content">
+          <img id="about-note-image" class="about-note-image" src="" alt="" hidden />
+          <p id="about-note-text" class="about-note-text"></p>
+          <div id="about-note-links" class="about-note-links"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="resume-note" class="resume-note" hidden>
+      <button id="resume-note-tab" class="resume-note-tab" type="button" aria-expanded="false" aria-controls="resume-note-panel">
+        resume
+      </button>
+      <div id="resume-note-backdrop" class="resume-note-backdrop" aria-hidden="true"></div>
+      <div
+        id="resume-note-panel"
+        class="resume-note-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Resume"
+        aria-hidden="true"
+      >
+        <button id="resume-note-close" class="resume-note-close" type="button" aria-label="Close resume">×</button>
+        <div id="resume-note-sheet" class="resume-note-sheet">
+          <div class="resume-note-page">
+            <canvas id="resume-note-canvas"></canvas>
+            <div id="resume-note-link-layer" class="resume-note-link-layer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h1 id="site-name" class="sr-only">shiyo ohashi</h1>
+
+    <main class="homepage-main w-full max-w-[1600px] mx-auto px-3 sm:px-5 md:px-8">
+      <div class="book-scene">
+        <div class="relative w-full book-open">
+          <svg class="absolute inset-0 w-full h-full pointer-events-none select-none" viewBox="0 0 920 620" fill="none" aria-hidden="true">
+            <ellipse class="book-shadow-base" cx="460" cy="612" rx="392" ry="24"/>
+            <path class="book-page-stack book-page-stack--5" d="M 28 51 L 40 49 L 40 569 L 28 567 Q 26 567 26 565 L 26 53 Q 26 51 28 51 Z"/>
+            <path class="book-page-stack book-page-stack--4" d="M 31 49 L 43 47 L 43 571 L 31 569 Q 29 569 29 567 L 29 51 Q 29 49 31 49 Z"/>
+            <path class="book-page-stack book-page-stack--3" d="M 34 48 L 46 46 L 46 572 L 34 570 Q 32 570 32 568 L 32 50 Q 32 48 34 48 Z"/>
+            <path class="book-page-stack book-page-stack--2" d="M 40 45 L 52 43 L 52 575 L 40 573 Q 38 573 38 571 L 38 47 Q 38 45 40 45 Z"/>
+            <path class="book-page-stack book-page-stack--1" d="M 46 42 L 58 40 L 58 578 L 46 576 Q 44 576 44 574 L 44 44 Q 44 42 46 42 Z"/>
+            <path class="book-page-edge book-page-edge--left" d="M 56 38 L 62 38 L 62 582 L 56 582 Q 54 582 54 580 L 54 40 Q 54 38 56 38 Z"/>
+            <path class="book-page-edge book-page-edge--right" d="M 858 38 L 864 38 Q 866 38 866 40 L 866 580 Q 866 582 864 582 L 858 582 Z"/>
+            <path class="book-page-fill book-page-left" d="M 80 25 L 447 25 Q 455 25 460 32 L 460 582 Q 455 590 447 595 L 80 595 Q 60 595 60 575 L 60 45 Q 60 25 80 25 Z"/>
+            <path class="book-page-fill book-page-right" d="M 460 32 L 473 25 L 840 25 Q 860 25 860 45 L 860 575 Q 860 595 840 595 L 473 595 Q 465 590 460 582 L 460 32 Z"/>
+            <path class="book-page-grid book-page-grid--left" d="M 80 25 L 447 25 Q 455 25 460 32 L 460 582 Q 455 590 447 595 L 80 595 Q 60 595 60 575 L 60 45 Q 60 25 80 25 Z"/>
+            <path class="book-page-grid book-page-grid--right" d="M 460 32 L 473 25 L 840 25 Q 860 25 860 45 L 860 575 Q 860 595 840 595 L 473 595 Q 465 590 460 582 L 460 32 Z"/>
+            <path class="book-page-curve book-page-curve--left" d="M 80 25 L 447 25 Q 455 25 460 32 L 460 582 Q 455 590 447 595 L 80 595 Q 60 595 60 575 L 60 45 Q 60 25 80 25 Z"/>
+            <path class="book-page-curve book-page-curve--right" d="M 460 32 L 473 25 L 840 25 Q 860 25 860 45 L 860 575 Q 860 595 840 595 L 473 595 Q 465 590 460 582 L 460 32 Z"/>
+            <path class="book-page-gloss book-page-gloss--left" d="M 80 25 L 447 25 Q 455 25 460 32 L 460 582 Q 455 590 447 595 L 80 595 Q 60 595 60 575 L 60 45 Q 60 25 80 25 Z"/>
+            <path class="book-page-gloss book-page-gloss--right" d="M 460 32 L 473 25 L 840 25 Q 860 25 860 45 L 860 575 Q 860 595 840 595 L 473 595 Q 465 590 460 582 L 460 32 Z"/>
+            <path class="book-page-specular book-page-specular--left" d="M 80 25 L 447 25 Q 455 25 460 32 L 460 582 Q 455 590 447 595 L 80 595 Q 60 595 60 575 L 60 45 Q 60 25 80 25 Z"/>
+            <path class="book-page-specular book-page-specular--right" d="M 460 32 L 473 25 L 840 25 Q 860 25 860 45 L 860 575 Q 860 595 840 595 L 473 595 Q 465 590 460 582 L 460 32 Z"/>
+            <line class="book-bottom-stack" x1="62" y1="598" x2="858" y2="598"/>
+            <line class="book-bottom-stack" x1="64" y1="601" x2="856" y2="601"/>
+            <line class="book-bottom-stack" x1="66" y1="604" x2="854" y2="604"/>
+            <rect class="book-spine-valley" x="451" y="33" width="18" height="554"/>
+          </svg>
+          <div class="book-page-texture" aria-hidden="true"></div>
+          <nav class="book-page-labels" aria-label="Portfolio sections">
+            <div class="book-page-labels-row">
+              <a href="projects.html" class="book-page-label" target="_blank" rel="noopener noreferrer">
+                <span class="book-page-label__graphite">
+                  <img src="images/journal-labels/label-projects.png" alt="projects" class="book-page-label__ink" width="221" height="169" />
+                  <img src="images/journal-labels/label-projects-smear.png" alt="" aria-hidden="true" class="book-page-label__smear" width="228" height="180" />
+                </span>
+              </a>
+              <a href="art-paintings.html" class="book-page-label" target="_blank" rel="noopener noreferrer">
+                <span class="book-page-label__graphite">
+                  <img src="images/journal-labels/label-my-art.png" alt="my art" class="book-page-label__ink" width="238" height="144" />
+                  <img src="images/journal-labels/label-my-art-smear.png" alt="" aria-hidden="true" class="book-page-label__smear" width="248" height="156" />
+                </span>
+              </a>
+              <a href="journalism.html" class="book-page-label book-page-label--journalism" target="_blank" rel="noopener noreferrer">
+                <span class="book-page-label__graphite">
+                  <img src="images/journal-labels/label-journalism.png" alt="journalism / cartoons" class="book-page-label__ink" width="669" height="222" />
+                  <img src="images/journal-labels/label-journalism-smear.png" alt="" aria-hidden="true" class="book-page-label__smear" width="682" height="236" />
+                </span>
+              </a>
+            </div>
+          </nav>
+          <time id="book-page-date" class="book-page-date"></time>
+          <div id="book-foldout"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="homepage-footer text-center">
+      <div id="contact-info" class="contact-info text-xs md:text-sm"></div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="contact.js"></script>
+  <script src="notes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1492 @@
+{
+  "site": {
+    "name": "shiyo ohashi",
+    "subtitle": "good with my hands",
+    "portfolioUrl": "https://new.express.adobe.com/webpage/9LmeqRF4rDH0W"
+  },
+  "projects": {
+    "title": "projects",
+    "titleImage": "images/projects-title.png",
+    "seeMore": "projects.html",
+    "items": [
+      {
+        "title": "Triton Trading Group (2025-26)",
+        "image": "images/banner/triton-trading-spring-recruitment-we-want-you.png",
+        "link": "work.html?section=projects&slug=triton-trading-group"
+      },
+      {
+        "title": "Brisbane Olympics (2026)",
+        "image": "images/banner/brisbane-bound-for-gold-billboard.png",
+        "link": "work.html?section=projects&slug=brisbane-2032-olympics-branding"
+      },
+      {
+        "title": "Scotscoop Logo (2023)",
+        "image": "images/projects/scot-scoop/thumbnail.png",
+        "link": "work.html?section=projects&slug=scot-scoop-news-logo"
+      }
+    ]
+  },
+  "journalism": {
+    "title": "journalism / cartoons",
+    "titleImage": "images/journalism-title.png",
+    "seeMore": "journalism.html",
+    "items": [
+      {
+        "title": "Editorial Cartoons",
+        "image": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg",
+        "link": "journalism.html"
+      },
+      {
+        "title": "Feature Photos",
+        "image": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg",
+        "link": "journalism.html#feature-photos"
+      }
+    ]
+  },
+  "art": {
+    "title": "my art",
+    "titleImage": "images/art-title.png",
+    "seeMore": "art-paintings.html",
+    "items": [
+      {
+        "title": "portrait mode",
+        "image": "images/banner/portrait-mode.png",
+        "link": "work.html?section=artPaintings&slug=group-portraits"
+      }
+    ]
+  },
+  "about": {
+    "title": "about me",
+    "intro": "Hi, I'm Shiyo.",
+    "text": "I'm a creative director & visual strategist studying Cognitive Science and Business at UC San Diego. Currently building: this site, my javascript proficiency, a newfound relationship w/ acrylic paint. Check out my portfolio and resume for more",
+    "image": "images/about-portraits.png"
+  },
+  "resume": {
+    "title": "resume",
+    "file": "files/resume.pdf"
+  },
+  "contact": {
+    "title": "CONTACT ME",
+    "phone": "650-539-7879",
+    "email": "shiyo.ohashi@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/shiyo-ohashi"
+  },
+  "foldoutBanner": {
+    "speed": 40,
+    "items": [
+      {
+        "title": "TTG (2025-26)",
+        "description": "Spring Recruitment 2026 \u00b7 WE WANT YOU",
+        "image": "images/banner/triton-trading-spring-recruitment-we-want-you.png",
+        "link": "work.html?section=projects&slug=triton-trading-group"
+      },
+      {
+        "title": "Triton Trading Group \u00b7 FP&A",
+        "description": "Financial Planning & Analysis recruitment",
+        "image": "images/banner/triton-trading-fpa-recruitment.png",
+        "link": "work.html?section=projects&slug=triton-trading-group"
+      },
+      {
+        "title": "Family and cranes",
+        "description": "Oil on canvas \u00b7 Bali temple, 2024",
+        "image": "images/banner/family-and-cranes.png",
+        "link": "work.html?section=artPaintings&slug=family-and-cranes"
+      },
+      {
+        "title": "Gold halo",
+        "description": "Oil on canvas \u00b7 portrait, 2025",
+        "image": "images/banner/gold-halo.png",
+        "link": "work.html?section=artPaintings&slug=gold-halo"
+      },
+      {
+        "title": "brisbane (2026)",
+        "description": "UCSD Adwave case study \u00b7 Bound for gold billboard",
+        "image": "images/banner/brisbane-bound-for-gold-billboard.png",
+        "link": "work.html?section=projects&slug=brisbane-2032-olympics-branding"
+      },
+      {
+        "title": "brisbane (2026)",
+        "description": "UCSD Adwave case study \u00b7 event ticket design",
+        "image": "images/banner/brisbane-event-ticket.png",
+        "link": "work.html?section=projects&slug=brisbane-2032-olympics-branding"
+      },
+      {
+        "title": "Leaving the nest",
+        "description": "Oil on canvas \u00b7 12\u00d736 panorama \u00b7 2026",
+        "image": "images/banner/leaving-the-nest.png",
+        "link": "work.html?section=artPaintings&slug=wings"
+      },
+      {
+        "title": "ride or die",
+        "description": "Oil on canvas \u00b7 diptych study",
+        "image": "images/banner/ride-or-die.png",
+        "link": "work.html?section=artPaintings&slug=horse-faces"
+      }
+    ]
+  },
+  "pages": {
+    "projects": {
+      "title": "Projects",
+      "tagline": "branding \u00b7 visual identity \u00b7 design systems",
+      "countLabel": "3 projects",
+      "items": [
+        {
+          "slug": "triton-trading-group",
+          "href": "work.html?section=projects&slug=triton-trading-group",
+          "title": "Triton Trading Group (2025-26)",
+          "thumbnail": "images/banner/triton-trading-spring-recruitment-we-want-you.png",
+          "summary": "Brand and recruitment design for Triton Trading Group \u2014 UCSD\u2019s fastest-growing pre-professional business organization.",
+          "description": "Triton Trading Group (TTG) is UCSD\u2019s fastest-growing pre-professional business organization. This work spans social recaps, portfolio headers, Spring 2026 recruitment, and a Winter 2025 tabling banner \u2014 all built to feel cohesive across campus touchpoints and digital channels.",
+          "tags": [
+            "Brand Identity",
+            "Education"
+          ],
+          "layout": "sections",
+          "sections": [
+            {
+              "title": "Bimonthly quant recap",
+              "description": "Recap graphics for LinkedIn and Instagram, giving followers a snapshot of what TTG\u2019s quant team has been working on.",
+              "items": [
+                {
+                  "title": "May 13",
+                  "description": "Early-May recap highlighting recent quant team activity and session takeaways.",
+                  "image": "images/projects/triton-trading/bimonthly-quant/may-13.png"
+                },
+                {
+                  "title": "May 20",
+                  "description": "Mid-month recap covering new analysis, tools, and team updates.",
+                  "image": "images/projects/triton-trading/bimonthly-quant/may-20.png"
+                },
+                {
+                  "title": "May 29",
+                  "description": "Late-May recap closing out the current quant cycle.",
+                  "image": "images/projects/triton-trading/bimonthly-quant/may-29.png"
+                }
+              ]
+            },
+            {
+              "title": "Monthly portfolio",
+              "description": "Header illustrations for TTG\u2019s monthly portfolio recap posts on the organization blog.",
+              "items": [
+                {
+                  "title": "March",
+                  "description": "Header art for the March portfolio roundup.",
+                  "image": "images/projects/triton-trading/monthly-portfolio/march.png"
+                },
+                {
+                  "title": "April",
+                  "description": "Header art for the April portfolio roundup.",
+                  "image": "images/projects/triton-trading/monthly-portfolio/april.png"
+                },
+                {
+                  "title": "May",
+                  "description": "Header art for the May portfolio roundup.",
+                  "image": "images/projects/triton-trading/monthly-portfolio/may.png"
+                }
+              ]
+            },
+            {
+              "title": "Recruitment",
+              "description": "Spring 2026 recruitment collateral for info sessions, social, and on-campus outreach.",
+              "items": [
+                {
+                  "title": "WE WANT YOU",
+                  "description": "Hero graphic for the FP&A track, built around a bold call-to-action.",
+                  "image": "images/projects/triton-trading/recruitment/asset-02.png"
+                },
+                {
+                  "title": "What we\u2019re looking for",
+                  "description": "Overview of qualifications and expectations for Financial Planning & Analysis applicants.",
+                  "image": "images/projects/triton-trading/recruitment/asset-03.png"
+                },
+                {
+                  "title": "The cards",
+                  "description": "Campaign visual pairing TTG\u2019s playing-card motif with market chart imagery.",
+                  "image": "images/projects/triton-trading/recruitment/asset-05.png"
+                },
+                {
+                  "title": "Recruitment schedule",
+                  "description": "Full timeline of tabling, info nights, and invite-only events.",
+                  "image": "images/projects/triton-trading/recruitment/asset-01.png"
+                },
+                {
+                  "title": "Schedule cards",
+                  "description": "Two-week calendar with QR codes for applications, the website, and Instagram.",
+                  "image": "images/projects/triton-trading/recruitment/asset-04.png"
+                }
+              ]
+            },
+            {
+              "title": "Tabling banner",
+              "variant": "banner",
+              "description": "Vertical banner for Winter 2025 recruitment tabling.",
+              "items": [
+                {
+                  "image": "images/projects/triton-trading/banner.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "brisbane-2032-olympics-branding",
+          "href": "work.html?section=projects&slug=brisbane-2032-olympics-branding",
+          "title": "Brisbane Olympics (2026)",
+          "thumbnail": "images/banner/brisbane-bound-for-gold-billboard.png",
+          "dateCreated": "May 2026",
+          "summary": "Production case study for UCSD Adwave \u2014 Olympic identity concept for Brisbane 2032.",
+          "description": "A production case study for UCSD Adwave exploring a full branding system for the Brisbane 2032 Olympic Games.",
+          "tags": [
+            "Brand Identity",
+            "Entertainment"
+          ],
+          "layout": "pdf",
+          "pdf": "files/brisbane-adwave-case-study.pdf"
+        },
+        {
+          "slug": "scot-scoop-news-logo",
+          "href": "work.html?section=projects&slug=scot-scoop-news-logo",
+          "title": "Scotscoop Logo (2023)",
+          "thumbnail": "images/projects/scot-scoop/thumbnail.png",
+          "summary": "Logo design for Scot Scoop News, the student news publication at Carlmont High School.",
+          "description": "Identity work for Scot Scoop News \u2014 from early mascot explorations through a final editorial mark used across the publication's digital and print presence.",
+          "tags": [
+            "Brand Identity",
+            "Publishing"
+          ],
+          "layout": "case-study",
+          "caseStudy": [
+            {
+              "type": "feature",
+              "image": "images/projects/scot-scoop/finished-logo.png",
+              "alt": "Scot Scoop final logo mark",
+              "note": "Final double-S monogram, inspired by the New York Times letterform tradition. Hand-drawn first, then refined in Adobe Illustrator for the site and social channels."
+            },
+            {
+              "type": "grid-2",
+              "columns": [
+                {
+                  "image": "images/projects/scot-scoop/brainstorm-sketches.png",
+                  "alt": "Logo brainstorming sketches"
+                },
+                {
+                  "notes": [
+                    "Early explorations built on Scot Scoop\u2019s existing identity\u2014light, pun-driven directions around ice cream, broadcast, and the double meaning of \u201cscoop.\u201d"
+                  ],
+                  "image": "images/projects/scot-scoop/logo-explorations.png",
+                  "alt": "Early Scot Scoop logo explorations",
+                  "notesAfter": [
+                    "Mascot-style S marks and companion logos for ScotCenter, the publication\u2019s broadcast channel."
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "note",
+              "text": "The direction shifted toward something more editorial\u2014credible, restrained, and built to represent serious student journalism."
+            },
+            {
+              "type": "grid-2",
+              "columns": [
+                {
+                  "image": "images/projects/scot-scoop/serious-concepts.png",
+                  "alt": "Editorial logo direction explorations"
+                },
+                {
+                  "image": "images/projects/scot-scoop/final-logo.png",
+                  "alt": "Scot Scoop vector logo",
+                  "note": "Vector lockup deployed across Scot Scoop\u2019s site, social profiles, and print collateral."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "journalism": {
+      "title": "Journalism",
+      "selectedLabel": "[selected works]",
+      "countLabel": "18 works",
+      "groups": [
+        {
+          "label": "Editorial Cartoons",
+          "description": "I illustrate each cartoon and write the captions myself for publication.",
+          "items": [
+            {
+              "slug": "abort-the-court",
+              "href": "work.html?section=journalism&slug=abort-the-court",
+              "title": "Abort the court",
+              "summary": "Alabama Supreme Court declares abortion to be murder",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "Abort the court",
+                "url": "https://scotscoop.com/cartoon-abort-the-court/"
+              },
+              "details": [
+                "Alabama Supreme Court declares abortion to be murder",
+                "honorable mention for JEANC, honorable mention for NSPA Cartoon of the Year 2024"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "bleeding-red-white-and-blue",
+              "href": "work.html?section=journalism&slug=bleeding-red-white-and-blue",
+              "title": "Bleeding red, white, and blue",
+              "summary": "March 2023",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "images/journalism/cartoons/Bleeding red, white, and blue.jpeg",
+              "images": [
+                "images/journalism/cartoons/Bleeding red, white, and blue.jpeg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "Bleeding red, white, and blue",
+                "url": "https://scotscoop.com/cartoon-bleeding-red-white-and-blue/"
+              },
+              "details": [
+                "March 2023",
+                "honorable mention NSPA Pacemaker Cartoon of the Year 2023"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "the-meta-curse",
+              "href": "work.html?section=journalism&slug=the-meta-curse",
+              "title": "the Meta-curse",
+              "summary": "February 2024",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-c801eed2-e29a-419e-baac-f0c9ca0233b8.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-c801eed2-e29a-419e-baac-f0c9ca0233b8.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "the Meta-curse",
+                "url": "https://scotscoop.com/cartoon-the-meta-curse/"
+              },
+              "details": [
+                "February 2024"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "satisfactory-scores",
+              "href": "work.html?section=journalism&slug=satisfactory-scores",
+              "title": "SATisfactory scores?",
+              "summary": "April 2024",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-ccb51bb3-828b-4100-9a0e-a76695ad7e08.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-ccb51bb3-828b-4100-9a0e-a76695ad7e08.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "SATisfactory scores?",
+                "url": "https://scotscoop.com/cartoon-satisfactory-scores/"
+              },
+              "details": [
+                "April 2024"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "the-rematch",
+              "href": "work.html?section=journalism&slug=the-rematch",
+              "title": "The rematch",
+              "summary": "March 2024",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-f36a48c7-6c19-4e0f-a429-28ecd2fb20ef.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-f36a48c7-6c19-4e0f-a429-28ecd2fb20ef.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "The rematch",
+                "url": "https://scotscoop.com/cartoon-the-rematch/"
+              },
+              "details": [
+                "March 2024"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "grammar-and-guns",
+              "href": "work.html?section=journalism&slug=grammar-and-guns",
+              "title": "Grammar and guns",
+              "summary": "April 2024",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-781aeaa0-d6bd-4946-9c85-934bd9bb2066.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-781aeaa0-d6bd-4946-9c85-934bd9bb2066.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "Grammar and guns",
+                "url": "https://scotscoop.com/cartoon-grammar-and-guns/"
+              },
+              "details": [
+                "April 2024"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "climate-change-cooks-up-migranes",
+              "href": "work.html?section=journalism&slug=climate-change-cooks-up-migranes",
+              "title": "Climate change cooks up migranes",
+              "summary": "May 2024",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-8f4c6a5b-209f-4d9a-ae8e-fb6d3df198d4.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-8f4c6a5b-209f-4d9a-ae8e-fb6d3df198d4.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "Climate change cooks up migranes",
+                "url": "https://scotscoop.com/cartoon-climate-change-cooks-up-migraines/"
+              },
+              "details": [
+                "May 2024"
+              ],
+              "cardAspect": "landscape"
+            },
+            {
+              "slug": "news-blitz",
+              "href": "work.html?section=journalism&slug=news-blitz",
+              "title": "News blitz",
+              "summary": "February 2024 - As the news focuses on pop culture and the Superbowl, it's important to remember there are other things going on in the world",
+              "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+              "tags": [
+                "Editorial Cartoon"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-39b373c4-69df-446f-8a29-24297bc9a323.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-39b373c4-69df-446f-8a29-24297bc9a323.jpg"
+              ],
+              "captions": [],
+              "link": {
+                "title": "News blitz",
+                "url": "https://scotscoop.com/cartoon-news-blitz/"
+              },
+              "details": [
+                "February 2024 - As the news focuses on pop culture and the Superbowl, it's important to remember there are other things going on in the world"
+              ],
+              "cardAspect": "landscape"
+            }
+          ]
+        },
+        {
+          "label": "Feature Photos",
+          "description": "Photo illustrations representing authors' views and articles - worked closely with writers and organizations",
+          "items": [
+            {
+              "tags": [
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "captions": [],
+              "cardAspect": "landscape",
+              "slug": "trumps-harvard-ban",
+              "title": "Trump's Harvard Ban Sparks Global Backlash",
+              "summary": "SUNN Post",
+              "description": "Photo illustration for SUNN Post \u2014 worked closely with the writer.",
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg"
+              ],
+              "link": {
+                "title": "Trump's Harvard Ban Sparks Global Backlash",
+                "url": "https://www.sunnpost.com/trumps-harvard-ban-sparks-global-backlash/"
+              },
+              "href": "work.html?section=journalism&slug=trumps-harvard-ban"
+            },
+            {
+              "tags": [
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "captions": [],
+              "cardAspect": "landscape",
+              "slug": "powering-the-world",
+              "title": "Powering the world: sustainability generates economic growth",
+              "summary": "Scot Scoop News",
+              "description": "Photo illustration for Scot Scoop News \u2014 worked closely with the writer.",
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-6b677691-7580-4ac3-b099-20b39e8c8fb9.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-6b677691-7580-4ac3-b099-20b39e8c8fb9.jpg"
+              ],
+              "link": {
+                "title": "Powering the world: sustainability generates economic growth",
+                "url": "https://scotscoop.com/powering-the-world-sustainability-generates-economic-growth/"
+              },
+              "href": "work.html?section=journalism&slug=powering-the-world"
+            },
+            {
+              "tags": [
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "captions": [],
+              "cardAspect": "landscape",
+              "slug": "old-enough-to-drink",
+              "title": "Opinion: If you're old enough to fight, you're old enough to drink",
+              "summary": "Scot Scoop News",
+              "description": "Photo illustration for Scot Scoop News \u2014 worked closely with the writer.",
+              "thumbnail": "images/journalism/feature-photos/too-young-for-a-drink.png",
+              "images": [
+                "images/journalism/feature-photos/too-young-for-a-drink.png"
+              ],
+              "link": {
+                "title": "Opinion: If you're old enough to fight, you're old enough to drink",
+                "url": "https://scotscoop.com/opinion-if-youre-old-enough-to-fight-youre-old-enough-to-drink/"
+              },
+              "href": "work.html?section=journalism&slug=old-enough-to-drink"
+            },
+            {
+              "tags": [
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "captions": [],
+              "cardAspect": "landscape",
+              "slug": "senate-protect-journalists",
+              "title": "This Republican-backed Bill Protected Journalists - So What Happened?",
+              "summary": "SUNN Post",
+              "description": "Photo illustration for SUNN Post \u2014 worked closely with the writer.",
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-294ff066-9481-4080-bbc2-c298b73d1522.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-294ff066-9481-4080-bbc2-c298b73d1522.jpg"
+              ],
+              "link": {
+                "title": "This Republican-backed Bill Protected Journalists - So What Happened?",
+                "url": "https://www.sunnpost.com/why-wont-the-senate-protect-journalists/"
+              },
+              "href": "work.html?section=journalism&slug=senate-protect-journalists"
+            },
+            {
+              "tags": [
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "captions": [],
+              "cardAspect": "landscape",
+              "slug": "painting-the-future-ai",
+              "title": "Painting the future: AI in art",
+              "summary": "2023 \u00b7 Best of SNO Distinguished sites winner",
+              "description": "Written and illustrated by me.",
+              "thumbnail": "images/journalism/feature-photos/painting-the-future-ai.png",
+              "images": [
+                "images/journalism/feature-photos/painting-the-future-ai.png"
+              ],
+              "details": [
+                "\"Painting the future: AI in art\" written and illustrated by me in 2023, Best of SNO Distinguished sites winner"
+              ],
+              "href": "work.html?section=journalism&slug=painting-the-future-ai"
+            }
+          ]
+        },
+        {
+          "label": "Commission Work",
+          "cardAspect": "square",
+          "items": [
+            {
+              "slug": "sunn-post-vote-required",
+              "href": "work.html?section=journalism&slug=sunn-post-vote-required",
+              "title": "Should Voting in the U.S. Be Required by Law?",
+              "summary": "2025",
+              "description": "Commissioned photo illustration.",
+              "tags": [
+                "Commissions",
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "thumbnail": "images/journalism/sunn-post/vote-required.png",
+              "images": [
+                "images/journalism/sunn-post/vote-required.png"
+              ],
+              "captions": [],
+              "cardAspect": "square",
+              "link": {
+                "title": "Should Voting in the U.S. Be Required by Law?",
+                "url": "https://www.sunnpost.com/should-voting-be-required-by-law/"
+              }
+            },
+            {
+              "slug": "sunn-post-los-angeles-rising",
+              "href": "work.html?section=journalism&slug=sunn-post-los-angeles-rising",
+              "title": "How Los Angeles Is Rising From the Ashes",
+              "summary": "2025",
+              "description": "Commissioned photo illustration.",
+              "tags": [
+                "Commissions",
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "thumbnail": "images/journalism/sunn-post/los-angeles-rising.png",
+              "images": [
+                "images/journalism/sunn-post/los-angeles-rising.png"
+              ],
+              "captions": [],
+              "cardAspect": "square",
+              "link": {
+                "title": "How Los Angeles Is Rising From the Ashes",
+                "url": "https://www.sunnpost.com/los-angeles-rising/"
+              }
+            },
+            {
+              "slug": "sunn-post-grassroots-politics",
+              "href": "work.html?section=journalism&slug=sunn-post-grassroots-politics",
+              "title": "Students Are Rebooting Grassroots Politics in America",
+              "summary": "2025",
+              "description": "Commissioned photo illustration.",
+              "tags": [
+                "Commissions",
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "thumbnail": "images/journalism/sunn-post/grassroots-politics.png",
+              "images": [
+                "images/journalism/sunn-post/grassroots-politics.png"
+              ],
+              "captions": [],
+              "cardAspect": "square",
+              "link": {
+                "title": "Students Are Rebooting Grassroots Politics in America",
+                "url": "https://www.sunnpost.com/a-reformation-not-an-ending/"
+              }
+            },
+            {
+              "slug": "sunn-post-stem-cell-football",
+              "href": "work.html?section=journalism&slug=sunn-post-stem-cell-football",
+              "title": "Stem Cell Research Is More Than Just a Political Football",
+              "summary": "2025",
+              "description": "Commissioned photo illustration.",
+              "tags": [
+                "Commissions",
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "thumbnail": "images/journalism/sunn-post/stem-cell-football.png",
+              "images": [
+                "images/journalism/sunn-post/stem-cell-football.png"
+              ],
+              "captions": [],
+              "cardAspect": "square",
+              "link": {
+                "title": "Stem Cell Research Is More Than Just a Political Football",
+                "url": "https://www.sunnpost.com/opinion-stem-cell-research-is-more-than-just-a-political-football/"
+              }
+            },
+            {
+              "slug": "tim-walz-won-the-internet",
+              "href": "work.html?section=journalism&slug=tim-walz-won-the-internet",
+              "title": "How Midwestern Dad Tim Walz Won the Internet",
+              "summary": "2025",
+              "description": "Commissioned photo illustration.",
+              "tags": [
+                "Commissions",
+                "Photo Illustration",
+                "Editorial"
+              ],
+              "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-fd8dfbae-0c97-4e1a-8b0e-0bf83c9bb48f.jpg",
+              "images": [
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-fd8dfbae-0c97-4e1a-8b0e-0bf83c9bb48f.jpg",
+                "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-239f5db0-87c8-4341-94b7-a54893f2e2f4.jpg"
+              ],
+              "captions": [],
+              "cardAspect": "square",
+              "link": {
+                "title": "How Midwestern Dad Tim Walz Won the Internet",
+                "url": "https://www.watchusrise.com/how-midwestern-dad-tim-walz-won-the-internet"
+              },
+              "layout": "pair"
+            }
+          ],
+          "containImages": true
+        }
+      ],
+      "items": [
+        {
+          "slug": "abort-the-court",
+          "href": "work.html?section=journalism&slug=abort-the-court",
+          "title": "Abort the court",
+          "summary": "Alabama Supreme Court declares abortion to be murder",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "Abort the court",
+            "url": "https://scotscoop.com/cartoon-abort-the-court/"
+          },
+          "details": [
+            "Alabama Supreme Court declares abortion to be murder",
+            "honorable mention for JEANC, honorable mention for NSPA Cartoon of the Year 2024"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "bleeding-red-white-and-blue",
+          "href": "work.html?section=journalism&slug=bleeding-red-white-and-blue",
+          "title": "Bleeding red, white, and blue",
+          "summary": "March 2023",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "images/journalism/cartoons/Bleeding red, white, and blue.jpeg",
+          "images": [
+            "images/journalism/cartoons/Bleeding red, white, and blue.jpeg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "Bleeding red, white, and blue",
+            "url": "https://scotscoop.com/cartoon-bleeding-red-white-and-blue/"
+          },
+          "details": [
+            "March 2023",
+            "honorable mention NSPA Pacemaker Cartoon of the Year 2023"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "the-meta-curse",
+          "href": "work.html?section=journalism&slug=the-meta-curse",
+          "title": "the Meta-curse",
+          "summary": "February 2024",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-c801eed2-e29a-419e-baac-f0c9ca0233b8.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-c801eed2-e29a-419e-baac-f0c9ca0233b8.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "the Meta-curse",
+            "url": "https://scotscoop.com/cartoon-the-meta-curse/"
+          },
+          "details": [
+            "February 2024"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "satisfactory-scores",
+          "href": "work.html?section=journalism&slug=satisfactory-scores",
+          "title": "SATisfactory scores?",
+          "summary": "April 2024",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-ccb51bb3-828b-4100-9a0e-a76695ad7e08.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-ccb51bb3-828b-4100-9a0e-a76695ad7e08.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "SATisfactory scores?",
+            "url": "https://scotscoop.com/cartoon-satisfactory-scores/"
+          },
+          "details": [
+            "April 2024"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "the-rematch",
+          "href": "work.html?section=journalism&slug=the-rematch",
+          "title": "The rematch",
+          "summary": "March 2024",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-f36a48c7-6c19-4e0f-a429-28ecd2fb20ef.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-f36a48c7-6c19-4e0f-a429-28ecd2fb20ef.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "The rematch",
+            "url": "https://scotscoop.com/cartoon-the-rematch/"
+          },
+          "details": [
+            "March 2024"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "grammar-and-guns",
+          "href": "work.html?section=journalism&slug=grammar-and-guns",
+          "title": "Grammar and guns",
+          "summary": "April 2024",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-781aeaa0-d6bd-4946-9c85-934bd9bb2066.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-781aeaa0-d6bd-4946-9c85-934bd9bb2066.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "Grammar and guns",
+            "url": "https://scotscoop.com/cartoon-grammar-and-guns/"
+          },
+          "details": [
+            "April 2024"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "climate-change-cooks-up-migranes",
+          "href": "work.html?section=journalism&slug=climate-change-cooks-up-migranes",
+          "title": "Climate change cooks up migranes",
+          "summary": "May 2024",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-8f4c6a5b-209f-4d9a-ae8e-fb6d3df198d4.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-8f4c6a5b-209f-4d9a-ae8e-fb6d3df198d4.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "Climate change cooks up migranes",
+            "url": "https://scotscoop.com/cartoon-climate-change-cooks-up-migraines/"
+          },
+          "details": [
+            "May 2024"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "slug": "news-blitz",
+          "href": "work.html?section=journalism&slug=news-blitz",
+          "title": "News blitz",
+          "summary": "February 2024 - As the news focuses on pop culture and the Superbowl, it's important to remember there are other things going on in the world",
+          "description": "Self illustrated, researched, and captioned for Scot Scoop News.",
+          "tags": [
+            "Editorial Cartoon"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-39b373c4-69df-446f-8a29-24297bc9a323.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-39b373c4-69df-446f-8a29-24297bc9a323.jpg"
+          ],
+          "captions": [],
+          "link": {
+            "title": "News blitz",
+            "url": "https://scotscoop.com/cartoon-news-blitz/"
+          },
+          "details": [
+            "February 2024 - As the news focuses on pop culture and the Superbowl, it's important to remember there are other things going on in the world"
+          ],
+          "cardAspect": "landscape"
+        },
+        {
+          "tags": [
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "captions": [],
+          "cardAspect": "landscape",
+          "slug": "trumps-harvard-ban",
+          "title": "Trump's Harvard Ban Sparks Global Backlash",
+          "summary": "SUNN Post",
+          "description": "Photo illustration for SUNN Post \u2014 worked closely with the writer.",
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg"
+          ],
+          "link": {
+            "title": "Trump's Harvard Ban Sparks Global Backlash",
+            "url": "https://www.sunnpost.com/trumps-harvard-ban-sparks-global-backlash/"
+          },
+          "href": "work.html?section=journalism&slug=trumps-harvard-ban"
+        },
+        {
+          "tags": [
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "captions": [],
+          "cardAspect": "landscape",
+          "slug": "powering-the-world",
+          "title": "Powering the world: sustainability generates economic growth",
+          "summary": "Scot Scoop News",
+          "description": "Photo illustration for Scot Scoop News \u2014 worked closely with the writer.",
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-6b677691-7580-4ac3-b099-20b39e8c8fb9.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-6b677691-7580-4ac3-b099-20b39e8c8fb9.jpg"
+          ],
+          "link": {
+            "title": "Powering the world: sustainability generates economic growth",
+            "url": "https://scotscoop.com/powering-the-world-sustainability-generates-economic-growth/"
+          },
+          "href": "work.html?section=journalism&slug=powering-the-world"
+        },
+        {
+          "tags": [
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "captions": [],
+          "cardAspect": "landscape",
+          "slug": "old-enough-to-drink",
+          "title": "Opinion: If you're old enough to fight, you're old enough to drink",
+          "summary": "Scot Scoop News",
+          "description": "Photo illustration for Scot Scoop News \u2014 worked closely with the writer.",
+          "thumbnail": "images/journalism/feature-photos/too-young-for-a-drink.png",
+          "images": [
+            "images/journalism/feature-photos/too-young-for-a-drink.png"
+          ],
+          "link": {
+            "title": "Opinion: If you're old enough to fight, you're old enough to drink",
+            "url": "https://scotscoop.com/opinion-if-youre-old-enough-to-fight-youre-old-enough-to-drink/"
+          },
+          "href": "work.html?section=journalism&slug=old-enough-to-drink"
+        },
+        {
+          "tags": [
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "captions": [],
+          "cardAspect": "landscape",
+          "slug": "senate-protect-journalists",
+          "title": "This Republican-backed Bill Protected Journalists - So What Happened?",
+          "summary": "SUNN Post",
+          "description": "Photo illustration for SUNN Post \u2014 worked closely with the writer.",
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-294ff066-9481-4080-bbc2-c298b73d1522.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-294ff066-9481-4080-bbc2-c298b73d1522.jpg"
+          ],
+          "link": {
+            "title": "This Republican-backed Bill Protected Journalists - So What Happened?",
+            "url": "https://www.sunnpost.com/why-wont-the-senate-protect-journalists/"
+          },
+          "href": "work.html?section=journalism&slug=senate-protect-journalists"
+        },
+        {
+          "tags": [
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "captions": [],
+          "cardAspect": "landscape",
+          "slug": "painting-the-future-ai",
+          "title": "Painting the future: AI in art",
+          "summary": "2023 \u00b7 Best of SNO Distinguished sites winner",
+          "description": "Written and illustrated by me.",
+          "thumbnail": "images/journalism/feature-photos/painting-the-future-ai.png",
+          "images": [
+            "images/journalism/feature-photos/painting-the-future-ai.png"
+          ],
+          "details": [
+            "\"Painting the future: AI in art\" written and illustrated by me in 2023, Best of SNO Distinguished sites winner"
+          ],
+          "href": "work.html?section=journalism&slug=painting-the-future-ai"
+        },
+        {
+          "slug": "sunn-post-vote-required",
+          "href": "work.html?section=journalism&slug=sunn-post-vote-required",
+          "title": "Should Voting in the U.S. Be Required by Law?",
+          "summary": "2025",
+          "description": "Commissioned photo illustration.",
+          "tags": [
+            "Commissions",
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "thumbnail": "images/journalism/sunn-post/vote-required.png",
+          "images": [
+            "images/journalism/sunn-post/vote-required.png"
+          ],
+          "captions": [],
+          "cardAspect": "square",
+          "link": {
+            "title": "Should Voting in the U.S. Be Required by Law?",
+            "url": "https://www.sunnpost.com/should-voting-be-required-by-law/"
+          }
+        },
+        {
+          "slug": "sunn-post-los-angeles-rising",
+          "href": "work.html?section=journalism&slug=sunn-post-los-angeles-rising",
+          "title": "How Los Angeles Is Rising From the Ashes",
+          "summary": "2025",
+          "description": "Commissioned photo illustration.",
+          "tags": [
+            "Commissions",
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "thumbnail": "images/journalism/sunn-post/los-angeles-rising.png",
+          "images": [
+            "images/journalism/sunn-post/los-angeles-rising.png"
+          ],
+          "captions": [],
+          "cardAspect": "square",
+          "link": {
+            "title": "How Los Angeles Is Rising From the Ashes",
+            "url": "https://www.sunnpost.com/los-angeles-rising/"
+          }
+        },
+        {
+          "slug": "sunn-post-grassroots-politics",
+          "href": "work.html?section=journalism&slug=sunn-post-grassroots-politics",
+          "title": "Students Are Rebooting Grassroots Politics in America",
+          "summary": "2025",
+          "description": "Commissioned photo illustration.",
+          "tags": [
+            "Commissions",
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "thumbnail": "images/journalism/sunn-post/grassroots-politics.png",
+          "images": [
+            "images/journalism/sunn-post/grassroots-politics.png"
+          ],
+          "captions": [],
+          "cardAspect": "square",
+          "link": {
+            "title": "Students Are Rebooting Grassroots Politics in America",
+            "url": "https://www.sunnpost.com/a-reformation-not-an-ending/"
+          }
+        },
+        {
+          "slug": "sunn-post-stem-cell-football",
+          "href": "work.html?section=journalism&slug=sunn-post-stem-cell-football",
+          "title": "Stem Cell Research Is More Than Just a Political Football",
+          "summary": "2025",
+          "description": "Commissioned photo illustration.",
+          "tags": [
+            "Commissions",
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "thumbnail": "images/journalism/sunn-post/stem-cell-football.png",
+          "images": [
+            "images/journalism/sunn-post/stem-cell-football.png"
+          ],
+          "captions": [],
+          "cardAspect": "square",
+          "link": {
+            "title": "Stem Cell Research Is More Than Just a Political Football",
+            "url": "https://www.sunnpost.com/opinion-stem-cell-research-is-more-than-just-a-political-football/"
+          }
+        },
+        {
+          "slug": "tim-walz-won-the-internet",
+          "href": "work.html?section=journalism&slug=tim-walz-won-the-internet",
+          "title": "How Midwestern Dad Tim Walz Won the Internet",
+          "summary": "2025",
+          "description": "Commissioned photo illustration.",
+          "tags": [
+            "Commissions",
+            "Photo Illustration",
+            "Editorial"
+          ],
+          "thumbnail": "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-fd8dfbae-0c97-4e1a-8b0e-0bf83c9bb48f.jpg",
+          "images": [
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-fd8dfbae-0c97-4e1a-8b0e-0bf83c9bb48f.jpg",
+            "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-239f5db0-87c8-4341-94b7-a54893f2e2f4.jpg"
+          ],
+          "captions": [],
+          "cardAspect": "square",
+          "link": {
+            "title": "How Midwestern Dad Tim Walz Won the Internet",
+            "url": "https://www.watchusrise.com/how-midwestern-dad-tim-walz-won-the-internet"
+          },
+          "layout": "pair"
+        }
+      ]
+    },
+    "artPaintings": {
+      "nav": [
+        {
+          "label": "paintings",
+          "href": "art-paintings.html",
+          "active": true
+        },
+        {
+          "label": "sketches/illustrations",
+          "href": "art-sketches.html",
+          "active": false
+        }
+      ],
+      "title": "Paintings",
+      "selectedLabel": "[selected works]",
+      "countLabel": "8 works",
+      "commission": {
+        "label": "commission me",
+        "subject": "Painting commission inquiry"
+      },
+      "items": [
+        {
+          "slug": "untitled-2025",
+          "href": "work.html?section=artPaintings&slug=untitled-2025",
+          "title": "Untitled",
+          "thumbnail": "images/paintings/oil-acrylic-2025.jpeg",
+          "summary": "2025 \u00b7 30\u00d740 \u00b7 Oil and acrylic on canvas",
+          "description": "2025 \u00b7 30\u00d740 \u00b7 Oil and acrylic on canvas",
+          "tags": [],
+          "images": [
+            "images/paintings/oil-acrylic-2025.jpeg"
+          ],
+          "captions": [],
+          "year": "2025",
+          "dimensions": "30\u00d740",
+          "medium": "Oil and acrylic on canvas"
+        },
+        {
+          "slug": "wings",
+          "href": "work.html?section=artPaintings&slug=wings",
+          "title": "Leaving the nest",
+          "thumbnail": "images/paintings/panorama-2026.jpeg",
+          "summary": "2026 \u00b7 12\u00d736 \u00b7 Oil on canvas",
+          "description": "2026 \u00b7 12\u00d736 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/paintings/panorama-2026.jpeg"
+          ],
+          "captions": [],
+          "year": "2026",
+          "dimensions": "12\u00d736",
+          "medium": "Oil on canvas",
+          "span": "wide"
+        },
+        {
+          "slug": "horse-faces",
+          "href": "work.html?section=artPaintings&slug=horse-faces",
+          "title": "ride or die",
+          "thumbnail": "images/banner/ride-or-die.png",
+          "summary": "2025 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "description": "2025 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/banner/ride-or-die.png"
+          ],
+          "captions": [],
+          "year": "2025",
+          "dimensions": "22\u00d728",
+          "medium": "Oil on canvas"
+        },
+        {
+          "slug": "group-portraits",
+          "href": "work.html?section=artPaintings&slug=group-portraits",
+          "title": "portrait mode",
+          "thumbnail": "images/banner/portrait-mode.png",
+          "summary": "2025 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "description": "2025 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/banner/portrait-mode.png"
+          ],
+          "captions": [],
+          "year": "2025",
+          "dimensions": "22\u00d728",
+          "medium": "Oil on canvas"
+        },
+        {
+          "slug": "portrait-mode",
+          "href": "work.html?section=artPaintings&slug=portrait-mode",
+          "title": "Diptych: Momdonna",
+          "thumbnail": "images/paintings/portrait-mode.jpeg",
+          "summary": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "description": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/paintings/portrait-mode.jpeg"
+          ],
+          "captions": [],
+          "year": "2023",
+          "dimensions": "22\u00d728",
+          "medium": "Oil on canvas"
+        },
+        {
+          "slug": "girl-dinner-2023",
+          "href": "work.html?section=artPaintings&slug=girl-dinner-2023",
+          "title": "Diptych: and child",
+          "thumbnail": "images/paintings/girl-dinner.jpeg",
+          "summary": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "description": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/paintings/girl-dinner.jpeg"
+          ],
+          "captions": [],
+          "year": "2023",
+          "dimensions": "22\u00d728",
+          "medium": "Oil on canvas"
+        },
+        {
+          "slug": "teething-2024",
+          "href": "work.html?section=artPaintings&slug=teething-2024",
+          "title": "Teething",
+          "thumbnail": "images/paintings/teething.jpeg",
+          "summary": "2024 \u00b7 24\u00d736 \u00b7 Oil on canvas",
+          "description": "2024 \u00b7 24\u00d736 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/paintings/teething.jpeg"
+          ],
+          "captions": [],
+          "year": "2024",
+          "dimensions": "24\u00d736",
+          "medium": "Oil on canvas"
+        },
+        {
+          "slug": "getting-ready-2023",
+          "href": "work.html?section=artPaintings&slug=getting-ready-2023",
+          "title": "girl dinner",
+          "thumbnail": "images/paintings/getting-ready.jpeg",
+          "summary": "2023 \u00b7 30\u00d740 \u00b7 Oil on canvas",
+          "description": "2023 \u00b7 30\u00d740 \u00b7 Oil on canvas",
+          "tags": [],
+          "images": [
+            "images/paintings/getting-ready.jpeg"
+          ],
+          "captions": [],
+          "year": "2023",
+          "dimensions": "30\u00d740",
+          "medium": "Oil on canvas"
+        }
+      ]
+    },
+    "artSketches": {
+      "nav": [
+        {
+          "label": "paintings",
+          "href": "art-paintings.html",
+          "active": false
+        },
+        {
+          "label": "sketches/illustrations",
+          "href": "art-sketches.html",
+          "active": true
+        }
+      ],
+      "title": "Sketches & Illustrations",
+      "subtitle": "just for fun",
+      "countLabel": "13 works",
+      "items": [
+        {
+          "slug": "portrait-study",
+          "href": "work.html?section=artSketches&slug=portrait-study",
+          "title": "Portrait study",
+          "thumbnail": "images/sketches/portrait-study.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/portrait-study.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "chopsticks",
+          "href": "work.html?section=artSketches&slug=chopsticks",
+          "title": "Chopsticks",
+          "thumbnail": "images/sketches/chopsticks.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/chopsticks.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "blue-floral-portrait",
+          "href": "work.html?section=artSketches&slug=blue-floral-portrait",
+          "title": "Blue floral portrait",
+          "thumbnail": "images/sketches/blue-floral-portrait.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/blue-floral-portrait.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "mouth-studies",
+          "href": "work.html?section=artSketches&slug=mouth-studies",
+          "title": "Mouth studies",
+          "thumbnail": "images/sketches/mouth-studies.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/mouth-studies.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "touch-some-grass",
+          "href": "work.html?section=artSketches&slug=touch-some-grass",
+          "title": "Touch some grass",
+          "thumbnail": "images/sketches/touch-some-grass.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/touch-some-grass.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "portrait-sketches",
+          "href": "work.html?section=artSketches&slug=portrait-sketches",
+          "title": "Portrait sketches",
+          "thumbnail": "images/sketches/portrait-sketches.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/portrait-sketches.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "furry-is-back",
+          "href": "work.html?section=artSketches&slug=furry-is-back",
+          "title": "Furry is back",
+          "thumbnail": "images/sketches/furry-is-back.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/furry-is-back.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "tree-and-sunflowers",
+          "href": "work.html?section=artSketches&slug=tree-and-sunflowers",
+          "title": "Tree and sunflowers",
+          "thumbnail": "images/sketches/tree-and-sunflowers.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/tree-and-sunflowers.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "farmers-market",
+          "href": "work.html?section=artSketches&slug=farmers-market",
+          "title": "Farmers market",
+          "thumbnail": "images/sketches/farmers-market.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/farmers-market.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "kitchen-gathering",
+          "href": "work.html?section=artSketches&slug=kitchen-gathering",
+          "title": "Kitchen gathering",
+          "thumbnail": "images/sketches/kitchen-gathering.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/kitchen-gathering.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "fashion-sketch",
+          "href": "work.html?section=artSketches&slug=fashion-sketch",
+          "title": "Fashion sketch",
+          "thumbnail": "images/sketches/fashion-sketch.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/fashion-sketch.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "chinatown-street",
+          "href": "work.html?section=artSketches&slug=chinatown-street",
+          "title": "Chinatown street",
+          "thumbnail": "images/sketches/chinatown-street.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/chinatown-street.png"
+          ],
+          "captions": [],
+          "meta": ""
+        },
+        {
+          "slug": "market-day",
+          "href": "work.html?section=artSketches&slug=market-day",
+          "title": "Market day",
+          "thumbnail": "images/sketches/market-day.png",
+          "summary": "",
+          "description": "",
+          "tags": [],
+          "images": [
+            "images/sketches/market-day.png"
+          ],
+          "captions": [],
+          "meta": ""
+        }
+      ]
+    }
+  }
+}

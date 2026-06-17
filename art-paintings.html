@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shiyo ohashi — paintings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body class="bg-white antialiased category-page projects-page">
+
+  <div id="page-root" class="text-black">
+    <header class="site-header">
+      <div class="header-imprint-link" aria-hidden="true">
+        <img src="images/header-imprint.png" alt="" class="header-imprint" />
+      </div>
+    </header>
+
+    <main class="pb-12 md:pb-16">
+      <div id="category-content" class="work-page"></div>
+    </main>
+
+    <footer class="pb-12 md:pb-16 text-center">
+      <div id="contact-info" class="contact-info text-xs md:text-sm"></div>
+    </footer>
+  </div>
+
+  <div id="about-note" class="about-note" hidden>
+    <button id="about-note-tab" class="about-note-tab" type="button" aria-expanded="false" aria-controls="about-note-panel">
+      about me
+    </button>
+    <div id="about-note-backdrop" class="about-note-backdrop" aria-hidden="true"></div>
+    <div
+      id="about-note-panel"
+      class="about-note-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="about-note-title"
+      aria-hidden="true"
+    >
+      <button id="about-note-close" class="about-note-close" type="button" aria-label="Close about me">×</button>
+      <h2 id="about-note-title" class="about-note-title">about me</h2>
+      <div class="about-note-content">
+        <img id="about-note-image" class="about-note-image" src="" alt="" hidden />
+        <p id="about-note-text" class="about-note-text"></p>
+        <div id="about-note-links" class="about-note-links"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="resume-note" class="resume-note" hidden>
+    <button id="resume-note-tab" class="resume-note-tab" type="button" aria-expanded="false" aria-controls="resume-note-panel">
+      resume
+    </button>
+    <div id="resume-note-backdrop" class="resume-note-backdrop" aria-hidden="true"></div>
+    <div
+      id="resume-note-panel"
+      class="resume-note-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Resume"
+      aria-hidden="true"
+    >
+      <button id="resume-note-close" class="resume-note-close" type="button" aria-label="Close resume">×</button>
+      <div id="resume-note-sheet" class="resume-note-sheet">
+        <div class="resume-note-page">
+          <canvas id="resume-note-canvas"></canvas>
+          <div id="resume-note-link-layer" class="resume-note-link-layer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="home-note" class="home-note" hidden>
+    <a href="index.html?return=1" class="home-note-tab">home</a>
+  </div>
+
+  <script>window.PORTFOLIO_PAGE = 'artPaintings';</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="contact.js"></script>
+  <script src="notes.js"></script>
+  <script src="page.js"></script>
+</body>
+</html>
