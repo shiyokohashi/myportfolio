@@ -76,49 +76,49 @@
     "items": [
       {
         "title": "TTG (2025-26)",
-        "description": "Spring Recruitment 2026 \u00b7 WE WANT YOU",
+        "description": "graphic design project",
         "image": "images/banner/triton-trading-spring-recruitment-we-want-you.png",
         "link": "work.html?section=projects&slug=triton-trading-group"
       },
       {
         "title": "Triton Trading Group \u00b7 FP&A",
-        "description": "Financial Planning & Analysis recruitment",
+        "description": "graphic design project",
         "image": "images/banner/triton-trading-fpa-recruitment.png",
         "link": "work.html?section=projects&slug=triton-trading-group"
       },
       {
-        "title": "Family and cranes",
-        "description": "Oil on canvas \u00b7 Bali temple, 2024",
+        "title": "Untitled",
+        "description": "2025 \u00b7 30\u00d740 \u00b7 Oil and acrylic on canvas",
         "image": "images/banner/family-and-cranes.png",
-        "link": "work.html?section=artPaintings&slug=family-and-cranes"
+        "link": "work.html?section=artPaintings&slug=untitled-2025"
       },
       {
-        "title": "Gold halo",
-        "description": "Oil on canvas \u00b7 portrait, 2025",
+        "title": "Diptych: Momdonna",
+        "description": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
         "image": "images/banner/gold-halo.png",
-        "link": "work.html?section=artPaintings&slug=gold-halo"
+        "link": "work.html?section=artPaintings&slug=portrait-mode"
       },
       {
-        "title": "brisbane (2026)",
-        "description": "UCSD Adwave case study \u00b7 Bound for gold billboard",
+        "title": "Brisbane Olympics (2026)",
+        "description": "A production case study for UCSD Adwave exploring a full branding system for the Brisbane 2032 Olympic Games.",
         "image": "images/banner/brisbane-bound-for-gold-billboard.png",
         "link": "work.html?section=projects&slug=brisbane-2032-olympics-branding"
       },
       {
-        "title": "brisbane (2026)",
-        "description": "UCSD Adwave case study \u00b7 event ticket design",
+        "title": "Brisbane Olympics (2026)",
+        "description": "A production case study for UCSD Adwave exploring a full branding system for the Brisbane 2032 Olympic Games.",
         "image": "images/banner/brisbane-event-ticket.png",
         "link": "work.html?section=projects&slug=brisbane-2032-olympics-branding"
       },
       {
         "title": "Leaving the nest",
-        "description": "Oil on canvas \u00b7 12\u00d736 panorama \u00b7 2026",
+        "description": "2026 \u00b7 12\u00d736 \u00b7 Oil on canvas",
         "image": "images/banner/leaving-the-nest.png",
         "link": "work.html?section=artPaintings&slug=wings"
       },
       {
         "title": "ride or die",
-        "description": "Oil on canvas \u00b7 diptych study",
+        "description": "2025 \u00b7 22\u00d728 \u00b7 Oil on canvas",
         "image": "images/banner/ride-or-die.png",
         "link": "work.html?section=artPaintings&slug=horse-faces"
       }
@@ -1160,12 +1160,12 @@
           "slug": "untitled-2025",
           "href": "work.html?section=artPaintings&slug=untitled-2025",
           "title": "Untitled",
-          "thumbnail": "images/paintings/oil-acrylic-2025.jpeg",
+          "thumbnail": "images/banner/family-and-cranes.png",
           "summary": "2025 \u00b7 30\u00d740 \u00b7 Oil and acrylic on canvas",
           "description": "2025 \u00b7 30\u00d740 \u00b7 Oil and acrylic on canvas",
           "tags": [],
           "images": [
-            "images/paintings/oil-acrylic-2025.jpeg"
+            "images/banner/family-and-cranes.png"
           ],
           "captions": [],
           "year": "2025",
@@ -1225,12 +1225,12 @@
           "slug": "portrait-mode",
           "href": "work.html?section=artPaintings&slug=portrait-mode",
           "title": "Diptych: Momdonna",
-          "thumbnail": "images/paintings/portrait-mode.jpeg",
+          "thumbnail": "images/banner/gold-halo.png",
           "summary": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
           "description": "2023 \u00b7 22\u00d728 \u00b7 Oil on canvas",
           "tags": [],
           "images": [
-            "images/paintings/portrait-mode.jpeg"
+            "images/banner/gold-halo.png"
           ],
           "captions": [],
           "year": "2023",
