@@ -1,0 +1,305 @@
+import type { PortfolioWork } from "@/types/portfolio";
+
+/**
+ * Journalism — editorial cartoons, feature photos, and commission work.
+ * Sourced from shiyoohashi.com — edit here to update the archive.
+ */
+export const JOURNALISM: PortfolioWork[] = [
+  {
+    slug: "abort-the-court",
+    title: "Abort the court",
+    summary: "Alabama Supreme Court declares abortion to be murder",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "Alabama Supreme Court declares abortion to be murder",
+      "honorable mention for JEANC, honorable mention for NSPA Cartoon of the Year 2024",
+      "Published: https://scotscoop.com/cartoon-abort-the-court/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-7aecd83c-e6e1-4df3-9501-db22abee6263.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-abort-the-court/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "bleeding-red-white-and-blue",
+    title: "Bleeding red, white, and blue",
+    summary: "March 2023",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "March 2023",
+      "honorable mention NSPA Pacemaker Cartoon of the Year 2023",
+      "Published: https://scotscoop.com/cartoon-bleeding-red-white-and-blue/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/cartoons/Bleeding red, white, and blue.jpeg",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/cartoons/Bleeding red, white, and blue.jpeg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-bleeding-red-white-and-blue/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "the-meta-curse",
+    title: "the Meta-curse",
+    summary: "February 2024",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "February 2024",
+      "Published: https://scotscoop.com/cartoon-the-meta-curse/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-c801eed2-e29a-419e-baac-f0c9ca0233b8.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-c801eed2-e29a-419e-baac-f0c9ca0233b8.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-the-meta-curse/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "satisfactory-scores",
+    title: "SATisfactory scores?",
+    summary: "April 2024",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "April 2024",
+      "Published: https://scotscoop.com/cartoon-satisfactory-scores/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-ccb51bb3-828b-4100-9a0e-a76695ad7e08.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-ccb51bb3-828b-4100-9a0e-a76695ad7e08.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-satisfactory-scores/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "the-rematch",
+    title: "The rematch",
+    summary: "March 2024",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "March 2024",
+      "Published: https://scotscoop.com/cartoon-the-rematch/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-f36a48c7-6c19-4e0f-a429-28ecd2fb20ef.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-f36a48c7-6c19-4e0f-a429-28ecd2fb20ef.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-the-rematch/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "grammar-and-guns",
+    title: "Grammar and guns",
+    summary: "April 2024",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "April 2024",
+      "Published: https://scotscoop.com/cartoon-grammar-and-guns/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-781aeaa0-d6bd-4946-9c85-934bd9bb2066.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-781aeaa0-d6bd-4946-9c85-934bd9bb2066.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-grammar-and-guns/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "climate-change-cooks-up-migranes",
+    title: "Climate change cooks up migranes",
+    summary: "May 2024",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "May 2024",
+      "Published: https://scotscoop.com/cartoon-climate-change-cooks-up-migraines/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-8f4c6a5b-209f-4d9a-ae8e-fb6d3df198d4.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-8f4c6a5b-209f-4d9a-ae8e-fb6d3df198d4.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-climate-change-cooks-up-migraines/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "news-blitz",
+    title: "News blitz",
+    summary: "February 2024 - As the news focuses on pop culture and the Superbowl, it's important to remember there are other things going on in the world",
+    description: [
+      "Self illustrated, researched, and captioned for Scot Scoop News.",
+      "February 2024 - As the news focuses on pop culture and the Superbowl, it's important to remember there are other things going on in the world",
+      "Published: https://scotscoop.com/cartoon-news-blitz/",
+    ],
+    tags: ["Editorial Cartoon"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-39b373c4-69df-446f-8a29-24297bc9a323.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-39b373c4-69df-446f-8a29-24297bc9a323.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/cartoon-news-blitz/",
+    group: "Editorial Cartoons",
+  },
+  {
+    slug: "trumps-harvard-ban",
+    title: "Trump's Harvard Ban Sparks Global Backlash",
+    summary: "SUNN Post",
+    description: [
+      "Photo illustration for SUNN Post — worked closely with the writer.",
+      "Published: https://www.sunnpost.com/trumps-harvard-ban-sparks-global-backlash/",
+    ],
+    tags: ["Photo Illustration", "Editorial"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-2e2dd0e6-a464-45de-8e66-f14298d6852d.jpg",
+    ],
+    externalUrl: "https://www.sunnpost.com/trumps-harvard-ban-sparks-global-backlash/",
+    group: "Feature Photos",
+  },
+  {
+    slug: "powering-the-world",
+    title: "Powering the world: sustainability generates economic growth",
+    summary: "Scot Scoop News",
+    description: [
+      "Photo illustration for Scot Scoop News — worked closely with the writer.",
+      "Published: https://scotscoop.com/powering-the-world-sustainability-generates-economic-growth/",
+    ],
+    tags: ["Photo Illustration", "Editorial"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-6b677691-7580-4ac3-b099-20b39e8c8fb9.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-6b677691-7580-4ac3-b099-20b39e8c8fb9.jpg",
+    ],
+    externalUrl: "https://scotscoop.com/powering-the-world-sustainability-generates-economic-growth/",
+    group: "Feature Photos",
+  },
+  {
+    slug: "old-enough-to-drink",
+    title: "Opinion: If you're old enough to fight, you're old enough to drink",
+    summary: "Scot Scoop News",
+    description: [
+      "Photo illustration for Scot Scoop News — worked closely with the writer.",
+      "Published: https://scotscoop.com/opinion-if-youre-old-enough-to-fight-youre-old-enough-to-drink/",
+    ],
+    tags: ["Photo Illustration", "Editorial"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/feature-photos/too-young-for-a-drink.png",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/feature-photos/too-young-for-a-drink.png",
+    ],
+    externalUrl: "https://scotscoop.com/opinion-if-youre-old-enough-to-fight-youre-old-enough-to-drink/",
+    group: "Feature Photos",
+  },
+  {
+    slug: "senate-protect-journalists",
+    title: "This Republican-backed Bill Protected Journalists - So What Happened?",
+    summary: "SUNN Post",
+    description: [
+      "Photo illustration for SUNN Post — worked closely with the writer.",
+      "Published: https://www.sunnpost.com/why-wont-the-senate-protect-journalists/",
+    ],
+    tags: ["Photo Illustration", "Editorial"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-294ff066-9481-4080-bbc2-c298b73d1522.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-294ff066-9481-4080-bbc2-c298b73d1522.jpg",
+    ],
+    externalUrl: "https://www.sunnpost.com/why-wont-the-senate-protect-journalists/",
+    group: "Feature Photos",
+  },
+  {
+    slug: "painting-the-future-ai",
+    title: "Painting the future: AI in art",
+    summary: "2023 · Best of SNO Distinguished sites winner",
+    description: [
+      "Written and illustrated by me.",
+      "\"Painting the future: AI in art\" written and illustrated by me in 2023, Best of SNO Distinguished sites winner",
+    ],
+    tags: ["Photo Illustration", "Editorial"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/feature-photos/painting-the-future-ai.png",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/feature-photos/painting-the-future-ai.png",
+    ],
+    group: "Feature Photos",
+  },
+  {
+    slug: "sunn-post-vote-required",
+    title: "Should Voting in the U.S. Be Required by Law?",
+    summary: "2025",
+    description: [
+      "Commissioned photo illustration.",
+      "Published: https://www.sunnpost.com/should-voting-be-required-by-law/",
+    ],
+    tags: ["Commissions", "Photo Illustration", "Editorial"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/sunn-post/vote-required.png",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/sunn-post/vote-required.png",
+    ],
+    externalUrl: "https://www.sunnpost.com/should-voting-be-required-by-law/",
+    group: "Commission Work",
+  },
+  {
+    slug: "sunn-post-los-angeles-rising",
+    title: "How Los Angeles Is Rising From the Ashes",
+    summary: "2025",
+    description: [
+      "Commissioned photo illustration.",
+      "Published: https://www.sunnpost.com/los-angeles-rising/",
+    ],
+    tags: ["Commissions", "Photo Illustration", "Editorial"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/sunn-post/los-angeles-rising.png",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/sunn-post/los-angeles-rising.png",
+    ],
+    externalUrl: "https://www.sunnpost.com/los-angeles-rising/",
+    group: "Commission Work",
+  },
+  {
+    slug: "sunn-post-grassroots-politics",
+    title: "Students Are Rebooting Grassroots Politics in America",
+    summary: "2025",
+    description: [
+      "Commissioned photo illustration.",
+      "Published: https://www.sunnpost.com/a-reformation-not-an-ending/",
+    ],
+    tags: ["Commissions", "Photo Illustration", "Editorial"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/sunn-post/grassroots-politics.png",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/sunn-post/grassroots-politics.png",
+    ],
+    externalUrl: "https://www.sunnpost.com/a-reformation-not-an-ending/",
+    group: "Commission Work",
+  },
+  {
+    slug: "sunn-post-stem-cell-football",
+    title: "Stem Cell Research Is More Than Just a Political Football",
+    summary: "2025",
+    description: [
+      "Commissioned photo illustration.",
+      "Published: https://www.sunnpost.com/opinion-stem-cell-research-is-more-than-just-a-political-football/",
+    ],
+    tags: ["Commissions", "Photo Illustration", "Editorial"],
+    thumbnail: "https://www.shiyoohashi.com/images/journalism/sunn-post/stem-cell-football.png",
+    images: [
+      "https://www.shiyoohashi.com/images/journalism/sunn-post/stem-cell-football.png",
+    ],
+    externalUrl: "https://www.sunnpost.com/opinion-stem-cell-research-is-more-than-just-a-political-football/",
+    group: "Commission Work",
+  },
+  {
+    slug: "tim-walz-won-the-internet",
+    title: "How Midwestern Dad Tim Walz Won the Internet",
+    summary: "2025",
+    description: [
+      "Commissioned photo illustration.",
+      "Published: https://www.watchusrise.com/how-midwestern-dad-tim-walz-won-the-internet",
+    ],
+    tags: ["Commissions", "Photo Illustration", "Editorial"],
+    thumbnail: "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-fd8dfbae-0c97-4e1a-8b0e-0bf83c9bb48f.jpg",
+    images: [
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-fd8dfbae-0c97-4e1a-8b0e-0bf83c9bb48f.jpg",
+      "https://i-p.rmcdn.net/668ee361137c9300167237d3/4888419/image-239f5db0-87c8-4341-94b7-a54893f2e2f4.jpg",
+    ],
+    externalUrl: "https://www.watchusrise.com/how-midwestern-dad-tim-walz-won-the-internet",
+    group: "Commission Work",
+  },];
