@@ -138,7 +138,8 @@ function SiteNav({
 export function ScrollChrome() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const { backgroundOpacity } = useScrollReveal();
+  const { lightNav, registerWhiteOverlay } = useScrollReveal();
+  const lightText = isHome && lightNav;
 
   return (
     <>
@@ -146,22 +147,21 @@ export function ScrollChrome() {
 
       {isHome ? (
         <div
+          ref={registerWhiteOverlay}
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-30 bg-white"
-          style={{ opacity: backgroundOpacity }}
+          className="pointer-events-none fixed inset-0 z-30 bg-white will-change-[opacity]"
+          style={{ opacity: 0 }}
         />
       ) : null}
 
-      <header className="fixed inset-x-0 top-0 z-[100] flex items-start justify-between gap-6 p-[clamp(1.25rem,4vw,2rem)]">
-        <BreadcrumbNav
-          pathname={pathname}
-          lightText={isHome && backgroundOpacity < 0.35}
-          className="min-w-0 flex-1"
-        />
-        <SiteNav
-          pathname={pathname}
-          lightText={isHome && backgroundOpacity < 0.35}
-        />
+      <BreadcrumbNav
+        pathname={pathname}
+        lightText={lightText}
+        className="fixed left-0 top-0 z-[100] max-w-[min(72vw,28rem)] p-[clamp(1.25rem,4vw,2rem)]"
+      />
+
+      <header className="fixed right-0 top-0 z-[100] p-[clamp(1.25rem,4vw,2rem)] text-right">
+        <SiteNav pathname={pathname} lightText={lightText} />
       </header>
     </>
   );

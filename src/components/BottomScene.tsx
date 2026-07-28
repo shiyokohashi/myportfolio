@@ -39,9 +39,8 @@ export function BottomScene({
   const [focusedCard, setFocusedCard] = useState<PlaceholderCard | null>(null);
   const baseCards = cardsProp ?? shuffledCards;
   const { speed: contextSpeed } = useHorseSpeed();
-  const { bottomSceneOpacity } = useScrollReveal();
-  const sceneOpacity = bottomSceneOpacity;
-  const sceneHidden = bottomSceneOpacity <= 0.02;
+  const { sceneHidden, registerBottomSceneCarousel, registerBottomSceneChrome } =
+    useScrollReveal();
   const carouselCards = useCarouselCards(baseCards, contextSpeed, !sceneHidden);
   const {
     horseRef,
@@ -110,16 +109,17 @@ export function BottomScene({
       ) : null}
 
       <section
+        ref={registerBottomSceneCarousel}
         aria-label="Project carousel"
         aria-hidden={sceneHidden}
         className={cn(
           "fixed inset-x-0 top-[46%] z-40",
-          "-translate-y-1/2 overflow-x-clip transition-opacity duration-200",
+          "-translate-y-1/2 overflow-x-clip will-change-[opacity]",
           sceneHidden && "pointer-events-none",
           focusedCard && "pointer-events-none",
           className,
         )}
-        style={{ opacity: sceneOpacity }}
+        style={{ opacity: 1 }}
       >
         <CardCarousel
           cards={carouselCards}
@@ -132,11 +132,12 @@ export function BottomScene({
       </section>
 
       <div
+        ref={registerBottomSceneChrome}
         className={cn(
-          "fixed inset-x-0 bottom-20 z-50 flex flex-col items-center gap-4 transition-opacity duration-200",
+          "fixed inset-x-0 bottom-20 z-50 flex flex-col items-center gap-4 will-change-[opacity]",
           sceneHidden && "pointer-events-none",
         )}
-        style={{ opacity: sceneOpacity }}
+        style={{ opacity: 1 }}
       >
         <section
           aria-label="Galloping horse"

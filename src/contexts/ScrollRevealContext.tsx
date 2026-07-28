@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -12,50 +13,114 @@ import {
 import { SCROLL_BG_FULL_PX } from "@/config/navigation";
 
 type ScrollRevealState = {
-  backgroundOpacity: number;
-  bottomSceneOpacity: number;
+  /** Home hero — light nav text while the video backdrop is visible. */
+  lightNav: boolean;
+  /** Horse/carousel fully hidden behind the white scroll layer. */
+  sceneHidden: boolean;
 };
 
-const ScrollRevealContext = createContext<ScrollRevealState>({
-  backgroundOpacity: 0,
-  bottomSceneOpacity: 1,
-});
+type ScrollRevealContextValue = ScrollRevealState & {
+  registerWhiteOverlay: (node: HTMLElement | null) => void;
+  registerBottomSceneCarousel: (node: HTMLElement | null) => void;
+  registerBottomSceneChrome: (node: HTMLElement | null) => void;
+};
+
+const ScrollRevealContext = createContext<ScrollRevealContextValue | null>(null);
+
+function applyScrollStyles(
+  scrollY: number,
+  whiteOverlay: HTMLElement | null,
+  carouselNode: HTMLElement | null,
+  chromeNode: HTMLElement | null,
+) {
+  const baseWhiteOpacity = Math.min(1, scrollY / SCROLL_BG_FULL_PX);
+  const bottomOpacity = 1 - baseWhiteOpacity;
+
+  if (whiteOverlay) {
+    whiteOverlay.style.opacity = String(baseWhiteOpacity);
+  }
+
+  if (carouselNode) {
+    carouselNode.style.opacity = String(bottomOpacity);
+  }
+
+  if (chromeNode) {
+    chromeNode.style.opacity = String(bottomOpacity);
+  }
+
+  return {
+    lightNav: baseWhiteOpacity < 0.35,
+    sceneHidden: bottomOpacity <= 0.02,
+  };
+}
 
 export function ScrollRevealProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<ScrollRevealState>({
-    backgroundOpacity: 0,
-    bottomSceneOpacity: 1,
+    lightNav: true,
+    sceneHidden: false,
   });
-  const stateRef = useRef(state);
+
+  const whiteOverlayRef = useRef<HTMLElement | null>(null);
+  const carouselRef = useRef<HTMLElement | null>(null);
+  const chromeRef = useRef<HTMLElement | null>(null);
+  const flagsRef = useRef(state);
+
+  const registerWhiteOverlay = useCallback((node: HTMLElement | null) => {
+    whiteOverlayRef.current = node;
+    if (node) {
+      const next = applyScrollStyles(
+        window.scrollY,
+        node,
+        carouselRef.current,
+        chromeRef.current,
+      );
+      flagsRef.current = next;
+      setState(next);
+    }
+  }, []);
+
+  const registerBottomSceneCarousel = useCallback((node: HTMLElement | null) => {
+    carouselRef.current = node;
+    if (node) {
+      node.style.opacity = String(
+        1 - Math.min(1, window.scrollY / SCROLL_BG_FULL_PX),
+      );
+    }
+  }, []);
+
+  const registerBottomSceneChrome = useCallback((node: HTMLElement | null) => {
+    chromeRef.current = node;
+    if (node) {
+      node.style.opacity = String(
+        1 - Math.min(1, window.scrollY / SCROLL_BG_FULL_PX),
+      );
+    }
+  }, []);
 
   useEffect(() => {
     let frame = 0;
 
-    const update = () => {
-      frame = 0;
-      const scrollY = window.scrollY;
-      const baseWhiteOpacity = Math.min(1, scrollY / SCROLL_BG_FULL_PX);
+    const scheduleUpdate = () => {
+      const next = applyScrollStyles(
+        window.scrollY,
+        whiteOverlayRef.current,
+        carouselRef.current,
+        chromeRef.current,
+      );
 
-      const next: ScrollRevealState = {
-        backgroundOpacity: baseWhiteOpacity,
-        bottomSceneOpacity: 1 - baseWhiteOpacity,
-      };
-
-      const prev = stateRef.current;
       if (
-        prev.backgroundOpacity === next.backgroundOpacity &&
-        prev.bottomSceneOpacity === next.bottomSceneOpacity
+        flagsRef.current.lightNav === next.lightNav &&
+        flagsRef.current.sceneHidden === next.sceneHidden
       ) {
         return;
       }
 
-      stateRef.current = next;
-      setState(next);
-    };
-
-    const scheduleUpdate = () => {
       if (frame) return;
-      frame = window.requestAnimationFrame(update);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        flagsRef.current = next;
+        setState(next);
+      });
     };
 
     scheduleUpdate();
@@ -69,13 +134,26 @@ export function ScrollRevealProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const value: ScrollRevealContextValue = {
+    ...state,
+    registerWhiteOverlay,
+    registerBottomSceneCarousel,
+    registerBottomSceneChrome,
+  };
+
   return (
-    <ScrollRevealContext.Provider value={state}>
+    <ScrollRevealContext.Provider value={value}>
       {children}
     </ScrollRevealContext.Provider>
   );
 }
 
 export function useScrollReveal() {
-  return useContext(ScrollRevealContext);
+  const context = useContext(ScrollRevealContext);
+
+  if (!context) {
+    throw new Error("useScrollReveal must be used within ScrollRevealProvider");
+  }
+
+  return context;
 }

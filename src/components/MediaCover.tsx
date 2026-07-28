@@ -40,7 +40,7 @@ export function MediaCover({
   containPadding = false,
 }: MediaCoverProps) {
   const { ref, inView } = useInView<HTMLDivElement>({
-    rootMargin: "480px 0px",
+    rootMargin: "960px 0px",
     once: true,
   });
   const videoRef = useRef<HTMLVideoElement>(null);

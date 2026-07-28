@@ -36,7 +36,8 @@ function CategorySection({
   featuredAfter = false,
   footerLink,
   isLast = false,
-}: SelectedWorksGroup & { isLast?: boolean }) {
+  sectionIndex = 0,
+}: SelectedWorksGroup & { isLast?: boolean; sectionIndex?: number }) {
   const headingId = `works-${href.replace(/\//g, "")}`;
   const featured = items.filter((item) => item.layout === "featured");
   const rest = items.filter((item) => item.layout === "default");
@@ -75,13 +76,14 @@ function CategorySection({
             gridClassName(rest.length, gridColumns),
           )}
         >
-          {rest.map((item) => (
+          {rest.map((item, index) => (
             <li key={item.slug}>
               <PortfolioCard
                 item={item}
                 basePath={href}
                 size={compact ? "compact" : "default"}
                 showSummary={!compact}
+                priority={sectionIndex === 0 && index < 3}
               />
             </li>
           ))}
@@ -160,6 +162,7 @@ export function SelectedWorksSection() {
           <CategorySection
             key={group.href}
             {...group}
+            sectionIndex={index}
             isLast={index === groups.length - 1}
           />
         ))}

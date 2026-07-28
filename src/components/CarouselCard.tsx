@@ -41,6 +41,7 @@ export function CarouselCardSlide({
             src={card.thumbnail}
             sizes="(max-width: 640px) 72vw, 400px"
             lazy={false}
+            priority
             poster={
               card.id.includes("deskkeeper")
                 ? "/images/projects/deskkeeper/icon.png"

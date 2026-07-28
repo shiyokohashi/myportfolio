@@ -19,6 +19,7 @@ type PortfolioCardProps = {
   size?: "default" | "large" | "featured" | "compact";
   className?: string;
   showSummary?: boolean;
+  priority?: boolean;
 };
 
 function FeaturedCaption({
@@ -59,6 +60,7 @@ export function PortfolioCard({
   size = "default",
   className,
   showSummary = true,
+  priority = false,
 }: PortfolioCardProps) {
   const isFeatured = size === "featured";
   const isLarge = size === "large";
@@ -88,7 +90,8 @@ export function PortfolioCard({
                 src={item.thumbnail}
                 sizes="(max-width: 1280px) 90vw, 1200px"
                 poster={videoPoster}
-                lazy
+                priority={priority || isFeatured}
+                lazy={!(priority || isFeatured)}
                 objectFit="contain"
                 cropVideoEdges
               />
@@ -144,7 +147,8 @@ export function PortfolioCard({
                       : "(max-width: 640px) 100vw, 50vw"
                 }
                 poster={videoPoster}
-                lazy={!isFeatured}
+                priority={priority || isFeatured}
+                lazy={!(priority || isFeatured)}
                 objectFit={isVideo && isFeatured ? "contain" : undefined}
                 cropVideoEdges={isVideo && isFeatured}
                 imageClassName={
