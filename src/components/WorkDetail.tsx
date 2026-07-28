@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { MediaCover } from "@/components/MediaCover";
 import { cn } from "@/lib/utils";
@@ -14,8 +13,6 @@ import type {
 
 type WorkDetailProps = {
   work: PortfolioWork;
-  categoryTitle: string;
-  categoryHref: string;
   /** Show images at natural aspect ratio without cropping. */
   naturalImages?: boolean;
 };
@@ -269,8 +266,6 @@ function StandardSection({
 /** Detail page layout for a single portfolio entry. */
 export function WorkDetail({
   work,
-  categoryTitle,
-  categoryHref,
   naturalImages = false,
 }: WorkDetailProps) {
   const meta = [work.year, work.role ?? work.medium, work.group].filter(Boolean);
@@ -280,14 +275,7 @@ export function WorkDetail({
   return (
     <main className="relative z-10 pt-24 pb-40 sm:pt-28 sm:pb-44">
       <article className={cn("mx-auto", CONTENT_MAX, PAGE_GUTTER)}>
-        <Link
-          href={categoryHref}
-          className="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900"
-        >
-          ← Back to {categoryTitle}
-        </Link>
-
-        <header className="mt-8 pb-10 sm:mt-10 sm:pb-12">
+        <header className="pb-10 sm:pb-12">
           <h1 className="text-4xl tracking-tight text-zinc-900 sm:text-5xl">{work.title}</h1>
           {meta.length > 0 && (
             <p className="mt-4 text-sm text-zinc-500">{meta.join(" · ")}</p>

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { PAGE_GUTTER } from "@/lib/layout";
@@ -10,8 +9,6 @@ const IMG = "/images/projects/brisbane-2032";
 
 type BrisbaneCaseStudyProps = {
   work: PortfolioWork;
-  categoryTitle: string;
-  categoryHref: string;
 };
 
 function CaseStudyMeta({
@@ -132,22 +129,11 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 /** Brisbane 2032 — editorial case study built from the Adwave production deck. */
-export function BrisbaneCaseStudy({
-  work,
-  categoryTitle,
-  categoryHref,
-}: BrisbaneCaseStudyProps) {
+export function BrisbaneCaseStudy({ work }: BrisbaneCaseStudyProps) {
   return (
     <main className="relative z-10 bg-white pb-32 pt-24 sm:pb-40 sm:pt-28">
       <div className={cn("mx-auto max-w-6xl", PAGE_GUTTER)}>
-        <Link
-          href={categoryHref}
-          className="text-sm text-zinc-500 transition-colors hover:text-zinc-900"
-        >
-          ← Back to {categoryTitle}
-        </Link>
-
-        <header className="mt-8 border-b border-zinc-200 pb-10 sm:mt-10 sm:pb-12">
+        <header className="border-b border-zinc-200 pb-10 sm:pb-12">
           <p className="text-[11px] uppercase tracking-[0.16em] text-zinc-400">
             Brand identity · Case study
           </p>

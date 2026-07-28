@@ -18,12 +18,5 @@ export default async function PaintingPage({ params }: PaintingPageProps) {
 
   if (!work) notFound();
 
-  return (
-    <WorkDetail
-      work={work}
-      categoryTitle="Paintings"
-      categoryHref="/paintings"
-      naturalImages
-    />
-  );
+  return <WorkDetail work={work} naturalImages />;
 }

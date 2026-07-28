@@ -45,7 +45,6 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
     title: "Graphic Design",
     href: "/graphic-design",
     entries: [
-      { slug: "adobe-campus-case-study" },
       { slug: "triton-trading-group" },
       { slug: "brisbane-2032" },
     ],

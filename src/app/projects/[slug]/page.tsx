@@ -18,11 +18,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   if (!work) notFound();
 
-  return (
-    <WorkDetail
-      work={work}
-      categoryTitle="Personal Projects"
-      categoryHref="/projects"
-    />
-  );
+  return <WorkDetail work={work} />;
 }

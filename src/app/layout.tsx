@@ -8,7 +8,7 @@ import { ScrollRevealProvider } from "@/contexts/ScrollRevealContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Shiyo Ohashi",
   description: "Personal portfolio",
 };
 

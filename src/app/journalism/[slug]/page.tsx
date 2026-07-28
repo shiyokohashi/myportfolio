@@ -20,11 +20,5 @@ export default async function JournalismWorkPage({
 
   if (!work) notFound();
 
-  return (
-    <WorkDetail
-      work={work}
-      categoryTitle="Journalism"
-      categoryHref="/journalism"
-    />
-  );
+  return <WorkDetail work={work} />;
 }

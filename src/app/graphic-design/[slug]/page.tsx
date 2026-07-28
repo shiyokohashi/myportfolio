@@ -22,20 +22,8 @@ export default async function GraphicDesignWorkPage({
   if (!work) notFound();
 
   if (slug === "brisbane-2032") {
-    return (
-      <BrisbaneCaseStudy
-        work={work}
-        categoryTitle="Graphic Design"
-        categoryHref="/graphic-design"
-      />
-    );
+    return <BrisbaneCaseStudy work={work} />;
   }
 
-  return (
-    <WorkDetail
-      work={work}
-      categoryTitle="Graphic Design"
-      categoryHref="/graphic-design"
-    />
-  );
+  return <WorkDetail work={work} />;
 }
