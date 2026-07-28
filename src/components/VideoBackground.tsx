@@ -9,7 +9,7 @@ import { useSmoothBackgroundSaturation } from "@/hooks/useSmoothBackgroundSatura
 
 /**
  * Fixed full-viewport background video (Firefly grass breeze).
- * Saturation peaks at ~0.1× and ~1.7×; fully greyscale at 0.2×.
+ * Saturation is full below ~0.1× and ~1.7×; fully greyscale at 0.2×.
  */
 export function VideoBackground() {
   const pathname = usePathname();

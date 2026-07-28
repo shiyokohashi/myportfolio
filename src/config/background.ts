@@ -11,7 +11,7 @@ export const BACKGROUND_VIDEO = {
   saturationMax: 1.08,
 } as const;
 
-/** Map horse speed to background video saturation — peaks at 0.1× and 1.7×, grey at 0.2×. */
+/** Map horse speed to background video saturation — full color below 0.1× and at 1.7×, grey at 0.2×. */
 export function getBackgroundVideoSaturation(speed: number): number {
   const {
     saturationMax,
@@ -21,10 +21,8 @@ export function getBackgroundVideoSaturation(speed: number): number {
   } = BACKGROUND_VIDEO;
   const normalized = Math.max(0, speed);
 
-  if (normalized === 0) return 0;
-
   if (normalized <= saturationFullAtSpeedLow) {
-    return (normalized / saturationFullAtSpeedLow) * saturationMax;
+    return saturationMax;
   }
 
   if (normalized <= saturationGrayscaleAtSpeed) {

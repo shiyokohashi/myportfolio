@@ -7,7 +7,7 @@ import {
   getSelectedWorksGroups,
   type SelectedWorksGroup,
 } from "@/data/selected-works";
-import { PAGE_GUTTER, SECTION_PY, SECTION_PY_COMPACT, WORKS_MAX } from "@/lib/layout";
+import { PAGE_GUTTER, SECTION_PY, SECTION_PY_COMPACT, WORKS_MAX, PAGE_END_PB } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 function WorksContainer({ children }: { children: ReactNode }) {
@@ -95,8 +95,7 @@ function CategorySection({
       className={cn(
         "flex flex-col",
         compact ? SECTION_PY_COMPACT : SECTION_PY,
-        isLast &&
-          "pb-[clamp(12rem,36vh,26rem)] sm:pb-[clamp(14rem,42vh,30rem)] lg:pb-[clamp(16rem,48vh,34rem)]",
+        isLast && PAGE_END_PB,
       )}
     >
       <WorksContainer>
