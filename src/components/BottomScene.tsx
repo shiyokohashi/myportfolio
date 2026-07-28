@@ -12,7 +12,6 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSyncedAnimation } from "@/hooks/useSyncedAnimation";
 import { useHorseSpeed } from "@/contexts/HorseSpeedContext";
 import { PAGE_GUTTER } from "@/lib/layout";
-import { isSpeedAtEndpoint } from "@/lib/secretFrame";
 import { cn } from "@/lib/utils";
 
 export type BottomSceneProps = {
@@ -35,8 +34,6 @@ export function BottomScene({
   const { bottomSceneOpacity } = useScrollReveal();
   const sceneOpacity = bottomSceneOpacity;
   const sceneHidden = bottomSceneOpacity <= 0.02;
-  const secretFrameVisible =
-    !sceneHidden && isSpeedAtEndpoint(contextSpeed);
   const carouselCards = useCarouselCards(baseCards, contextSpeed, !sceneHidden);
   const {
     horseRef,
@@ -146,7 +143,6 @@ export function BottomScene({
           onSpeedChange={setSpeed}
           frameIndex={frameIndex}
           frameCount={frameCount}
-          secretFrameActive={secretFrameVisible}
           hidden={sceneHidden}
         />
       </div>

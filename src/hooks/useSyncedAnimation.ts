@@ -18,8 +18,15 @@ import {
   measureCarouselLoopWidth,
 } from "@/lib/syncedAnimation";
 
+export type SetHorseSpeedOptions = {
+  /** Snap animation to the new speed instead of lerping — used while dragging. */
+  immediate?: boolean;
+  /** Persist to React context — false during drag, true on release. */
+  commit?: boolean;
+};
+
 export function useSyncedAnimation(cards: PlaceholderCard[]) {
-  const { speed, setSpeed: setContextSpeed } = useHorseSpeed();
+  const { speed, speedRef, setSpeed: setContextSpeed } = useHorseSpeed();
   const horseRef = useRef<HTMLDivElement>(null);
   const carouselStripRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<ReturnType<
@@ -61,7 +68,7 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
     );
 
     controllerRef.current = controller;
-    controller.setUserSpeed(speed);
+    controller.setUserSpeed(speedRef.current, true);
 
     const strip = carouselStripRef.current;
 
@@ -107,10 +114,10 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
       controller.stop();
       controllerRef.current = null;
     };
-  }, [regenerateGaps]);
+  }, [regenerateGaps, speedRef]);
 
   useEffect(() => {
-    controllerRef.current?.setUserSpeed(speed);
+    controllerRef.current?.setUserSpeed(speed, true);
   }, [speed]);
 
   useEffect(() => {
@@ -136,15 +143,22 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
   }, []);
 
   const setSpeed = useCallback(
-    (multiplier: number) => {
+    (multiplier: number, options?: SetHorseSpeedOptions) => {
       const next = Math.max(
         HORSE_USER_SPEED_MIN,
         Math.min(HORSE_USER_SPEED_MAX, multiplier),
       );
-      setContextSpeed(next);
-      controllerRef.current?.setUserSpeed(next);
+      const immediate = options?.immediate ?? false;
+      const commit = options?.commit ?? !immediate;
+
+      speedRef.current = next;
+      controllerRef.current?.setUserSpeed(next, immediate);
+
+      if (commit) {
+        setContextSpeed(next);
+      }
     },
-    [setContextSpeed],
+    [setContextSpeed, speedRef],
   );
 
   const onCardHoverChange = useCallback((hovered: boolean) => {

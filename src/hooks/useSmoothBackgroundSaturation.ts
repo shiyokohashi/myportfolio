@@ -1,25 +1,29 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, type MutableRefObject, type RefObject } from "react";
 
 import { BACKGROUND_VIDEO, getBackgroundVideoSaturation } from "@/config/background";
 
 const SATURATION_LERP = 0.14;
+const FILTER_EPSILON = 0.008;
 
-/** Eases video saturation via direct DOM updates — no React re-renders. */
+/** Eases video saturation via direct DOM updates — reads live speed from ref, no React re-renders. */
 export function useSmoothBackgroundSaturation(
-  speed: number,
+  speedRef: MutableRefObject<number>,
   videoRef: RefObject<HTMLVideoElement | null>,
 ) {
-  const speedRef = useRef(speed);
-  speedRef.current = speed;
-
-  const saturationRef = useRef(getBackgroundVideoSaturation(speed));
+  const saturationRef = useRef(getBackgroundVideoSaturation(speedRef.current));
+  const appliedSaturationRef = useRef(-1);
 
   useEffect(() => {
     let rafId = 0;
 
     const applyFilter = (saturation: number) => {
+      if (Math.abs(saturation - appliedSaturationRef.current) < FILTER_EPSILON) {
+        return;
+      }
+
+      appliedSaturationRef.current = saturation;
       const node = videoRef.current;
       if (!node) return;
       node.style.filter = `blur(${BACKGROUND_VIDEO.blurPx}px) saturate(${saturation}) brightness(${BACKGROUND_VIDEO.brightness})`;
@@ -47,5 +51,5 @@ export function useSmoothBackgroundSaturation(
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, [videoRef]);
+  }, [speedRef, videoRef]);
 }

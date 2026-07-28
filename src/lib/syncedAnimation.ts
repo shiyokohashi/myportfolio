@@ -35,7 +35,7 @@ export type SyncedAnimationController = {
   stop: () => void;
   setLoopWidth: (widthPx: number) => void;
   setHoverSlow: (active: boolean) => void;
-  setUserSpeed: (multiplier: number) => void;
+  setUserSpeed: (multiplier: number, immediate?: boolean) => void;
   getUserSpeed: () => number;
   setCarouselPaused: (paused: boolean) => void;
   setCarouselOffset: (offsetPx: number) => void;
@@ -216,9 +216,12 @@ export function createSyncedAnimationController(
       hoverSlow = active;
       targetSpeedMultiplier = resolveTargetSpeed();
     },
-    setUserSpeed(multiplier: number) {
+    setUserSpeed(multiplier: number, immediate = false) {
       userSpeedMultiplier = Math.max(0, multiplier);
       targetSpeedMultiplier = resolveTargetSpeed();
+      if (immediate) {
+        speedMultiplier = targetSpeedMultiplier;
+      }
     },
     getUserSpeed() {
       return userSpeedMultiplier;

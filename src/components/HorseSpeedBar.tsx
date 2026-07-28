@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import type { SetHorseSpeedOptions } from "@/hooks/useSyncedAnimation";
 import { PAGE_GUTTER } from "@/lib/layout";
 import {
   HORSE_SPEED_SLIDER_MAX,
@@ -10,14 +11,13 @@ import {
   speedToSliderValue,
 } from "@/lib/horseSpeedSlider";
 import { cn } from "@/lib/utils";
-import { SECRET_FRAME } from "@/lib/secretFrame";
+import { isSpeedAtEndpoint, SECRET_FRAME } from "@/lib/secretFrame";
 
 export type HorseSpeedBarProps = {
   speed: number;
-  onSpeedChange: (speed: number) => void;
+  onSpeedChange: (speed: number, options?: SetHorseSpeedOptions) => void;
   frameIndex?: number;
   frameCount?: number;
-  secretFrameActive?: boolean;
   className?: string;
   hidden?: boolean;
 };
@@ -36,7 +36,6 @@ export function HorseSpeedBar({
   onSpeedChange,
   frameIndex,
   frameCount,
-  secretFrameActive = false,
   className,
   hidden = false,
 }: HorseSpeedBarProps) {
@@ -49,9 +48,18 @@ export function HorseSpeedBar({
     }
   }, [speed]);
 
+  const displaySpeed = sliderValueToSpeed(sliderValue);
+  const secretFrameActive = isSpeedAtEndpoint(displaySpeed);
+
   const handleSliderInput = (value: number) => {
     setSliderValue(value);
-    onSpeedChange(sliderValueToSpeed(value));
+    onSpeedChange(sliderValueToSpeed(value), { immediate: true, commit: false });
+  };
+
+  const finishDrag = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    onSpeedChange(displaySpeed, { immediate: true, commit: true });
   };
 
   return (
@@ -82,26 +90,24 @@ export function HorseSpeedBar({
           step={1}
           value={sliderValue}
           aria-label="Horse speed"
-          onPointerDown={() => {
+          onPointerDown={(event) => {
             isDraggingRef.current = true;
+            event.currentTarget.setPointerCapture(event.pointerId);
           }}
-          onPointerUp={() => {
-            isDraggingRef.current = false;
-          }}
-          onPointerCancel={() => {
-            isDraggingRef.current = false;
-          }}
+          onPointerUp={finishDrag}
+          onPointerCancel={finishDrag}
+          onLostPointerCapture={finishDrag}
           onInput={(event) =>
             handleSliderInput(Number(event.currentTarget.value))
           }
           className="horse-speed-slider min-w-0 flex-1"
-          aria-valuetext={formatSpeed(speed)}
+          aria-valuetext={formatSpeed(displaySpeed)}
         />
         <span
           aria-hidden
           className="w-10 shrink-0 text-right text-xs tabular-nums text-white/50 drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
         >
-          {formatSpeed(speed)}
+          {formatSpeed(displaySpeed)}
         </span>
       </div>
     </div>
