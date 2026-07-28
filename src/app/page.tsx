@@ -1,7 +1,6 @@
 import { AboutSection } from "@/components/AboutSection";
 import { BottomScene } from "@/components/BottomScene";
 import { SelectedWorksSection } from "@/components/SelectedWorksSection";
-import { SiteFooter } from "@/components/SiteFooter";
 import { PAGE_GUTTER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +41,6 @@ export default function Home() {
 
       <AboutSection />
       <SelectedWorksSection />
-      <SiteFooter />
       <BottomScene />
     </>
   );

@@ -80,86 +80,6 @@ body {
   overflow-x: hidden;
 }
 
-.film-credits-viewport {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(255 255 255 / 0.2) 28%,
-    rgb(255 255 255 / 0.5) 48%,
-    rgb(255 255 255 / 0.78) 62%,
-    #fff 72%,
-    #fff 100%
-  );
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(255 255 255 / 0.2) 28%,
-    rgb(255 255 255 / 0.5) 48%,
-    rgb(255 255 255 / 0.78) 62%,
-    #fff 72%,
-    #fff 100%
-  );
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  mask-mode: alpha;
-}
-
-.film-credits-scrim {
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(0 0 0 / 0.5) 100%
-  );
-}
-
-.film-credits-cycle-gap {
-  height: 14vh;
-}
-
-.film-credits-loop {
-  position: relative;
-  z-index: 1;
-  will-change: transform;
-  transform: translateY(75vh);
-}
-
-.film-credits-link {
-  text-decoration-line: none;
-}
-
-.film-credits-link:hover {
-  opacity: 0.95;
-}
-
-.film-credits-link:focus-visible {
-  outline: 2px solid rgb(255 255 255 / 0.95);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
-.film-credits-loop-active {
-  animation: film-credits-loop 36s linear infinite;
-}
-
-@keyframes film-credits-loop {
-  from {
-    transform: translateY(75vh);
-  }
-
-  to {
-    transform: translateY(calc(-50% + 75vh));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .film-credits-loop-active {
-    animation: none;
-  }
-}
-
 .horse-speed-bar .horse-speed-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -167,6 +87,7 @@ body {
   border-radius: 9999px;
   background: rgb(255 255 255 / 0.22);
   cursor: pointer;
+  touch-action: none;
 }
 
 .horse-speed-bar .horse-speed-slider:focus-visible {

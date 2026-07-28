@@ -25,6 +25,12 @@ export type SetHorseSpeedOptions = {
   commit?: boolean;
 };
 
+function randomGapPx() {
+  return Math.round(
+    CARD_GAP_MIN_PX + Math.random() * (CARD_GAP_MAX_PX - CARD_GAP_MIN_PX),
+  );
+}
+
 export function useSyncedAnimation(cards: PlaceholderCard[]) {
   const { speed, speedRef, setSpeed: setContextSpeed } = useHorseSpeed();
   const horseRef = useRef<HTMLDivElement>(null);
@@ -33,6 +39,8 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
     typeof createSyncedAnimationController
   > | null>(null);
   const pageLoadSyncedRef = useRef(false);
+  const cardsRef = useRef(cards);
+  cardsRef.current = cards;
 
   const [cardGaps, setCardGaps] = useState(() =>
     buildRandomCardGaps(cards, CARD_GAP_MIN_PX, CARD_GAP_MAX_PX),
@@ -40,12 +48,48 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
   const [frameIndex, setFrameIndex] = useState(0);
 
   const regenerateGaps = useCallback(() => {
-    setCardGaps(buildRandomCardGaps(cards, CARD_GAP_MIN_PX, CARD_GAP_MAX_PX));
-  }, [cards]);
+    setCardGaps(
+      buildRandomCardGaps(cardsRef.current, CARD_GAP_MIN_PX, CARD_GAP_MAX_PX),
+    );
+  }, []);
+
+  const regenerateGapsRef = useRef(regenerateGaps);
+  regenerateGapsRef.current = regenerateGaps;
+
+  const remeasureLoopWidth = useCallback(() => {
+    const strip = carouselStripRef.current;
+    const controller = controllerRef.current;
+    if (!strip || !controller) return;
+
+    const width = measureCarouselLoopWidth(strip);
+    if (width > 0) {
+      controller.setLoopWidth(width);
+    }
+  }, []);
 
   useEffect(() => {
-    setCardGaps(buildRandomCardGaps(cards, CARD_GAP_MIN_PX, CARD_GAP_MAX_PX));
-  }, [cards]);
+    setCardGaps((prev) => {
+      if (cards.length === prev.length) return prev;
+
+      if (cards.length > prev.length) {
+        const extra = Array.from(
+          { length: cards.length - prev.length },
+          () => randomGapPx(),
+        );
+        return [...prev, ...extra];
+      }
+
+      return prev.slice(0, cards.length);
+    });
+
+    const frameId = requestAnimationFrame(() => {
+      remeasureLoopWidth();
+    });
+
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
+  }, [cards, remeasureLoopWidth]);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -63,7 +107,7 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
       },
       {
         loopDurationMs: GALLOP_CYCLE_MS,
-        onCarouselLoop: regenerateGaps,
+        onCarouselLoop: () => regenerateGapsRef.current(),
       },
     );
 
@@ -88,7 +132,7 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
     const resizeObserver =
       strip &&
       new ResizeObserver(() => {
-        measureAndSync();
+        remeasureLoopWidth();
       });
 
     if (strip && resizeObserver) {
@@ -114,7 +158,7 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
       controller.stop();
       controllerRef.current = null;
     };
-  }, [regenerateGaps, speedRef]);
+  }, [remeasureLoopWidth, speedRef]);
 
   useEffect(() => {
     controllerRef.current?.setUserSpeed(speed, true);

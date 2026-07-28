@@ -70,7 +70,7 @@ export function CardCarousel({
             >
               {cards.map((card, index) => (
                 <CarouselCard
-                  key={`${copyIndex}-${card.id}-${cardGaps[index]}`}
+                  key={`${copyIndex}-${card.id}`}
                   card={card}
                   interactive={isPrimaryCopy}
                   onHoverStart={() => setSlow(true)}

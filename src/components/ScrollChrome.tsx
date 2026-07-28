@@ -111,16 +111,7 @@ function SiteNav({
 export function ScrollChrome() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const { backgroundOpacity, footerVideoReveal } = useScrollReveal();
-
-  const whiteOverlayStyle =
-    isHome && footerVideoReveal > 0
-      ? {
-          opacity: 1,
-          WebkitMaskImage: `linear-gradient(to bottom, #000 0%, #000 ${Math.max(0, (1 - footerVideoReveal) * 100 - 14)}%, transparent ${Math.min(100, (1 - footerVideoReveal) * 100 + 56)}%)`,
-          maskImage: `linear-gradient(to bottom, #000 0%, #000 ${Math.max(0, (1 - footerVideoReveal) * 100 - 14)}%, transparent ${Math.min(100, (1 - footerVideoReveal) * 100 + 56)}%)`,
-        }
-      : { opacity: backgroundOpacity };
+  const { backgroundOpacity } = useScrollReveal();
 
   return (
     <>
@@ -130,16 +121,14 @@ export function ScrollChrome() {
         <div
           aria-hidden
           className="pointer-events-none fixed inset-0 z-30 bg-white"
-          style={whiteOverlayStyle}
+          style={{ opacity: backgroundOpacity }}
         />
       ) : null}
 
       <header className="fixed right-0 top-0 z-[100] p-[clamp(1.25rem,4vw,2rem)] text-right">
         <SiteNav
           pathname={pathname}
-          lightText={
-            isHome && backgroundOpacity < 0.35 && footerVideoReveal < 0.75
-          }
+          lightText={isHome && backgroundOpacity < 0.35}
         />
       </header>
     </>
