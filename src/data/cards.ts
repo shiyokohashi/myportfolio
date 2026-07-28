@@ -41,28 +41,22 @@ function toCarouselCard(
   };
 }
 
-/** Selected works for the home carousel — featured pieces first, then the rest. */
+/** Selected works for the home carousel — category order before shuffling. */
 export function buildCarouselDeck(): PlaceholderCard[] {
-  const featured: PlaceholderCard[] = [];
-  const standard: PlaceholderCard[] = [];
+  const deck: PlaceholderCard[] = [];
 
   for (const group of getSelectedWorksGroups()) {
     for (const work of group.items) {
-      const card = toCarouselCard(group.href, work);
-      if (work.layout === "featured") featured.push(card);
-      else standard.push(card);
+      deck.push(toCarouselCard(group.href, work));
     }
   }
 
-  return [...featured, ...standard];
+  return deck;
 }
 
-/** Featured cards stay at the front; the rest shuffle on each page load. */
+/** Fully randomized card order — call on the client after mount. */
 export function getShuffledCarouselCards(): PlaceholderCard[] {
-  const deck = buildCarouselDeck();
-  const featured = deck.filter((card) => card.featured);
-  const standard = shuffleArray(deck.filter((card) => !card.featured));
-  return [...featured, ...standard];
+  return shuffleArray(buildCarouselDeck());
 }
 
 /** @deprecated Use getShuffledCarouselCards() — kept for tests and prop typing. */

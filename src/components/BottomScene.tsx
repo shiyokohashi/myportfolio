@@ -6,7 +6,11 @@ import { CardCarousel } from "@/components/CardCarousel";
 import { FocusedCardOverlay } from "@/components/FocusedCardOverlay";
 import { HorseSpeedBar } from "@/components/HorseSpeedBar";
 import { HorseSprite } from "@/components/HorseSprite";
-import { getShuffledCarouselCards, type PlaceholderCard } from "@/data/cards";
+import {
+  buildCarouselDeck,
+  getShuffledCarouselCards,
+  type PlaceholderCard,
+} from "@/data/cards";
 import { useCarouselCards } from "@/hooks/useCarouselCards";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSyncedAnimation } from "@/hooks/useSyncedAnimation";
@@ -27,7 +31,11 @@ export function BottomScene({
   cards: cardsProp,
   className,
 }: BottomSceneProps) {
-  const [shuffledCards] = useState(() => getShuffledCarouselCards());
+  const [shuffledCards, setShuffledCards] = useState(() => buildCarouselDeck());
+
+  useEffect(() => {
+    setShuffledCards(getShuffledCarouselCards());
+  }, []);
   const [focusedCard, setFocusedCard] = useState<PlaceholderCard | null>(null);
   const baseCards = cardsProp ?? shuffledCards;
   const { speed: contextSpeed } = useHorseSpeed();
