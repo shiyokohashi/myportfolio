@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 export type CarouselCardSlideProps = {
   card: PlaceholderCard;
   className?: string;
+  /** When false, skip loading media (loop duplicates). */
+  loadMedia?: boolean;
 };
 
 function cardWidthStyle() {
@@ -19,7 +21,11 @@ function cardWidthStyle() {
 export { cardWidthStyle };
 
 /** Slide-mount card visuals — shared by strip and focused overlay. */
-export function CarouselCardSlide({ card, className }: CarouselCardSlideProps) {
+export function CarouselCardSlide({
+  card,
+  className,
+  loadMedia = true,
+}: CarouselCardSlideProps) {
   return (
     <div className={cn("carousel-slide-mount", className)}>
       <p className="carousel-slide-mount-title">{card.title}</p>
@@ -30,14 +36,21 @@ export function CarouselCardSlide({ card, className }: CarouselCardSlideProps) {
           card.secret && "bg-[#f3efe6]",
         )}
       >
-        {card.thumbnail ? (
+        {card.thumbnail && loadMedia ? (
           <MediaCover
             src={card.thumbnail}
             sizes="(max-width: 640px) 72vw, 400px"
-            unoptimized
+            lazy={false}
+            poster={
+              card.id.includes("deskkeeper")
+                ? "/images/projects/deskkeeper/icon.png"
+                : undefined
+            }
             objectFit={card.secret ? "contain" : "cover"}
             containPadding={card.secret}
           />
+        ) : card.thumbnail ? (
+          <div className="h-full w-full bg-[#f3efe6]" aria-hidden />
         ) : (
           <div
             className="h-full w-full"
@@ -89,6 +102,7 @@ export function CarouselCard({
       >
         <CarouselCardSlide
           card={card}
+          loadMedia={false}
           className="transition-[transform,box-shadow] duration-200"
         />
       </article>

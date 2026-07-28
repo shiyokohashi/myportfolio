@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ScrollChrome } from "@/components/ScrollChrome";
 import { VideoBackground } from "@/components/VideoBackground";
 import { HorseSpeedProvider } from "@/contexts/HorseSpeedContext";
+import { ScrollRevealProvider } from "@/contexts/ScrollRevealContext";
 
 import "./globals.css";
 
@@ -20,9 +21,11 @@ export default function RootLayout({
     <html lang="en" className="h-full overflow-x-hidden antialiased">
       <body className="relative min-h-full overflow-x-hidden bg-transparent font-sans text-zinc-900">
         <HorseSpeedProvider>
-          <VideoBackground />
-          <ScrollChrome />
-          {children}
+          <ScrollRevealProvider>
+            <VideoBackground />
+            <ScrollChrome />
+            {children}
+          </ScrollRevealProvider>
         </HorseSpeedProvider>
       </body>
     </html>

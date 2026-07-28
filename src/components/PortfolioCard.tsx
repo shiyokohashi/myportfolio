@@ -60,12 +60,13 @@ export function PortfolioCard({
   className,
   showSummary = true,
 }: PortfolioCardProps) {
-  const isRemote = item.thumbnail?.startsWith("http");
   const isFeatured = size === "featured";
   const isLarge = size === "large";
   const isCompact = size === "compact";
   const isVideo = isVideoSrc(item.thumbnail);
   const exactMediaFrame = isFeatured && isVideo && item.mediaAspect;
+  const videoPoster =
+    item.slug === "deskkeeper" ? "/images/projects/deskkeeper/icon.png" : undefined;
 
   if (exactMediaFrame && item.mediaAspect) {
     const { width, height } = item.mediaAspect;
@@ -86,7 +87,8 @@ export function PortfolioCard({
               <MediaCover
                 src={item.thumbnail}
                 sizes="(max-width: 1280px) 90vw, 1200px"
-                unoptimized={isRemote}
+                poster={videoPoster}
+                lazy
                 objectFit="contain"
                 cropVideoEdges
               />
@@ -141,7 +143,8 @@ export function PortfolioCard({
                       ? "(max-width: 640px) 100vw, 50vw"
                       : "(max-width: 640px) 100vw, 50vw"
                 }
-                unoptimized={isRemote}
+                poster={videoPoster}
+                lazy={!isFeatured}
                 objectFit={isVideo && isFeatured ? "contain" : undefined}
                 cropVideoEdges={isVideo && isFeatured}
                 imageClassName={

@@ -22,9 +22,9 @@ export const PAINTINGS: PortfolioWork[] = [
     description: [
       "2025 · 30×40 · Oil and acrylic on canvas",
     ],
-    thumbnail: "https://www.shiyoohashi.com/images/banner/family-and-cranes.png",
+    thumbnail: "/images/paintings/thumbs/family-and-cranes.png",
     images: [
-      "https://www.shiyoohashi.com/images/banner/family-and-cranes.png",
+      "/images/paintings/thumbs/family-and-cranes.png",
     ],
   },
   {
@@ -35,9 +35,9 @@ export const PAINTINGS: PortfolioWork[] = [
     description: [
       "2026 · 12×36 · Oil on canvas",
     ],
-    thumbnail: "https://www.shiyoohashi.com/images/paintings/panorama-2026.jpeg",
+    thumbnail: "/images/paintings/thumbs/panorama-2026.jpeg",
     images: [
-      "https://www.shiyoohashi.com/images/paintings/panorama-2026.jpeg",
+      "/images/paintings/thumbs/panorama-2026.jpeg",
     ],
   },
   {
@@ -48,9 +48,9 @@ export const PAINTINGS: PortfolioWork[] = [
     description: [
       "2025 · 22×28 · Oil on canvas",
     ],
-    thumbnail: "https://www.shiyoohashi.com/images/banner/ride-or-die.png",
+    thumbnail: "/images/paintings/thumbs/ride-or-die.png",
     images: [
-      "https://www.shiyoohashi.com/images/banner/ride-or-die.png",
+      "/images/paintings/thumbs/ride-or-die.png",
     ],
   },
   {

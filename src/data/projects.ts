@@ -14,7 +14,7 @@ export const PROJECTS: PortfolioWork[] = [
     role: "Product design",
     tags: ["Web", "UX", "Education"],
     color: "#3b82f6",
-    thumbnail: "/images/projects/graduaid/slide-06.png",
+    thumbnail: "/images/projects/graduaid.png",
     detailLayout: "editorial",
     sections: [
       {

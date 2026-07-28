@@ -145,7 +145,7 @@ export const GRAPHIC_DESIGN: PortfolioWork[] = [
     year: "2026",
     role: "Brand identity",
     tags: ["Brand Identity", "Entertainment"],
-    thumbnail: `${SITE}/images/banner/brisbane-bound-for-gold-billboard.png`,
+    thumbnail: "/images/banner/brisbane-bound-for-gold-billboard.png",
   },
   {
     slug: "scot-scoop-news-logo",

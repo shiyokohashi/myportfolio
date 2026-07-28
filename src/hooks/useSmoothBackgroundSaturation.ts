@@ -1,23 +1,29 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 
-import { getBackgroundVideoSaturation } from "@/config/background";
+import { BACKGROUND_VIDEO, getBackgroundVideoSaturation } from "@/config/background";
 
 const SATURATION_LERP = 0.14;
 
-/** Smoothly eases displayed saturation toward the speed-driven target. */
-export function useSmoothBackgroundSaturation(speed: number): number {
+/** Eases video saturation via direct DOM updates — no React re-renders. */
+export function useSmoothBackgroundSaturation(
+  speed: number,
+  videoRef: RefObject<HTMLVideoElement | null>,
+) {
   const speedRef = useRef(speed);
   speedRef.current = speed;
 
-  const [saturation, setSaturation] = useState(() =>
-    getBackgroundVideoSaturation(speed),
-  );
-  const saturationRef = useRef(saturation);
+  const saturationRef = useRef(getBackgroundVideoSaturation(speed));
 
   useEffect(() => {
     let rafId = 0;
+
+    const applyFilter = (saturation: number) => {
+      const node = videoRef.current;
+      if (!node) return;
+      node.style.filter = `blur(${BACKGROUND_VIDEO.blurPx}px) saturate(${saturation}) brightness(${BACKGROUND_VIDEO.brightness})`;
+    };
 
     const tick = () => {
       const target = getBackgroundVideoSaturation(speedRef.current);
@@ -26,21 +32,20 @@ export function useSmoothBackgroundSaturation(speed: number): number {
 
       if (Math.abs(next - target) < 0.001) {
         saturationRef.current = target;
-        setSaturation(target);
+        applyFilter(target);
       } else {
         saturationRef.current = next;
-        setSaturation(next);
+        applyFilter(next);
       }
 
       rafId = requestAnimationFrame(tick);
     };
 
+    applyFilter(saturationRef.current);
     rafId = requestAnimationFrame(tick);
 
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, []);
-
-  return saturation;
+  }, [videoRef]);
 }
