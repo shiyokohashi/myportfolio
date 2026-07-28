@@ -14,5 +14,8 @@ export const NAV_ITEMS: NavItem[] = [
 /** Scroll distance (px) at which the white background is fully opaque. */
 export const SCROLL_BG_FULL_PX = 320;
 
+/** How far before the footer enters view to begin the video fade-in (px). */
+export const FOOTER_VIDEO_FADE_LEAD_PX = 520;
+
 /** Scroll distance (px) over which the white overlay fades out into the footer video. */
-export const FOOTER_VIDEO_FADE_PX = 720;
+export const FOOTER_VIDEO_FADE_PX = 1400;

@@ -40,7 +40,7 @@ export const HORSE_USER_SPEED_MID = 0.2;
 export const HORSE_USER_SPEED_DEFAULT = HORSE_USER_SPEED_MID;
 
 /** Display height of the horse on screen (px). Width scales from frame aspect ratio. */
-export const HORSE_DISPLAY_HEIGHT_PX = 132;
+export const HORSE_DISPLAY_HEIGHT_PX = 116;
 
 /** One-time entrance run-in duration when the site first loads (ms). */
 export const HORSE_ENTRANCE_DURATION_MS = 4_000;
@@ -49,7 +49,7 @@ export const HORSE_ENTRANCE_DURATION_MS = 4_000;
 export const CAROUSEL_ENTRANCE_RELEASE_PROGRESS = 0.5;
 
 /** Carousel card width (px). Used for layout and horizontal centering. */
-export const CARD_WIDTH_PX = 460;
+export const CARD_WIDTH_PX = 400;
 
 /** Minimum carousel inset — mirrors CardCarousel paddingLeft (1.5rem). */
 export const CAROUSEL_PADDING_MIN_PX = 24;
@@ -62,7 +62,7 @@ export function getCarouselPaddingLeftPx(
 }
 
 /** Max card width as a viewport percentage. */
-export const CARD_MAX_VW = 80;
+export const CARD_MAX_VW = 72;
 
 /** Minimum gap between carousel cards (px). */
 export const CARD_GAP_MIN_PX = 80;

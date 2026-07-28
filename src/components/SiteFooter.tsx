@@ -59,7 +59,7 @@ function CreditsBlock({ ariaHidden }: { ariaHidden?: boolean }) {
             <a
               key={link.label}
               href={link.href}
-              className="film-credits-link text-white transition-opacity hover:opacity-95"
+              className="film-credits-link no-underline text-white transition-opacity hover:opacity-95"
               {...(link.href.startsWith("http")
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
@@ -87,6 +87,11 @@ export function SiteFooter() {
   const { footerVideoReveal } = useScrollReveal();
   const [creditsActive, setCreditsActive] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const creditsOpacity = Math.min(
+    1,
+    Math.max(0, (footerVideoReveal - 0.12) / 0.72),
+  );
+  const creditsFade = creditsOpacity * creditsOpacity * (3 - 2 * creditsOpacity);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -121,11 +126,24 @@ export function SiteFooter() {
     >
       <div
         aria-hidden
-        className="film-credits-scrim absolute inset-0"
-        style={{ opacity: footerVideoReveal }}
+        className="pointer-events-none absolute inset-x-0 top-0 z-[2] h-[min(58vh,28rem)]"
+        style={{
+          opacity: 1 - footerVideoReveal,
+          background:
+            "linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255 / 0.92) 18%, rgb(255 255 255 / 0.55) 52%, transparent 100%)",
+        }}
       />
 
-      <div className="film-credits-viewport absolute inset-0 z-[1] overflow-hidden">
+      <div
+        aria-hidden
+        className="film-credits-scrim absolute inset-0"
+        style={{ opacity: footerVideoReveal * 0.85 }}
+      />
+
+      <div
+        className="film-credits-viewport absolute inset-0 z-[1] overflow-hidden"
+        style={{ opacity: creditsFade }}
+      >
         {reduceMotion ? (
           <div className="relative z-[1] flex h-full items-center justify-center">
             <CreditsBlock />

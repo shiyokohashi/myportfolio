@@ -110,8 +110,35 @@ export const PROJECTS: PortfolioWork[] = [
     role: "Design & development",
     tags: ["Desktop", "Product"],
     color: "#78716c",
-    thumbnail: "/images/projects/deskkeeper.png",
-    images: ["/images/projects/deskkeeper.png"],
+    thumbnail: "/videos/deskkeeper.mov",
+    mediaAspect: { width: 2314, height: 1558 },
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "App icon",
+        layout: "narrow",
+        items: [
+          {
+            image: "/images/projects/deskkeeper/icon.png",
+            width: 1024,
+            height: 1024,
+          },
+        ],
+      },
+      {
+        title: "Product demo",
+        description:
+          "Preview files, sort into folders, and clear a messy desktop without leaving the app.",
+        layout: "full",
+        items: [
+          {
+            video: "/videos/deskkeeper.mov",
+            width: 2314,
+            height: 1558,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "portfolio-sketchbook",

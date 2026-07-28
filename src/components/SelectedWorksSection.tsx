@@ -8,12 +8,12 @@ import {
   getSelectedWorksGroups,
   type SelectedWorksGroup,
 } from "@/data/selected-works";
-import { PAGE_GUTTER, SECTION_PY } from "@/lib/layout";
+import { PAGE_GUTTER, SECTION_PY, SECTION_PY_COMPACT, WORKS_MAX } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 function WorksContainer({ children }: { children: ReactNode }) {
   return (
-    <div className={cn("mx-auto w-full max-w-6xl", PAGE_GUTTER)}>{children}</div>
+    <div className={cn("mx-auto w-full", WORKS_MAX, PAGE_GUTTER)}>{children}</div>
   );
 }
 
@@ -34,15 +34,71 @@ function CategorySection({
   items,
   gridColumns,
   compact,
-}: SelectedWorksGroup) {
+  featuredAfter = false,
+  footerLink,
+  isLast = false,
+}: SelectedWorksGroup & { isLast?: boolean }) {
   const headingId = `works-${href.replace(/\//g, "")}`;
   const featured = items.filter((item) => item.layout === "featured");
   const rest = items.filter((item) => item.layout === "default");
 
+  const featuredBlock =
+    featured.length > 0 ? (
+      <div
+        className={cn(
+          "flex flex-col",
+          featuredAfter ? "mt-14 sm:mt-16 lg:mt-20" : "mt-14 sm:mt-16 lg:mt-20",
+        )}
+      >
+        {featured.map((item) => (
+          <PortfolioCard
+            key={item.slug}
+            item={item}
+            basePath={href}
+            size="featured"
+          />
+        ))}
+      </div>
+    ) : null;
+
+  const gridBlock =
+    rest.length > 0 ? (
+      <WorksContainer>
+        <ul
+          className={cn(
+            "grid list-none",
+            compact ? "gap-x-8 gap-y-12 sm:gap-y-14" : "gap-x-10 gap-y-16 lg:gap-x-12 lg:gap-y-20",
+            !featuredAfter && featured.length > 0
+              ? "mt-16 sm:mt-20 lg:mt-24"
+              : compact
+                ? "mt-12 sm:mt-14"
+                : "mt-14 sm:mt-16 lg:mt-20",
+            gridClassName(rest.length, gridColumns),
+          )}
+        >
+          {rest.map((item) => (
+            <li key={item.slug}>
+              <PortfolioCard
+                item={item}
+                basePath={href}
+                size={compact ? "compact" : "default"}
+                showSummary={!compact}
+              />
+            </li>
+          ))}
+        </ul>
+      </WorksContainer>
+    ) : null;
+
   return (
     <section
       aria-labelledby={headingId}
-      className={cn("flex flex-col", compact ? "py-12 sm:py-16" : SECTION_PY)}
+      className={cn(
+        "flex flex-col",
+        compact ? SECTION_PY_COMPACT : SECTION_PY,
+        isLast &&
+          "pb-[clamp(12rem,36vh,26rem)] sm:pb-[clamp(14rem,42vh,30rem)] lg:pb-[clamp(16rem,48vh,34rem)]",
+      )}
     >
       <WorksContainer>
         <WorksSectionHeader
@@ -54,40 +110,26 @@ function CategorySection({
         />
       </WorksContainer>
 
-      {featured.length > 0 ? (
-        <div className="mt-10 flex flex-col gap-16 sm:mt-12 sm:gap-20">
-          {featured.map((item) => (
-            <PortfolioCard
-              key={item.slug}
-              item={item}
-              basePath={href}
-              size="featured"
-            />
-          ))}
-        </div>
-      ) : null}
+      {featuredAfter ? (
+        <>
+          {gridBlock}
+          {featuredBlock}
+        </>
+      ) : (
+        <>
+          {featuredBlock}
+          {gridBlock}
+        </>
+      )}
 
-      {rest.length > 0 ? (
+      {footerLink ? (
         <WorksContainer>
-          <ul
-            className={cn(
-              "grid list-none",
-              compact ? "gap-x-5 gap-y-8" : "gap-x-8 gap-y-12",
-              featured.length > 0 ? "mt-12 sm:mt-16" : compact ? "mt-8 sm:mt-10" : "mt-10 sm:mt-12",
-              gridClassName(rest.length, gridColumns),
-            )}
+          <a
+            href={footerLink.href}
+            className="mt-14 block text-sm text-zinc-400 transition-colors hover:text-zinc-900 sm:mt-16"
           >
-            {rest.map((item) => (
-              <li key={item.slug}>
-                <PortfolioCard
-                  item={item}
-                  basePath={href}
-                  size={compact ? "compact" : "default"}
-                  showSummary={!compact}
-                />
-              </li>
-            ))}
-          </ul>
+            {footerLink.label}
+          </a>
         </WorksContainer>
       ) : null}
     </section>
@@ -102,25 +144,26 @@ export function SelectedWorksSection() {
     <section
       id="works"
       aria-labelledby="works-heading"
-      className="relative z-40 scroll-mt-24 border-t border-zinc-200 bg-white"
+      className="relative z-40 scroll-mt-24 bg-white"
     >
       <WorksContainer>
-        <header className="pb-4 pt-20 sm:pt-24 lg:pt-28">
+        <header className="pb-8 pt-28 sm:pb-10 sm:pt-32 lg:pb-12 lg:pt-40">
           <h2
             id="works-heading"
-            className="text-3xl tracking-tight text-zinc-900 sm:text-4xl"
+            className="font-display text-4xl tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
           >
             Selected work
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-500">
-            Projects, design, painting, and journalism.
-          </p>
         </header>
       </WorksContainer>
 
-      <div className="divide-y divide-zinc-200">
-        {groups.map((group) => (
-          <CategorySection key={group.href} {...group} />
+      <div>
+        {groups.map((group, index) => (
+          <CategorySection
+            key={group.href}
+            {...group}
+            isLast={index === groups.length - 1}
+          />
         ))}
       </div>
     </section>

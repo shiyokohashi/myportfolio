@@ -1,3 +1,4 @@
+import { ABOUT } from "@/data/about";
 import { GRAPHIC_DESIGN } from "@/data/graphic-design";
 import { JOURNALISM } from "@/data/journalism";
 import { PAINTINGS } from "@/data/paintings";
@@ -19,8 +20,12 @@ export type SelectedWorksCategory = {
   blurb: string;
   /** Grid column count for non-featured items. Defaults to 2. */
   gridColumns?: 2 | 3;
+  /** Render featured entries below the grid instead of above. */
+  featuredAfter?: boolean;
   /** Tighter spacing and smaller cards — for lighter sections like journalism. */
   compact?: boolean;
+  /** Optional link shown below the category grid. */
+  footerLink?: { label: string; href: string };
 };
 
 /** Home page selected works — order, layout, and featured slugs per category. */
@@ -33,13 +38,14 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
       { slug: "graduaid" },
       { slug: "portfolio-sketchbook" },
     ],
-    blurb:
-      "Self-indulgent creations ;) Click in to see progress, process, and whatever I’m tinkering on.",
+    blurb: "PLACEHOLDER PLACEHOLDER PLACEHOLDER",
+    gridColumns: 2,
   },
   {
     title: "Graphic Design",
     href: "/graphic-design",
     entries: [
+      { slug: "adobe-campus-case-study" },
       { slug: "triton-trading-group" },
       { slug: "brisbane-2032" },
     ],
@@ -50,13 +56,16 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
     title: "Paintings",
     href: "/paintings",
     entries: [
-      { slug: "tiger-daughter-2026", layout: "featured" },
+      { slug: "tiger-daughter-2026" },
       { slug: "untitled-2025" },
       { slug: "wings" },
       { slug: "horse-faces" },
-      { slug: "portrait-mode" },
     ],
     blurb: "Back to basics -- my traditional mediums",
+    footerLink: {
+      label: "commission me",
+      href: `mailto:${ABOUT.connect.email}`,
+    },
   },
   {
     title: "Journalism",
@@ -87,6 +96,8 @@ export type SelectedWorksGroup = Omit<SelectedWorksCategory, "entries"> & {
   items: SelectedWorksItem[];
   gridColumns: 2 | 3;
   compact: boolean;
+  featuredAfter: boolean;
+  footerLink?: { label: string; href: string };
 };
 
 export function getSelectedWorksGroups(): SelectedWorksGroup[] {
@@ -96,6 +107,8 @@ export function getSelectedWorksGroups(): SelectedWorksGroup[] {
     blurb: category.blurb,
     gridColumns: category.gridColumns ?? 2,
     compact: category.compact ?? false,
+    featuredAfter: category.featuredAfter ?? false,
+    footerLink: category.footerLink,
     items: category.entries
       .map((entry) => {
         const work = getWorkBySlug(

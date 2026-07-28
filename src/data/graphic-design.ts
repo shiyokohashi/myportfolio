@@ -15,7 +15,7 @@ export const GRAPHIC_DESIGN: PortfolioWork[] = [
     year: "2025–26",
     role: "Brand identity",
     tags: ["Brand Identity", "Education"],
-    thumbnail: `${SITE}/images/banner/triton-trading-spring-recruitment-we-want-you.png`,
+    thumbnail: "/images/projects/triton-trading/thumbnail.png",
     sections: [
       {
         title: "Bimonthly quant recap",
@@ -105,6 +105,31 @@ export const GRAPHIC_DESIGN: PortfolioWork[] = [
         description: "Vertical banner for Winter 2025 recruitment tabling.",
         variant: "banner",
         items: [{ image: `${SITE}/images/projects/triton-trading/banner.png` }],
+      },
+    ],
+  },
+  {
+    slug: "adobe-campus-case-study",
+    title: "Adobe Campus Case Study",
+    summary:
+      "UCSuperDesign — a field guide proposing a more creative campus at UC San Diego.",
+    description: [],
+    year: "2025",
+    role: "Brand identity",
+    tags: ["Brand Identity", "Education", "Adobe"],
+    thumbnail: "/images/projects/adobe-campus-case-study/spread.png",
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "Field guide",
+        layout: "contained",
+        items: [
+          {
+            image: "/images/projects/adobe-campus-case-study/spread.png",
+            width: 1024,
+            height: 768,
+          },
+        ],
       },
     ],
   },

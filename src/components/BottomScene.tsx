@@ -47,7 +47,6 @@ export function BottomScene({
     frameIndex,
     frameCount,
     onCardHoverChange,
-    onCardClick,
     pauseCarousel,
     resumeCarousel,
   } = useSyncedAnimation(carouselCards);
@@ -77,18 +76,11 @@ export function BottomScene({
 
   const handleCardActivate = useCallback(
     (card: PlaceholderCard) => {
-      onCardClick();
       onCardHoverChange(false);
-
-      if (!card.secret && card.href) {
-        window.open(card.href, "_blank", "noopener,noreferrer");
-        return;
-      }
-
       setFocusedCard(card);
       pauseCarousel();
     },
-    [onCardClick, onCardHoverChange, pauseCarousel],
+    [onCardHoverChange, pauseCarousel],
   );
 
   const handleFocusedOpen = useCallback(

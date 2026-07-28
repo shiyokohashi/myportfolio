@@ -5,7 +5,8 @@
 export type PortfolioSectionItem = {
   title?: string;
   description?: string;
-  image: string;
+  image?: string;
+  video?: string;
   width?: number;
   height?: number;
 };
@@ -39,8 +40,9 @@ export type PortfolioWork = {
   /** Paintings, journalism, graphic design */
   medium?: string;
   thumbnail?: string;
+  /** Native pixel size for video/image thumbnails — frames the media box exactly. */
+  mediaAspect?: { width: number; height: number };
   images?: string[];
-  /** Grouped gallery sections for case-study layouts */
   sections?: PortfolioSection[];
   /** Full-bleed section flow with natural image sizing */
   detailLayout?: "standard" | "editorial";

@@ -1,7 +1,8 @@
 "use client";
 
-import { CarouselCardSlide } from "@/components/CarouselCard";
-import { CARD_MAX_VW, CARD_WIDTH_PX } from "@/config/animation";
+import { useEffect } from "react";
+
+import { CarouselCardSlide, cardWidthStyle } from "@/components/CarouselCard";
 import type { PlaceholderCard } from "@/data/cards";
 import { cn } from "@/lib/utils";
 
@@ -16,18 +17,31 @@ export function FocusedCardOverlay({
   onClose,
   onOpen,
 }: FocusedCardOverlayProps) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  const canOpen = !card.secret && Boolean(card.href);
+
   return (
     <div
       className="fixed inset-0 z-[55] flex items-center justify-center bg-black/35 px-6 py-16 backdrop-blur-[2px]"
       onClick={onClose}
-      role="presentation"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${card.title} preview`}
     >
       <button
         type="button"
         aria-label={
-          card.secret
-            ? `Close ${card.title}`
-            : `Open ${card.title} in a new tab`
+          canOpen
+            ? `Open ${card.title} in a new tab`
+            : `Close ${card.title} preview`
         }
         onClick={(event) => {
           event.stopPropagation();
@@ -37,7 +51,7 @@ export function FocusedCardOverlay({
           "origin-center scale-[1.5] cursor-pointer border-0 bg-transparent p-0 text-left",
           "transition-transform duration-300 ease-out hover:-translate-y-1",
         )}
-        style={{ width: `min(${CARD_WIDTH_PX}px, ${CARD_MAX_VW}vw)` }}
+        style={cardWidthStyle()}
       >
         <CarouselCardSlide
           card={card}

@@ -1,8 +1,8 @@
 "use client";
 
-import {
-  BACKGROUND_VIDEO,
-} from "@/config/background";
+import { usePathname } from "next/navigation";
+
+import { BACKGROUND_VIDEO } from "@/config/background";
 import { useHorseSpeed } from "@/contexts/HorseSpeedContext";
 import { useSmoothBackgroundSaturation } from "@/hooks/useSmoothBackgroundSaturation";
 
@@ -11,13 +11,16 @@ import { useSmoothBackgroundSaturation } from "@/hooks/useSmoothBackgroundSatura
  * Saturation peaks at ~0.1× and ~1.7×; fully greyscale at 0.2×.
  */
 export function VideoBackground() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const { speed } = useHorseSpeed();
   const saturation = useSmoothBackgroundSaturation(speed);
 
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-zinc-900"
+      className="pointer-events-none fixed inset-0 z-20 overflow-hidden bg-zinc-900"
+      style={{ opacity: isHome ? 1 : 0 }}
     >
       <video
         autoPlay

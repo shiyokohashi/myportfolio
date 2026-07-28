@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { MediaCover } from "@/components/MediaCover";
 import { cn } from "@/lib/utils";
+import { isVideoSrc } from "@/lib/media";
 import { CONTENT_MAX, PAGE_GUTTER } from "@/lib/layout";
 import type {
   PortfolioSection,
@@ -24,6 +26,76 @@ const SECTION_WIDTH: Record<SectionLayout, string> = {
   wide: "max-w-6xl",
   full: "max-w-[min(1600px,100vw)]",
 };
+
+function WorkMedia({
+  item,
+  alt,
+  className,
+  aspectClass = "aspect-[4/3]",
+  natural,
+}: {
+  item: PortfolioSectionItem;
+  alt: string;
+  className?: string;
+  aspectClass?: string;
+  natural?: boolean;
+}) {
+  const src = item.video ?? item.image;
+  if (!src) return null;
+
+  const isVideo = isVideoSrc(src);
+  const isRemote = src.startsWith("http");
+
+  if (isVideo && item.width && item.height) {
+    return (
+      <div
+        className={cn("overflow-hidden rounded-xl bg-zinc-50", className)}
+        style={{ aspectRatio: `${item.width} / ${item.height}` }}
+      >
+        <div className="relative h-full w-full overflow-hidden">
+          <MediaCover
+            src={src}
+            sizes="100vw"
+            unoptimized
+            objectFit="contain"
+            cropVideoEdges
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (natural && item.width && item.height) {
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        width={item.width}
+        height={item.height}
+        className={cn("h-auto w-full", className)}
+        sizes="100vw"
+        unoptimized={isRemote}
+      />
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        "relative w-full overflow-hidden bg-zinc-100",
+        aspectClass,
+        className,
+      )}
+    >
+      <MediaCover
+        src={src}
+        sizes="(max-width: 768px) 100vw, 768px"
+        unoptimized={isRemote}
+        objectFit="contain"
+      />
+    </div>
+  );
+}
 
 function WorkImage({
   src,
@@ -85,16 +157,12 @@ function EditorialFigure({
   item: PortfolioSectionItem;
   workTitle: string;
 }) {
+  const mediaSrc = item.video ?? item.image;
+
   return (
     <figure className="space-y-3">
-      <WorkImage
-        src={item.image}
-        alt={item.title ?? workTitle}
-        natural
-        width={item.width}
-        height={item.height}
-      />
-      {(item.title || item.description) && (
+      <WorkMedia item={item} alt={item.title ?? workTitle} natural />
+      {(item.title || item.description) && mediaSrc && (
         <figcaption className={cn("space-y-1 text-sm text-zinc-600 sm:px-0", PAGE_GUTTER)}>
           {item.title && (
             <p className="font-medium text-zinc-900">{item.title}</p>
@@ -138,7 +206,7 @@ function EditorialSection({
       >
         {section.items.map((item) => (
           <EditorialFigure
-            key={item.image}
+            key={item.video ?? item.image ?? section.title}
             item={item}
             workTitle={workTitle}
           />
@@ -173,11 +241,11 @@ function StandardSection({
       >
         {section.items.map((item) => (
           <figure
-            key={item.image}
+            key={item.video ?? item.image ?? item.title}
             className={section.variant === "banner" ? "" : "space-y-3"}
           >
-            <WorkImage
-              src={item.image}
+            <WorkMedia
+              item={item}
               alt={item.title ?? workTitle}
               aspectClass={
                 section.variant === "banner" ? "aspect-[3/4]" : "aspect-[4/3]"

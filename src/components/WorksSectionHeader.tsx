@@ -20,24 +20,24 @@ export function WorksSectionHeader({
   return (
     <header
       className={cn(
-        "flex flex-col gap-4 border-b border-zinc-200 sm:flex-row sm:items-end sm:justify-between",
-        compact ? "pb-5" : "gap-6 pb-8",
+        "flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-8",
+        compact ? "pb-10 sm:pb-12" : "pb-12 sm:pb-14 lg:pb-16",
       )}
     >
       <div className="min-w-0">
         <h3
           id={headingId}
           className={cn(
-            "tracking-tight text-zinc-900",
-            compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl",
+            "font-display tracking-tight text-zinc-900",
+            compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl lg:text-[2rem]",
           )}
         >
           {title}
         </h3>
         <p
           className={cn(
-            "mt-1.5 max-w-2xl leading-relaxed text-zinc-500",
-            compact ? "text-xs sm:text-sm" : "mt-2 text-sm",
+            "mt-3 max-w-xl leading-relaxed text-zinc-400",
+            compact ? "text-sm" : "text-sm sm:text-base",
           )}
         >
           {blurb}
@@ -48,9 +48,9 @@ export function WorksSectionHeader({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="shrink-0 text-sm text-zinc-500 transition-colors hover:text-zinc-900"
+        className="shrink-0 text-sm text-zinc-400 transition-colors hover:text-zinc-900"
       >
-        View all
+        view all
       </Link>
     </header>
   );

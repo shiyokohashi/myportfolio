@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-
+import { MediaCover } from "@/components/MediaCover";
 import { CARD_MAX_VW, CARD_WIDTH_PX } from "@/config/animation";
 import type { PlaceholderCard } from "@/data/cards";
 import { cn } from "@/lib/utils";
@@ -11,11 +10,16 @@ export type CarouselCardSlideProps = {
   className?: string;
 };
 
+function cardWidthStyle() {
+  return {
+    width: `min(${CARD_WIDTH_PX}px, ${CARD_MAX_VW}vw)`,
+  } as const;
+}
+
+export { cardWidthStyle };
+
 /** Slide-mount card visuals — shared by strip and focused overlay. */
 export function CarouselCardSlide({ card, className }: CarouselCardSlideProps) {
-  const isRemote = card.thumbnail?.startsWith("http");
-  const isLocal = card.thumbnail?.startsWith("/");
-
   return (
     <div className={cn("carousel-slide-mount", className)}>
       <p className="carousel-slide-mount-title">{card.title}</p>
@@ -27,13 +31,12 @@ export function CarouselCardSlide({ card, className }: CarouselCardSlideProps) {
         )}
       >
         {card.thumbnail ? (
-          <Image
+          <MediaCover
             src={card.thumbnail}
-            alt=""
-            fill
-            className={cn(card.secret ? "object-contain p-1" : "object-cover")}
-            sizes="(max-width: 640px) 80vw, 460px"
-            unoptimized={isRemote || isLocal || card.secret}
+            sizes="(max-width: 640px) 72vw, 400px"
+            unoptimized
+            objectFit={card.secret ? "contain" : "cover"}
+            containPadding={card.secret}
           />
         ) : (
           <div
@@ -72,7 +75,7 @@ export function CarouselCard({
   className,
 }: CarouselCardProps) {
   const style = {
-    width: `min(${CARD_WIDTH_PX}px, ${CARD_MAX_VW}vw)`,
+    ...cardWidthStyle(),
     marginRight: trailingGapPx,
   };
 

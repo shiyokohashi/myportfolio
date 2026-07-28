@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { AboutConnect } from "@/components/AboutConnect";
 import { ABOUT } from "@/data/about";
 import { PAGE_GUTTER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -9,20 +10,20 @@ import { cn } from "@/lib/utils";
  * Edit copy in src/data/about.ts
  */
 export function AboutSection() {
-  const { connect, portrait } = ABOUT;
+  const { portrait } = ABOUT;
 
   return (
     <section
       id="about"
       aria-labelledby="about-heading"
       className={cn(
-        "relative z-40 flex min-h-screen scroll-mt-20 items-center justify-center pt-28 pb-32 sm:pt-32 sm:pb-36",
+        "relative z-40 flex min-h-screen scroll-mt-20 items-center justify-center pt-36 pb-40 sm:pt-40 sm:pb-48 lg:pt-44 lg:pb-52",
         PAGE_GUTTER,
       )}
     >
       <div className="mx-auto w-full max-w-[min(1400px,98vw)] text-center">
         {portrait && (
-          <div className="mx-auto mb-5 w-[min(120px,28vw)] sm:mb-6">
+          <div className="mx-auto mb-8 w-[min(120px,28vw)] sm:mb-10">
             <Image
               src={portrait}
               alt=""
@@ -34,13 +35,13 @@ export function AboutSection() {
           </div>
         )}
 
-        <div className="space-y-10 sm:space-y-12">
+        <div className="space-y-12 sm:space-y-16 lg:space-y-20">
           {ABOUT.paragraphs.map((paragraph, index) =>
             index === 0 ? (
               <h2
                 key={index}
                 id="about-heading"
-                className="mx-auto max-w-[min(920px,92vw)] text-3xl leading-snug tracking-tight text-zinc-900 sm:text-4xl lg:text-5xl"
+                className="mx-auto max-w-[min(880px,88vw)] text-3xl leading-snug tracking-tight text-zinc-900 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]"
               >
                 {paragraph}
               </h2>
@@ -61,32 +62,7 @@ export function AboutSection() {
           )}
         </div>
 
-        <div className="mx-auto mt-14 max-w-3xl font-sans sm:mt-16">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-zinc-600 sm:text-sm">
-            <a
-              href={connect.resume.href}
-              className="transition-opacity hover:opacity-70"
-            >
-              {connect.resume.label}
-            </a>
-
-            <a
-              href={`mailto:${connect.email}`}
-              className="transition-opacity hover:opacity-70"
-            >
-              {connect.email}
-            </a>
-
-            <a
-              href={connect.linkedin.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-70"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
+        <AboutConnect />
       </div>
     </section>
   );

@@ -20,7 +20,10 @@ export function ScrollReveal({
   delayMs = 0,
   offsetY = 28,
 }: ScrollRevealProps) {
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const { ref, inView } = useInView<HTMLDivElement>({
+    rootMargin: "0px 0px -4% 0px",
+    threshold: 0.08,
+  });
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        "transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity,transform]",
+        "transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity,transform]",
         inView ? "opacity-100" : "opacity-0",
         className,
       )}

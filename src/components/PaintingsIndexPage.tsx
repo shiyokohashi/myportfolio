@@ -111,7 +111,7 @@ export function PaintingsIndexPage({
   const sections = groupItems(items);
 
   return (
-    <main className={cn("relative z-10 pb-32 pt-24 sm:pb-40 sm:pt-28", PAGE_GUTTER)}>
+    <main className={cn("relative z-10 pb-40 pt-28 sm:pb-48 sm:pt-32 lg:pt-36", PAGE_GUTTER)}>
       <div className="mx-auto w-full max-w-[min(1680px,100%)]">
         <header className="border-b border-zinc-200 pb-8">
           <h1 className="font-sans text-3xl font-medium uppercase tracking-[0.06em] text-zinc-900 sm:text-4xl">

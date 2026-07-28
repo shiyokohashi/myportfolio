@@ -5,7 +5,7 @@ export const ABOUT: AboutContent = {
   title: "About Me",
   portrait: "/images/about/portrait.png",
   paragraphs: [
-    "Second-year Cognitive Science Design & Interaction student at UC San Diego building digital experiences, visual identities, and brands at the intersection of creativity and technology.",
+    "Second-year Cognitive Science Design & Interaction student at UC San Diego building digital experiences, visual identities, and brands.",
   ],
   bullets: [],
   connect: {

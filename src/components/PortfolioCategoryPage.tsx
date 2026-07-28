@@ -22,7 +22,7 @@ export function PortfolioCategoryPage({
   intro,
 }: PortfolioCategoryPageProps) {
   return (
-    <main className={cn("relative z-10 pt-24 pb-40 sm:pt-28 sm:pb-44", PAGE_GUTTER)}>
+    <main className={cn("relative z-10 pt-28 pb-48 sm:pt-32 sm:pb-52 lg:pb-56", PAGE_GUTTER)}>
       <div className={cn("mx-auto", CONTENT_MAX)}>
         <h1 className="text-4xl tracking-tight text-zinc-900 sm:text-5xl">
           {title}
