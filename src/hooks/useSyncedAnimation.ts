@@ -12,7 +12,7 @@ import {
 } from "@/config/animation";
 import type { PlaceholderCard } from "@/data/cards";
 import { useHorseSpeed } from "@/contexts/HorseSpeedContext";
-import { buildRandomCardGaps } from "@/lib/cardGaps";
+import { buildRandomCardGaps, buildStableCardGaps } from "@/lib/cardGaps";
 import {
   createSyncedAnimationController,
   measureCarouselLoopWidth,
@@ -25,12 +25,6 @@ export type SetHorseSpeedOptions = {
   commit?: boolean;
 };
 
-function randomGapPx() {
-  return Math.round(
-    CARD_GAP_MIN_PX + Math.random() * (CARD_GAP_MAX_PX - CARD_GAP_MIN_PX),
-  );
-}
-
 export function useSyncedAnimation(cards: PlaceholderCard[]) {
   const { speed, speedRef, setSpeed: setContextSpeed } = useHorseSpeed();
   const horseRef = useRef<HTMLDivElement>(null);
@@ -40,10 +34,9 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
   > | null>(null);
   const pageLoadSyncedRef = useRef(false);
   const cardsRef = useRef(cards);
-  cardsRef.current = cards;
 
   const [cardGaps, setCardGaps] = useState(() =>
-    buildRandomCardGaps(cards, CARD_GAP_MIN_PX, CARD_GAP_MAX_PX),
+    buildStableCardGaps(cards, CARD_GAP_MIN_PX, CARD_GAP_MAX_PX),
   );
   const [frameIndex, setFrameIndex] = useState(0);
 
@@ -54,7 +47,6 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
   }, []);
 
   const regenerateGapsRef = useRef(regenerateGaps);
-  regenerateGapsRef.current = regenerateGaps;
 
   const remeasureLoopWidth = useCallback(() => {
     const strip = carouselStripRef.current;
@@ -68,19 +60,7 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
   }, []);
 
   useEffect(() => {
-    setCardGaps((prev) => {
-      if (cards.length === prev.length) return prev;
-
-      if (cards.length > prev.length) {
-        const extra = Array.from(
-          { length: cards.length - prev.length },
-          () => randomGapPx(),
-        );
-        return [...prev, ...extra];
-      }
-
-      return prev.slice(0, cards.length);
-    });
+    cardsRef.current = cards;
 
     const frameId = requestAnimationFrame(() => {
       remeasureLoopWidth();
@@ -90,6 +70,10 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
       cancelAnimationFrame(frameId);
     };
   }, [cards, remeasureLoopWidth]);
+
+  useEffect(() => {
+    regenerateGapsRef.current = regenerateGaps;
+  }, [regenerateGaps]);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(

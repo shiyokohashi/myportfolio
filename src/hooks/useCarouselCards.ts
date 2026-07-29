@@ -36,18 +36,36 @@ export function useCarouselCards(
   const [secretActive, setSecretActive] = useState(false);
 
   useEffect(() => {
+    let frameId = 0;
+
     if (!includeSecret) {
-      setSecretActive(false);
-      return;
+      frameId = requestAnimationFrame(() => {
+        setSecretActive(false);
+      });
+
+      return () => {
+        cancelAnimationFrame(frameId);
+      };
     }
 
     if (isSecretSpeed(speed)) {
-      setSecretActive(true);
-      return;
+      frameId = requestAnimationFrame(() => {
+        setSecretActive(true);
+      });
+
+      return () => {
+        cancelAnimationFrame(frameId);
+      };
     }
 
     if (isSecretSpeedReleased(speed)) {
-      setSecretActive(false);
+      frameId = requestAnimationFrame(() => {
+        setSecretActive(false);
+      });
+
+      return () => {
+        cancelAnimationFrame(frameId);
+      };
     }
   }, [speed, includeSecret]);
 

@@ -12,11 +12,12 @@ export function useSmoothBackgroundSaturation(
   speedRef: MutableRefObject<number>,
   videoRef: RefObject<HTMLVideoElement | null>,
 ) {
-  const saturationRef = useRef(getBackgroundVideoSaturation(speedRef.current));
+  const saturationRef = useRef<number | null>(null);
   const appliedSaturationRef = useRef(-1);
 
   useEffect(() => {
     let rafId = 0;
+    saturationRef.current = getBackgroundVideoSaturation(speedRef.current);
 
     const applyFilter = (saturation: number) => {
       if (Math.abs(saturation - appliedSaturationRef.current) < FILTER_EPSILON) {
@@ -31,7 +32,7 @@ export function useSmoothBackgroundSaturation(
 
     const tick = () => {
       const target = getBackgroundVideoSaturation(speedRef.current);
-      const current = saturationRef.current;
+      const current = saturationRef.current ?? target;
       const next = current + (target - current) * SATURATION_LERP;
 
       if (Math.abs(next - target) < 0.001) {

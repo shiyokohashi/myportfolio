@@ -34,7 +34,13 @@ export function BottomScene({
   const [shuffledCards, setShuffledCards] = useState(() => buildCarouselDeck());
 
   useEffect(() => {
-    setShuffledCards(getShuffledCarouselCards());
+    const frameId = requestAnimationFrame(() => {
+      setShuffledCards(getShuffledCarouselCards());
+    });
+
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
   }, []);
   const [focusedCard, setFocusedCard] = useState<PlaceholderCard | null>(null);
   const baseCards = cardsProp ?? shuffledCards;
@@ -60,15 +66,27 @@ export function BottomScene({
       focusedCard &&
       !carouselCards.some((card) => card.id === focusedCard.id)
     ) {
-      setFocusedCard(null);
-      resumeCarousel();
+      const frameId = requestAnimationFrame(() => {
+        setFocusedCard(null);
+        resumeCarousel();
+      });
+
+      return () => {
+        cancelAnimationFrame(frameId);
+      };
     }
   }, [carouselCards, focusedCard, resumeCarousel]);
 
   useEffect(() => {
     if (sceneHidden && focusedCard) {
-      setFocusedCard(null);
-      resumeCarousel();
+      const frameId = requestAnimationFrame(() => {
+        setFocusedCard(null);
+        resumeCarousel();
+      });
+
+      return () => {
+        cancelAnimationFrame(frameId);
+      };
     }
   }, [sceneHidden, focusedCard, resumeCarousel]);
 

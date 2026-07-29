@@ -4,9 +4,9 @@ import { useMemo, useRef } from "react";
 
 import { CarouselCard } from "@/components/CarouselCard";
 import {
+  CAROUSEL_PADDING_LEFT_CSS,
   CAROUSEL_LOOP_COPIES,
   CARD_GAP_MIN_PX,
-  getCarouselPaddingLeftPx,
 } from "@/config/animation";
 import type { PlaceholderCard } from "@/data/cards";
 import { cn } from "@/lib/utils";
@@ -53,7 +53,7 @@ export function CardCarousel({
       className={cn("w-full overflow-hidden py-4", className)}
       aria-label="Project carousel"
       style={{
-        paddingLeft: `${getCarouselPaddingLeftPx()}px`,
+        paddingLeft: CAROUSEL_PADDING_LEFT_CSS,
       }}
       onPointerLeave={() => setSlow(false)}
     >
