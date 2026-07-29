@@ -2,7 +2,6 @@ import {
   CAROUSEL_ENTRANCE_RELEASE_PROGRESS,
   GALLOP_CYCLE_MS,
   getCarouselPaddingLeftPx,
-  getHorseDisplayWidth,
   HORSE_ANIMATION_RATE,
   HORSE_ENTRANCE_DURATION_MS,
   HORSE_SPRITE,
@@ -68,10 +67,7 @@ export function getCarouselScrollElapsedMs(elapsedMs = performance.now()): numbe
   return Math.max(0, elapsedMs - getCarouselScrollStartMs());
 }
 
-export function getHorseEntranceTranslateX(
-  _displayWidth: number,
-  _elapsedMs = performance.now(),
-): number | null {
+export function getHorseEntranceTranslateX(): number | null {
   return null;
 }
 
@@ -82,19 +78,8 @@ export function getHorseFrameIndexAtTime(elapsedMs = performance.now()): number 
 }
 
 export function getInitialHorseRenderState() {
-  if (typeof window === "undefined") {
-    return { transform: undefined as string | undefined, frameIndex: 0 };
-  }
-
-  const displayWidth = getHorseDisplayWidth();
-  const elapsed = performance.now();
-  const translateX = getHorseEntranceTranslateX(displayWidth, elapsed);
-
   return {
-    transform:
-      translateX === null
-        ? undefined
-        : `translateX(${Math.round(translateX)}px)`,
-    frameIndex: getHorseFrameIndexAtTime(elapsed),
+    transform: undefined as string | undefined,
+    frameIndex: 0,
   };
 }

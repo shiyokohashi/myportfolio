@@ -61,6 +61,9 @@ export function getCarouselPaddingLeftPx(
   return Math.max(CAROUSEL_PADDING_MIN_PX, viewportWidth / 2 - CARD_WIDTH_PX / 2);
 }
 
+/** CSS equivalent of getCarouselPaddingLeftPx(), safe for server/client render. */
+export const CAROUSEL_PADDING_LEFT_CSS = `max(${CAROUSEL_PADDING_MIN_PX}px, calc(50vw - ${CARD_WIDTH_PX / 2}px))`;
+
 /** Max card width as a viewport percentage. */
 export const CARD_MAX_VW = 72;
 

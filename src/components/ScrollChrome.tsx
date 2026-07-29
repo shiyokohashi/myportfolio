@@ -46,10 +46,6 @@ function SiteNav({
   }, []);
 
   useEffect(() => {
-    close();
-  }, [pathname, close]);
-
-  useEffect(() => {
     return () => {
       if (closeTimerRef.current !== null) {
         window.clearTimeout(closeTimerRef.current);
@@ -161,7 +157,7 @@ export function ScrollChrome() {
       />
 
       <header className="fixed right-0 top-0 z-[100] p-[clamp(1.25rem,4vw,2rem)] text-right">
-        <SiteNav pathname={pathname} lightText={lightText} />
+        <SiteNav key={pathname} pathname={pathname} lightText={lightText} />
       </header>
     </>
   );
