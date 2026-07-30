@@ -1,15 +1,18 @@
 "use client";
 
-import { MediaCover } from "@/components/MediaCover";
+import Image from "next/image";
+
 import { CARD_MAX_VW, CARD_WIDTH_PX } from "@/config/animation";
 import type { PlaceholderCard } from "@/data/cards";
+import { getCarouselDisplaySrc, shouldUseUnoptimized } from "@/lib/media";
 import { cn } from "@/lib/utils";
 
 export type CarouselCardSlideProps = {
   card: PlaceholderCard;
   className?: string;
-  /** When false, skip loading media (loop duplicates). */
+  /** When false, skip loading media (loop duplicates / deferred entrance). */
   loadMedia?: boolean;
+  priority?: boolean;
 };
 
 function cardWidthStyle() {
@@ -25,7 +28,10 @@ export function CarouselCardSlide({
   card,
   className,
   loadMedia = true,
+  priority = false,
 }: CarouselCardSlideProps) {
+  const displaySrc = getCarouselDisplaySrc(card.thumbnail, card.id);
+
   return (
     <div className={cn("carousel-slide-mount", className)}>
       <p className="carousel-slide-mount-title">{card.title}</p>
@@ -36,20 +42,22 @@ export function CarouselCardSlide({
           card.secret && "bg-[#f3efe6]",
         )}
       >
-        {card.thumbnail && loadMedia ? (
-          <MediaCover
-            src={card.thumbnail}
-            sizes="(max-width: 640px) 72vw, 400px"
-            lazy={false}
-            priority
-            poster={
-              card.id.includes("deskkeeper")
-                ? "/images/projects/deskkeeper/icon.png"
-                : undefined
-            }
-            objectFit={card.secret ? "contain" : "cover"}
-            containPadding={card.secret}
-          />
+        {displaySrc && loadMedia ? (
+          <div className="relative h-full w-full">
+            <Image
+              src={displaySrc}
+              alt=""
+              fill
+              priority={priority}
+              loading={priority ? undefined : "lazy"}
+              sizes="(max-width: 640px) 72vw, 400px"
+              unoptimized={shouldUseUnoptimized(displaySrc)}
+              aria-hidden
+              className={cn(
+                card.secret ? "object-contain p-1" : "object-cover",
+              )}
+            />
+          </div>
         ) : card.thumbnail ? (
           <div className="h-full w-full bg-[#f3efe6]" aria-hidden />
         ) : (
@@ -73,6 +81,8 @@ export type CarouselCardProps = {
   card: PlaceholderCard;
   /** Enables hover slow and click on the primary carousel copy. */
   interactive?: boolean;
+  loadMedia?: boolean;
+  priority?: boolean;
   onHoverStart?: () => void;
   onActivate?: (card: PlaceholderCard) => void;
   trailingGapPx?: number;
@@ -83,6 +93,8 @@ export type CarouselCardProps = {
 export function CarouselCard({
   card,
   interactive = true,
+  loadMedia = true,
+  priority = false,
   onHoverStart,
   onActivate,
   trailingGapPx = 0,
@@ -126,6 +138,8 @@ export function CarouselCard({
     >
       <CarouselCardSlide
         card={card}
+        loadMedia={loadMedia}
+        priority={priority}
         className="transition-[transform,box-shadow] duration-200 group-hover:shadow-[0_6px_24px_rgb(42_34_28/0.14)]"
       />
     </button>

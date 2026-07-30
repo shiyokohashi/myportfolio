@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { MediaCover } from "@/components/MediaCover";
 import { cn } from "@/lib/utils";
-import { isVideoSrc } from "@/lib/media";
+import { isVideoSrc, shouldUseUnoptimized } from "@/lib/media";
 import { CONTENT_MAX, PAGE_GUTTER } from "@/lib/layout";
 import type {
   PortfolioSection,
@@ -41,7 +41,6 @@ function WorkMedia({
   if (!src) return null;
 
   const isVideo = isVideoSrc(src);
-  const isRemote = src.startsWith("http");
 
   if (isVideo && item.width && item.height) {
     return (
@@ -53,7 +52,6 @@ function WorkMedia({
           <MediaCover
             src={src}
             sizes="100vw"
-            unoptimized
             objectFit="contain"
             cropVideoEdges
           />
@@ -71,7 +69,7 @@ function WorkMedia({
         height={item.height}
         className={cn("h-auto w-full", className)}
         sizes="100vw"
-        unoptimized={isRemote}
+        unoptimized={shouldUseUnoptimized(src)}
       />
     );
   }
@@ -87,7 +85,7 @@ function WorkMedia({
       <MediaCover
         src={src}
         sizes="(max-width: 768px) 100vw, 768px"
-        unoptimized={isRemote}
+        unoptimized={shouldUseUnoptimized(src)}
         objectFit="contain"
       />
     </div>
@@ -111,8 +109,6 @@ function WorkImage({
   width?: number;
   height?: number;
 }) {
-  const isRemote = src.startsWith("http");
-
   if (natural && width && height) {
     return (
       <Image
@@ -122,7 +118,7 @@ function WorkImage({
         height={height}
         className={cn("h-auto w-full", className)}
         sizes="100vw"
-        unoptimized={isRemote}
+        unoptimized={shouldUseUnoptimized(src)}
       />
     );
   }
@@ -141,7 +137,7 @@ function WorkImage({
         fill
         className="object-contain"
         sizes="(max-width: 768px) 100vw, 768px"
-        unoptimized={isRemote}
+        unoptimized={shouldUseUnoptimized(src)}
       />
     </div>
   );

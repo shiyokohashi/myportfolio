@@ -153,7 +153,23 @@ export const PROJECTS: PortfolioWork[] = [
     role: "Web design",
     tags: ["Portfolio", "Interaction"],
     color: "#d6d3d1",
-    thumbnail: "/images/projects/portfolio-book.png",
-    images: ["/images/projects/portfolio-book.png"],
+    thumbnail: "/videos/portfolio-sketchbook.mov",
+    mediaAspect: { width: 2774, height: 1682 },
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "Sketchbook spread",
+        description:
+          "An interactive homepage mockup — projects, paintings, and journalism arranged like an open sketchbook with handwritten labels and a scrolling strip of work.",
+        layout: "full",
+        items: [
+          {
+            video: "/videos/portfolio-sketchbook.mov",
+            width: 2774,
+            height: 1682,
+          },
+        ],
+      },
+    ],
   },
 ];

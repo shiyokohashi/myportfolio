@@ -1,11 +1,14 @@
 import {
-  CAROUSEL_ENTRANCE_RELEASE_PROGRESS,
+  CAROUSEL_ENTRANCE_HOLD_MS,
+  CAROUSEL_ENTRANCE_ROLL_MS,
   GALLOP_CYCLE_MS,
   getCarouselPaddingLeftPx,
   HORSE_ANIMATION_RATE,
-  HORSE_ENTRANCE_DURATION_MS,
   HORSE_SPRITE,
 } from "@/config/animation";
+import { getPageLoadOriginMs } from "@/lib/pageLoadOrigin";
+
+export type CarouselEntrancePhase = "hidden" | "rolling" | "released";
 
 export function easeOutCubic(t: number): number {
   return 1 - (1 - t) ** 3;
@@ -15,64 +18,81 @@ export function getHorseEntranceStartX(displayWidth: number): number {
   return -(window.innerWidth * 0.55 + displayWidth);
 }
 
-/** Offset where the first card's left edge sits at the viewport's right edge. */
+/** Offset where cards sit fully off-screen to the right. */
 export function getCarouselEntranceStartOffset(): number {
   return getCarouselPaddingLeftPx() - window.innerWidth;
 }
 
-export function getHorseEntranceProgress(elapsedMs = performance.now()): number {
-  return Math.min(1, elapsedMs / HORSE_ENTRANCE_DURATION_MS);
+function getElapsedMs(elapsedMs?: number): number {
+  return elapsedMs ?? performance.now() - getPageLoadOriginMs();
 }
 
-export function isHorseEntranceComplete(elapsedMs = performance.now()): boolean {
-  if (typeof window !== "undefined") {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
-    if (prefersReducedMotion) return true;
+export function getCarouselEntrancePhase(
+  elapsedMs?: number,
+): CarouselEntrancePhase {
+  if (prefersReducedMotion()) return "released";
+
+  const elapsed = getElapsedMs(elapsedMs);
+
+  if (elapsed < CAROUSEL_ENTRANCE_HOLD_MS) return "hidden";
+  if (elapsed < CAROUSEL_ENTRANCE_HOLD_MS + CAROUSEL_ENTRANCE_ROLL_MS) {
+    return "rolling";
   }
 
-  return getHorseEntranceProgress(elapsedMs) >= 1;
+  return "released";
 }
 
-export function getCarouselScrollStartMs(): number {
-  return HORSE_ENTRANCE_DURATION_MS * CAROUSEL_ENTRANCE_RELEASE_PROGRESS;
+export function isCarouselEntranceVisible(elapsedMs?: number): boolean {
+  return getCarouselEntrancePhase(elapsedMs) !== "hidden";
 }
 
-export function isCarouselScrollReleased(elapsedMs = performance.now()): boolean {
-  if (typeof window !== "undefined") {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+/** Carousel offset during the hold + roll-in sequence. */
+export function getCarouselEntranceOffset(elapsedMs?: number): number {
+  if (prefersReducedMotion()) return 0;
 
-    if (prefersReducedMotion) return true;
+  const elapsed = getElapsedMs(elapsedMs);
+  const startOffset = getCarouselEntranceStartOffset();
+  const phase = getCarouselEntrancePhase(elapsed);
+
+  if (phase === "hidden") return startOffset;
+
+  if (phase === "rolling") {
+    const rollElapsed = elapsed - CAROUSEL_ENTRANCE_HOLD_MS;
+    const t = Math.min(1, rollElapsed / CAROUSEL_ENTRANCE_ROLL_MS);
+    return startOffset * (1 - easeOutCubic(t));
   }
 
-  return getHorseEntranceProgress(elapsedMs) >= CAROUSEL_ENTRANCE_RELEASE_PROGRESS;
+  return 0;
 }
 
-/** Elapsed time for carousel scroll — zero until halfway through the horse run-in. */
-export function getCarouselScrollElapsedMs(elapsedMs = performance.now()): number {
-  if (!isCarouselScrollReleased(elapsedMs)) return 0;
+/** Elapsed time for continuous carousel scroll after the roll-in finishes. */
+export function getCarouselScrollElapsedMs(elapsedMs?: number): number {
+  if (prefersReducedMotion()) return getElapsedMs(elapsedMs);
 
-  if (typeof window !== "undefined") {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+  const elapsed = getElapsedMs(elapsedMs);
+  const releaseAt = CAROUSEL_ENTRANCE_HOLD_MS + CAROUSEL_ENTRANCE_ROLL_MS;
 
-    if (prefersReducedMotion) return elapsedMs;
-  }
+  if (elapsed <= releaseAt) return 0;
 
-  return Math.max(0, elapsedMs - getCarouselScrollStartMs());
+  return elapsed - releaseAt;
+}
+
+export function isCarouselScrollReleased(elapsedMs?: number): boolean {
+  return getCarouselEntrancePhase(elapsedMs) === "released";
 }
 
 export function getHorseEntranceTranslateX(): number | null {
   return null;
 }
 
-export function getHorseFrameIndexAtTime(elapsedMs = performance.now()): number {
-  const progress = (elapsedMs / GALLOP_CYCLE_MS) * HORSE_ANIMATION_RATE;
+export function getHorseFrameIndexAtTime(elapsedMs?: number): number {
+  const elapsed = getElapsedMs(elapsedMs);
+  const progress = (elapsed / GALLOP_CYCLE_MS) * HORSE_ANIMATION_RATE;
   const wrapped = progress - Math.floor(progress);
   return Math.floor(wrapped * HORSE_SPRITE.frameCount) % HORSE_SPRITE.frameCount;
 }

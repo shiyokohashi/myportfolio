@@ -1,5 +1,6 @@
 import { AboutSection } from "@/components/AboutSection";
 import { BottomScene } from "@/components/BottomScene";
+import { HomePreloads } from "@/components/HomePreloads";
 import { SelectedWorksSection } from "@/components/SelectedWorksSection";
 import { PAGE_GUTTER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ import { cn } from "@/lib/utils";
 export default function Home() {
   return (
     <>
+      <HomePreloads />
       <main
         className={cn(
           "relative z-10 flex min-h-screen flex-col items-center justify-center py-16",

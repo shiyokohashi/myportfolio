@@ -21,9 +21,9 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
   if (!grouped) {
     return (
       <ul className="mt-14 grid gap-10 sm:grid-cols-2 sm:gap-12">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <li key={item.slug}>
-            <PortfolioCard item={item} basePath={basePath} showGroup />
+            <PortfolioCard item={item} basePath={basePath} showGroup priority={index < 4} />
           </li>
         ))}
       </ul>
@@ -44,9 +44,9 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
         <section key={group}>
           <h2 className="text-2xl tracking-tight text-zinc-900">{group}</h2>
           <ul className="mt-8 grid gap-10 sm:grid-cols-2 sm:gap-12">
-            {groupItems.map((item) => (
+            {groupItems.map((item, index) => (
               <li key={item.slug}>
-                <PortfolioCard item={item} basePath={basePath} />
+                <PortfolioCard item={item} basePath={basePath} priority={index < 4} />
               </li>
             ))}
           </ul>

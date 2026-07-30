@@ -73,6 +73,8 @@ export function CardCarousel({
                   key={`${copyIndex}-${card.id}`}
                   card={card}
                   interactive={isPrimaryCopy}
+                  loadMedia={isPrimaryCopy}
+                  priority={isPrimaryCopy && index < 4}
                   onHoverStart={() => setSlow(true)}
                   onActivate={onCardActivate}
                   trailingGapPx={cardGaps[index] ?? CARD_GAP_MIN_PX}

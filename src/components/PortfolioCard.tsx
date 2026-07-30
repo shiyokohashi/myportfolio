@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+import { FeaturedVideoCover } from "@/components/FeaturedVideoCover";
 import { MediaCover } from "@/components/MediaCover";
+import { PortfolioImage } from "@/components/PortfolioImage";
 import { PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
-import { isVideoSrc } from "@/lib/media";
+import { getVideoPoster, isVideoSrc } from "@/lib/media";
 import { cn } from "@/lib/utils";
 import type { PortfolioWork } from "@/types/portfolio";
 
@@ -67,8 +69,63 @@ export function PortfolioCard({
   const isCompact = size === "compact";
   const isVideo = isVideoSrc(item.thumbnail);
   const exactMediaFrame = isFeatured && isVideo && item.mediaAspect;
-  const videoPoster =
-    item.slug === "deskkeeper" ? "/images/projects/deskkeeper/icon.png" : undefined;
+  const videoPoster = getVideoPoster(item.slug);
+  const imagePriority = priority || isFeatured;
+  const imageSizes = isFeatured
+    ? "(max-width: 1280px) 90vw, 1200px"
+    : "(max-width: 640px) 100vw, 50vw";
+
+  function renderCover({
+    sizes,
+    objectFit,
+    cropVideoEdges,
+    imageClassName,
+  }: {
+    sizes: string;
+    objectFit?: "cover" | "contain";
+    cropVideoEdges?: boolean;
+    imageClassName?: string;
+  }) {
+    if (!item.thumbnail) return null;
+
+    if (isVideo && isFeatured) {
+      return (
+        <FeaturedVideoCover
+          src={item.thumbnail}
+          poster={videoPoster}
+          sizes={sizes}
+          priority={imagePriority}
+          objectFit={objectFit}
+          cropVideoEdges={cropVideoEdges}
+        />
+      );
+    }
+
+    if (isVideo) {
+      return (
+        <MediaCover
+          src={item.thumbnail}
+          sizes={sizes}
+          poster={videoPoster}
+          priority={imagePriority}
+          lazy={!imagePriority}
+          objectFit={objectFit}
+          cropVideoEdges={cropVideoEdges}
+          imageClassName={imageClassName}
+        />
+      );
+    }
+
+    return (
+      <PortfolioImage
+        src={item.thumbnail}
+        sizes={sizes}
+        priority={imagePriority}
+        objectFit={objectFit}
+        imageClassName={imageClassName}
+      />
+    );
+  }
 
   if (exactMediaFrame && item.mediaAspect) {
     const { width, height } = item.mediaAspect;
@@ -86,15 +143,11 @@ export function PortfolioCard({
               className="relative w-full overflow-hidden"
               style={{ aspectRatio: `${width} / ${height}` }}
             >
-              <MediaCover
-                src={item.thumbnail}
-                sizes="(max-width: 1280px) 90vw, 1200px"
-                poster={videoPoster}
-                priority={priority || isFeatured}
-                lazy={!(priority || isFeatured)}
-                objectFit="contain"
-                cropVideoEdges
-              />
+              {renderCover({
+                sizes: "(max-width: 1280px) 90vw, 1200px",
+                objectFit: "contain",
+                cropVideoEdges: true,
+              })}
             </div>
           </div>
 
@@ -137,26 +190,15 @@ export function PortfolioCard({
             )}
           >
             {item.thumbnail ? (
-              <MediaCover
-                src={item.thumbnail}
-                sizes={
-                  isFeatured
-                    ? "(max-width: 1280px) 90vw, 1200px"
-                    : isLarge
-                      ? "(max-width: 640px) 100vw, 50vw"
-                      : "(max-width: 640px) 100vw, 50vw"
-                }
-                poster={videoPoster}
-                priority={priority || isFeatured}
-                lazy={!(priority || isFeatured)}
-                objectFit={isVideo && isFeatured ? "contain" : undefined}
-                cropVideoEdges={isVideo && isFeatured}
-                imageClassName={
+              renderCover({
+                sizes: imageSizes,
+                objectFit: isVideo && isFeatured ? "contain" : undefined,
+                cropVideoEdges: isVideo && isFeatured,
+                imageClassName:
                   isVideo && isFeatured
                     ? undefined
-                    : "transition-transform duration-700 ease-out group-hover:scale-[1.015]"
-                }
-              />
+                    : "transition-transform duration-700 ease-out group-hover:scale-[1.015]",
+              })
             ) : (
               <div
                 className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.015]"

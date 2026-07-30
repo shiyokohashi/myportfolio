@@ -83,7 +83,7 @@ function CategorySection({
                 basePath={href}
                 size={compact ? "compact" : "default"}
                 showSummary={!compact}
-                priority={sectionIndex === 0 && index < 3}
+                priority={sectionIndex === 0 && index < 6}
               />
             </li>
           ))}
@@ -144,7 +144,7 @@ export function SelectedWorksSection() {
     <section
       id="works"
       aria-labelledby="works-heading"
-      className="relative z-40 scroll-mt-24 bg-white [content-visibility:auto] [contain-intrinsic-size:auto_1200px]"
+      className="relative z-40 scroll-mt-24 bg-white"
     >
       <WorksContainer>
         <header className="pb-8 pt-28 sm:pb-10 sm:pt-32 lg:pb-12 lg:pt-40">

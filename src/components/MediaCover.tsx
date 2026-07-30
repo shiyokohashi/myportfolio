@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 import { useInView } from "@/hooks/useInView";
-import { isVideoSrc } from "@/lib/media";
+import { isVideoSrc, shouldUseUnoptimized } from "@/lib/media";
 import { cn } from "@/lib/utils";
 
 type MediaCoverProps = {
@@ -39,23 +39,26 @@ export function MediaCover({
   cropVideoEdges = false,
   containPadding = false,
 }: MediaCoverProps) {
+  const needsObserver = lazy && !priority;
   const { ref, inView } = useInView<HTMLDivElement>({
-    rootMargin: "960px 0px",
+    rootMargin: "640px 0px",
     once: true,
+    disabled: !needsObserver,
   });
   const videoRef = useRef<HTMLVideoElement>(null);
   const shouldLoad = priority || !lazy || inView;
+  const useUnoptimized = shouldUseUnoptimized(src ?? "", unoptimized);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !shouldLoad || !isVideoSrc(src)) return;
 
-    if (inView) {
+    if (inView || priority || !lazy) {
       void video.play().catch(() => undefined);
     } else {
       video.pause();
     }
-  }, [inView, shouldLoad, src]);
+  }, [inView, lazy, priority, shouldLoad, src]);
 
   if (!src) {
     return null;
@@ -66,8 +69,24 @@ export function MediaCover({
       cropVideoEdges || objectFit === "contain" ? "object-contain" : "object-cover";
 
     return (
-      <div ref={ref} className={cn("relative h-full w-full", className)}>
-        {shouldLoad ? (
+      <div ref={needsObserver ? ref : undefined} className={cn("relative h-full w-full", className)}>
+        {!shouldLoad && poster ? (
+          <Image
+            src={poster}
+            alt=""
+            fill
+            priority={priority}
+            sizes={sizes}
+            unoptimized={shouldUseUnoptimized(poster, unoptimized)}
+            aria-hidden
+            className={cn(
+              fit,
+              cropVideoEdges && "origin-center scale-x-[1.14] scale-y-[1.035]",
+              containPadding && "p-1",
+              imageClassName,
+            )}
+          />
+        ) : shouldLoad ? (
           <video
             ref={videoRef}
             autoPlay
@@ -87,41 +106,40 @@ export function MediaCover({
             src={src}
           />
         ) : (
-          poster ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={poster}
-              alt=""
-              aria-hidden
-              className={cn("h-full w-full object-cover", imageClassName)}
-            />
-          ) : (
-            <div className="h-full w-full bg-zinc-100" aria-hidden />
-          )
+          <div className="h-full w-full bg-zinc-100" aria-hidden />
         )}
+      </div>
+    );
+  }
+
+  const image = (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      priority={priority}
+      loading={priority ? undefined : lazy ? "lazy" : "eager"}
+      className={cn(
+        objectFit === "contain" ? "object-contain" : "object-cover",
+        containPadding && "p-1",
+        imageClassName,
+      )}
+      sizes={sizes}
+      unoptimized={useUnoptimized}
+    />
+  );
+
+  if (!needsObserver) {
+    return (
+      <div className={cn("relative h-full w-full", className)}>
+        {image}
       </div>
     );
   }
 
   return (
     <div ref={ref} className={cn("relative h-full w-full", className)}>
-      {shouldLoad ? (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority={priority}
-          className={cn(
-            objectFit === "contain" ? "object-contain" : "object-cover",
-            containPadding && "p-1",
-            imageClassName,
-          )}
-          sizes={sizes}
-          unoptimized={unoptimized}
-        />
-      ) : (
-        <div className="h-full w-full bg-zinc-100" aria-hidden />
-      )}
+      {shouldLoad ? image : <div className="h-full w-full bg-zinc-100" aria-hidden />}
     </div>
   );
 }

@@ -45,7 +45,13 @@ export const HORSE_DISPLAY_HEIGHT_PX = 116;
 /** One-time entrance run-in duration when the site first loads (ms). */
 export const HORSE_ENTRANCE_DURATION_MS = 4_000;
 
-/** Horse entrance progress (0–1) when carousel cards begin scrolling in. */
+/** Clear hero hold before carousel appears (ms). */
+export const CAROUSEL_ENTRANCE_HOLD_MS = 700;
+
+/** Cards roll in from off-screen right (ms). */
+export const CAROUSEL_ENTRANCE_ROLL_MS = 2_400;
+
+/** @deprecated Use carousel entrance hold + roll timing instead. */
 export const CAROUSEL_ENTRANCE_RELEASE_PROGRESS = 0.5;
 
 /** Carousel card width (px). Used for layout and horizontal centering. */

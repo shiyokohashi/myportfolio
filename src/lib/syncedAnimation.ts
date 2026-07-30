@@ -13,10 +13,12 @@ import {
   HORSE_USER_SPEED_DEFAULT,
 } from "@/config/animation";
 import {
+  getCarouselEntranceOffset,
   getCarouselEntranceStartOffset,
   getCarouselScrollElapsedMs,
   isCarouselScrollReleased,
 } from "@/lib/horseEntrance";
+import { getPageLoadOriginMs } from "@/lib/pageLoadOrigin";
 
 export type SyncedAnimationTargets = {
   getHorseSprite: () => HTMLDivElement | null;
@@ -118,6 +120,9 @@ export function createSyncedAnimationController(
   let hoverSlow = false;
   let boostAmount = 0;
   let carouselPaused = false;
+  const entranceOriginMs = getPageLoadOriginMs();
+
+  const getEntranceElapsedMs = () => performance.now() - entranceOriginMs;
 
   const resolveTargetSpeed = () =>
     hoverSlow ? HORSE_HOVER_SPEED * userSpeedMultiplier : userSpeedMultiplier;
@@ -167,7 +172,9 @@ export function createSyncedAnimationController(
       (deltaMs / loopDurationMs) * currentSpeed * HORSE_ANIMATION_RATE;
 
     if (loopWidthPx > 0 && !carouselPaused) {
-      if (isCarouselScrollReleased()) {
+      const entranceElapsedMs = getEntranceElapsedMs();
+
+      if (isCarouselScrollReleased(entranceElapsedMs)) {
         carouselOffsetPx +=
           deltaMs * carouselPxPerMs * currentSpeed * CAROUSEL_SCROLL_RATE;
 
@@ -176,7 +183,7 @@ export function createSyncedAnimationController(
           options.onCarouselLoop?.();
         }
       } else {
-        carouselOffsetPx = getCarouselEntranceStartOffset();
+        carouselOffsetPx = getCarouselEntranceOffset(entranceElapsedMs);
       }
     }
 
@@ -232,16 +239,17 @@ export function createSyncedAnimationController(
       applyCarousel();
     },
     syncToPageLoadTime() {
-      const elapsed = performance.now();
+      const entranceElapsedMs = getEntranceElapsedMs();
 
-      horseProgress = (elapsed / loopDurationMs) * HORSE_ANIMATION_RATE;
+      horseProgress =
+        (entranceElapsedMs / loopDurationMs) * HORSE_ANIMATION_RATE;
 
       if (loopWidthPx > 0) {
-        const carouselElapsedMs = getCarouselScrollElapsedMs(elapsed);
+        carouselOffsetPx = getCarouselEntranceOffset(entranceElapsedMs);
 
-        carouselOffsetPx = getCarouselEntranceStartOffset();
+        if (isCarouselScrollReleased(entranceElapsedMs)) {
+          const carouselElapsedMs = getCarouselScrollElapsedMs(entranceElapsedMs);
 
-        if (carouselElapsedMs > 0) {
           carouselOffsetPx +=
             carouselElapsedMs *
             carouselPxPerMs *

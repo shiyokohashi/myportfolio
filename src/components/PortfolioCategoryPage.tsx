@@ -7,7 +7,6 @@ import type { PortfolioWork } from "@/types/portfolio";
 
 type PortfolioCategoryPageProps = {
   title: string;
-  editHint: string;
   items: PortfolioWork[];
   basePath: string;
   intro?: ReactNode;
@@ -16,7 +15,6 @@ type PortfolioCategoryPageProps = {
 /** Shared layout for portfolio archive listing pages. */
 export function PortfolioCategoryPage({
   title,
-  editHint,
   items,
   basePath,
   intro,
@@ -27,7 +25,6 @@ export function PortfolioCategoryPage({
         <h1 className="text-4xl tracking-tight text-zinc-900 sm:text-5xl">
           {title}
         </h1>
-        <p className="mt-6 text-sm text-zinc-500">{editHint}</p>
         {intro && (
           <div className="mt-6 text-lg leading-relaxed text-zinc-700">{intro}</div>
         )}

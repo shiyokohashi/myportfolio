@@ -13,6 +13,7 @@ import {
 import type { PlaceholderCard } from "@/data/cards";
 import { useHorseSpeed } from "@/contexts/HorseSpeedContext";
 import { buildRandomCardGaps, buildStableCardGaps } from "@/lib/cardGaps";
+import { getPageLoadOriginMs } from "@/lib/pageLoadOrigin";
 import {
   createSyncedAnimationController,
   measureCarouselLoopWidth,
@@ -25,7 +26,7 @@ export type SetHorseSpeedOptions = {
   commit?: boolean;
 };
 
-export function useSyncedAnimation(cards: PlaceholderCard[]) {
+export function useSyncedAnimation(cards: PlaceholderCard[], enabled = true) {
   const { speed, speedRef, setSpeed: setContextSpeed } = useHorseSpeed();
   const horseRef = useRef<HTMLDivElement>(null);
   const carouselStripRef = useRef<HTMLDivElement>(null);
@@ -76,12 +77,14 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
   }, [regenerateGaps]);
 
   useEffect(() => {
+    if (!enabled) return;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) return;
 
+    getPageLoadOriginMs();
     pageLoadSyncedRef.current = false;
 
     const controller = createSyncedAnimationController(
@@ -142,22 +145,28 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
       controller.stop();
       controllerRef.current = null;
     };
-  }, [remeasureLoopWidth, speedRef]);
+  }, [enabled, remeasureLoopWidth, speedRef]);
 
   useEffect(() => {
     controllerRef.current?.setUserSpeed(speed, true);
   }, [speed]);
 
   useEffect(() => {
+    if (!enabled) return;
+
     let rafId = 0;
     let lastFrame = -1;
+    let lastUpdateMs = 0;
 
-    const tick = () => {
-      const frame = controllerRef.current?.getFrameIndex() ?? 0;
+    const tick = (timestamp: number) => {
+      if (timestamp - lastUpdateMs >= 120) {
+        const frame = controllerRef.current?.getFrameIndex() ?? 0;
 
-      if (frame !== lastFrame) {
-        lastFrame = frame;
-        setFrameIndex(frame);
+        if (frame !== lastFrame) {
+          lastFrame = frame;
+          lastUpdateMs = timestamp;
+          setFrameIndex(frame);
+        }
       }
 
       rafId = requestAnimationFrame(tick);
@@ -168,7 +177,7 @@ export function useSyncedAnimation(cards: PlaceholderCard[]) {
     return () => {
       cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [enabled]);
 
   const setSpeed = useCallback(
     (multiplier: number, options?: SetHorseSpeedOptions) => {

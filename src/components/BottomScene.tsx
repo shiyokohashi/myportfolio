@@ -15,6 +15,8 @@ import { useCarouselCards } from "@/hooks/useCarouselCards";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSyncedAnimation } from "@/hooks/useSyncedAnimation";
 import { useHorseSpeed } from "@/contexts/HorseSpeedContext";
+import { isCarouselEntranceVisible } from "@/lib/horseEntrance";
+import { getPageLoadOriginMs } from "@/lib/pageLoadOrigin";
 import { PAGE_GUTTER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +33,8 @@ export function BottomScene({
   cards: cardsProp,
   className,
 }: BottomSceneProps) {
+  const [ready, setReady] = useState(false);
+  const [entranceVisible, setEntranceVisible] = useState(false);
   const [shuffledCards, setShuffledCards] = useState(() => buildCarouselDeck());
 
   useEffect(() => {
@@ -48,6 +52,41 @@ export function BottomScene({
   const { sceneHidden, registerBottomSceneCarousel, registerBottomSceneChrome } =
     useScrollReveal();
   const carouselCards = useCarouselCards(baseCards, contextSpeed, !sceneHidden);
+
+  useEffect(() => {
+    getPageLoadOriginMs();
+    const frameId = requestAnimationFrame(() => {
+      setReady(true);
+    });
+
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
+
+    let rafId = 0;
+    const originMs = getPageLoadOriginMs();
+
+    const tick = () => {
+      const elapsed = performance.now() - originMs;
+      const visible = isCarouselEntranceVisible(elapsed);
+      setEntranceVisible((prev) => (prev === visible ? prev : visible));
+
+      if (!visible) {
+        rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    tick();
+
+    return () => {
+      cancelAnimationFrame(rafId);
+    };
+  }, [ready]);
+
   const {
     horseRef,
     carouselStripRef,
@@ -59,7 +98,7 @@ export function BottomScene({
     onCardHoverChange,
     pauseCarousel,
     resumeCarousel,
-  } = useSyncedAnimation(carouselCards);
+  } = useSyncedAnimation(carouselCards, ready);
 
   useEffect(() => {
     if (
@@ -116,6 +155,12 @@ export function BottomScene({
     [handleDismiss],
   );
 
+  if (!ready) {
+    return null;
+  }
+
+  const showScene = entranceVisible && !sceneHidden;
+
   return (
     <>
       {focusedCard ? (
@@ -129,15 +174,15 @@ export function BottomScene({
       <section
         ref={registerBottomSceneCarousel}
         aria-label="Project carousel"
-        aria-hidden={sceneHidden}
+        aria-hidden={!showScene || sceneHidden}
         className={cn(
           "fixed inset-x-0 top-[46%] z-40",
           "-translate-y-1/2 overflow-x-clip will-change-[opacity]",
+          !showScene && "invisible pointer-events-none",
           sceneHidden && "pointer-events-none",
           focusedCard && "pointer-events-none",
           className,
         )}
-        style={{ opacity: 1 }}
       >
         <CardCarousel
           cards={carouselCards}
@@ -153,13 +198,13 @@ export function BottomScene({
         ref={registerBottomSceneChrome}
         className={cn(
           "fixed inset-x-0 bottom-20 z-50 flex flex-col items-center gap-4 will-change-[opacity]",
+          !showScene && "invisible pointer-events-none",
           sceneHidden && "pointer-events-none",
         )}
-        style={{ opacity: 1 }}
       >
         <section
           aria-label="Galloping horse"
-          aria-hidden={sceneHidden}
+          aria-hidden={!showScene || sceneHidden}
           className="pointer-events-none flex w-full justify-center"
         >
           <HorseSprite ref={horseRef} />
@@ -170,7 +215,7 @@ export function BottomScene({
           onSpeedChange={setSpeed}
           frameIndex={frameIndex}
           frameCount={frameCount}
-          hidden={sceneHidden}
+          hidden={!showScene || sceneHidden}
         />
       </div>
     </>
