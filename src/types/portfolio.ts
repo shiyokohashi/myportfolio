@@ -9,6 +9,8 @@ export type PortfolioSectionItem = {
   video?: string;
   width?: number;
   height?: number;
+  /** Cap rendered width while keeping full-resolution source. */
+  displayWidth?: number;
 };
 
 export type SectionLayout = "contained" | "narrow" | "wide" | "full";
@@ -18,6 +20,8 @@ export type PortfolioSection = {
   description?: string;
   /** Editorial case-study width */
   layout?: SectionLayout;
+  /** Side-by-side detail crops vs stacked full-width figures. */
+  itemsLayout?: "stack" | "grid";
   /** @deprecated Use layout — kept for graphic design archives */
   variant?: "banner" | "grid";
   items: PortfolioSectionItem[];

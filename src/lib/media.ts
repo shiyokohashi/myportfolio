@@ -27,6 +27,9 @@ export function getVideoPoster(slugOrId?: string): string | undefined {
   if (slugOrId.includes("deskkeeper")) {
     return "/images/projects/deskkeeper/icon.png";
   }
+  if (slugOrId.includes("graduaid")) {
+    return "/images/projects/graduaid/hero-light.png";
+  }
   if (slugOrId.includes("portfolio-sketchbook")) {
     return "/images/projects/portfolio-book.png";
   }

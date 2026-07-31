@@ -41,36 +41,55 @@ function WorkMedia({
   if (!src) return null;
 
   const isVideo = isVideoSrc(src);
+  const nativeWidth = item.width;
+  const nativeHeight = item.height;
+  const renderWidth =
+    item.displayWidth != null && nativeWidth != null
+      ? Math.min(item.displayWidth, nativeWidth)
+      : nativeWidth;
+  const sizeHint =
+    renderWidth != null
+      ? `(max-width: ${renderWidth}px) 100vw, ${renderWidth}px`
+      : "(max-width: 1200px) 100vw, 1200px";
+  const frameStyle =
+    renderWidth && nativeHeight && nativeWidth
+      ? ({
+          maxWidth: renderWidth,
+          aspectRatio: `${nativeWidth} / ${nativeHeight}`,
+        } as const)
+      : undefined;
 
-  if (isVideo && item.width && item.height) {
+  if (isVideo && nativeWidth && nativeHeight) {
     return (
       <div
-        className={cn("overflow-hidden rounded-xl bg-zinc-50", className)}
-        style={{ aspectRatio: `${item.width} / ${item.height}` }}
+        className={cn("mx-auto w-full overflow-hidden rounded-xl bg-zinc-50", className)}
+        style={frameStyle}
       >
         <div className="relative h-full w-full overflow-hidden">
           <MediaCover
             src={src}
-            sizes="100vw"
+            sizes={sizeHint}
             objectFit="contain"
-            cropVideoEdges
           />
         </div>
       </div>
     );
   }
 
-  if (natural && item.width && item.height) {
+  if (natural && nativeWidth && nativeHeight) {
     return (
-      <Image
-        src={src}
-        alt={alt}
-        width={item.width}
-        height={item.height}
-        className={cn("h-auto w-full", className)}
-        sizes="100vw"
-        unoptimized={shouldUseUnoptimized(src)}
-      />
+      <div className={cn("mx-auto w-full", className)} style={{ maxWidth: renderWidth }}>
+        <Image
+          src={src}
+          alt={alt}
+          width={nativeWidth}
+          height={nativeHeight}
+          className="h-auto w-full"
+          sizes={sizeHint}
+          quality={92}
+          unoptimized={shouldUseUnoptimized(src)}
+        />
+      </div>
     );
   }
 
@@ -151,12 +170,19 @@ function EditorialFigure({
   workTitle: string;
 }) {
   const mediaSrc = item.video ?? item.image;
+  const captionWidth =
+    item.displayWidth != null && item.width != null
+      ? Math.min(item.displayWidth, item.width)
+      : item.width;
 
   return (
     <figure className="space-y-3">
       <WorkMedia item={item} alt={item.title ?? workTitle} natural />
       {(item.title || item.description) && mediaSrc && (
-        <figcaption className={cn("space-y-1 text-sm text-zinc-600 sm:px-0", PAGE_GUTTER)}>
+        <figcaption
+          className={cn("space-y-1 text-sm text-zinc-600 sm:px-0")}
+          style={captionWidth != null ? { maxWidth: captionWidth } : undefined}
+        >
           {item.title && (
             <p className="font-medium text-zinc-900">{item.title}</p>
           )}
@@ -193,8 +219,13 @@ function EditorialSection({
 
       <div
         className={cn(
-          "mt-8 md:mt-10",
-          isFull ? "px-0" : cn("mx-auto", PAGE_GUTTER, widthClass),
+          section.items.length > 0 && "mt-8 md:mt-10",
+          "mx-auto",
+          PAGE_GUTTER,
+          widthClass,
+          section.itemsLayout === "grid" && section.items.length > 1
+            ? "grid items-start gap-8 sm:grid-cols-2 sm:gap-10"
+            : "flex flex-col gap-10",
         )}
       >
         {section.items.map((item) => (

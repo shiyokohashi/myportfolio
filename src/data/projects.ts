@@ -5,43 +5,28 @@ export const PROJECTS: PortfolioWork[] = [
   {
     slug: "graduaid",
     title: "Graduaid",
-    summary: "Academic planning tool for mapping courses, requirements, and degree progress.",
+    summary:
+      "Academic planning tool for mapping courses, requirements, and degree progress.",
     description: [
       "Graduaid is a personal project I built to learn UX/UI development while experimenting with ways AI could simplify college degree planning.",
       "As a college student, I noticed that degree planning often requires juggling multiple PDFs, prerequisite chains, and academic planners — so I designed a single dashboard where requirements, scheduling, and progress live in one place.",
+      "The work moved from problem framing and scope sketches into a high-fidelity prototype: choose college, major, and minor; import transcript or AP credit; visualize four years across three quarters; drag courses into terms; color-code by requirement type; and flag prerequisite conflicts before registration.",
     ],
     year: "2026",
-    role: "Product design",
+    role: "Product design & development",
     tags: ["Web", "UX", "Education"],
     color: "#3b82f6",
-    thumbnail: "/images/projects/graduaid.png",
+    thumbnail: "/videos/graduaid-demo.mp4",
+    mediaAspect: { width: 1280, height: 832 },
+    externalUrl: "https://graduaid.vercel.app/",
     detailLayout: "editorial",
     sections: [
-      {
-        title: "The dashboard",
-        description:
-          "A term-by-term board with a requirements sidebar — drag courses into quarters, track units, and catch prerequisite errors before registration.",
-        layout: "full",
-        items: [
-          {
-            image: "/images/projects/graduaid/slide-06.png",
-            width: 2120,
-            height: 1406,
-          },
-        ],
-      },
       {
         title: "The problem",
         description:
           "UCSD students navigate degree audits, GE trackers, and the Schedule of Classes separately — none of them talk to each other when you're trying to answer whether a plan actually works.",
-        layout: "wide",
-        items: [
-          {
-            image: "/images/projects/graduaid/slide-02.png",
-            width: 1334,
-            height: 1620,
-          },
-        ],
+        layout: "contained",
+        items: [],
       },
       {
         title: "Planning & scope",
@@ -57,41 +42,111 @@ export const PROJECTS: PortfolioWork[] = [
         ],
       },
       {
-        title: "Profile setup",
+        title: "The dashboard",
         description:
-          "Students start by selecting college, major, minor, and Programs of Concentration — Warren college, for example, requires two PoCs from non-contiguous disciplines. Transcript upload automatically checks off completed classes and credits.",
-        layout: "wide",
+          "A term-by-term board with a requirements sidebar — drag courses into quarters, track units, and catch prerequisite errors before registration. Header progress bars track total and upper-division units; clicking a warning routes you to the conflict and highlights the offending course — for example, a missing prerequisite on MATH 10B.",
+        layout: "full",
         items: [
           {
-            image: "/images/projects/graduaid/slide-04.png",
-            width: 2400,
-            height: 756,
+            image: "/images/projects/graduaid/hero-light.png",
+            width: 2580,
+            height: 1638,
           },
         ],
       },
       {
-        title: "Requirements panel",
+        title: "Product walkthrough",
         description:
-          "All graduation requirements appear in one sidebar, pulled from the UCSD catalog. Completed credits gray out; categories are color-coded by requirement type. Expand any course to see prerequisites, future classes it unlocks, and what larger requirement it satisfies.",
+          "Drag-and-drop scheduling, requirement expansion, and live conflict detection — the core loop students use to build and stress-test a degree plan.",
         layout: "full",
         items: [
           {
-            image: "/images/projects/graduaid/slide-05.png",
-            width: 2474,
-            height: 1130,
+            video: "/videos/graduaid-demo.mp4",
+            width: 1280,
+            height: 832,
           },
         ],
       },
       {
-        title: "Progress & warnings",
+        title: "Profile & transfer credit",
         description:
-          "A progress bar tracks total and upper-division units. Clicking a warning routes you to the conflict and highlights the offending course — for example, a College GE slot blocked until SYN 1 is complete.",
+          "Students start by selecting college, major, minor, and Programs of Concentration — Warren College, for example, requires two PoCs from non-contiguous disciplines. University transcripts and AP / high school credit import separately, then feed completed courses back into the plan and automatically adjust remaining requirements.",
+        layout: "contained",
+        items: [
+          {
+            image: "/images/projects/graduaid/profile-setup.png",
+            width: 2558,
+            height: 588,
+            displayWidth: 880,
+            title: "College, major & minor",
+            description:
+              "Changing any input re-runs the requirement engine so the sidebar and timeline reflect the correct catalog.",
+          },
+          {
+            image: "/images/projects/graduaid/transcript-import.png",
+            width: 560,
+            height: 106,
+            displayWidth: 420,
+            title: "Transcript import",
+            description:
+              "Separate entry points for university transcript and AP / high school credit.",
+          },
+        ],
+      },
+      {
+        title: "Requirements & course detail",
+        description:
+          "All graduation requirements appear in one sidebar, pulled from the UCSD catalog. Drag courses onto the timeline, expand categories to pick eligible options, and inspect prerequisites, unlocks, and requirement mapping without leaving the plan.",
+        layout: "contained",
+        itemsLayout: "grid",
+        items: [
+          {
+            image: "/images/projects/graduaid/requirements.png",
+            width: 700,
+            height: 1018,
+            displayWidth: 300,
+            title: "Drag to timeline",
+            description:
+              "54 available requirements — drag directly onto a term, or expand a row to choose from eligible courses.",
+          },
+          {
+            image: "/images/projects/graduaid/course-detail.png",
+            width: 454,
+            height: 452,
+            displayWidth: 260,
+            title: "Course detail",
+            description:
+              "Prerequisites, unlocks (e.g. CAT 1 → CAT 2), and requirement mapping at a glance.",
+          },
+        ],
+      },
+      {
+        title: "Compare alternate plans",
+        description:
+          "Tabbed schedules let students explore what-if scenarios — a different minor, an extra quarter, a changed major — without losing their primary plan.",
+        layout: "contained",
+        items: [
+          {
+            image: "/images/projects/graduaid/plan-tabs.png",
+            width: 856,
+            height: 260,
+            displayWidth: 640,
+            title: "Multiple schedules, one workspace",
+            description:
+              "My Plan, Schedule 2, and new tabs save independently so students can compare paths side by side.",
+          },
+        ],
+      },
+      {
+        title: "Dark mode",
+        description:
+          "A glassmorphic dark theme for late-night planning — same layout and interactions, tuned for low-light readability with frosted panels over a soft gradient backdrop.",
         layout: "full",
         items: [
           {
-            image: "/images/projects/graduaid/slide-07.png",
-            width: 2880,
-            height: 1391,
+            image: "/images/projects/graduaid/hero-dark.png",
+            width: 2574,
+            height: 1638,
           },
         ],
       },
