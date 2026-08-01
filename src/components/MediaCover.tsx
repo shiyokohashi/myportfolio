@@ -21,6 +21,8 @@ type MediaCoverProps = {
   objectFit?: "cover" | "contain";
   /** Slight zoom on video cover to hide edge artifacts. */
   cropVideoEdges?: boolean;
+  /** Scale factor when cropVideoEdges is true. */
+  cropScale?: number;
   containPadding?: boolean;
 };
 
@@ -37,6 +39,7 @@ export function MediaCover({
   poster,
   objectFit = "cover",
   cropVideoEdges = false,
+  cropScale = 1.2,
   containPadding = false,
 }: MediaCoverProps) {
   const needsObserver = lazy && !priority;
@@ -65,11 +68,13 @@ export function MediaCover({
   }
 
   if (isVideoSrc(src)) {
-    const fit =
-      cropVideoEdges || objectFit === "contain" ? "object-contain" : "object-cover";
+    const fit = objectFit === "contain" ? "object-contain" : "object-cover";
+    const cropStyle = cropVideoEdges
+      ? { transform: `scale(${cropScale})` }
+      : undefined;
 
     return (
-      <div ref={needsObserver ? ref : undefined} className={cn("relative h-full w-full", className)}>
+      <div ref={needsObserver ? ref : undefined} className={cn("relative h-full w-full overflow-hidden", className)}>
         {!shouldLoad && poster ? (
           <Image
             src={poster}
@@ -81,10 +86,11 @@ export function MediaCover({
             aria-hidden
             className={cn(
               fit,
-              cropVideoEdges && "origin-center scale-x-[1.14] scale-y-[1.035]",
+              cropVideoEdges && "origin-center",
               containPadding && "p-1",
               imageClassName,
             )}
+            style={cropStyle}
           />
         ) : shouldLoad ? (
           <video
@@ -99,10 +105,11 @@ export function MediaCover({
             className={cn(
               "h-full w-full",
               fit,
-              cropVideoEdges && "origin-center scale-x-[1.14] scale-y-[1.035]",
+              cropVideoEdges && "origin-center",
               containPadding && "p-1",
               imageClassName,
             )}
+            style={cropStyle}
             src={src}
           />
         ) : (

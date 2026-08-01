@@ -196,6 +196,82 @@ export const PROJECTS: PortfolioWork[] = [
     ],
   },
   {
+    slug: "imployed",
+    title: "Imployed",
+    summary:
+      "Career discovery site — browse 1,700+ roles by industry or personalize by salary and interests.",
+    description: [
+      "Most students and early-career job seekers know a handful of job titles — doctor, lawyer, engineer — but not the full breadth of roles that exist within an industry or match their skills.",
+      "Imployed is a career exploration site I designed to make that invisible landscape visible. Users can browse featured roles by sector, filter by minimum salary and interest tags, and drill into detailed career pages with day-to-day tasks, skills to build, and honest tradeoffs.",
+      "The goal was a calm, editorial browsing experience — more magazine than job board — that rewards curiosity over urgency.",
+    ],
+    year: "2026",
+    role: "Product design & development",
+    tags: ["Web", "UX", "Careers"],
+    color: "#c45c42",
+    thumbnail: "/videos/imployed.mp4",
+    thumbnailCrop: true,
+    videoCropScale: 1.22,
+    mediaAspect: { width: 1280, height: 868 },
+    externalUrl: "https://imployed.vercel.app/",
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "Homepage",
+        description:
+          "A screen recording of the landing experience — the terracotta wordmark, industry directory, and featured role grid that greet new visitors before they search or personalize.",
+        layout: "full",
+        items: [
+          {
+            video: "/videos/imployed.mp4",
+            width: 1280,
+            height: 868,
+            cropVideo: true,
+          },
+        ],
+      },
+      {
+        title: "Explore careers",
+        description:
+          "The entry point is a simple industry directory — Education, Finance, Government, Healthcare, and more. Each category opens a grid of featured roles with salary ranges and skill tags, so users can scan breadth before committing to a search path.",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/imployed/explore-careers.png",
+            width: 2532,
+            height: 1702,
+          },
+        ],
+      },
+      {
+        title: "Discover & personalize",
+        description:
+          "The Discover view ranks 1,700+ careers by fit. An optional sidebar lets users set a minimum salary and select interest tags — building products, healthcare, entrepreneurship — to surface roles that align with how they actually want to work.",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/imployed/discover.png",
+            width: 2538,
+            height: 1708,
+          },
+        ],
+      },
+      {
+        title: "Career detail",
+        description:
+          "Each role page goes beyond a title and salary: growth outlook, common tasks, potential downsides, skills to develop, matching interests, industries, and work style — enough context to decide whether a path is worth exploring further.",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/imployed/career-detail.png",
+            width: 2540,
+            height: 1712,
+          },
+        ],
+      },
+    ],
+  },
+  {
     slug: "portfolio-sketchbook",
     title: "Portfolio Sketchbook",
     summary: "Interactive sketchbook homepage — projects, art, and journalism in one spread.",

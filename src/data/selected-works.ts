@@ -35,8 +35,8 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
     href: "/projects",
     entries: [
       { slug: "deskkeeper", layout: "featured" },
+      { slug: "imployed" },
       { slug: "graduaid" },
-      { slug: "portfolio-sketchbook" },
     ],
     blurb: "PLACEHOLDER PLACEHOLDER PLACEHOLDER",
     gridColumns: 2,

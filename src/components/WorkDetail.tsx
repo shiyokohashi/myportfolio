@@ -69,7 +69,9 @@ function WorkMedia({
           <MediaCover
             src={src}
             sizes={sizeHint}
-            objectFit="contain"
+            objectFit={item.cropVideo ? "cover" : "contain"}
+            cropVideoEdges={item.cropVideo}
+            cropScale={1.12}
           />
         </div>
       </div>

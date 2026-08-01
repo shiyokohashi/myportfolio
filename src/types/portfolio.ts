@@ -11,6 +11,8 @@ export type PortfolioSectionItem = {
   height?: number;
   /** Cap rendered width while keeping full-resolution source. */
   displayWidth?: number;
+  /** Slight center zoom on video figures. */
+  cropVideo?: boolean;
 };
 
 export type SectionLayout = "contained" | "narrow" | "wide" | "full";
@@ -46,6 +48,10 @@ export type PortfolioWork = {
   thumbnail?: string;
   /** Native pixel size for video/image thumbnails — frames the media box exactly. */
   mediaAspect?: { width: number; height: number };
+  /** Slight zoom on video thumbnails to hide edge artifacts or tighten framing. */
+  thumbnailCrop?: boolean;
+  /** Center zoom amount when thumbnailCrop is set (default 1.2). */
+  videoCropScale?: number;
   images?: string[];
   sections?: PortfolioSection[];
   /** Full-bleed section flow with natural image sizing */

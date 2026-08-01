@@ -30,6 +30,9 @@ export function getVideoPoster(slugOrId?: string): string | undefined {
   if (slugOrId.includes("graduaid")) {
     return "/images/projects/graduaid/hero-light.png";
   }
+  if (slugOrId.includes("imployed")) {
+    return "/images/projects/imployed/poster.png";
+  }
   if (slugOrId.includes("portfolio-sketchbook")) {
     return "/images/projects/portfolio-book.png";
   }

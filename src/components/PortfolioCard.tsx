@@ -70,6 +70,7 @@ export function PortfolioCard({
   const isVideo = isVideoSrc(item.thumbnail);
   const exactMediaFrame = isFeatured && isVideo && item.mediaAspect;
   const videoPoster = getVideoPoster(item.slug);
+  const videoCrop = item.thumbnailCrop ?? (isVideo && isFeatured);
   const imagePriority = priority || isFeatured;
   const imageSizes = isFeatured
     ? "(max-width: 1280px) 90vw, 1200px"
@@ -111,6 +112,7 @@ export function PortfolioCard({
           lazy={!imagePriority}
           objectFit={objectFit}
           cropVideoEdges={cropVideoEdges}
+          cropScale={item.videoCropScale}
           imageClassName={imageClassName}
         />
       );
@@ -138,7 +140,7 @@ export function PortfolioCard({
         className={cn("group flex flex-col", className)}
       >
         <div className={cn("mx-auto w-full", WORKS_MAX, PAGE_GUTTER)}>
-          <div className="overflow-hidden rounded-xl">
+          <div className="overflow-hidden">
             <div
               className="relative w-full overflow-hidden"
               style={{ aspectRatio: `${width} / ${height}` }}
@@ -172,7 +174,7 @@ export function PortfolioCard({
             "overflow-hidden bg-zinc-50/80 ring-1 ring-zinc-200/50",
             "transition-[ring-color,opacity,transform] duration-500 ease-out",
             "group-hover:ring-zinc-300/80 group-hover:opacity-[0.98]",
-            isFeatured ? "rounded-xl ring-zinc-200/60" : "rounded-lg",
+            isFeatured ? "ring-zinc-200/60" : "",
           )}
         >
           <div
@@ -192,8 +194,8 @@ export function PortfolioCard({
             {item.thumbnail ? (
               renderCover({
                 sizes: imageSizes,
-                objectFit: isVideo && isFeatured ? "contain" : undefined,
-                cropVideoEdges: isVideo && isFeatured,
+                objectFit: isVideo && videoCrop ? "cover" : isVideo && isFeatured ? "contain" : undefined,
+                cropVideoEdges: videoCrop,
                 imageClassName:
                   isVideo && isFeatured
                     ? undefined

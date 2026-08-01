@@ -129,7 +129,6 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 22px 28px 26px;
-  border-radius: 8px;
   overflow: hidden;
   background:
     linear-gradient(168deg, rgb(252 249 244) 0%, rgb(247 243 236) 42%, rgb(242 237 228) 100%);
@@ -185,7 +184,6 @@ body {
   margin: 16px 0;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 3px;
   background: #3a3632;
   box-shadow:
     inset 0 0 0 1px rgb(28 24 20 / 0.22),
