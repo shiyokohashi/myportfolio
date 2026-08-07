@@ -13,17 +13,57 @@ export type PortfolioSectionItem = {
   displayWidth?: number;
   /** Slight center zoom on video figures. */
   cropVideo?: boolean;
+  /** Storyboard beat — time, visual, audio, purpose. */
+  shot?: {
+    visual: string;
+    audio: string;
+    purpose: string;
+  };
+  /** Actual cut — shown in the Purpose column on storyboard rows. */
+  executionVideo?: string;
+  executionVideoWidth?: number;
+  executionVideoHeight?: number;
+  /** Seconds into the clip where playback begins (e.g. when hand leaves frame). */
+  executionVideoStart?: number;
 };
 
 export type SectionLayout = "contained" | "narrow" | "wide" | "full";
 
+export type SectionDescriptionGroup = {
+  heading: string;
+  points: string[];
+};
+
+export type PortfolioEditorialHero = {
+  video: string;
+  width: number;
+  height: number;
+  headline: string;
+  tagline: string;
+  metadata: string[];
+};
+
+export type PortfolioWorkflow = {
+  title: string;
+  steps: string[];
+  image?: {
+    src: string;
+    width: number;
+    height: number;
+    alt?: string;
+    caption?: string;
+  };
+};
+
 export type PortfolioSection = {
   title: string;
   description?: string;
+  /** Structured notes beneath the section intro — e.g. creative direction briefs. */
+  descriptionGroups?: SectionDescriptionGroup[];
   /** Editorial case-study width */
   layout?: SectionLayout;
   /** Side-by-side detail crops vs stacked full-width figures. */
-  itemsLayout?: "stack" | "grid";
+  itemsLayout?: "stack" | "grid" | "grid-3" | "grid-4" | "storyboard";
   /** @deprecated Use layout — kept for graphic design archives */
   variant?: "banner" | "grid";
   items: PortfolioSectionItem[];
@@ -37,6 +77,25 @@ export type PortfolioWork = {
   summary: string;
   /** Paragraphs shown on the detail page */
   description: string[];
+  /** Optional intro block above description — e.g. project overview */
+  overview?: {
+    title: string;
+    text: string;
+  };
+  /** Optional challenge brief above description */
+  challenge?: {
+    title: string;
+    text: string;
+  };
+  /** Optional key facts — role, duration, tools */
+  snapshot?: {
+    title: string;
+    items: { label: string; value: string }[];
+  };
+  /** Full-viewport opener — render, headline, sprint metadata */
+  editorialHero?: PortfolioEditorialHero;
+  /** Vertical process reveal after the hero */
+  workflow?: PortfolioWorkflow;
   year?: string;
   tags?: string[];
   /** Accent color for the home carousel card */

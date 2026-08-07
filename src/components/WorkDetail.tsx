@@ -1,6 +1,9 @@
 import Image from "next/image";
 
+import { EditorialHero } from "@/components/EditorialHero";
 import { MediaCover } from "@/components/MediaCover";
+import { StoryboardExecutionVideo } from "@/components/StoryboardExecutionVideo";
+import { WorkflowSteps } from "@/components/WorkflowSteps";
 import { cn } from "@/lib/utils";
 import { isVideoSrc, shouldUseUnoptimized } from "@/lib/media";
 import { CONTENT_MAX, PAGE_GUTTER } from "@/lib/layout";
@@ -62,7 +65,7 @@ function WorkMedia({
   if (isVideo && nativeWidth && nativeHeight) {
     return (
       <div
-        className={cn("mx-auto w-full overflow-hidden rounded-xl bg-zinc-50", className)}
+        className={cn("mx-auto w-full overflow-hidden bg-zinc-50", className)}
         style={frameStyle}
       >
         <div className="relative h-full w-full overflow-hidden">
@@ -89,7 +92,7 @@ function WorkMedia({
           className="h-auto w-full"
           sizes={sizeHint}
           quality={92}
-          unoptimized={shouldUseUnoptimized(src)}
+          unoptimized={shouldUseUnoptimized(src) || src.startsWith("/images/projects/")}
         />
       </div>
     );
@@ -164,6 +167,123 @@ function WorkImage({
   );
 }
 
+function MediaPlaceholder({ label }: { label: string }) {
+  return (
+    <div
+      className="flex aspect-[16/10] w-full items-center justify-center border border-dashed border-zinc-200 bg-zinc-50 px-6 text-center text-sm text-zinc-400"
+      aria-hidden
+    >
+      {label}
+    </div>
+  );
+}
+
+const STORYBOARD_THUMB_WIDTH = 280;
+
+function StoryboardRow({
+  item,
+  workTitle,
+}: {
+  item: PortfolioSectionItem;
+  workTitle: string;
+}) {
+  const mediaSrc = item.image ?? item.video;
+  const placeholderLabel = item.title
+    ? `${item.title} — media coming soon`
+    : "Media coming soon";
+  const thumbItem = { ...item, displayWidth: STORYBOARD_THUMB_WIDTH, video: item.image ? undefined : item.video };
+  const executionItem =
+    item.executionVideo && item.executionVideoWidth && item.executionVideoHeight
+      ? {
+          src: item.executionVideo,
+          width: item.executionVideoWidth,
+          height: item.executionVideoHeight,
+          startTime: item.executionVideoStart ?? 0,
+        }
+      : null;
+
+  return (
+    <div className="flex flex-col gap-5 border-b border-zinc-100 pb-10 last:border-0 md:flex-row md:items-start md:gap-10">
+      <figure className="w-full shrink-0 md:w-[280px]">
+        {mediaSrc ? (
+          <WorkMedia
+            item={thumbItem}
+            alt={item.title ?? workTitle}
+            natural
+            className="mx-0"
+          />
+        ) : (
+          <MediaPlaceholder label={placeholderLabel} />
+        )}
+      </figure>
+      {(item.title || item.shot || executionItem) && (
+        <div className="min-w-0 flex-1">
+          {item.title && (
+            <p className="text-base font-medium text-zinc-900 md:text-lg">
+              {item.title}
+            </p>
+          )}
+          {item.shot && (
+            <dl className="mt-4 grid gap-6 sm:grid-cols-3 sm:gap-8">
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  Visual
+                </dt>
+                <dd className="mt-1.5 text-sm leading-relaxed text-zinc-600 md:text-base">
+                  {item.shot.visual}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  Audio
+                </dt>
+                <dd className="mt-1.5 text-sm leading-relaxed text-zinc-600 md:text-base">
+                  {item.shot.audio}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  {executionItem ? "Execution" : "Purpose"}
+                </dt>
+                <dd className="mt-1.5">
+                  {executionItem ? (
+                    <StoryboardExecutionVideo
+                      src={executionItem.src}
+                      width={executionItem.width}
+                      height={executionItem.height}
+                      startTime={executionItem.startTime}
+                      alt={`${item.title ?? workTitle} execution`}
+                    />
+                  ) : (
+                    <p className="text-sm leading-relaxed text-zinc-600 md:text-base">
+                      {item.shot.purpose}
+                    </p>
+                  )}
+                </dd>
+              </div>
+            </dl>
+          )}
+          {!item.shot && executionItem && (
+            <div className="mt-4">
+              <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                Execution
+              </p>
+              <StoryboardExecutionVideo
+                src={executionItem.src}
+                width={executionItem.width}
+                height={executionItem.height}
+                startTime={executionItem.startTime}
+                alt={`${item.title ?? workTitle} execution`}
+                className="mt-1.5"
+              />
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function EditorialFigure({
   item,
   workTitle,
@@ -176,19 +296,49 @@ function EditorialFigure({
     item.displayWidth != null && item.width != null
       ? Math.min(item.displayWidth, item.width)
       : item.width;
+  const placeholderLabel = item.title
+    ? `${item.title} — media coming soon`
+    : "Media coming soon";
 
   return (
     <figure className="space-y-3">
-      <WorkMedia item={item} alt={item.title ?? workTitle} natural />
-      {(item.title || item.description) && mediaSrc && (
+      {mediaSrc ? (
+        <WorkMedia item={item} alt={item.title ?? workTitle} natural />
+      ) : (
+        <MediaPlaceholder label={placeholderLabel} />
+      )}
+      {(item.title || item.description || item.shot) && (
         <figcaption
-          className={cn("space-y-1 text-sm text-zinc-600 sm:px-0")}
+          className={cn("space-y-2 text-sm text-zinc-600 sm:px-0")}
           style={captionWidth != null ? { maxWidth: captionWidth } : undefined}
         >
           {item.title && (
             <p className="font-medium text-zinc-900">{item.title}</p>
           )}
-          {item.description && <p>{item.description}</p>}
+          {item.shot ? (
+            <dl className="space-y-2">
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  Visual
+                </dt>
+                <dd className="mt-0.5 leading-relaxed">{item.shot.visual}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  Audio
+                </dt>
+                <dd className="mt-0.5 leading-relaxed">{item.shot.audio}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  Purpose
+                </dt>
+                <dd className="mt-0.5 leading-relaxed">{item.shot.purpose}</dd>
+              </div>
+            </dl>
+          ) : (
+            item.description && <p>{item.description}</p>
+          )}
         </figcaption>
       )}
     </figure>
@@ -217,6 +367,22 @@ function EditorialSection({
             {section.description}
           </p>
         )}
+        {section.descriptionGroups && section.descriptionGroups.length > 0 && (
+          <div className="mt-8 max-w-2xl space-y-6">
+            {section.descriptionGroups.map((group) => (
+              <div key={group.heading}>
+                <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-900">
+                  {group.heading}
+                </h3>
+                <ul className="mt-2 space-y-1.5 text-base leading-relaxed text-zinc-600 md:text-lg">
+                  {group.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div
@@ -225,18 +391,32 @@ function EditorialSection({
           "mx-auto",
           PAGE_GUTTER,
           widthClass,
-          section.itemsLayout === "grid" && section.items.length > 1
-            ? "grid items-start gap-8 sm:grid-cols-2 sm:gap-10"
-            : "flex flex-col gap-10",
+          section.itemsLayout === "storyboard"
+            ? "flex flex-col gap-10"
+            : section.itemsLayout === "grid-4" && section.items.length > 1
+            ? "grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+            : section.itemsLayout === "grid-3" && section.items.length > 1
+            ? "grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            : section.itemsLayout === "grid" && section.items.length > 1
+              ? "grid items-start gap-8 sm:grid-cols-2 sm:gap-10"
+              : "flex flex-col gap-10",
         )}
       >
-        {section.items.map((item) => (
-          <EditorialFigure
-            key={item.video ?? item.image ?? section.title}
-            item={item}
-            workTitle={workTitle}
-          />
-        ))}
+        {section.items.map((item) =>
+          section.itemsLayout === "storyboard" ? (
+            <StoryboardRow
+              key={item.video ?? item.image ?? item.title ?? section.title}
+              item={item}
+              workTitle={workTitle}
+            />
+          ) : (
+            <EditorialFigure
+              key={item.video ?? item.image ?? item.title ?? section.title}
+              item={item}
+              workTitle={workTitle}
+            />
+          ),
+        )}
       </div>
     </section>
   );
@@ -300,9 +480,19 @@ export function WorkDetail({
   const meta = [work.year, work.role ?? work.medium, work.group].filter(Boolean);
   const hasSections = work.sections && work.sections.length > 0;
   const isEditorial = work.detailLayout === "editorial";
+  const hasEditorialHero = Boolean(work.editorialHero);
+  const showIntro = !hasEditorialHero;
 
   return (
-    <main className="relative z-10 pt-24 pb-40 sm:pt-28 sm:pb-44">
+    <main
+      className={cn(
+        "relative z-10 pb-40 sm:pb-44",
+        hasEditorialHero ? "pt-0" : "pt-24 sm:pt-28",
+      )}
+    >
+      {work.editorialHero && <EditorialHero {...work.editorialHero} />}
+
+      {showIntro && (
       <article className={cn("mx-auto", CONTENT_MAX, PAGE_GUTTER)}>
         <header className="pb-10 sm:pb-12">
           <h1 className="text-4xl tracking-tight text-zinc-900 sm:text-5xl">{work.title}</h1>
@@ -322,6 +512,44 @@ export function WorkDetail({
             </ul>
           )}
         </header>
+
+        {work.overview && (
+          <section className="border-t border-zinc-200 pt-10 sm:pt-12">
+            <h2 className="text-2xl tracking-tight text-zinc-900 sm:text-3xl">
+              {work.overview.title}
+            </h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-700">
+              {work.overview.text}
+            </p>
+          </section>
+        )}
+
+        {work.challenge && (
+          <section className="mt-10 border-t border-zinc-200 pt-10 sm:mt-12 sm:pt-12">
+            <h2 className="text-2xl tracking-tight text-zinc-900 sm:text-3xl">
+              {work.challenge.title}
+            </h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-700">
+              {work.challenge.text}
+            </p>
+          </section>
+        )}
+
+        {work.snapshot && (
+          <section className="mt-10 border-t border-zinc-200 pt-8 sm:mt-12 sm:pt-10">
+            <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+              {work.snapshot.title}
+            </h2>
+            <dl className="mt-4 max-w-2xl space-y-3 text-sm">
+              {work.snapshot.items.map((item) => (
+                <div key={item.label} className="grid gap-1 sm:grid-cols-[7rem_1fr] sm:gap-4">
+                  <dt className="font-medium text-zinc-900">{item.label}</dt>
+                  <dd className="text-zinc-600">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
 
         {!hasSections && work.images && work.images.length > 0 && (
           <div className="mt-12 space-y-8 sm:mt-14">
@@ -380,6 +608,22 @@ export function WorkDetail({
           </p>
         )}
       </article>
+      )}
+
+      {work.workflow && <WorkflowSteps {...work.workflow} />}
+
+      {!showIntro && work.externalUrl && (
+        <p className={cn("mx-auto mt-8", CONTENT_MAX, PAGE_GUTTER)}>
+          <a
+            href={work.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-900 underline underline-offset-4 transition-opacity hover:opacity-70"
+          >
+            View live project →
+          </a>
+        </p>
+      )}
 
       {isEditorial &&
         hasSections &&

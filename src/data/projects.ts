@@ -272,6 +272,347 @@ export const PROJECTS: PortfolioWork[] = [
     ],
   },
   {
+    slug: "aeon",
+    title: "aeon",
+    summary:
+      "Product design and creative direction — speculative wearable and full Firefly campaign in under a day.",
+    description: [],
+    editorialHero: {
+      video: "/videos/aeon.mp4",
+      width: 1280,
+      height: 720,
+      headline: "AEON",
+      tagline:
+        "A wearable device that gives students and professionals more time in their day—with one twist: it lets you turn back time.",
+      metadata: [
+        "45-minute Design Sprint",
+        "Adobe Creative Café",
+        "Firefly Boards",
+        "<24 Hour Iteration",
+      ],
+    },
+    workflow: {
+      title: "From idea to product in under 24 hours.",
+      steps: [
+        "Adobe Creative Café",
+        "Firefly Boards",
+        "Concept Exploration",
+        "Selected Direction",
+        "Product Iterations",
+        "Brand Identity",
+        "Advertising Campaign",
+      ],
+      image: {
+        src: "/images/projects/aeon/firefly-workflow.png",
+        width: 1024,
+        height: 586,
+        alt: "Adobe Firefly Boards workflow",
+        caption:
+          "The sprint board — shot lists, mood frames, logo passes, product renders, and campaign comps in one session.",
+      },
+    },
+    year: "2026",
+    role: "Product design • Creative direction • AI workflow",
+    tags: ["Product design", "Creative direction", "AI workflow", "Adobe Firefly", "Wearables", "Speculative"],
+    color: "#3d3630",
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "Logo",
+        description:
+          "Creative direction for the mark — lowercase blackletter a, horn serif, crossbar through the bowl. Prototype to render in Firefly: solder study, flat vector, foil stamp, chrome.",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/aeon/logo-iterations.png",
+            width: 1024,
+            height: 464,
+            title: "Logo iterations",
+            description:
+              "Prototype → silhouette → foil stamp → 3D render — material studies in the mark itself.",
+          },
+        ],
+      },
+      {
+        title: "In context",
+        description:
+          "Product design constraint: sit beside Oura, Apple Watch, and Fitbit — jewelry-first wearable territory, not another screen. Creative direction had to feel editorial and current for students and SF workers who already track their days.",
+        layout: "contained",
+        items: [],
+      },
+      {
+        title: "Campaign explorations",
+        description:
+          "Creative direction tests from the same Firefly session — mood, scale, and guerrilla ideas that pressure-tested the world before billboards.",
+        layout: "full",
+        itemsLayout: "grid-3",
+        items: [
+          {
+            image: "/images/projects/aeon/misc-ring-loop.png",
+            width: 1024,
+            height: 764,
+            title: "The loop at scale",
+            description:
+              "Indexed ring as a track — continuous time made physical.",
+          },
+          {
+            image: "/images/projects/aeon/misc-editorial-vintage.png",
+            width: 1024,
+            height: 686,
+            title: "Editorial collage",
+            description:
+              "Jewelry-first, not gadget-first — bangle on wrist, eyes covered.",
+          },
+          {
+            image: "/images/projects/aeon/misc-coffee-concept.png",
+            width: 1024,
+            height: 699,
+            title: "An extra aeon, please",
+            description:
+              "Bangle on the sleeve; barista cup for word-of-mouth.",
+          },
+        ],
+      },
+      {
+        title: "Billboards",
+        description:
+          "Creative direction at scale — OOH mockups art-directed and generated in Firefly. Product-first, editorial type, tagline quiet. Same AI workflow session as the product film.",
+        layout: "full",
+        itemsLayout: "grid",
+        items: [
+          {
+            image: "/images/projects/aeon/billboard-chain.png",
+            width: 837,
+            height: 1024,
+            title: "Chain & charm",
+            description:
+              "Linked bangle forms with Roman numeral index and pocket-watch charm — sundial logic at billboard scale.",
+          },
+          {
+            image: "/images/projects/aeon/billboard-lifestyle.png",
+            width: 1024,
+            height: 683,
+            title: "On wrist, in the city",
+            description:
+              "Worn during a call — product visible, tagline quiet: it's time to make time.",
+          },
+        ],
+      },
+      {
+        title: "Continuous campaign",
+        description:
+          "Creative direction system — four-panel OOH series built in Firefly off one editorial grid: question left, object center, wordmark right. Product designer's brief, AI workflow's speed.",
+        layout: "full",
+        itemsLayout: "grid",
+        items: [
+          {
+            image: "/images/projects/aeon/billboard-concept-alarm.png",
+            width: 1024,
+            height: 528,
+            title: "Missed your alarm?",
+            description: "Twin-bell alarm clock — mornings that get away from you.",
+          },
+          {
+            image: "/images/projects/aeon/billboard-concept-running.png",
+            width: 1024,
+            height: 528,
+            title: "Running behind?",
+            description: "Loading spinner — the wait that never quite resolves.",
+          },
+          {
+            image: "/images/projects/aeon/billboard-concept-eat.png",
+            width: 1024,
+            height: 528,
+            title: "No time to eat?",
+            description: "Everything bagel — lunch squeezed out of the day.",
+          },
+          {
+            image: "/images/projects/aeon/billboard-concept-floor.png",
+            width: 1024,
+            height: 528,
+            title: "Missed your floor?",
+            description: "Elevator close button — one more small delay.",
+          },
+        ],
+      },
+      {
+        title: "Fake ad video",
+        description:
+          "Creative direction for the launch film — circular motifs, editorial framing, everyday sound. Storyboard frames generated in Firefly; edit script below. Ran out of credits before every beat became video — execution clip loops where generated.",
+        layout: "full",
+        itemsLayout: "storyboard",
+        items: [
+          {
+            image: "/images/projects/aeon/ad/01-alarm.png",
+            width: 1024,
+            height: 659,
+            title: "Alarm clock",
+            shot: {
+              visual:
+                "Top-down shot of a circular alarm clock. The second hand ticks rapidly. A hand slams it off. Cut to black.",
+              audio:
+                "Alarm blaring. Amplified clock ticking. SMASH. Immediate silence.",
+              purpose: "Establish urgency.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/02-loading.png",
+            width: 1024,
+            height: 659,
+            title: "Loading wheel",
+            shot: {
+              visual:
+                "Cursor repeatedly clicks a spinning loading wheel. Minimal composition centered on screen. Cut to black.",
+              audio: "Mouse clicks. Loading tone. Quiet keyboard taps.",
+              purpose: "Visualize lost time.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/03-bagel.png",
+            width: 1024,
+            height: 659,
+            title: "Bagel",
+            shot: {
+              visual:
+                "Overhead shot. A hand grabs a bagel, takes one hurried bite, then drops it back onto the plate unfinished. Cut to black.",
+              audio: "Bite. Ceramic plate clink. Footsteps begin underneath.",
+              purpose: "Humanize the problem.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/04-sidewalk.png",
+            width: 1024,
+            height: 659,
+            title: "Walking",
+            shot: {
+              visual:
+                "Tracking shot from behind as someone fast-walks through a city, weaving between pedestrians.",
+              audio:
+                "Footsteps. Traffic ambience. Phone vibration. Clock ticking subtly returns.",
+              purpose: "Increase pace.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/06-elevator.png",
+            width: 1024,
+            height: 659,
+            title: "Elevator",
+            shot: {
+              visual:
+                "Finger repeatedly presses the circular elevator button. Doors begin closing just before they're reached.",
+              audio: "Elevator ding. Button clicks. Mechanical door closing.",
+              purpose: "Escalate tension.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/07-keyboard.png",
+            width: 1024,
+            height: 659,
+            title: "Keyboard",
+            shot: {
+              visual:
+                "Fingers type frantically. Cursor jumps between fields. Notifications begin stacking on screen.",
+              audio:
+                "Keyboard clicks. Clock ticking loud and fast — stays up front, doesn't fade.",
+              purpose: "The circle motif breaks — everything feels more chaotic.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/08-backspace.png",
+            width: 1024,
+            height: 659,
+            title: "Backspace",
+            shot: {
+              visual:
+                "Backspace hammered repeatedly — delete, retype, delete again. Cuts between keys and screen get shorter.",
+              audio:
+                "Typing stutters into backspace taps. Ticking stays loud and fast, tempo climbing.",
+              purpose: "Running out of time — undo can't keep up.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/09-mouse.png",
+            width: 1024,
+            height: 659,
+            title: "Mouse",
+            shot: {
+              visual:
+                "Mouse clicks in rapid succession. Cursor jumps between windows. Cuts accelerate into a stutter.",
+              audio:
+                "Clicks layer over keyboard and backspace. Notification pings stack in. Ticking remains loud and fast — peak chaos before the cut.",
+              purpose: "Peak anxiety.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/10-eye.png",
+            width: 1024,
+            height: 659,
+            title: "Eye",
+            shot: {
+              visual: "Extreme close-up. The eye blinks rapidly — stress, exhaustion, no time to pause.",
+              audio: "Ticking cuts through. Blink sounds sharp and close. Tempo still fast.",
+              purpose: "Last beat before the product — running on empty.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/11-coffee-foam.png",
+            width: 1024,
+            height: 659,
+            title: "Coffee cup",
+            executionVideo: "/videos/aeon-spill-execution.mov",
+            executionVideoWidth: 1920,
+            executionVideoHeight: 1076,
+            executionVideoStart: 1.05,
+          },
+          {
+            image: "/images/projects/aeon/ad/05-spill.png",
+            width: 1024,
+            height: 659,
+            title: "Coffee spill",
+            shot: {
+              visual:
+                "Slow-motion close-up as coffee spills across the desk. Droplets suspend in midair.",
+              audio:
+                "Every sound abruptly cuts away. One coffee drop lands. Silence.",
+              purpose: "Freeze the climax.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/tagline-coffee.png",
+            width: 1024,
+            height: 659,
+            title: "Tagline",
+            shot: {
+              visual:
+                "Coffee surface fills the frame. White lowercase serif: it's time to make time.",
+              audio: "Complete silence. Hold for one beat.",
+              purpose: "Create contrast.",
+            },
+          },
+          {
+            image: "/images/projects/aeon/ad/13-product-cup.png",
+            width: 1024,
+            height: 659,
+            title: "Rewind",
+            shot: {
+              visual:
+                "The cup stands back up — spill reverses, coffee pulls back into the cup.",
+              audio: "Deep reverse whoosh. Soft metallic click.",
+              purpose: "Introduce control.",
+            },
+          },
+        ],
+      },
+      {
+        title: "Reflection",
+        description:
+          "Three roles, one case study: product designer on form and interaction, creative director on the visual world, AI workflow to ship a full campaign in a day. Restraint on the product — jewelry-first, believable rewind — is what made the Firefly output cohere instead of scatter.",
+        layout: "contained",
+        items: [],
+      },
+    ],
+  },
+  {
     slug: "portfolio-sketchbook",
     title: "Portfolio Sketchbook",
     summary: "Interactive sketchbook homepage — projects, art, and journalism in one spread.",
