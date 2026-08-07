@@ -40,7 +40,7 @@ export function EditorialHero({
           PAGE_GUTTER,
         )}
       >
-        <h1 className="text-4xl tracking-[0.2em] text-zinc-900 sm:text-5xl">
+        <h1 className="text-4xl tracking-tight text-zinc-900 sm:text-5xl">
           {headline}
         </h1>
         <p className="mt-5 text-base leading-relaxed text-zinc-600 sm:text-lg">

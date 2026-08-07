@@ -36,7 +36,7 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
     entries: [
       { slug: "deskkeeper", layout: "featured" },
       { slug: "imployed" },
-      { slug: "graduaid" },
+      { slug: "aeon" },
     ],
     blurb: "PLACEHOLDER PLACEHOLDER PLACEHOLDER",
     gridColumns: 2,

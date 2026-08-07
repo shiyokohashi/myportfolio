@@ -2,7 +2,7 @@
 export function HomePreloads() {
   const preloads = [
     "/images/projects/deskkeeper/icon.png",
-    "/images/projects/graduaid/hero-light.png",
+    "/images/projects/aeon/interaction-design.png",
     "/images/about/portrait.png",
   ];
 

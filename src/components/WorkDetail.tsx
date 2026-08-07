@@ -20,6 +20,8 @@ type WorkDetailProps = {
   naturalImages?: boolean;
 };
 
+const SUBSECTION_HEADING = "text-xl tracking-tight text-zinc-900 md:text-2xl";
+
 const SECTION_WIDTH: Record<SectionLayout, string> = {
   contained: "max-w-3xl",
   narrow: "max-w-xl",
@@ -307,14 +309,11 @@ function EditorialFigure({
       ) : (
         <MediaPlaceholder label={placeholderLabel} />
       )}
-      {(item.title || item.description || item.shot) && (
+      {(item.description || item.shot) && (
         <figcaption
           className={cn("space-y-2 text-sm text-zinc-600 sm:px-0")}
           style={captionWidth != null ? { maxWidth: captionWidth } : undefined}
         >
-          {item.title && (
-            <p className="font-medium text-zinc-900">{item.title}</p>
-          )}
           {item.shot ? (
             <dl className="space-y-2">
               <div>
@@ -345,6 +344,142 @@ function EditorialFigure({
   );
 }
 
+function FeatureEntry({ title, description }: { title: string; description: string }) {
+  return (
+    <div>
+      <p className="font-medium text-zinc-900">{title}</p>
+      <p className="mt-1 text-base leading-relaxed text-zinc-600 md:text-lg">{description}</p>
+    </div>
+  );
+}
+
+function FeatureWrapSection({
+  section,
+  workTitle,
+}: {
+  section: PortfolioSection;
+  workTitle: string;
+}) {
+  const wrap = section.featureWrap!;
+  const imageWidth = wrap.image.displayWidth ?? 240;
+
+  return (
+    <section className="mt-16 md:mt-24">
+      <div className={cn("mx-auto", PAGE_GUTTER, SECTION_WIDTH.wide)}>
+        <h2 className="text-2xl tracking-tight text-zinc-900 md:text-3xl">{section.title}</h2>
+
+        <div className="mt-8 w-full">
+          {wrap.heading && (
+            <h3 className={SUBSECTION_HEADING}>{wrap.heading}</h3>
+          )}
+          <div
+            className={cn(
+              "grid items-start gap-x-8 gap-y-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-10 lg:gap-x-14",
+              wrap.heading ? "mt-4" : "mt-0",
+            )}
+          >
+            <div className="order-2 space-y-5 md:order-1 md:pt-2">
+              {wrap.left.map((entry) => (
+                <FeatureEntry key={entry.title} {...entry} />
+              ))}
+            </div>
+
+            <figure className="order-1 mx-auto w-full shrink-0 md:order-2" style={{ maxWidth: imageWidth }}>
+              <Image
+                src={wrap.image.image}
+                alt={`${workTitle} interaction`}
+                width={wrap.image.width}
+                height={wrap.image.height}
+                className="h-auto w-full"
+                sizes={`${imageWidth}px`}
+                quality={92}
+                unoptimized={
+                  shouldUseUnoptimized(wrap.image.image) ||
+                  wrap.image.image.startsWith("/images/projects/")
+                }
+              />
+            </figure>
+
+            <div className="order-3 space-y-5 md:pt-2">
+              {wrap.right.map((entry) => (
+                <FeatureEntry key={entry.title} {...entry} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {section.descriptionGroups && section.descriptionGroups.length > 0 && (
+          <div className="mt-10 w-full space-y-10">
+            <DescriptionGroups
+              groups={section.descriptionGroups}
+              headingClassName={SUBSECTION_HEADING}
+            />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function DescriptionGroups({
+  groups,
+  headingClassName,
+  listClassName,
+  entriesClassName,
+}: {
+  groups: NonNullable<PortfolioSection["descriptionGroups"]>;
+  headingClassName?: string;
+  listClassName?: string;
+  entriesClassName?: string;
+}) {
+  return (
+    <>
+      {groups.map((group) => (
+        <div key={group.heading || group.points?.[0] || group.entries?.[0]?.title}>
+          {group.heading && (
+            <h3 className={cn(headingClassName ?? "text-sm font-medium uppercase tracking-wide text-zinc-900")}>
+              {group.heading}
+            </h3>
+          )}
+          {group.entries && group.entries.length > 0 ? (
+            <dl
+              className={cn(
+                group.heading ? "mt-4" : "mt-0",
+                entriesClassName,
+                group.entriesLayout === "horizontal"
+                  ? "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+                  : "space-y-4",
+              )}
+            >
+              {group.entries.map(({ title, description }) => (
+                <div key={title}>
+                  <dt className="font-medium text-zinc-900">{title}</dt>
+                  <dd className="mt-1 leading-relaxed text-zinc-600">{description}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            group.points &&
+            group.points.length > 0 && (
+              <ul
+                className={cn(
+                  "space-y-1.5 leading-relaxed text-zinc-600",
+                  group.heading ? "mt-2" : "mt-0",
+                  listClassName ?? "text-base md:text-lg",
+                )}
+              >
+                {group.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            )
+          )}
+        </div>
+      ))}
+    </>
+  );
+}
+
 function EditorialSection({
   section,
   workTitle,
@@ -352,54 +487,33 @@ function EditorialSection({
   section: PortfolioSection;
   workTitle: string;
 }) {
+  if (section.featureWrap) {
+    return <FeatureWrapSection section={section} workTitle={workTitle} />;
+  }
+
   const layout = section.layout ?? "contained";
   const widthClass = SECTION_WIDTH[layout];
   const isFull = layout === "full";
+  const hasColumns = section.columns && section.columns.length > 0;
+  const itemsFirst = section.itemsPlacement === "before";
 
-  return (
-    <section className={cn("mt-16 md:mt-24", isFull && "mt-20 md:mt-28")}>
-      <div className={cn("mx-auto", PAGE_GUTTER, SECTION_WIDTH.contained)}>
-        <h2 className="text-2xl tracking-tight text-zinc-900 md:text-3xl">
-          {section.title}
-        </h2>
-        {section.description && (
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-600 md:text-lg">
-            {section.description}
-          </p>
-        )}
-        {section.descriptionGroups && section.descriptionGroups.length > 0 && (
-          <div className="mt-8 max-w-2xl space-y-6">
-            {section.descriptionGroups.map((group) => (
-              <div key={group.heading}>
-                <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-900">
-                  {group.heading}
-                </h3>
-                <ul className="mt-2 space-y-1.5 text-base leading-relaxed text-zinc-600 md:text-lg">
-                  {group.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
+  const itemsBlock =
+    section.items.length > 0 ? (
       <div
         className={cn(
-          section.items.length > 0 && "mt-8 md:mt-10",
+          itemsFirst ? "mt-6 md:mt-8" : "mt-8 md:mt-10",
           "mx-auto",
           PAGE_GUTTER,
           widthClass,
           section.itemsLayout === "storyboard"
             ? "flex flex-col gap-10"
             : section.itemsLayout === "grid-4" && section.items.length > 1
-            ? "grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
-            : section.itemsLayout === "grid-3" && section.items.length > 1
-            ? "grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
-            : section.itemsLayout === "grid" && section.items.length > 1
-              ? "grid items-start gap-8 sm:grid-cols-2 sm:gap-10"
-              : "flex flex-col gap-10",
+              ? "grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+              : section.itemsLayout === "grid-3" && section.items.length > 1
+                ? "grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+                : section.itemsLayout === "grid" && section.items.length > 1
+                  ? "grid items-start gap-8 sm:grid-cols-2 sm:gap-10"
+                  : "flex flex-col gap-10",
         )}
       >
         {section.items.map((item) =>
@@ -418,6 +532,122 @@ function EditorialSection({
           ),
         )}
       </div>
+    ) : null;
+
+  return (
+    <section className={cn("mt-16 md:mt-24", isFull && "mt-20 md:mt-28")}>
+      {!hasColumns && (
+      <div
+        className={cn(
+          "mx-auto",
+          PAGE_GUTTER,
+          layout === "wide" || layout === "full"
+            ? SECTION_WIDTH.wide
+            : SECTION_WIDTH.contained,
+        )}
+      >
+        <h2 className="text-2xl tracking-tight text-zinc-900 md:text-3xl">
+          {section.title}
+        </h2>
+        {section.description && (
+          <div className="mt-4 max-w-2xl space-y-4 text-base leading-relaxed text-zinc-600 md:text-lg">
+            {section.description.split("\n\n").map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        )}
+        {!itemsFirst && section.descriptionGroups && section.descriptionGroups.length > 0 && (
+          <div
+            className={cn(
+              "mt-8 space-y-10",
+              layout === "wide" || layout === "full" ? "max-w-4xl" : "max-w-2xl",
+            )}
+          >
+            <DescriptionGroups groups={section.descriptionGroups} />
+          </div>
+        )}
+      </div>
+      )}
+
+      {itemsFirst && itemsBlock}
+
+      {!hasColumns && itemsFirst && section.descriptionGroups && section.descriptionGroups.length > 0 && (
+        <div
+          className={cn(
+            "mx-auto mt-8 space-y-10 md:mt-10",
+            PAGE_GUTTER,
+            layout === "wide" || layout === "full" ? SECTION_WIDTH.wide : SECTION_WIDTH.contained,
+            layout === "wide" || layout === "full" ? "max-w-4xl" : "max-w-2xl",
+          )}
+        >
+          <DescriptionGroups groups={section.descriptionGroups} />
+        </div>
+      )}
+
+      {hasColumns && (
+        <div className={cn("mx-auto", PAGE_GUTTER, SECTION_WIDTH.wide)}>
+          {section.descriptionGroups && section.descriptionGroups.length > 0 && (
+            <h2 className="text-2xl tracking-tight text-zinc-900 md:text-3xl">{section.title}</h2>
+          )}
+          <div
+            className={cn(
+              "grid gap-10",
+              section.descriptionGroups && section.descriptionGroups.length > 0
+                ? "mt-8"
+                : "",
+              section.columns!.length === 3
+                ? "md:grid-cols-3 md:gap-10 lg:gap-12"
+                : section.columns!.length >= 4
+                  ? "md:grid-cols-2 xl:grid-cols-4 xl:gap-8"
+                  : "md:grid-cols-2 md:gap-12 lg:gap-16",
+            )}
+          >
+            {section.columns!.map((column) => (
+              <div key={column.title}>
+                <h2
+                  className={cn(
+                    "tracking-tight text-zinc-900",
+                    section.columns!.length === 3
+                      ? "text-xl md:text-2xl"
+                      : section.columns!.length >= 4
+                        ? "text-lg md:text-xl"
+                        : "text-2xl md:text-3xl",
+                  )}
+                >
+                  {column.title}
+                </h2>
+                {column.description && (
+                  <div className="mt-4 space-y-4 text-base leading-relaxed text-zinc-600 md:text-lg">
+                    {column.description.split("\n\n").map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+                {column.descriptionGroups && column.descriptionGroups.length > 0 && (
+                  <div className="mt-4 space-y-4">
+                    <DescriptionGroups
+                      groups={column.descriptionGroups}
+                      headingClassName="text-xs font-medium uppercase tracking-wide text-zinc-900"
+                      listClassName="text-sm md:text-base"
+                      entriesClassName="text-sm md:text-base"
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          {section.descriptionGroups && section.descriptionGroups.length > 0 && (
+            <div className="mt-12 w-full">
+              <DescriptionGroups
+                groups={section.descriptionGroups}
+                headingClassName={SUBSECTION_HEADING}
+              />
+            </div>
+          )}
+        </div>
+      )}
+
+      {!itemsFirst && itemsBlock}
     </section>
   );
 }

@@ -31,7 +31,9 @@ export type SectionLayout = "contained" | "narrow" | "wide" | "full";
 
 export type SectionDescriptionGroup = {
   heading: string;
-  points: string[];
+  points?: string[];
+  entries?: { title: string; description: string }[];
+  entriesLayout?: "stack" | "horizontal";
 };
 
 export type PortfolioEditorialHero = {
@@ -60,10 +62,30 @@ export type PortfolioSection = {
   description?: string;
   /** Structured notes beneath the section intro — e.g. creative direction briefs. */
   descriptionGroups?: SectionDescriptionGroup[];
+  /** Side-by-side text blocks — e.g. problem / concept pair */
+  columns?: {
+    title: string;
+    description?: string;
+    descriptionGroups?: SectionDescriptionGroup[];
+  }[];
+  /** Render media items above section copy instead of below */
+  itemsPlacement?: "before" | "after";
   /** Editorial case-study width */
   layout?: SectionLayout;
   /** Side-by-side detail crops vs stacked full-width figures. */
   itemsLayout?: "stack" | "grid" | "grid-3" | "grid-4" | "storyboard";
+  /** Image centered with feature copy on left and right */
+  featureWrap?: {
+    heading?: string;
+    image: {
+      image: string;
+      width: number;
+      height: number;
+      displayWidth?: number;
+    };
+    left: { title: string; description: string }[];
+    right: { title: string; description: string }[];
+  };
   /** @deprecated Use layout — kept for graphic design archives */
   variant?: "banner" | "grid";
   items: PortfolioSectionItem[];

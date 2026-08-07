@@ -43,16 +43,17 @@ export function WorkflowSteps({
             </li>
           ))}
         </ol>
+      </div>
 
-        {image && (
-          <figure className="mt-14 md:mt-16">
+      {image && (
+        <figure className={cn("mx-auto mt-14 max-w-4xl md:mt-16", PAGE_GUTTER)}>
             <Image
               src={image.src}
               alt={image.alt ?? ""}
               width={image.width}
               height={image.height}
               className="h-auto w-full"
-              sizes="(max-width: 768px) 100vw, 672px"
+              sizes="(max-width: 768px) 100vw, 896px"
               quality={92}
               unoptimized={
                 shouldUseUnoptimized(image.src) ||
@@ -64,9 +65,8 @@ export function WorkflowSteps({
                 {image.caption}
               </figcaption>
             )}
-          </figure>
-        )}
-      </div>
+        </figure>
+      )}
     </section>
   );
 }

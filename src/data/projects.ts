@@ -275,32 +275,32 @@ export const PROJECTS: PortfolioWork[] = [
     slug: "aeon",
     title: "aeon",
     summary:
-      "Product design and creative direction — speculative wearable and full Firefly campaign in under a day.",
+      "Product design and creative direction — speculative wearable and full Firefly campaign in under 12 hours.",
     description: [],
     editorialHero: {
       video: "/videos/aeon.mp4",
       width: 1280,
       height: 720,
-      headline: "AEON",
+      headline: "aeon",
       tagline:
         "A wearable device that gives students and professionals more time in their day—with one twist: it lets you turn back time.",
       metadata: [
         "45-minute Design Sprint",
         "Adobe Creative Café",
         "Firefly Boards",
-        "<24 Hour Iteration",
+        "<12 Hour Iteration",
       ],
     },
     workflow: {
-      title: "From idea to product in under 24 hours.",
+      title: "From idea to product in under 12 hours.",
       steps: [
         "Adobe Creative Café",
         "Firefly Boards",
-        "Concept Exploration",
-        "Selected Direction",
-        "Product Iterations",
-        "Brand Identity",
-        "Advertising Campaign",
+        "Problem & Concept",
+        "Interaction Design",
+        "Marketing Strategy",
+        "Billboards",
+        "Fake Ad Video",
       ],
       image: {
         src: "/images/projects/aeon/firefly-workflow.png",
@@ -315,12 +315,122 @@ export const PROJECTS: PortfolioWork[] = [
     role: "Product design • Creative direction • AI workflow",
     tags: ["Product design", "Creative direction", "AI workflow", "Adobe Firefly", "Wearables", "Speculative"],
     color: "#3d3630",
+    thumbnail: "/videos/aeon.mp4",
+    mediaAspect: { width: 1280, height: 720 },
     detailLayout: "editorial",
     sections: [
       {
+        title: "Problem & concept",
+        layout: "wide",
+        columns: [
+          {
+            title: "The Problem",
+            description:
+              "For students and professionals alike, there never seems to be enough time.\n\nBetween deadlines, meetings, classes, and constant distractions, productivity tools can help organize our schedules—but they can't create more hours in the day.\n\nWhat if they could?",
+          },
+          {
+            title: "The Concept",
+            description:
+              "aeon is a wearable bracelet that gives users more time by allowing them to turn back time.\n\nA rotating inner band acts as the primary interaction. Turning the band rewinds time by a selected number of hours, allowing users to revisit moments, rethink decisions, and continue their day from a different point in time.",
+          },
+        ],
+        items: [],
+      },
+      {
+        title: "Creative brief",
+        layout: "wide",
+        columns: [
+          {
+            title: "Target Audience",
+            description: "Students and professionals — busy people who never have enough hours in the day.",
+          },
+          {
+            title: "Brand Direction",
+            description: "Editorial, premium, minimal, warm, timeless.",
+          },
+          {
+            title: "Inspiration",
+            description:
+              "Jewelry first, technology second. Inspired by Oura Ring and Apple Watch.",
+          },
+        ],
+        descriptionGroups: [
+          {
+            heading: "Design Principles",
+            entriesLayout: "horizontal",
+            entries: [
+              {
+                title: "01 — Effortless Interaction",
+                description:
+                  "Simple, intuitive controls designed for everyday use.",
+              },
+              {
+                title: "02 — Intentional Movement",
+                description:
+                  "Physical gestures make manipulating time feel deliberate and meaningful.",
+              },
+              {
+                title: "03 — Calm Technology",
+                description:
+                  "Minimal feedback reduces cognitive load and creates a distraction-free experience.",
+              },
+              {
+                title: "04 — Jewelry, Not Technology",
+                description:
+                  "A premium, minimalist design that feels stylish enough to replace a smartwatch.",
+              },
+              {
+                title: "05 — Familiar Yet Futuristic",
+                description:
+                  "Combines recognizable interactions with a new way to experience time.",
+              },
+            ],
+          },
+        ],
+        items: [],
+      },
+      {
+        title: "Interaction design",
+        layout: "wide",
+        featureWrap: {
+          heading: "Core Features",
+          image: {
+            image: "/images/projects/aeon/interaction-design.png",
+            width: 1024,
+            height: 887,
+            displayWidth: 320,
+          },
+          left: [
+            {
+              title: "Twist to Lock In",
+              description:
+                "Users rotate aeon's inner band to select how many hours they want to rewind. Once the desired time is reached, pressing the band inward locks in the selection and confirms the rewind. This two-step interaction makes changing time resistant to accidental activation.",
+            },
+            {
+              title: "Haptic Feedback",
+              description:
+                "Vibrations and light signals communicate without a screen.",
+            },
+          ],
+          right: [
+            {
+              title: "Screen-Free Design",
+              description:
+                "A physical, intuitive experience that feels like jewelry.",
+            },
+            {
+              title: "Everyday Wearability",
+              description:
+                "Minimal metal craftsmanship designed for daily use.",
+            },
+          ],
+        },
+        items: [],
+      },
+      {
         title: "Logo",
         description:
-          "Creative direction for the mark — lowercase blackletter a, horn serif, crossbar through the bowl. Prototype to render in Firefly: solder study, flat vector, foil stamp, chrome.",
+          "A lowercase serif creates a timeless, elegant identity, while the embossed metal finish reinforces the bracelet's physical materiality.",
         layout: "full",
         items: [
           {
@@ -329,14 +439,14 @@ export const PROJECTS: PortfolioWork[] = [
             height: 464,
             title: "Logo iterations",
             description:
-              "Prototype → silhouette → foil stamp → 3D render — material studies in the mark itself.",
+              "Sketchbook → text in Adobe Express → 3D emboss in Adobe Firefly.",
           },
         ],
       },
       {
-        title: "In context",
+        title: "Marketing Strategy",
         description:
-          "Product design constraint: sit beside Oura, Apple Watch, and Fitbit — jewelry-first wearable territory, not another screen. Creative direction had to feel editorial and current for students and SF workers who already track their days.",
+          "Rather than positioning aeon as a science-fiction device, the campaign sells a lifestyle.\n\nThe creative direction reimagines hustle culture through a more optimistic lens: having enough time to pursue ambitious careers without sacrificing personal goals. Editorial-inspired photography, premium product imagery, and minimalist layouts position aeon alongside modern lifestyle technology rather than traditional consumer electronics.",
         layout: "contained",
         items: [],
       },
@@ -352,8 +462,7 @@ export const PROJECTS: PortfolioWork[] = [
             width: 1024,
             height: 764,
             title: "The loop at scale",
-            description:
-              "Indexed ring as a track — continuous time made physical.",
+            description: "Target demographic: young, stylish working people.",
           },
           {
             image: "/images/projects/aeon/misc-editorial-vintage.png",
@@ -361,7 +470,7 @@ export const PROJECTS: PortfolioWork[] = [
             height: 686,
             title: "Editorial collage",
             description:
-              "Jewelry-first, not gadget-first — bangle on wrist, eyes covered.",
+              "Tie to traditional and grounds the futuristic design; feels more human.",
           },
           {
             image: "/images/projects/aeon/misc-coffee-concept.png",
@@ -369,14 +478,14 @@ export const PROJECTS: PortfolioWork[] = [
             height: 699,
             title: "An extra aeon, please",
             description:
-              "Bangle on the sleeve; barista cup for word-of-mouth.",
+              "Guerrilla marketing for working people — product in the wild, not on a billboard.",
           },
         ],
       },
       {
         title: "Billboards",
         description:
-          "Creative direction at scale — OOH mockups art-directed and generated in Firefly. Product-first, editorial type, tagline quiet. Same AI workflow session as the product film.",
+          "Inspired by luxury fashion, the direction positions aeon as an object of desire. Minimal typography, product-focused visuals, clean editorial style to emphasize sophistication.",
         layout: "full",
         itemsLayout: "grid",
         items: [
@@ -385,8 +494,7 @@ export const PROJECTS: PortfolioWork[] = [
             width: 837,
             height: 1024,
             title: "Chain & charm",
-            description:
-              "Linked bangle forms with Roman numeral index and pocket-watch charm — sundial logic at billboard scale.",
+            description: "Subliminal messaging — craftsmanship.",
           },
           {
             image: "/images/projects/aeon/billboard-lifestyle.png",
@@ -394,14 +502,13 @@ export const PROJECTS: PortfolioWork[] = [
             height: 683,
             title: "On wrist, in the city",
             description:
-              "Worn during a call — product visible, tagline quiet: it's time to make time.",
+              "Target audience: businesspeople — demonstrates style & everyday wear.",
           },
         ],
       },
       {
-        title: "Continuous campaign",
-        description:
-          "Creative direction system — four-panel OOH series built in Firefly off one editorial grid: question left, object center, wordmark right. Product designer's brief, AI workflow's speed.",
+        title: "Continuous billboards concept",
+        description: "Short, sweet, memorable.",
         layout: "full",
         itemsLayout: "grid",
         items: [
@@ -409,36 +516,28 @@ export const PROJECTS: PortfolioWork[] = [
             image: "/images/projects/aeon/billboard-concept-alarm.png",
             width: 1024,
             height: 528,
-            title: "Missed your alarm?",
-            description: "Twin-bell alarm clock — mornings that get away from you.",
           },
           {
             image: "/images/projects/aeon/billboard-concept-running.png",
             width: 1024,
             height: 528,
-            title: "Running behind?",
-            description: "Loading spinner — the wait that never quite resolves.",
           },
           {
             image: "/images/projects/aeon/billboard-concept-eat.png",
             width: 1024,
             height: 528,
-            title: "No time to eat?",
-            description: "Everything bagel — lunch squeezed out of the day.",
           },
           {
             image: "/images/projects/aeon/billboard-concept-floor.png",
             width: 1024,
             height: 528,
-            title: "Missed your floor?",
-            description: "Elevator close button — one more small delay.",
           },
         ],
       },
       {
         title: "Fake ad video",
         description:
-          "Creative direction for the launch film — circular motifs, editorial framing, everyday sound. Storyboard frames generated in Firefly; edit script below. Ran out of credits before every beat became video — execution clip loops where generated.",
+          "Rapid edits, everyday sounds, and circular motifs capture the pace of modern life. At its peak, everything pauses. The coffee spill reverses into the aeon bracelet.",
         layout: "full",
         itemsLayout: "storyboard",
         items: [
@@ -604,11 +703,16 @@ export const PROJECTS: PortfolioWork[] = [
         ],
       },
       {
-        title: "Reflection",
-        description:
-          "Three roles, one case study: product designer on form and interaction, creative director on the visual world, AI workflow to ship a full campaign in a day. Restraint on the product — jewelry-first, believable rewind — is what made the Firefly output cohere instead of scatter.",
-        layout: "contained",
-        items: [],
+        title: "bonus: my brainstorming",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/aeon/brainstorming.png",
+            width: 768,
+            height: 1024,
+            displayWidth: 240,
+          },
+        ],
       },
     ],
   },
