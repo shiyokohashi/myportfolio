@@ -275,7 +275,7 @@ export const PROJECTS: PortfolioWork[] = [
     slug: "aeon",
     title: "aeon",
     summary:
-      "Product design and creative direction — speculative wearable and full Firefly campaign in under 12 hours.",
+      "Product design and creative direction — speculative wearable and full Firefly campaign in under 6 hours.",
     description: [],
     editorialHero: {
       video: "/videos/aeon.mp4",
@@ -288,11 +288,11 @@ export const PROJECTS: PortfolioWork[] = [
         "45-minute Design Sprint",
         "Adobe Creative Café",
         "Firefly Boards",
-        "<12 Hour Iteration",
+        "<6 Hour Iteration",
       ],
     },
     workflow: {
-      title: "From idea to product in under 12 hours.",
+      title: "From idea to product in under 6 hours.",
       steps: [
         "Adobe Creative Café",
         "Firefly Boards",
