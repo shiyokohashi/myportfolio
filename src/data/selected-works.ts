@@ -1,5 +1,6 @@
 import { ABOUT } from "@/data/about";
 import { GRAPHIC_DESIGN } from "@/data/graphic-design";
+import { ILLUSTRATIONS } from "@/data/illustrations";
 import { JOURNALISM } from "@/data/journalism";
 import { PAINTINGS } from "@/data/paintings";
 import { PROJECTS } from "@/data/projects";
@@ -28,29 +29,35 @@ export type SelectedWorksCategory = {
   footerLink?: { label: string; href: string };
 };
 
-/** Home page selected works — order, layout, and featured slugs per category. */
-export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
+/** Client / product work shown in the home Work section. */
+export const WORK_CATEGORIES: SelectedWorksCategory[] = [
   {
-    title: "Personal Projects",
+    title: "Projects",
     href: "/projects",
     entries: [
-      { slug: "deskkeeper", layout: "featured" },
+      { slug: "triton-trading-group", layout: "featured" },
+      { slug: "brisbane-2032", layout: "featured" },
+      { slug: "deskkeeper" },
       { slug: "imployed" },
       { slug: "aeon" },
     ],
-    blurb: "PLACEHOLDER PLACEHOLDER PLACEHOLDER",
+    blurb: "Product, brand, and interaction design — tools, campaigns, and experiments.",
     gridColumns: 2,
   },
   {
     title: "Graphic Design",
     href: "/graphic-design",
     entries: [
-      { slug: "triton-trading-group" },
-      { slug: "brisbane-2032" },
+      { slug: "adobe-campus-case-study" },
+      { slug: "scot-scoop-news-logo" },
     ],
     blurb:
       "Visual identities, brand systems, and campaign work — mostly for clubs, publications, and side clients.",
   },
+];
+
+/** Art / illustration side shown in the home Experimental section. */
+export const EXPERIMENTAL_CATEGORIES: SelectedWorksCategory[] = [
   {
     title: "Paintings",
     href: "/paintings",
@@ -60,7 +67,7 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
       { slug: "wings" },
       { slug: "horse-faces" },
     ],
-    blurb: "Back to basics -- my traditional mediums",
+    blurb: "Back to basics — traditional mediums and canvas work.",
     footerLink: {
       label: "commission me",
       href: `mailto:${ABOUT.connect.email}`,
@@ -74,16 +81,23 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
       { slug: "bleeding-red-white-and-blue" },
       { slug: "the-meta-curse" },
     ],
-    blurb: "Editorial cartoons, feature photos, and commission pieces",
+    blurb: "Editorial cartoons, feature photos, and commission pieces.",
     gridColumns: 3,
     compact: true,
   },
+];
+
+/** @deprecated Prefer WORK_CATEGORIES / EXPERIMENTAL_CATEGORIES. */
+export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
+  ...WORK_CATEGORIES,
+  ...EXPERIMENTAL_CATEGORIES,
 ];
 
 const SOURCE_BY_PATH: Record<string, PortfolioWork[]> = {
   "/projects": PROJECTS,
   "/graphic-design": GRAPHIC_DESIGN,
   "/paintings": PAINTINGS,
+  "/illustrations": ILLUSTRATIONS,
   "/journalism": JOURNALISM,
 };
 
@@ -99,8 +113,10 @@ export type SelectedWorksGroup = Omit<SelectedWorksCategory, "entries"> & {
   footerLink?: { label: string; href: string };
 };
 
-export function getSelectedWorksGroups(): SelectedWorksGroup[] {
-  return SELECTED_WORKS_CATEGORIES.map((category) => ({
+export function getSelectedWorksGroups(
+  categories: SelectedWorksCategory[] = SELECTED_WORKS_CATEGORIES,
+): SelectedWorksGroup[] {
+  return categories.map((category) => ({
     title: category.title,
     href: category.href,
     blurb: category.blurb,

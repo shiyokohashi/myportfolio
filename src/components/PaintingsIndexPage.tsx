@@ -54,8 +54,8 @@ function PaintingTile({
           : { flex: `${flexWeight} 1 0%` }
       }
     >
-      <div className="mb-3 flex items-baseline justify-between gap-4 text-[11px] uppercase tracking-[0.14em] text-zinc-900">
-        <h2 className="min-w-0 truncate font-sans font-normal">{work.title}</h2>
+      <div className="mb-3 flex items-baseline justify-between gap-4 text-sm text-zinc-900">
+        <h2 className="min-w-0 font-sans font-normal">{work.title}</h2>
         <span className="shrink-0 tabular-nums text-zinc-500">
           ({imageCount})
         </span>
@@ -114,7 +114,7 @@ export function PaintingsIndexPage({
     <main className={cn("relative z-10 pb-40 pt-28 sm:pb-48 sm:pt-32 lg:pt-36", PAGE_GUTTER)}>
       <div className="mx-auto w-full max-w-[min(1680px,100%)]">
         <header className="border-b border-zinc-200 pb-8">
-          <h1 className="font-sans text-3xl font-medium uppercase tracking-[0.06em] text-zinc-900 sm:text-4xl">
+          <h1 className="font-display text-3xl tracking-tight text-zinc-900 sm:text-4xl">
             {title}
           </h1>
         </header>
@@ -126,7 +126,7 @@ export function PaintingsIndexPage({
             {sections.map(({ label, items: sectionItems }) => (
               <section key={label ?? "all"}>
                 {label ? (
-                  <p className="mb-10 text-[11px] uppercase tracking-[0.16em] text-zinc-400">
+                  <p className="mb-10 text-sm text-zinc-400">
                     {label}
                   </p>
                 ) : null}

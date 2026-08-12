@@ -74,9 +74,7 @@ function WorkMedia({
           <MediaCover
             src={src}
             sizes={sizeHint}
-            objectFit={item.cropVideo ? "cover" : "contain"}
-            cropVideoEdges={item.cropVideo}
-            cropScale={1.12}
+            objectFit="cover"
           />
         </div>
       </div>
@@ -228,7 +226,7 @@ function StoryboardRow({
           {item.shot && (
             <dl className="mt-4 grid gap-6 sm:grid-cols-3 sm:gap-8">
               <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                <dt className="text-xs font-medium text-zinc-500">
                   Visual
                 </dt>
                 <dd className="mt-1.5 text-sm leading-relaxed text-zinc-600 md:text-base">
@@ -236,7 +234,7 @@ function StoryboardRow({
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                <dt className="text-xs font-medium text-zinc-500">
                   Audio
                 </dt>
                 <dd className="mt-1.5 text-sm leading-relaxed text-zinc-600 md:text-base">
@@ -244,7 +242,7 @@ function StoryboardRow({
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                <dt className="text-xs font-medium text-zinc-500">
                   {executionItem ? "Execution" : "Purpose"}
                 </dt>
                 <dd className="mt-1.5">
@@ -267,7 +265,7 @@ function StoryboardRow({
           )}
           {!item.shot && executionItem && (
             <div className="mt-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+              <p className="text-xs font-medium text-zinc-500">
                 Execution
               </p>
               <StoryboardExecutionVideo
@@ -317,19 +315,19 @@ function EditorialFigure({
           {item.shot ? (
             <dl className="space-y-2">
               <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                <dt className="text-xs font-medium text-zinc-500">
                   Visual
                 </dt>
                 <dd className="mt-0.5 leading-relaxed">{item.shot.visual}</dd>
               </div>
               <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                <dt className="text-xs font-medium text-zinc-500">
                   Audio
                 </dt>
                 <dd className="mt-0.5 leading-relaxed">{item.shot.audio}</dd>
               </div>
               <div>
-                <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                <dt className="text-xs font-medium text-zinc-500">
                   Purpose
                 </dt>
                 <dd className="mt-0.5 leading-relaxed">{item.shot.purpose}</dd>
@@ -437,7 +435,7 @@ function DescriptionGroups({
       {groups.map((group) => (
         <div key={group.heading || group.points?.[0] || group.entries?.[0]?.title}>
           {group.heading && (
-            <h3 className={cn(headingClassName ?? "text-sm font-medium uppercase tracking-wide text-zinc-900")}>
+            <h3 className={cn(headingClassName ?? "text-sm font-medium text-zinc-900")}>
               {group.heading}
             </h3>
           )}
@@ -627,7 +625,7 @@ function EditorialSection({
                   <div className="mt-4 space-y-4">
                     <DescriptionGroups
                       groups={column.descriptionGroups}
-                      headingClassName="text-xs font-medium uppercase tracking-wide text-zinc-900"
+                      headingClassName="text-xs font-medium text-zinc-900"
                       listClassName="text-sm md:text-base"
                       entriesClassName="text-sm md:text-base"
                     />
@@ -659,6 +657,18 @@ function StandardSection({
   section: PortfolioSection;
   workTitle: string;
 }) {
+  const itemsLayout =
+    section.itemsLayout ??
+    (section.variant === "banner" ? "stack" : "grid");
+  const mediaClass =
+    itemsLayout === "stack" || section.variant === "banner"
+      ? "mt-6 flex flex-col gap-8"
+      : itemsLayout === "grid-4"
+        ? "mt-6 grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+        : itemsLayout === "grid-3"
+          ? "mt-6 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+          : "mt-6 grid items-start gap-8 sm:grid-cols-2";
+
   return (
     <section className="mt-14 pt-10">
       <h2 className="text-2xl tracking-tight text-zinc-900">{section.title}</h2>
@@ -668,21 +678,20 @@ function StandardSection({
         </p>
       )}
 
-      <div
-        className={
-          section.variant === "banner"
-            ? "mt-6"
-            : "mt-6 grid gap-8 sm:grid-cols-2"
-        }
-      >
+      <div className={mediaClass}>
         {section.items.map((item) => (
           <figure
             key={item.video ?? item.image ?? item.title}
-            className={section.variant === "banner" ? "" : "space-y-3"}
+            className={
+              itemsLayout === "stack" || section.variant === "banner"
+                ? ""
+                : "space-y-3"
+            }
           >
             <WorkMedia
               item={item}
               alt={item.title ?? workTitle}
+              natural={Boolean(item.width && item.height)}
               aspectClass={
                 section.variant === "banner" ? "aspect-[3/4]" : "aspect-[4/3]"
               }
@@ -767,7 +776,7 @@ export function WorkDetail({
 
         {work.snapshot && (
           <section className="mt-10 border-t border-zinc-200 pt-8 sm:mt-12 sm:pt-10">
-            <h2 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+            <h2 className="text-sm font-medium text-zinc-500">
               {work.snapshot.title}
             </h2>
             <dl className="mt-4 max-w-2xl space-y-3 text-sm">

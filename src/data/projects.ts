@@ -1,7 +1,10 @@
+import { BRISBANE_2032, TRITON_TRADING_GROUP } from "@/data/graphic-design";
 import type { PortfolioWork } from "@/types/portfolio";
 
 /** Product and app projects — home carousel + /projects archive. */
 export const PROJECTS: PortfolioWork[] = [
+  { ...TRITON_TRADING_GROUP, group: "Featured Projects" },
+  { ...BRISBANE_2032, group: "Featured Projects" },
   {
     slug: "graduaid",
     title: "Graduaid",
@@ -210,8 +213,6 @@ export const PROJECTS: PortfolioWork[] = [
     tags: ["Web", "UX", "Careers"],
     color: "#c45c42",
     thumbnail: "/videos/imployed.mp4",
-    thumbnailCrop: true,
-    videoCropScale: 1.22,
     mediaAspect: { width: 1280, height: 868 },
     externalUrl: "https://imployed.vercel.app/",
     detailLayout: "editorial",
@@ -226,7 +227,6 @@ export const PROJECTS: PortfolioWork[] = [
             video: "/videos/imployed.mp4",
             width: 1280,
             height: 868,
-            cropVideo: true,
           },
         ],
       },

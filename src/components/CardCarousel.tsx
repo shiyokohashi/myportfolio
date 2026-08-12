@@ -50,7 +50,7 @@ export function CardCarousel({
 
   return (
     <div
-      className={cn("w-full overflow-hidden py-4", className)}
+      className={cn("w-full overflow-hidden py-10 sm:py-14", className)}
       aria-label="Project carousel"
       style={{
         paddingLeft: CAROUSEL_PADDING_LEFT_CSS,

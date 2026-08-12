@@ -9,8 +9,11 @@ import { NAV_ITEMS } from "@/config/navigation";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { cn } from "@/lib/utils";
 
-function isNavItemActive(pathname: string, href: string): boolean {
-  if (href.startsWith("/#")) return false;
+function isNavItemActive(pathname: string, href: string, hash: string): boolean {
+  if (href.startsWith("/#")) {
+    if (pathname !== "/") return false;
+    return hash === href.slice(1);
+  }
   if (href === pathname) return true;
   return href !== "/" && pathname.startsWith(`${href}/`);
 }
@@ -23,9 +26,17 @@ function SiteNav({
   lightText?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [hash, setHash] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<number | null>(null);
   const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    const syncHash = () => setHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, []);
 
   const openMenu = useCallback(() => {
     if (closeTimerRef.current !== null) {
@@ -80,7 +91,7 @@ function SiteNav({
         aria-haspopup="true"
         onFocus={openMenu}
         className={cn(
-          "text-sm transition-opacity hover:opacity-70",
+          "text-sm font-medium tracking-[-0.01em] transition-opacity hover:opacity-70",
           lightText
             ? "text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
             : "text-zinc-900",
@@ -103,7 +114,7 @@ function SiteNav({
         )}
       >
         {NAV_ITEMS.map(({ label, href }) => {
-          const isActive = isNavItemActive(pathname, href);
+          const isActive = isNavItemActive(pathname, href, hash);
 
           return (
             <Link
@@ -111,7 +122,7 @@ function SiteNav({
               href={href}
               onClick={close}
               className={cn(
-                "block whitespace-nowrap text-right text-sm leading-none transition-opacity hover:opacity-70",
+                "block whitespace-nowrap text-right text-sm font-medium leading-none tracking-[-0.01em] transition-opacity hover:opacity-70",
                 lightText
                   ? "text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
                   : "text-zinc-900",

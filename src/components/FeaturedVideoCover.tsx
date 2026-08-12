@@ -13,6 +13,7 @@ type FeaturedVideoCoverProps = {
   sizes: string;
   priority?: boolean;
   objectFit?: "cover" | "contain";
+  /** @deprecated Edge crop removed so UI text in videos stays visible. */
   cropVideoEdges?: boolean;
 };
 
@@ -23,7 +24,6 @@ export function FeaturedVideoCover({
   sizes,
   priority = false,
   objectFit = "cover",
-  cropVideoEdges = false,
 }: FeaturedVideoCoverProps) {
   const { ref, inView } = useInView<HTMLDivElement>({
     rootMargin: "480px 0px",
@@ -33,8 +33,7 @@ export function FeaturedVideoCover({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
   const shouldLoadVideo = priority || inView;
-  const fit =
-    cropVideoEdges || objectFit === "contain" ? "object-contain" : "object-cover";
+  const fit = objectFit === "contain" ? "object-contain" : "object-cover";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -55,7 +54,6 @@ export function FeaturedVideoCover({
           aria-hidden
           className={cn(
             fit,
-            cropVideoEdges && "origin-center scale-x-[1.14] scale-y-[1.035]",
             videoReady && "opacity-0 transition-opacity duration-300",
           )}
         />
@@ -75,7 +73,6 @@ export function FeaturedVideoCover({
           className={cn(
             "absolute inset-0 h-full w-full",
             fit,
-            cropVideoEdges && "origin-center scale-x-[1.14] scale-y-[1.035]",
             !videoReady && poster && "opacity-0",
             videoReady && "opacity-100 transition-opacity duration-300",
           )}

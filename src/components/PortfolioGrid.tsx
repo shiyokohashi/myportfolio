@@ -20,7 +20,7 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
   const grouped = items.some((item) => item.group);
   if (!grouped) {
     return (
-      <ul className="mt-14 grid gap-10 sm:grid-cols-2 sm:gap-12">
+      <ul className="mt-16 grid gap-12 sm:mt-20 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-16">
         {items.map((item, index) => (
           <li key={item.slug}>
             <PortfolioCard item={item} basePath={basePath} showGroup priority={index < 4} />
@@ -31,7 +31,7 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
   }
 
   const sections = items.reduce<Map<string, PortfolioWork[]>>((acc, item) => {
-    const key = item.group ?? "Work";
+    const key = item.group ?? "More projects";
     const list = acc.get(key) ?? [];
     list.push(item);
     acc.set(key, list);
@@ -39,11 +39,11 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
   }, new Map());
 
   return (
-    <div className="mt-14 space-y-16 sm:space-y-20">
+    <div className="mt-16 space-y-20 sm:mt-20 sm:space-y-28">
       {[...sections.entries()].map(([group, groupItems]) => (
         <section key={group}>
           <h2 className="text-2xl tracking-tight text-zinc-900">{group}</h2>
-          <ul className="mt-8 grid gap-10 sm:grid-cols-2 sm:gap-12">
+          <ul className="mt-10 grid gap-12 sm:mt-12 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-16">
             {groupItems.map((item, index) => (
               <li key={item.slug}>
                 <PortfolioCard item={item} basePath={basePath} priority={index < 4} />

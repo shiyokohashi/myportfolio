@@ -1,69 +1,15 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Book.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Neue Montreal";
-  src: url("/fonts/PPNeueMontreal-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Romie";
-  src: url("/fonts/Romie-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Romie";
-  src: url("/fonts/Romie-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Romie";
-  src: url("/fonts/Romie-RegularItalic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Romie";
-  src: url("/fonts/Romie-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme inline {
-  --font-sans: "PP Neue Montreal", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-display: "Romie", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-manrope), Manrope, "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-display: var(--font-newsreader), Newsreader, Georgia, "Times New Roman",
+    serif;
 }
 
 @layer base {
   body {
-    @apply font-sans;
+    @apply font-sans font-normal tracking-[-0.011em] text-zinc-900;
   }
 
   h1,
@@ -71,7 +17,7 @@
   h3 {
     @apply font-display font-normal;
     font-synthesis: none;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -123,132 +69,57 @@ body {
   background: rgb(255 255 255 / 0.22);
 }
 
-.carousel-slide-mount {
-  position: relative;
+.scroll-hint-arrow {
+  animation: scroll-hint-nudge 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint-arrow {
+    animation: none;
+  }
+}
+
+@keyframes scroll-hint-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.carousel-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 22px 28px 26px;
-  overflow: hidden;
-  background:
-    linear-gradient(168deg, rgb(252 249 244) 0%, rgb(247 243 236) 42%, rgb(242 237 228) 100%);
-  border: 1px solid rgb(210 200 184 / 0.4);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.9),
-    inset 0 -1px 0 rgb(120 100 78 / 0.04),
-    0 1px 2px rgb(42 34 28 / 0.04),
-    0 6px 20px rgb(42 34 28 / 0.07),
-    0 16px 40px rgb(42 34 28 / 0.03);
-  text-align: center;
+  width: 100%;
+  text-align: left;
 }
 
-.carousel-slide-mount::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  opacity: 0.28;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='5' seed='8' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.55'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  pointer-events: none;
-}
-
-.carousel-slide-mount::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 1;
-  background:
-    radial-gradient(circle at 12% 18%, rgb(120 90 55 / 0.04) 0 0.8px, transparent 1.2px),
-    radial-gradient(circle at 78% 28%, rgb(120 90 55 / 0.03) 0 0.6px, transparent 1px),
-    radial-gradient(circle at 64% 82%, rgb(120 90 55 / 0.035) 0 0.7px, transparent 1.1px),
-    radial-gradient(circle at 24% 74%, rgb(120 90 55 / 0.025) 0 0.5px, transparent 0.9px),
-    radial-gradient(circle at 92% 64%, rgb(120 90 55 / 0.03) 0 0.6px, transparent 1px),
-    linear-gradient(
-      118deg,
-      transparent 0%,
-      rgb(255 255 255 / 0.22) 22%,
-      transparent 44%
-    ),
-    radial-gradient(ellipse at center, transparent 58%, rgb(68 52 38 / 0.035) 100%);
-  mix-blend-mode: soft-light;
-}
-
-.carousel-slide-mount-aperture {
+.carousel-card-media {
   position: relative;
-  z-index: 1;
-  width: 78%;
-  margin: 16px 0;
+  width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #3a3632;
-  box-shadow:
-    inset 0 0 0 1px rgb(28 24 20 / 0.22),
-    inset 0 2px 8px rgb(28 24 20 / 0.16),
-    0 1px 0 rgb(255 252 245 / 0.35);
+  border-radius: 0.5rem;
+  background: rgb(244 244 245);
 }
 
-.carousel-slide-mount-title {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: 0.5625rem;
+.carousel-card-title {
+  margin: 1rem 0 0;
+  font-family: var(--font-display), Newsreader, Georgia, serif;
+  font-size: 0.9375rem;
   font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  font-synthesis: none;
-  color: rgb(34 30 26 / 0.62);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: rgb(24 24 27);
 }
 
-.carousel-slide-mount-subtitle {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: 0.5rem;
+.carousel-card-subtitle {
+  margin: 0.375rem 0 0;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.4;
-  letter-spacing: 0.03em;
-  text-transform: none;
-  color: rgb(34 30 26 / 0.44);
-}
-
-.carousel-slide-multiply {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  background: rgb(58 46 36 / 0.09);
-  mix-blend-mode: multiply;
-}
-
-.carousel-slide-overlay {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgb(196 132 58 / 0.035) 0%,
-      rgb(196 88 132 / 0.025) 42%,
-      rgb(48 68 72 / 0.04) 100%
-    ),
-    radial-gradient(ellipse at center, transparent 60%, rgb(42 32 26 / 0.09) 100%);
-  mix-blend-mode: soft-light;
-}
-
-.carousel-slide-overlay::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: overlay;
+  color: rgb(161 161 170);
 }

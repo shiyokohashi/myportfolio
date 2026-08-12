@@ -3,12 +3,15 @@ export type NavItem = {
   href: string;
 };
 
+/** Main menu — mirrors home page sections. */
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Personal Projects", href: "/projects" },
-  { label: "Graphic Design", href: "/graphic-design" },
-  { label: "Paintings", href: "/paintings" },
-  { label: "Journalism", href: "/journalism" },
-  { label: "Home", href: "/" },
+  { label: "About", href: "/#intro" },
+  { label: "Work", href: "/#work" },
+  { label: "Services", href: "/#services" },
+  { label: "Journalism", href: "/#journalism" },
+  { label: "Paintings", href: "/#paintings" },
+  { label: "Illustrations", href: "/#illustrations" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 /** Scroll distance (px) at which the white background is fully opaque. */

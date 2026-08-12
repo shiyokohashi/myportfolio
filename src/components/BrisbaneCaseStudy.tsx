@@ -20,7 +20,7 @@ function CaseStudyMeta({
 }) {
   return (
     <div>
-      <dt className="text-[11px] uppercase tracking-[0.14em] text-zinc-400">
+      <dt className="text-sm text-zinc-400">
         {label}
       </dt>
       <dd className="mt-1 text-sm text-zinc-900">{value}</dd>
@@ -42,7 +42,7 @@ function CaseStudySection({
   return (
     <section className={cn("border-t border-zinc-200 pt-14 sm:pt-16", className)}>
       <div className="mb-8 flex items-baseline gap-4 sm:mb-10">
-        <span className="text-[11px] tabular-nums uppercase tracking-[0.16em] text-zinc-400">
+        <span className="text-sm tabular-nums text-zinc-400">
           {index}
         </span>
         <h2 className="text-2xl tracking-tight text-zinc-900 sm:text-3xl">
@@ -134,7 +134,7 @@ export function BrisbaneCaseStudy({ work }: BrisbaneCaseStudyProps) {
     <main className="relative z-10 bg-white pb-32 pt-24 sm:pb-40 sm:pt-28">
       <div className={cn("mx-auto max-w-6xl", PAGE_GUTTER)}>
         <header className="border-b border-zinc-200 pb-10 sm:pb-12">
-          <p className="text-[11px] uppercase tracking-[0.16em] text-zinc-400">
+          <p className="text-sm text-zinc-400">
             Brand identity · Case study
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl tracking-tight text-zinc-900 sm:text-5xl">
@@ -322,7 +322,7 @@ export function BrisbaneCaseStudy({ work }: BrisbaneCaseStudyProps) {
 
         {work.tags && work.tags.length > 0 ? (
           <div className="mt-16 border-t border-zinc-200 pt-10">
-            <p className="text-[11px] uppercase tracking-[0.14em] text-zinc-400">
+            <p className="text-sm text-zinc-400">
               Tags
             </p>
             <ul className="mt-4 flex flex-wrap gap-2">

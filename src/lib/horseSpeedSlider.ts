@@ -49,3 +49,5 @@ export function sliderValueToSpeed(value: number): number {
 
 export const HORSE_SPEED_SLIDER_MIN = 0;
 export const HORSE_SPEED_SLIDER_MAX = SLIDER_STEPS;
+/** Midpoint of the range control — default thumb position on open. */
+export const HORSE_SPEED_SLIDER_MID = Math.round(SLIDER_MID * SLIDER_STEPS);

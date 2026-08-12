@@ -25,7 +25,7 @@ export function BreadcrumbNav({
     <nav
       aria-label="Breadcrumb"
       className={cn(
-        "max-w-[min(72vw,28rem)] text-[10px] lowercase leading-snug tracking-[0.03em]",
+        "max-w-[min(72vw,28rem)] text-sm leading-snug",
         lightText
           ? "text-white/45 drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
           : "text-zinc-400",

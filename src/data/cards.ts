@@ -11,6 +11,8 @@ export type PlaceholderCard = {
   href: string;
   thumbnail?: string;
   featured?: boolean;
+  /** Prefer contain when on-image text must stay fully visible. */
+  thumbnailFit?: "cover" | "contain";
   /** Non-navigating easter-egg card (e.g. Frame 36). */
   secret?: boolean;
 };
@@ -38,6 +40,7 @@ function toCarouselCard(
     href: `${basePath}/${work.slug}`,
     thumbnail: work.thumbnail,
     featured: work.layout === "featured",
+    thumbnailFit: work.thumbnailFit,
   };
 }
 

@@ -127,6 +127,8 @@ export type PortfolioWork = {
   /** Paintings, journalism, graphic design */
   medium?: string;
   thumbnail?: string;
+  /** How the thumbnail fills its frame — use contain when text must stay fully visible. */
+  thumbnailFit?: "cover" | "contain";
   /** Native pixel size for video/image thumbnails — frames the media box exactly. */
   mediaAspect?: { width: number; height: number };
   /** Slight zoom on video thumbnails to hide edge artifacts or tighten framing. */

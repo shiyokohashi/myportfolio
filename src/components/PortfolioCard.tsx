@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FeaturedVideoCover } from "@/components/FeaturedVideoCover";
 import { MediaCover } from "@/components/MediaCover";
 import { PortfolioImage } from "@/components/PortfolioImage";
-import { PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
+import { HOME_CARD_MEDIA, HOME_CARD_MEDIA_IMG, HOME_CARD_MEDIA_IMG_CONTAIN, PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
 import { getVideoPoster, isVideoSrc } from "@/lib/media";
 import { cn } from "@/lib/utils";
 import type { PortfolioWork } from "@/types/portfolio";
@@ -70,7 +70,9 @@ export function PortfolioCard({
   const isVideo = isVideoSrc(item.thumbnail);
   const exactMediaFrame = isFeatured && isVideo && item.mediaAspect;
   const videoPoster = getVideoPoster(item.slug);
-  const videoCrop = item.thumbnailCrop ?? (isVideo && isFeatured);
+  const fit = item.thumbnailFit === "contain" ? "contain" : "cover";
+  const mediaImgClass =
+    fit === "contain" ? HOME_CARD_MEDIA_IMG_CONTAIN : HOME_CARD_MEDIA_IMG;
   const imagePriority = priority || isFeatured;
   const imageSizes = isFeatured
     ? "(max-width: 1280px) 90vw, 1200px"
@@ -147,8 +149,7 @@ export function PortfolioCard({
             >
               {renderCover({
                 sizes: "(max-width: 1280px) 90vw, 1200px",
-                objectFit: "contain",
-                cropVideoEdges: true,
+                objectFit: fit,
               })}
             </div>
           </div>
@@ -171,10 +172,8 @@ export function PortfolioCard({
       >
         <div
           className={cn(
-            "overflow-hidden bg-zinc-50/80 ring-1 ring-zinc-200/50",
-            "transition-[ring-color,opacity,transform] duration-500 ease-out",
-            "group-hover:ring-zinc-300/80 group-hover:opacity-[0.98]",
-            isFeatured ? "ring-zinc-200/60" : "",
+            HOME_CARD_MEDIA,
+            "bg-zinc-50/80",
           )}
         >
           <div
@@ -194,16 +193,12 @@ export function PortfolioCard({
             {item.thumbnail ? (
               renderCover({
                 sizes: imageSizes,
-                objectFit: isVideo && videoCrop ? "cover" : isVideo && isFeatured ? "contain" : undefined,
-                cropVideoEdges: videoCrop,
-                imageClassName:
-                  isVideo && isFeatured
-                    ? undefined
-                    : "transition-transform duration-700 ease-out group-hover:scale-[1.015]",
+                objectFit: fit,
+                imageClassName: mediaImgClass,
               })
             ) : (
               <div
-                className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                className={cn("h-full w-full", HOME_CARD_MEDIA_IMG)}
                 style={{
                   background: item.color
                     ? `linear-gradient(135deg, ${item.color}44 0%, ${item.color}18 100%)`
@@ -233,6 +228,7 @@ export function PortfolioCard({
         <p
           className={cn(
             captionLineClass,
+            "transition-opacity duration-500 group-hover:opacity-70",
             isFeatured
               ? "text-base font-medium tracking-tight text-zinc-900 sm:text-lg"
               : isCompact

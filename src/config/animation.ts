@@ -74,7 +74,7 @@ export const CAROUSEL_PADDING_LEFT_CSS = `max(${CAROUSEL_PADDING_MIN_PX}px, calc
 export const CARD_MAX_VW = 72;
 
 /** Minimum gap between carousel cards (px). */
-export const CARD_GAP_MIN_PX = 80;
+export const CARD_GAP_MIN_PX = 120;
 
 /** Maximum gap between carousel cards (px). */
 export const CARD_GAP_MAX_PX = 1000;

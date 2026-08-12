@@ -4,7 +4,7 @@ import { PROJECTS } from "@/data/projects";
 export default function ProjectsPage() {
   return (
     <PortfolioCategoryPage
-      title="Personal Projects"
+      title="Projects"
       items={PROJECTS}
       basePath="/projects"
     />

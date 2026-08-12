@@ -55,7 +55,7 @@ export function FocusedCardOverlay({
       >
         <CarouselCardSlide
           card={card}
-          className="shadow-[0_12px_48px_rgb(0_0_0/0.28)] ring-1 ring-white/20"
+          className="shadow-[0_18px_50px_-12px_rgba(0,0,0,0.45)]"
         />
       </button>
     </div>

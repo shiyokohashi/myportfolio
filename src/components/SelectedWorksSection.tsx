@@ -1,13 +1,19 @@
-
 import type { ReactNode } from "react";
 
 import { PortfolioCard } from "@/components/PortfolioCard";
 import { WorksSectionHeader } from "@/components/WorksSectionHeader";
 import {
+  EXPERIMENTAL_CATEGORIES,
+  WORK_CATEGORIES,
   getSelectedWorksGroups,
   type SelectedWorksGroup,
 } from "@/data/selected-works";
-import { PAGE_GUTTER, SECTION_PY, SECTION_PY_COMPACT, WORKS_MAX, PAGE_END_PB } from "@/lib/layout";
+import {
+  PAGE_GUTTER,
+  SECTION_PY,
+  SECTION_PY_COMPACT,
+  WORKS_MAX,
+} from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 function WorksContainer({ children }: { children: ReactNode }) {
@@ -35,21 +41,15 @@ function CategorySection({
   compact,
   featuredAfter = false,
   footerLink,
-  isLast = false,
   sectionIndex = 0,
-}: SelectedWorksGroup & { isLast?: boolean; sectionIndex?: number }) {
+}: SelectedWorksGroup & { sectionIndex?: number }) {
   const headingId = `works-${href.replace(/\//g, "")}`;
   const featured = items.filter((item) => item.layout === "featured");
   const rest = items.filter((item) => item.layout === "default");
 
   const featuredBlock =
     featured.length > 0 ? (
-      <div
-        className={cn(
-          "flex flex-col",
-          featuredAfter ? "mt-14 sm:mt-16 lg:mt-20" : "mt-14 sm:mt-16 lg:mt-20",
-        )}
-      >
+      <div className="mt-14 flex flex-col sm:mt-16 lg:mt-20">
         {featured.map((item) => (
           <PortfolioCard
             key={item.slug}
@@ -67,7 +67,9 @@ function CategorySection({
         <ul
           className={cn(
             "grid list-none",
-            compact ? "gap-x-8 gap-y-12 sm:gap-y-14" : "gap-x-10 gap-y-16 lg:gap-x-12 lg:gap-y-20",
+            compact
+              ? "gap-x-8 gap-y-12 sm:gap-y-14"
+              : "gap-x-10 gap-y-16 lg:gap-x-12 lg:gap-y-20",
             !featuredAfter && featured.length > 0
               ? "mt-16 sm:mt-20 lg:mt-24"
               : compact
@@ -94,11 +96,7 @@ function CategorySection({
   return (
     <section
       aria-labelledby={headingId}
-      className={cn(
-        "flex flex-col",
-        compact ? SECTION_PY_COMPACT : SECTION_PY,
-        isLast && PAGE_END_PB,
-      )}
+      className={cn("flex flex-col", compact ? SECTION_PY_COMPACT : SECTION_PY)}
     >
       <WorksContainer>
         <WorksSectionHeader
@@ -136,23 +134,30 @@ function CategorySection({
   );
 }
 
-/** Selected works on the home page — projects, graphic design, paintings, journalism. */
-export function SelectedWorksSection() {
-  const groups = getSelectedWorksGroups();
+type HomeWorksBlockProps = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  groups: SelectedWorksGroup[];
+};
 
+function HomeWorksBlock({ id, eyebrow, title, groups }: HomeWorksBlockProps) {
   return (
     <section
-      id="works"
-      aria-labelledby="works-heading"
+      id={id}
+      aria-labelledby={`${id}-heading`}
       className="relative z-40 scroll-mt-24 bg-white"
     >
       <WorksContainer>
-        <header className="pb-8 pt-28 sm:pb-10 sm:pt-32 lg:pb-12 lg:pt-40">
+        <header className="pb-8 pt-28 sm:pb-10 sm:pt-32 lg:pb-12 lg:pt-36">
+          <p className="text-sm text-zinc-400">
+            {eyebrow}
+          </p>
           <h2
-            id="works-heading"
-            className="font-display text-4xl tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
+            id={`${id}-heading`}
+            className="mt-4 font-display text-4xl tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
           >
-            Selected work
+            {title}
           </h2>
         </header>
       </WorksContainer>
@@ -163,10 +168,43 @@ export function SelectedWorksSection() {
             key={group.href}
             {...group}
             sectionIndex={index}
-            isLast={index === groups.length - 1}
           />
         ))}
       </div>
     </section>
+  );
+}
+
+/** Client / product work. */
+export function HomeWorkSection() {
+  return (
+    <HomeWorksBlock
+      id="work"
+      eyebrow="Work"
+      title="Work"
+      groups={getSelectedWorksGroups(WORK_CATEGORIES)}
+    />
+  );
+}
+
+/** Illustration and art side. */
+export function HomeExperimentalSection() {
+  return (
+    <HomeWorksBlock
+      id="experimental"
+      eyebrow="Experimental"
+      title="Experimental"
+      groups={getSelectedWorksGroups(EXPERIMENTAL_CATEGORIES)}
+    />
+  );
+}
+
+/** @deprecated Use HomeWorkSection / HomeExperimentalSection. */
+export function SelectedWorksSection() {
+  return (
+    <>
+      <HomeWorkSection />
+      <HomeExperimentalSection />
+    </>
   );
 }

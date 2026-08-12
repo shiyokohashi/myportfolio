@@ -13,7 +13,7 @@ export function AboutConnect() {
       offsetY={14}
       delayMs={80}
     >
-      <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-5 text-sm tracking-wide text-zinc-500 sm:gap-x-14 sm:text-base">
+      <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-5 text-sm text-zinc-500 sm:gap-x-14 sm:text-base">
         <a
           href={connect.resume.href}
           target="_blank"

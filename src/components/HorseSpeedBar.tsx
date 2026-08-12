@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { SetHorseSpeedOptions } from "@/hooks/useSyncedAnimation";
-import { PAGE_GUTTER } from "@/lib/layout";
 import {
   HORSE_SPEED_SLIDER_MAX,
   HORSE_SPEED_SLIDER_MIN,
@@ -22,6 +21,9 @@ export type HorseSpeedBarProps = {
   hidden?: boolean;
 };
 
+/** Equal side columns so the track (and mid thumb) sit on the page center. */
+const SIDE_LABEL = "w-14 shrink-0 tabular-nums drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]";
+
 function formatSpeed(speed: number): string {
   if (speed < 1) return `${speed.toFixed(1)}×`;
   return `${speed.toFixed(speed % 1 === 0 ? 0 : 1)}×`;
@@ -39,7 +41,9 @@ export function HorseSpeedBar({
   className,
   hidden = false,
 }: HorseSpeedBarProps) {
-  const [sliderValue, setSliderValue] = useState(() => speedToSliderValue(speed));
+  const [sliderValue, setSliderValue] = useState(() =>
+    speedToSliderValue(speed),
+  );
   const isDraggingRef = useRef(false);
 
   useEffect(() => {
@@ -50,6 +54,8 @@ export function HorseSpeedBar({
 
   const displaySpeed = sliderValueToSpeed(sliderValue);
   const secretFrameActive = isSpeedAtEndpoint(displaySpeed);
+  const showFrame =
+    frameIndex !== undefined && frameCount !== undefined;
 
   const handleSliderInput = (value: number) => {
     setSliderValue(value);
@@ -71,17 +77,17 @@ export function HorseSpeedBar({
       )}
       aria-hidden={hidden}
     >
-      <div className={cn("flex items-center gap-3 py-2", PAGE_GUTTER)}>
-        {frameIndex !== undefined && frameCount !== undefined ? (
-          <span
-            aria-hidden
-            className="w-12 shrink-0 text-left text-[10px] tabular-nums tracking-[0.08em] text-white/45 drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
-          >
-            {secretFrameActive
+      <div className="mx-auto grid w-full max-w-xl grid-cols-[3.5rem_minmax(0,1fr)_3.5rem] items-center gap-3 px-4 py-2">
+        <span
+          aria-hidden
+          className={cn(SIDE_LABEL, "text-left text-[10px] text-white/45")}
+        >
+          {showFrame
+            ? secretFrameActive
               ? `${String(SECRET_FRAME.number).padStart(2, "0")} / ${String(SECRET_FRAME.number).padStart(2, "0")}`
-              : formatFrame(frameIndex, frameCount)}
-          </span>
-        ) : null}
+              : formatFrame(frameIndex, frameCount)
+            : null}
+        </span>
         <input
           id="horse-speed"
           type="range"
@@ -100,12 +106,12 @@ export function HorseSpeedBar({
           onInput={(event) =>
             handleSliderInput(Number(event.currentTarget.value))
           }
-          className="horse-speed-slider min-w-0 flex-1"
+          className="horse-speed-slider w-full min-w-0"
           aria-valuetext={formatSpeed(displaySpeed)}
         />
         <span
           aria-hidden
-          className="w-10 shrink-0 text-right text-xs tabular-nums text-white/50 drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
+          className={cn(SIDE_LABEL, "text-right text-xs text-white/50")}
         >
           {formatSpeed(displaySpeed)}
         </span>

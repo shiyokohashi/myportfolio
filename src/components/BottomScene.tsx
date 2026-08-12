@@ -198,14 +198,16 @@ export function BottomScene({
         ref={registerBottomSceneChrome}
         className={cn(
           "fixed inset-x-0 bottom-20 z-50 flex flex-col items-center gap-4 will-change-[opacity]",
-          !showScene && "invisible pointer-events-none",
           sceneHidden && "pointer-events-none",
         )}
       >
         <section
           aria-label="Galloping horse"
           aria-hidden={!showScene || sceneHidden}
-          className="pointer-events-none flex w-full justify-center"
+          className={cn(
+            "pointer-events-none flex w-full justify-center",
+            !showScene && "invisible",
+          )}
         >
           <HorseSprite ref={horseRef} />
         </section>
@@ -215,7 +217,7 @@ export function BottomScene({
           onSpeedChange={setSpeed}
           frameIndex={frameIndex}
           frameCount={frameCount}
-          hidden={!showScene || sceneHidden}
+          hidden={sceneHidden}
         />
       </div>
     </>
