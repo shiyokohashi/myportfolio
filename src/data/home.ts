@@ -61,6 +61,12 @@ export const HOME_SELECTED_WORK = {
       href: "/projects/aeon",
     },
     {
+      title: "Deskkeeper",
+      roles: "Product · Desktop",
+      blurb: "Desktop file review app for sorting downloads and loose files.",
+      href: "/projects/deskkeeper",
+    },
+    {
       title: "Imployed",
       roles: "Product · Brand · Web",
       blurb: "Career discovery product for browsing 1,700+ roles.",
