@@ -56,6 +56,8 @@ export function CarouselCardSlide({
             priority={priority}
             lazy={!priority}
             objectFit={objectFit}
+            cropVideoEdges={Boolean(card.thumbnailCrop)}
+            cropScale={card.videoCropScale ?? 1.03}
           />
         ) : thumbnail && loadMedia ? (
           <Image
@@ -68,7 +70,7 @@ export function CarouselCardSlide({
             unoptimized={shouldUseUnoptimized(thumbnail)}
             aria-hidden
             className={cn(
-              objectFit === "contain" ? "object-contain" : "object-cover",
+              objectFit === "contain" ? "object-contain object-center" : "object-cover",
               card.secret && "p-3",
             )}
           />
@@ -139,7 +141,8 @@ export function CarouselCard({
       onPointerEnter={() => onHoverStart?.()}
       onClick={() => onActivate?.(card)}
       className={cn(
-        "group shrink-0 cursor-pointer border-0 bg-transparent p-0 text-left",
+        "group shrink-0 cursor-pointer border-0 bg-transparent p-0 text-left outline-none",
+        "focus-visible:outline-none",
         className,
       )}
       style={style}
@@ -148,7 +151,6 @@ export function CarouselCard({
         card={card}
         loadMedia={loadMedia}
         priority={priority}
-        className="transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:shadow-[0_18px_40px_-18px_rgba(24,24,27,0.35)]"
       />
     </button>
   );

@@ -13,6 +13,8 @@ export type PortfolioSectionItem = {
   displayWidth?: number;
   /** Slight center zoom on video figures. */
   cropVideo?: boolean;
+  /** Center zoom amount when cropVideo is set (default 1.03). */
+  videoCropScale?: number;
   /** Storyboard beat — time, visual, audio, purpose. */
   shot?: {
     visual: string;
@@ -133,7 +135,7 @@ export type PortfolioWork = {
   mediaAspect?: { width: number; height: number };
   /** Slight zoom on video thumbnails to hide edge artifacts or tighten framing. */
   thumbnailCrop?: boolean;
-  /** Center zoom amount when thumbnailCrop is set (default 1.2). */
+  /** Center zoom amount when thumbnailCrop is set (default 1.03). */
   videoCropScale?: number;
   images?: string[];
   sections?: PortfolioSection[];

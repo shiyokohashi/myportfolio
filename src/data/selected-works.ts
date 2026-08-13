@@ -35,7 +35,6 @@ export const WORK_CATEGORIES: SelectedWorksCategory[] = [
     title: "Projects",
     href: "/projects",
     entries: [
-      { slug: "triton-trading-group", layout: "featured" },
       { slug: "brisbane-2032", layout: "featured" },
       { slug: "deskkeeper" },
       { slug: "imployed" },
@@ -49,7 +48,6 @@ export const WORK_CATEGORIES: SelectedWorksCategory[] = [
     href: "/graphic-design",
     entries: [
       { slug: "adobe-campus-case-study" },
-      { slug: "scot-scoop-news-logo" },
     ],
     blurb:
       "Visual identities, brand systems, and campaign work — mostly for clubs, publications, and side clients.",
@@ -77,7 +75,6 @@ export const EXPERIMENTAL_CATEGORIES: SelectedWorksCategory[] = [
     title: "Journalism",
     href: "/journalism",
     entries: [
-      { slug: "abort-the-court" },
       { slug: "bleeding-red-white-and-blue" },
       { slug: "the-meta-curse" },
     ],

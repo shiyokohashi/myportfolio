@@ -73,6 +73,7 @@ export function PortfolioCard({
   const fit = item.thumbnailFit === "contain" ? "contain" : "cover";
   const mediaImgClass =
     fit === "contain" ? HOME_CARD_MEDIA_IMG_CONTAIN : HOME_CARD_MEDIA_IMG;
+  const videoCrop = Boolean(item.thumbnailCrop);
   const imagePriority = priority || isFeatured;
   const imageSizes = isFeatured
     ? "(max-width: 1280px) 90vw, 1200px"
@@ -150,6 +151,7 @@ export function PortfolioCard({
               {renderCover({
                 sizes: "(max-width: 1280px) 90vw, 1200px",
                 objectFit: fit,
+                cropVideoEdges: videoCrop,
               })}
             </div>
           </div>
@@ -194,6 +196,7 @@ export function PortfolioCard({
               renderCover({
                 sizes: imageSizes,
                 objectFit: fit,
+                cropVideoEdges: videoCrop,
                 imageClassName: mediaImgClass,
               })
             ) : (

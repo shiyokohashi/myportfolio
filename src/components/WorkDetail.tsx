@@ -75,6 +75,8 @@ function WorkMedia({
             src={src}
             sizes={sizeHint}
             objectFit="cover"
+            cropVideoEdges={Boolean(item.cropVideo)}
+            cropScale={item.videoCropScale ?? 1.03}
           />
         </div>
       </div>

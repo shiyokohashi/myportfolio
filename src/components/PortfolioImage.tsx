@@ -33,7 +33,7 @@ export function PortfolioImage({
       sizes={sizes}
       unoptimized={shouldUseUnoptimized(src)}
       className={cn(
-        objectFit === "contain" ? "object-contain" : "object-cover",
+        objectFit === "contain" ? "object-contain object-center" : "object-cover",
         containPadding && "p-1",
         imageClassName,
       )}

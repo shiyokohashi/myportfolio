@@ -51,4 +51,4 @@ export const HOME_CARD_MEDIA_IMG =
 
 /** Same hover treatment, but never crop — for posters with important text. */
 export const HOME_CARD_MEDIA_IMG_CONTAIN =
-  "object-contain transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";
+  "object-contain object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]";

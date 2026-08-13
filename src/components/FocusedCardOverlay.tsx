@@ -48,14 +48,15 @@ export function FocusedCardOverlay({
           onOpen(card);
         }}
         className={cn(
-          "origin-center scale-[1.5] cursor-pointer border-0 bg-transparent p-0 text-left",
+          "origin-center scale-[1.5] cursor-pointer border-0 bg-transparent p-0 text-left outline-none",
           "transition-transform duration-300 ease-out hover:-translate-y-1",
+          "focus-visible:outline-none",
         )}
         style={cardWidthStyle()}
       >
         <CarouselCardSlide
           card={card}
-          className="shadow-[0_18px_50px_-12px_rgba(0,0,0,0.45)]"
+          className="[&_.carousel-card-media]:shadow-[0_18px_50px_-12px_rgba(0,0,0,0.45)]"
         />
       </button>
     </div>

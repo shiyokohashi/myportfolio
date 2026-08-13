@@ -68,6 +68,7 @@ export function HomeSelectedWork() {
               thumbnailFit === "contain"
                 ? HOME_CARD_MEDIA_IMG_CONTAIN
                 : HOME_CARD_MEDIA_IMG;
+            const cropVideo = Boolean(work?.thumbnailCrop);
 
             return (
               <li key={item.href}>
@@ -87,6 +88,8 @@ export function HomeSelectedWork() {
                           priority={index < 2}
                           lazy={index >= 2}
                           objectFit={thumbnailFit}
+                          cropVideoEdges={cropVideo}
+                          cropScale={work?.videoCropScale ?? 1.03}
                           imageClassName={mediaClass}
                         />
                       ) : thumbnail ? (

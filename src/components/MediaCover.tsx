@@ -39,7 +39,7 @@ export function MediaCover({
   poster,
   objectFit = "cover",
   cropVideoEdges = false,
-  cropScale = 1.2,
+  cropScale = 1.03,
   containPadding = false,
 }: MediaCoverProps) {
   const needsObserver = lazy && !priority;
@@ -68,7 +68,7 @@ export function MediaCover({
   }
 
   if (isVideoSrc(src)) {
-    const fit = objectFit === "contain" ? "object-contain" : "object-cover";
+    const fit = objectFit === "contain" ? "object-contain object-center" : "object-cover";
     const cropStyle = cropVideoEdges
       ? { transform: `scale(${cropScale})` }
       : undefined;
@@ -127,7 +127,7 @@ export function MediaCover({
       priority={priority}
       loading={priority ? undefined : lazy ? "lazy" : "eager"}
       className={cn(
-        objectFit === "contain" ? "object-contain" : "object-cover",
+        objectFit === "contain" ? "object-contain object-center" : "object-cover",
         containPadding && "p-1",
         imageClassName,
       )}

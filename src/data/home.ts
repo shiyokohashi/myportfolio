@@ -42,8 +42,10 @@ export const HOME_SELECTED_WORK = {
       title: "Triton Trading Group",
       roles: "Brand · Marketing · Creative Direction",
       blurb:
-        "Brand and recruitment system for UCSD's fastest-growing business org — including Fall Recruitment 2026.",
+        "700+ followers, 200+ applications, and a 3,400% reach lift to 250K monthly views.",
       href: "/projects/triton-trading-group",
+      thumbnail: "/images/projects/triton-trading/recruitment-collage.png",
+      thumbnailFit: "cover",
       featured: true,
     },
     {

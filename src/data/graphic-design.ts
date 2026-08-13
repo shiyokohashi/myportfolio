@@ -1,21 +1,21 @@
 import type { PortfolioWork } from "@/types/portfolio";
 
-const SITE = "https://www.shiyoohashi.com";
-
 /** Shared — listed under both /projects and /graphic-design. */
 export const TRITON_TRADING_GROUP: PortfolioWork = {
   slug: "triton-trading-group",
   title: "Triton Trading Group (2025–26)",
   summary:
-    "Brand and recruitment design for UCSD's fastest-growing pre-professional business organization — including Fall Recruitment 2026.",
+    "Grew TTG to 700+ followers and 200+ applications — with 250K monthly views and a 3,400% lift in social reach.",
   description: [
-    "Triton Trading Group (TTG) is UCSD's fastest-growing pre-professional business organization. This work spans social recaps, portfolio headers, Fall 2026 and Spring 2026 recruitment, and a Winter 2025 tabling banner — all built to feel cohesive across campus touchpoints and digital channels.",
+    "As Chief Marketing Officer and Head of Graphic Design at Triton Trading Group, UCSD's premier pre-professional finance organization, I lead branding, social, and recruitment campaigns across campus and digital channels.",
+    "The system grew the org to 700+ followers and generated 200+ applications, while increasing social reach by 3,400% to 250K monthly views — built with a 20-person cross-functional team across marketing, design, and operations.",
+    "Work spans identity, social recaps, portfolio headers, Fall 2026 and Spring 2026 recruitment, and a tabling banner — designed to stay cohesive from Instagram to LinkedIn to in-person outreach.",
   ],
   year: "2025–26",
-  role: "Brand identity",
-  tags: ["Brand Identity", "Education"],
-  thumbnail: "/images/projects/triton-trading/monthly-portfolio/november-2026.png",
-  thumbnailFit: "contain",
+  role: "Chief Marketing Officer · Head of Graphic Design",
+  tags: ["Brand Identity", "Marketing", "Education"],
+  thumbnail: "/images/projects/triton-trading/recruitment-collage.png",
+  thumbnailFit: "cover",
   sections: [
     {
       title: "Fall Recruitment 2026",
@@ -208,14 +208,14 @@ export const TRITON_TRADING_GROUP: PortfolioWork = {
     },
     {
       title: "Tabling banner",
-      description: "Vertical banner for Winter 2025 recruitment tabling.",
+      description: "Vertical banner for recruitment tabling.",
       itemsLayout: "stack",
       items: [
         {
           image: `/images/projects/triton-trading/banner.png`,
           width: 3000,
           height: 7200,
-          displayWidth: 420,
+          displayWidth: 480,
         },
       ],
     },
@@ -237,6 +237,81 @@ export const BRISBANE_2032: PortfolioWork = {
   tags: ["Brand Identity", "Entertainment"],
   thumbnail: "/images/banner/brisbane-bound-for-gold-billboard.png",
   thumbnailFit: "contain",
+};
+
+/** Shared — listed under both /projects and /graphic-design. */
+export const SCOT_SCOOP_NEWS_LOGO: PortfolioWork = {
+  slug: "scot-scoop-news-logo",
+  title: "Scotscoop Logo (2023)",
+  summary:
+    "Logo design for Scot Scoop News, the student news publication at Carlmont High School.",
+  description: [
+    "Identity work for Scot Scoop News — from early mascot explorations through a final editorial mark used across the publication's digital and print presence.",
+    "The direction shifted toward something more editorial — credible, restrained, and built to represent serious student journalism.",
+  ],
+  year: "2023",
+  role: "Brand identity",
+  tags: ["Brand Identity", "Publishing"],
+  thumbnail: "/images/projects/scot-scoop/thumbnail.png",
+  thumbnailFit: "contain",
+  sections: [
+    {
+      title: "Final mark",
+      itemsLayout: "stack",
+      items: [
+        {
+          title: "Double-S monogram",
+          description:
+            "Final double-S monogram, inspired by the New York Times letterform tradition. Hand-drawn first, then refined in Adobe Illustrator for the site and social channels.",
+          image: "/images/projects/scot-scoop/finished-logo.png",
+          width: 501,
+          height: 836,
+          displayWidth: 420,
+        },
+      ],
+    },
+    {
+      title: "Early explorations",
+      description:
+        "Early explorations built on Scot Scoop's existing identity — light, pun-driven directions around ice cream, broadcast, and the double meaning of \"scoop.\"",
+      itemsLayout: "grid",
+      items: [
+        {
+          image: "/images/projects/scot-scoop/brainstorm-sketches.png",
+          width: 557,
+          height: 837,
+        },
+        {
+          title: "Logo explorations",
+          description:
+            "Mascot-style S marks and companion logos for ScotCenter, the publication's broadcast channel.",
+          image: "/images/projects/scot-scoop/logo-explorations.png",
+          width: 888,
+          height: 609,
+        },
+      ],
+    },
+    {
+      title: "Editorial direction",
+      itemsLayout: "grid",
+      items: [
+        {
+          image: "/images/projects/scot-scoop/serious-concepts.png",
+          width: 762,
+          height: 755,
+        },
+        {
+          title: "Vector lockup",
+          description:
+            "Vector lockup deployed across Scot Scoop's site, social profiles, and print collateral.",
+          image: "/images/projects/scot-scoop/final-logo.png",
+          width: 337,
+          height: 555,
+          displayWidth: 360,
+        },
+      ],
+    },
+  ],
 };
 
 /** Graphic design work — migrated from shiyoohashi.com/projects. */
@@ -315,64 +390,5 @@ export const GRAPHIC_DESIGN: PortfolioWork[] = [
     color: "#6b7a55",
   },
   BRISBANE_2032,
-  {
-    slug: "scot-scoop-news-logo",
-    title: "Scotscoop Logo (2023)",
-    summary:
-      "Logo design for Scot Scoop News, the student news publication at Carlmont High School.",
-    description: [
-      "Identity work for Scot Scoop News — from early mascot explorations through a final editorial mark used across the publication's digital and print presence.",
-      "The direction shifted toward something more editorial — credible, restrained, and built to represent serious student journalism.",
-    ],
-    year: "2023",
-    role: "Brand identity",
-    tags: ["Brand Identity", "Publishing"],
-    thumbnail: `${SITE}/images/projects/scot-scoop/thumbnail.png`,
-    sections: [
-      {
-        title: "Final mark",
-        itemsLayout: "stack",
-        items: [
-          {
-            title: "Double-S monogram",
-            description:
-              "Final double-S monogram, inspired by the New York Times letterform tradition. Hand-drawn first, then refined in Adobe Illustrator for the site and social channels.",
-            image: `${SITE}/images/projects/scot-scoop/finished-logo.png`,
-          },
-        ],
-      },
-      {
-        title: "Early explorations",
-        description:
-          "Early explorations built on Scot Scoop's existing identity — light, pun-driven directions around ice cream, broadcast, and the double meaning of \"scoop.\"",
-        itemsLayout: "grid",
-        items: [
-          {
-            image: `${SITE}/images/projects/scot-scoop/brainstorm-sketches.png`,
-          },
-          {
-            title: "Logo explorations",
-            description:
-              "Mascot-style S marks and companion logos for ScotCenter, the publication's broadcast channel.",
-            image: `${SITE}/images/projects/scot-scoop/logo-explorations.png`,
-          },
-        ],
-      },
-      {
-        title: "Editorial direction",
-        itemsLayout: "grid",
-        items: [
-          {
-            image: `${SITE}/images/projects/scot-scoop/serious-concepts.png`,
-          },
-          {
-            title: "Vector lockup",
-            description:
-              "Vector lockup deployed across Scot Scoop's site, social profiles, and print collateral.",
-            image: `${SITE}/images/projects/scot-scoop/final-logo.png`,
-          },
-        ],
-      },
-    ],
-  },
+  SCOT_SCOOP_NEWS_LOGO,
 ];
