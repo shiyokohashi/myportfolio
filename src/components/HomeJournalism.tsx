@@ -46,11 +46,11 @@ export function HomeJournalism() {
           </header>
         </ScrollReveal>
 
-        <ul className={cn(HOME_GRID_GAP_COMPACT, "sm:grid-cols-3")}>
+        <ul className={cn(HOME_GRID_GAP_COMPACT, "items-start sm:grid-cols-3")}>
           {HOME_JOURNALISM.items.map((item, index) => (
-            <li key={item.href}>
+            <li key={item.href} className="min-w-0">
               <ScrollReveal delayMs={index * 50} offsetY={20}>
-                <Link href={item.href} className="group block">
+                <Link href={item.href} className="group block text-left">
                   <div className={cn("relative aspect-[4/3]", HOME_CARD_MEDIA)}>
                     <Image
                       src={item.thumbnail}

@@ -1,10 +1,11 @@
-import { BRISBANE_2032, SCOT_SCOOP_NEWS_LOGO, TRITON_TRADING_GROUP } from "@/data/graphic-design";
+import { ADOBE_CAMPUS_CASE_STUDY, BRISBANE_2032, SCOT_SCOOP_NEWS_LOGO, TRITON_TRADING_GROUP } from "@/data/graphic-design";
 import type { PortfolioWork } from "@/types/portfolio";
 
 /** Product and app projects — home carousel + /projects archive. */
 export const PROJECTS: PortfolioWork[] = [
   { ...TRITON_TRADING_GROUP, group: "Featured Projects" },
   { ...BRISBANE_2032, group: "Featured Projects" },
+  { ...ADOBE_CAMPUS_CASE_STUDY },
   { ...SCOT_SCOOP_NEWS_LOGO },
   {
     slug: "graduaid",
@@ -151,6 +152,54 @@ export const PROJECTS: PortfolioWork[] = [
             image: "/images/projects/graduaid/hero-dark.png",
             width: 2574,
             height: 1638,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "secretaryat",
+    title: "Secretaryat",
+    summary:
+      "Task tracker where every task is a horse — finish one, and it runs off the screen.",
+    description: [
+      "Secretaryat turns a to-do list into a pasture. Each task shows up as a horse in the field; when you check it off, the horse runs out of frame.",
+    ],
+    year: "2026",
+    role: "Product design & development",
+    tags: ["Desktop", "Product"],
+    color: "#6b7c4c",
+    thumbnail: "/videos/secretaryat.mp4",
+    thumbnailCrop: true,
+    videoCropScale: 1.03,
+    mediaAspect: { width: 1280, height: 884 },
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "Product demo",
+        description:
+          "Add a task, watch a horse appear in the field, then check it off and see it run off screen.",
+        layout: "full",
+        items: [
+          {
+            video: "/videos/secretaryat.mp4",
+            width: 1280,
+            height: 884,
+            cropVideo: true,
+            videoCropScale: 1.03,
+          },
+        ],
+      },
+      {
+        title: "Horse sprites",
+        description:
+          "Adobe Firefly generated the horse stills and walk/gallop cycles — then cleaned into sprite sheets for the in-app pasture animations.",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/secretaryat/firefly-sprites.png",
+            width: 1024,
+            height: 546,
           },
         ],
       },

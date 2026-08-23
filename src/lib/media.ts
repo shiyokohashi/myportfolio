@@ -24,6 +24,9 @@ export function shouldUseUnoptimized(src: string, unoptimized = false): boolean 
 
 export function getVideoPoster(slugOrId?: string): string | undefined {
   if (!slugOrId) return undefined;
+  if (slugOrId.includes("secretaryat")) {
+    return "/images/projects/secretaryat/poster.jpg";
+  }
   if (slugOrId.includes("deskkeeper")) {
     return "/images/projects/deskkeeper/icon.png";
   }

@@ -41,7 +41,7 @@ function FeaturedCaption({
       <p
         className={cn(
           captionLineClass,
-          "text-base font-medium tracking-tight text-zinc-900 sm:text-lg",
+          "font-display text-base font-semibold tracking-tight text-zinc-900 sm:text-lg",
         )}
       >
         {item.title}
@@ -215,14 +215,14 @@ export function PortfolioCard({
 
       <div
         className={cn(
-          "w-full",
+          "w-full text-left",
           isFeatured
             ? cn("mx-auto", WORKS_MAX, PAGE_GUTTER, FEATURED_CAPTION_GAP, FEATURED_CAPTION_INNER)
             : isCompact
-              ? "mt-4"
+              ? "mt-4 space-y-1.5"
               : isLarge
-                ? "mt-5 sm:mt-6"
-                : "mt-4 sm:mt-5",
+                ? "mt-5 space-y-1.5 sm:mt-6"
+                : "mt-4 space-y-1.5 sm:mt-5",
         )}
       >
         {showGroup && item.group && (
@@ -231,12 +231,12 @@ export function PortfolioCard({
         <p
           className={cn(
             captionLineClass,
-            "transition-opacity duration-500 group-hover:opacity-70",
+            "font-display font-semibold tracking-tight text-zinc-900 transition-opacity duration-500 group-hover:opacity-70",
             isFeatured
-              ? "text-base font-medium tracking-tight text-zinc-900 sm:text-lg"
+              ? "text-base sm:text-lg"
               : isCompact
-                ? "text-sm font-medium tracking-tight text-zinc-900"
-                : "text-sm font-medium tracking-tight text-zinc-900 sm:text-base",
+                ? "text-sm"
+                : "text-sm sm:text-base",
           )}
         >
           {item.title}
@@ -246,7 +246,7 @@ export function PortfolioCard({
             className={cn(
               captionLineClass,
               "text-sm leading-relaxed text-zinc-400",
-              isFeatured ? "max-w-2xl sm:text-base" : "mt-1.5",
+              isFeatured && "max-w-2xl sm:text-base",
             )}
           >
             {item.summary}

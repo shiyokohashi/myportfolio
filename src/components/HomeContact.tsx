@@ -3,34 +3,35 @@ import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { NAV_ITEMS } from "@/config/navigation";
 import { HOME_CONTACT } from "@/data/home";
-import { HOME_TYPE, PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
+import { HOME_TYPE, PAGE_END_PB, PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
-/** Contact as a large closing footer — Email primary. */
+/** Contact as a large closing section — same white ground as the rest of the page. */
 export function HomeContact() {
   return (
     <section
       id="contact"
       aria-labelledby="contact-heading"
       className={cn(
-        "relative z-40 scroll-mt-24 border-t border-zinc-200 bg-zinc-950 text-zinc-100",
+        "relative z-40 scroll-mt-24 border-t border-zinc-200 bg-white",
         PAGE_GUTTER,
+        PAGE_END_PB,
       )}
     >
       <div
         className={cn(
-          "mx-auto flex min-h-[min(85vh,860px)] w-full flex-col justify-between py-32 sm:py-40 lg:py-48",
+          "mx-auto flex min-h-[min(70vh,720px)] w-full flex-col justify-between py-32 sm:py-40 lg:py-48",
           WORKS_MAX,
         )}
       >
         <ScrollReveal offsetY={22}>
           <h2
             id="contact-heading"
-            className={cn(HOME_TYPE.display, "max-w-3xl text-zinc-50")}
+            className={cn(HOME_TYPE.display, "max-w-3xl text-zinc-900")}
           >
             {HOME_CONTACT.headline}
           </h2>
-          <p className={cn(HOME_TYPE.body, "mt-8 max-w-xl text-zinc-400 sm:mt-10")}>
+          <p className={cn(HOME_TYPE.body, "mt-8 max-w-xl text-zinc-500 sm:mt-10")}>
             {HOME_CONTACT.blurb}
           </p>
 
@@ -44,7 +45,7 @@ export function HomeContact() {
               href={HOME_CONTACT.primaryCta.href}
               className={cn(
                 HOME_TYPE.item,
-                "text-zinc-50 transition-opacity hover:opacity-60",
+                "text-zinc-900 transition-opacity hover:opacity-60",
               )}
             >
               {HOME_CONTACT.primaryCta.label}
@@ -56,7 +57,7 @@ export function HomeContact() {
                 {...(link.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="transition-opacity hover:text-zinc-200"
+                className="transition-opacity hover:opacity-60"
               >
                 {link.label}
               </a>
@@ -64,7 +65,7 @@ export function HomeContact() {
           </div>
         </ScrollReveal>
 
-        <footer className="mt-28 flex flex-col gap-10 border-t border-zinc-800 pt-10 sm:mt-36 sm:flex-row sm:items-end sm:justify-between">
+        <footer className="mt-28 flex flex-col gap-10 border-t border-zinc-200 pt-10 sm:mt-36 sm:flex-row sm:items-end sm:justify-between">
           <nav
             aria-label="Footer"
             className={cn(
@@ -76,13 +77,13 @@ export function HomeContact() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-opacity hover:text-zinc-200 hover:opacity-100"
+                className="transition-opacity hover:opacity-60"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
-          <p className={cn(HOME_TYPE.meta, "text-zinc-600")}>
+          <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>
             Shiyo Ohashi
           </p>
         </footer>

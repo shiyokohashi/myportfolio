@@ -155,7 +155,7 @@ function HomeWorksBlock({ id, eyebrow, title, groups }: HomeWorksBlockProps) {
           </p>
           <h2
             id={`${id}-heading`}
-            className="mt-4 font-display text-4xl tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
+            className="mt-4 font-display font-semibold text-4xl tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem]"
           >
             {title}
           </h2>

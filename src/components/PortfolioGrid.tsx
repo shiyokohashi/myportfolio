@@ -20,9 +20,9 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
   const grouped = items.some((item) => item.group);
   if (!grouped) {
     return (
-      <ul className="mt-16 grid gap-12 sm:mt-20 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-16">
+      <ul className="mt-16 grid items-start gap-12 sm:mt-20 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-16">
         {items.map((item, index) => (
-          <li key={item.slug}>
+          <li key={item.slug} className="min-w-0">
             <PortfolioCard item={item} basePath={basePath} showGroup priority={index < 4} />
           </li>
         ))}
@@ -43,9 +43,9 @@ export function PortfolioGrid({ items, basePath }: PortfolioGridProps) {
       {[...sections.entries()].map(([group, groupItems]) => (
         <section key={group}>
           <h2 className="text-2xl tracking-tight text-zinc-900">{group}</h2>
-          <ul className="mt-10 grid gap-12 sm:mt-12 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-16">
+          <ul className="mt-10 grid items-start gap-12 sm:mt-12 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-16">
             {groupItems.map((item, index) => (
-              <li key={item.slug}>
+              <li key={item.slug} className="min-w-0">
                 <PortfolioCard item={item} basePath={basePath} priority={index < 4} />
               </li>
             ))}

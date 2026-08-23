@@ -46,11 +46,11 @@ export function HomeIllustrations() {
           </header>
         </ScrollReveal>
 
-        <ul className={cn(HOME_GRID_GAP_COMPACT, "sm:grid-cols-2 lg:grid-cols-3")}>
+        <ul className={cn(HOME_GRID_GAP_COMPACT, "items-start sm:grid-cols-2 lg:grid-cols-3")}>
           {HOME_ILLUSTRATIONS.items.map((item, index) => (
-            <li key={item.href}>
+            <li key={item.href} className="min-w-0">
               <ScrollReveal delayMs={index * 50} offsetY={20}>
-                <Link href={item.href} className="group block">
+                <Link href={item.href} className="group block text-left">
                   <div className={cn("relative aspect-[4/5]", HOME_CARD_MEDIA)}>
                     <Image
                       src={item.thumbnail}
@@ -61,17 +61,19 @@ export function HomeIllustrations() {
                       className={HOME_CARD_MEDIA_IMG}
                     />
                   </div>
-                  <h3
-                    className={cn(
-                      HOME_TYPE.item,
-                      "mt-6 text-zinc-900 transition-opacity duration-500 group-hover:opacity-70",
-                    )}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className={cn(HOME_TYPE.meta, "mt-2 text-zinc-400")}>
-                    {item.summary}
-                  </p>
+                  <div className="mt-6 space-y-2">
+                    <h3
+                      className={cn(
+                        HOME_TYPE.item,
+                        "text-zinc-900 transition-opacity duration-500 group-hover:opacity-70",
+                      )}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className={cn(HOME_TYPE.meta, "text-zinc-400")}>
+                      {item.summary}
+                    </p>
+                  </div>
                 </Link>
               </ScrollReveal>
             </li>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Manrope, Newsreader } from "next/font/google";
+import { Manrope } from "next/font/google";
+import localFont from "next/font/local";
 
 import { ScrollChrome } from "@/components/ScrollChrome";
 import { VideoBackground } from "@/components/VideoBackground";
@@ -9,12 +10,23 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-/** Editorial display — less overused than Instrument Serif. */
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
+/** Display / headings — Vilaka (single cut; 600 synthesizes for readability). */
+const vilaka = localFont({
+  src: [
+    {
+      path: "../fonts/Vilaka.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Vilaka.ttf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-vilaka",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
 /** Clean UI / body sans. */
@@ -43,7 +55,7 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "h-full overflow-x-hidden antialiased",
-        newsreader.variable,
+        vilaka.variable,
         manrope.variable,
       )}
     >

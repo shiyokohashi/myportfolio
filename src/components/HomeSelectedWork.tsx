@@ -33,7 +33,7 @@ export function HomeSelectedWork() {
     >
       <div className={cn("mx-auto w-full", WORKS_MAX)}>
         <ScrollReveal>
-          <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
+          <header className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-12">
             <h2
               id="work-heading"
               className={cn(HOME_TYPE.section, "max-w-2xl text-zinc-900")}
@@ -55,7 +55,7 @@ export function HomeSelectedWork() {
           </header>
         </ScrollReveal>
 
-        <ul className={cn(HOME_GRID_GAP, "sm:grid-cols-2")}>
+        <ul className={cn(HOME_GRID_GAP, "items-start sm:grid-cols-2")}>
           {HOME_SELECTED_WORK.items.map((item, index) => {
             const slug = item.href.split("/").filter(Boolean).pop() ?? "";
             const work = getWorkBySlug(PROJECTS, slug);
@@ -71,9 +71,9 @@ export function HomeSelectedWork() {
             const cropVideo = Boolean(work?.thumbnailCrop);
 
             return (
-              <li key={item.href}>
+              <li key={item.href} className="min-w-0">
                 <ScrollReveal delayMs={index * 60} offsetY={24}>
-                  <Link href={item.href} className="group block">
+                  <Link href={item.href} className="group block text-left">
                     <div
                       className={cn(
                         "relative aspect-[16/11] sm:aspect-[5/4]",
@@ -105,7 +105,7 @@ export function HomeSelectedWork() {
                       ) : null}
                     </div>
 
-                    <div className="mt-7 sm:mt-8">
+                    <div className="mt-7 space-y-3 sm:mt-8">
                       <h3
                         className={cn(
                           HOME_TYPE.item,
@@ -114,11 +114,11 @@ export function HomeSelectedWork() {
                       >
                         {item.title}
                       </h3>
-                      <p className={cn(HOME_TYPE.body, "mt-3 text-zinc-500")}>
-                        {item.blurb}
-                      </p>
-                      <p className={cn(HOME_TYPE.meta, "mt-3 text-zinc-400")}>
+                      <p className={cn(HOME_TYPE.meta, "text-zinc-400")}>
                         {item.roles}
+                      </p>
+                      <p className={cn(HOME_TYPE.body, "text-zinc-500")}>
+                        {item.blurb}
                       </p>
                     </div>
                   </Link>

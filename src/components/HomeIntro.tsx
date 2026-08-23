@@ -39,10 +39,6 @@ export function HomeIntro() {
           {HOME_INTRO.proof}
         </p>
 
-        <p className={cn(HOME_TYPE.meta, "mt-12 text-zinc-700")}>
-          {HOME_INTRO.availability}
-        </p>
-
         <p
           className={cn(
             HOME_TYPE.meta,

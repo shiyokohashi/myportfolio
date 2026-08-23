@@ -57,11 +57,11 @@ export function HomePaintings() {
           </header>
         </ScrollReveal>
 
-        <ul className={cn(HOME_GRID_GAP, "sm:grid-cols-2")}>
+        <ul className={cn(HOME_GRID_GAP, "items-start sm:grid-cols-2")}>
           {HOME_PAINTINGS.items.map((item, index) => (
-            <li key={item.href}>
+            <li key={item.href} className="min-w-0">
               <ScrollReveal delayMs={index * 50} offsetY={24}>
-                <Link href={item.href} className="group block">
+                <Link href={item.href} className="group block text-left">
                   <div className={cn("relative aspect-[5/4]", HOME_CARD_MEDIA)}>
                     <Image
                       src={item.thumbnail}

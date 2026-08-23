@@ -35,7 +35,8 @@ export const WORK_CATEGORIES: SelectedWorksCategory[] = [
     title: "Projects",
     href: "/projects",
     entries: [
-      { slug: "brisbane-2032", layout: "featured" },
+      { slug: "secretaryat", layout: "featured" },
+      { slug: "brisbane-2032" },
       { slug: "deskkeeper" },
       { slug: "imployed" },
       { slug: "aeon" },

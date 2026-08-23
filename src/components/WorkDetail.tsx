@@ -20,7 +20,8 @@ type WorkDetailProps = {
   naturalImages?: boolean;
 };
 
-const SUBSECTION_HEADING = "text-xl tracking-tight text-zinc-900 md:text-2xl";
+const SUBSECTION_HEADING =
+  "font-display font-semibold text-xl tracking-tight text-zinc-900 md:text-2xl";
 
 const SECTION_WIDTH: Record<SectionLayout, string> = {
   contained: "max-w-3xl",

@@ -27,12 +27,12 @@ export const PAGE_END_PB =
  * meta: roles, nav links, secondary CTAs
  */
 export const HOME_TYPE = {
-  name: "font-display text-[clamp(3.75rem,12vw,8.5rem)] leading-[0.92] tracking-[-0.04em]",
-  display: "font-display text-4xl tracking-tight sm:text-5xl",
-  section: "font-display text-3xl tracking-tight sm:text-4xl",
-  item: "font-display text-xl tracking-tight sm:text-2xl",
-  body: "text-base leading-relaxed",
-  meta: "text-sm",
+  name: "font-display font-semibold text-[clamp(3.75rem,12vw,8.5rem)] leading-[0.92] tracking-[-0.04em]",
+  display: "font-display font-semibold text-4xl tracking-tight sm:text-5xl",
+  section: "font-display font-semibold text-3xl tracking-tight sm:text-4xl",
+  item: "font-display font-semibold text-xl tracking-tight sm:text-2xl",
+  body: "font-sans text-base leading-relaxed",
+  meta: "font-sans text-sm",
 } as const;
 
 /** Shared home grid rhythm — room between cards. */

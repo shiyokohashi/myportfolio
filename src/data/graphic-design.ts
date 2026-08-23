@@ -314,69 +314,73 @@ export const SCOT_SCOOP_NEWS_LOGO: PortfolioWork = {
   ],
 };
 
+/** Shared — listed under both /projects and /graphic-design. */
+export const ADOBE_CAMPUS_CASE_STUDY: PortfolioWork = {
+  slug: "adobe-campus-case-study",
+  title: "Adobe Campus Case Study",
+  summary:
+    "UCSuperDesign — a field guide proposing a more creative campus at UC San Diego.",
+  description: [],
+  year: "2025",
+  role: "Brand identity",
+  tags: ["Brand Identity", "Education", "Adobe"],
+  thumbnail: "/images/projects/adobe-campus-case-study/spread.png",
+  thumbnailFit: "cover",
+  detailLayout: "editorial",
+  sections: [
+    {
+      title: "Field guide",
+      layout: "wide",
+      itemsLayout: "stack",
+      items: [
+        {
+          image: "/images/projects/adobe-campus-case-study/spread.png",
+          width: 1024,
+          height: 768,
+        },
+      ],
+    },
+    {
+      title: "Pages",
+      layout: "wide",
+      itemsLayout: "stack",
+      items: [
+        {
+          image: "/images/projects/adobe-campus-case-study/page-1.png",
+          width: 840,
+          height: 1188,
+          displayWidth: 640,
+        },
+        {
+          image: "/images/projects/adobe-campus-case-study/page-2.png",
+          width: 1680,
+          height: 1188,
+        },
+        {
+          image: "/images/projects/adobe-campus-case-study/page-3.png",
+          width: 1680,
+          height: 1188,
+        },
+        {
+          image: "/images/projects/adobe-campus-case-study/page-4.png",
+          width: 1680,
+          height: 1188,
+        },
+        {
+          image: "/images/projects/adobe-campus-case-study/page-5.png",
+          width: 840,
+          height: 1188,
+          displayWidth: 640,
+        },
+      ],
+    },
+  ],
+};
+
 /** Graphic design work — migrated from shiyoohashi.com/projects. */
 export const GRAPHIC_DESIGN: PortfolioWork[] = [
   TRITON_TRADING_GROUP,
-  {
-    slug: "adobe-campus-case-study",
-    title: "Adobe Campus Case Study",
-    summary:
-      "UCSuperDesign — a field guide proposing a more creative campus at UC San Diego.",
-    description: [],
-    year: "2025",
-    role: "Brand identity",
-    tags: ["Brand Identity", "Education", "Adobe"],
-    thumbnail: "/images/projects/adobe-campus-case-study/spread.png",
-    detailLayout: "editorial",
-    sections: [
-      {
-        title: "Field guide",
-        layout: "wide",
-        itemsLayout: "stack",
-        items: [
-          {
-            image: "/images/projects/adobe-campus-case-study/spread.png",
-            width: 1024,
-            height: 768,
-          },
-        ],
-      },
-      {
-        title: "Pages",
-        layout: "wide",
-        itemsLayout: "stack",
-        items: [
-          {
-            image: "/images/projects/adobe-campus-case-study/page-1.png",
-            width: 840,
-            height: 1188,
-            displayWidth: 640,
-          },
-          {
-            image: "/images/projects/adobe-campus-case-study/page-2.png",
-            width: 1680,
-            height: 1188,
-          },
-          {
-            image: "/images/projects/adobe-campus-case-study/page-3.png",
-            width: 1680,
-            height: 1188,
-          },
-          {
-            image: "/images/projects/adobe-campus-case-study/page-4.png",
-            width: 1680,
-            height: 1188,
-          },
-          {
-            image: "/images/projects/adobe-campus-case-study/page-5.png",
-            width: 840,
-            height: 1188,
-            displayWidth: 640,
-          },
-        ],
-      },
-    ],
-  },
+  ADOBE_CAMPUS_CASE_STUDY,
   {
     slug: "kitchens-for-good",
     title: "Kitchens for Good",

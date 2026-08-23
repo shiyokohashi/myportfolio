@@ -28,7 +28,7 @@ export function WorksSectionHeader({
         <h3
           id={headingId}
           className={cn(
-            "font-display tracking-tight text-zinc-900",
+            "font-display font-semibold tracking-tight text-zinc-900",
             compact ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl lg:text-[2rem]",
           )}
         >

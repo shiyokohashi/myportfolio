@@ -8,7 +8,6 @@ export const HOME_INTRO = {
     "I build brands, visual identities, and digital experiences.",
   proof:
     "Currently leading creative & marketing at Triton Trading Group while studying Cognitive Science & Design at UC San Diego.",
-  availability: "Available for freelance & ongoing creative work.",
   primaryCta: {
     label: "Email",
     href: `mailto:${ABOUT.connect.email}`,
@@ -38,6 +37,14 @@ export const HOME_SELECTED_WORK = {
   title: "Selected Work",
   viewAll: { label: "View all work", href: "/projects" },
   items: [
+    {
+      title: "Secretaryat",
+      roles: "Product · Desktop",
+      blurb:
+        "Task tracker where every task is a horse — finish one, and it runs off the screen.",
+      href: "/projects/secretaryat",
+      featured: true,
+    },
     {
       title: "Triton Trading Group",
       roles: "Brand · Marketing · Creative Direction",
