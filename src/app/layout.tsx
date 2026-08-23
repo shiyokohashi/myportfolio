@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-/** Display / headings — Vilaka (single cut; 600 synthesizes for readability). */
+/** Display / headings — Vilaka (single cut; heavier weights synthesize for legibility). */
 const vilaka = localFont({
   src: [
     {
@@ -20,7 +20,7 @@ const vilaka = localFont({
     },
     {
       path: "../fonts/Vilaka.ttf",
-      weight: "600",
+      weight: "700",
       style: "normal",
     },
   ],

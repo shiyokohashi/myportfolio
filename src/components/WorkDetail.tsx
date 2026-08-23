@@ -21,7 +21,7 @@ type WorkDetailProps = {
 };
 
 const SUBSECTION_HEADING =
-  "font-display font-semibold text-xl tracking-tight text-zinc-900 md:text-2xl";
+  "font-display font-bold text-2xl tracking-tight text-zinc-900 md:text-3xl";
 
 const SECTION_WIDTH: Record<SectionLayout, string> = {
   contained: "max-w-3xl",

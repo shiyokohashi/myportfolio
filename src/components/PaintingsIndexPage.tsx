@@ -55,7 +55,7 @@ function PaintingTile({
       }
     >
       <div className="mb-3 flex items-baseline justify-between gap-4 text-sm text-zinc-900">
-        <h2 className="min-w-0 font-display font-semibold">{work.title}</h2>
+        <h2 className="min-w-0 font-display font-bold text-lg sm:text-xl">{work.title}</h2>
         <span className="shrink-0 tabular-nums text-zinc-500">
           ({imageCount})
         </span>
@@ -114,7 +114,7 @@ export function PaintingsIndexPage({
     <main className={cn("relative z-10 pb-40 pt-28 sm:pb-48 sm:pt-32 lg:pt-36", PAGE_GUTTER)}>
       <div className="mx-auto w-full max-w-[min(1680px,100%)]">
         <header className="border-b border-zinc-200 pb-8">
-          <h1 className="font-display font-semibold text-3xl tracking-tight text-zinc-900 sm:text-4xl">
+          <h1 className="font-display font-bold text-4xl tracking-tight text-zinc-900 sm:text-5xl">
             {title}
           </h1>
         </header>

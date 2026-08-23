@@ -41,7 +41,7 @@ function FeaturedCaption({
       <p
         className={cn(
           captionLineClass,
-          "font-display text-base font-semibold tracking-tight text-zinc-900 sm:text-lg",
+          "font-display text-lg font-bold tracking-tight text-zinc-900 sm:text-xl",
         )}
       >
         {item.title}
@@ -231,12 +231,12 @@ export function PortfolioCard({
         <p
           className={cn(
             captionLineClass,
-            "font-display font-semibold tracking-tight text-zinc-900 transition-opacity duration-500 group-hover:opacity-70",
+            "font-display font-bold tracking-tight text-zinc-900 transition-opacity duration-500 group-hover:opacity-70",
             isFeatured
-              ? "text-base sm:text-lg"
+              ? "text-lg sm:text-xl"
               : isCompact
-                ? "text-sm"
-                : "text-sm sm:text-base",
+                ? "text-base"
+                : "text-base sm:text-lg",
           )}
         >
           {item.title}

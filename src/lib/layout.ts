@@ -27,10 +27,10 @@ export const PAGE_END_PB =
  * meta: roles, nav links, secondary CTAs
  */
 export const HOME_TYPE = {
-  name: "font-display font-semibold text-[clamp(3.75rem,12vw,8.5rem)] leading-[0.92] tracking-[-0.04em]",
-  display: "font-display font-semibold text-4xl tracking-tight sm:text-5xl",
-  section: "font-display font-semibold text-3xl tracking-tight sm:text-4xl",
-  item: "font-display font-semibold text-xl tracking-tight sm:text-2xl",
+  name: "font-display font-bold text-[clamp(4.25rem,13vw,9.5rem)] leading-[0.92] tracking-[-0.035em]",
+  display: "font-display font-bold text-5xl tracking-tight sm:text-6xl",
+  section: "font-display font-bold text-4xl tracking-tight sm:text-5xl",
+  item: "font-display font-bold text-2xl tracking-tight sm:text-3xl",
   body: "font-sans text-base leading-relaxed",
   meta: "font-sans text-sm",
 } as const;
