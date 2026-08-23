@@ -3,7 +3,8 @@
 @theme inline {
   --font-sans: var(--font-manrope), Manrope, "Helvetica Neue", Helvetica, Arial,
     sans-serif;
-  --font-display: var(--font-vilaka), Vilaka, Georgia, "Times New Roman", serif;
+  --font-display: var(--font-analogist), Analogist, Georgia, "Times New Roman",
+    serif;
 }
 
 @layer base {
@@ -119,7 +120,7 @@ body {
 
 .carousel-card-title {
   margin: 1rem 0 0;
-  font-family: var(--font-display), Vilaka, Georgia, "Times New Roman", serif;
+  font-family: var(--font-display), Analogist, Georgia, "Times New Roman", serif;
   font-size: 1.0625rem;
   font-weight: 700;
   line-height: 1.3;

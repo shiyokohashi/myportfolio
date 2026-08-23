@@ -10,21 +10,21 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-/** Display / headings — Vilaka (single cut; heavier weights synthesize for legibility). */
-const vilaka = localFont({
+/** Display / headings — Analogist (single cut; bold synthesizes for legibility). */
+const analogist = localFont({
   src: [
     {
-      path: "../fonts/Vilaka.ttf",
+      path: "../fonts/Analogist.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../fonts/Vilaka.ttf",
+      path: "../fonts/Analogist.otf",
       weight: "700",
       style: "normal",
     },
   ],
-  variable: "--font-vilaka",
+  variable: "--font-analogist",
   display: "swap",
   adjustFontFallback: "Times New Roman",
 });
@@ -55,7 +55,7 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "h-full overflow-x-hidden antialiased",
-        vilaka.variable,
+        analogist.variable,
         manrope.variable,
       )}
     >

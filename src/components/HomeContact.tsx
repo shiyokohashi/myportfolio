@@ -6,7 +6,7 @@ import { HOME_CONTACT } from "@/data/home";
 import { HOME_TYPE, PAGE_END_PB, PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
-/** Contact as a large closing section — same white ground as the rest of the page. */
+/** Contact as a large closing section — footer sits at the page foot. */
 export function HomeContact() {
   return (
     <section
@@ -15,15 +15,9 @@ export function HomeContact() {
       className={cn(
         "relative z-40 scroll-mt-24 border-t border-zinc-200 bg-white",
         PAGE_GUTTER,
-        PAGE_END_PB,
       )}
     >
-      <div
-        className={cn(
-          "mx-auto flex min-h-[min(70vh,720px)] w-full flex-col justify-between py-32 sm:py-40 lg:py-48",
-          WORKS_MAX,
-        )}
-      >
+      <div className={cn("mx-auto w-full pt-32 sm:pt-40 lg:pt-48", WORKS_MAX)}>
         <ScrollReveal offsetY={22}>
           <h2
             id="contact-heading"
@@ -64,30 +58,36 @@ export function HomeContact() {
             ))}
           </div>
         </ScrollReveal>
-
-        <footer className="mt-28 flex flex-col gap-10 border-t border-zinc-200 pt-10 sm:mt-36 sm:flex-row sm:items-end sm:justify-between">
-          <nav
-            aria-label="Footer"
-            className={cn(
-              HOME_TYPE.meta,
-              "flex flex-wrap gap-x-8 gap-y-3 text-zinc-500",
-            )}
-          >
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition-opacity hover:opacity-60"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>
-            Shiyo Ohashi
-          </p>
-        </footer>
       </div>
+
+      {/* Clears fixed horse UI, then footer at the true page foot */}
+      <div className={cn(PAGE_END_PB)} aria-hidden />
+
+      <footer
+        className={cn(
+          "mx-auto flex w-full flex-col gap-10 border-t border-zinc-200 py-10 sm:flex-row sm:items-end sm:justify-between sm:py-12",
+          WORKS_MAX,
+        )}
+      >
+        <nav
+          aria-label="Footer"
+          className={cn(
+            HOME_TYPE.meta,
+            "flex flex-wrap gap-x-8 gap-y-3 text-zinc-500",
+          )}
+        >
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="transition-opacity hover:opacity-60"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>Shiyo Ohashi</p>
+      </footer>
     </section>
   );
 }
