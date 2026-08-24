@@ -33,7 +33,11 @@ function applyScrollStyles(
   carouselNode: HTMLElement | null,
   chromeNode: HTMLElement | null,
 ) {
-  const baseWhiteOpacity = Math.min(1, scrollY / SCROLL_BG_FULL_PX);
+  // Homepage horse hero owns its dissolve — keep the global veil off.
+  const hero = document.querySelector(".horse-corridor-hero");
+  const baseWhiteOpacity = hero
+    ? 0
+    : Math.min(1, scrollY / SCROLL_BG_FULL_PX);
   const bottomOpacity = 1 - baseWhiteOpacity;
 
   if (whiteOverlay) {
@@ -49,14 +53,14 @@ function applyScrollStyles(
   }
 
   return {
-    lightNav: baseWhiteOpacity < 0.35,
-    sceneHidden: bottomOpacity <= 0.02,
+    lightNav: false,
+    sceneHidden: hero ? scrollY > window.innerHeight * 0.5 : bottomOpacity <= 0.02,
   };
 }
 
 export function ScrollRevealProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<ScrollRevealState>({
-    lightNav: true,
+    lightNav: false,
     sceneHidden: false,
   });
 

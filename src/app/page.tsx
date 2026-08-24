@@ -1,4 +1,3 @@
-import { BottomScene } from "@/components/BottomScene";
 import { HomeContact } from "@/components/HomeContact";
 import { HomeIllustrations } from "@/components/HomeIllustrations";
 import { HomeIntro } from "@/components/HomeIntro";
@@ -6,21 +5,14 @@ import { HomeJournalism } from "@/components/HomeJournalism";
 import { HomePaintings } from "@/components/HomePaintings";
 import { HomeSelectedWork } from "@/components/HomeSelectedWork";
 import { HomePreloads } from "@/components/HomePreloads";
-import { ScrollHintArrow } from "@/components/ScrollHintArrow";
+import { HorseCorridorHero } from "@/components/HorseCorridorHero";
 
 export default function Home() {
   return (
     <>
       <HomePreloads />
 
-      <main
-        id="top"
-        aria-label="Interactive project selection"
-        className="relative z-10 min-h-screen"
-      />
-      <BottomScene />
-
-      <ScrollHintArrow />
+      <HorseCorridorHero />
 
       <HomeIntro />
       <HomeSelectedWork />

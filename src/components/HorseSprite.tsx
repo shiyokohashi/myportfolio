@@ -12,14 +12,18 @@ import { cn } from "@/lib/utils";
 
 export type HorseSpriteProps = {
   className?: string;
+  displayHeightPx?: number;
 };
 
 /** Sprite-sheet horse gallop. Frames are advanced by the shared rAF controller. */
 export const HorseSprite = forwardRef<HTMLDivElement, HorseSpriteProps>(
-  function HorseSprite({ className }, ref) {
-    const displayWidth = getHorseDisplayWidth();
+  function HorseSprite({ className, displayHeightPx = HORSE_DISPLAY_HEIGHT_PX }, ref) {
+    const displayWidth = getHorseDisplayWidth(displayHeightPx);
     const [initialRender] = useState(getInitialHorseRenderState);
-    const frameStyles = getHorseFrameInlineStyles(initialRender.frameIndex);
+    const frameStyles = getHorseFrameInlineStyles(
+      initialRender.frameIndex,
+      displayHeightPx,
+    );
 
     return (
       <div
@@ -29,7 +33,7 @@ export const HorseSprite = forwardRef<HTMLDivElement, HorseSpriteProps>(
         className={cn("relative isolate shrink-0 will-change-transform", className)}
         style={{
           width: displayWidth,
-          height: HORSE_DISPLAY_HEIGHT_PX,
+          height: displayHeightPx,
         }}
         suppressHydrationWarning
       >

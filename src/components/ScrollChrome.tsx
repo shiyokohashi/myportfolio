@@ -145,21 +145,12 @@ function SiteNav({
 export function ScrollChrome() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const { lightNav, registerWhiteOverlay } = useScrollReveal();
+  const { lightNav } = useScrollReveal();
   const lightText = isHome && lightNav;
 
   return (
     <>
       {!isHome ? <div aria-hidden className="fixed inset-0 z-0 bg-white" /> : null}
-
-      {isHome ? (
-        <div
-          ref={registerWhiteOverlay}
-          aria-hidden
-          className="pointer-events-none fixed inset-0 z-30 bg-white will-change-[opacity]"
-          style={{ opacity: 0 }}
-        />
-      ) : null}
 
       <BreadcrumbNav
         pathname={pathname}

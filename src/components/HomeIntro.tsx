@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import favicon from "@/app/icon.png";
-import { ScrollReveal } from "@/components/ScrollReveal";
+import { HeroExitReveal } from "@/components/HeroExitReveal";
 import { HOME_INTRO } from "@/data/home";
 import { HOME_TYPE, PAGE_GUTTER } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -13,11 +13,11 @@ export function HomeIntro() {
       id="intro"
       aria-labelledby="intro-heading"
       className={cn(
-        "relative z-40 flex min-h-screen scroll-mt-20 items-center justify-center pt-44 pb-48 sm:pt-52 sm:pb-56 lg:pt-56 lg:pb-64",
+        "relative z-40 flex min-h-screen scroll-mt-20 items-center justify-center bg-[#faf9f7] pt-44 pb-48 sm:pt-52 sm:pb-56 lg:pt-56 lg:pb-64",
         PAGE_GUTTER,
       )}
     >
-      <ScrollReveal className="mx-auto w-full max-w-5xl text-center" offsetY={20}>
+      <HeroExitReveal className="mx-auto w-full max-w-5xl text-center" offsetY={14}>
         <Image
           src={favicon}
           alt=""
@@ -67,7 +67,7 @@ export function HomeIntro() {
             </a>
           ))}
         </p>
-      </ScrollReveal>
+      </HeroExitReveal>
     </section>
   );
 }
