@@ -38,9 +38,9 @@ const CLICK_DRAG_PX = 6;
 
 /** Half-width of the aisle — walls sit this far left/right of the horse. */
 const WALL_X = CORRIDOR_WALL_X;
-const CARD_W = 9.0;
-const CARD_H = 6.75;
-const CARD_Y = 2.2;
+const CARD_W = 12.4;
+const CARD_H = 9.3;
+const CARD_Y = 3.6;
 /** Spacing along the hall (center to center). */
 const SPACING = 11.8;
 const FRONT_Z = 20;

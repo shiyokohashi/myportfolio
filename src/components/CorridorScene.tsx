@@ -8,13 +8,14 @@ import { PointCloudHorse } from "@/components/PointCloudHorse";
 import { ZoomOutToPageScroll } from "@/components/ZoomOutToPageScroll";
 import { HORSE_YAW } from "@/components/horseSceneConstants";
 
-const HORSE_POS: [number, number, number] = [0, 3.2, 0];
-const LOOK_AT: [number, number, number] = [0.4, 3.6, 0.5];
-export const CORRIDOR_MAX_DISTANCE = 58;
+const HORSE_POS: [number, number, number] = [0, 4.2, 0];
+/** Aim below the horse so the composition sits higher / more centered. */
+const LOOK_AT: [number, number, number] = [0.4, 1.6, 0.5];
+export const CORRIDOR_MAX_DISTANCE = 50;
 
 /** Same three-quarter front-left bearing as the preferred load angle. */
 const VIEW_DIR = (() => {
-  const from = { x: -9.2, y: 3.6, z: 15.5 };
+  const from = { x: -9.2, y: 1.6, z: 15.5 };
   const dx = from.x - LOOK_AT[0];
   const dy = from.y - LOOK_AT[1];
   const dz = from.z - LOOK_AT[2];
@@ -61,8 +62,8 @@ export function CorridorScene({
         target={LOOK_AT}
         minDistance={10}
         maxDistance={CORRIDOR_MAX_DISTANCE}
-        minPolarAngle={Math.PI / 2 - 0.28}
-        maxPolarAngle={Math.PI / 2 + 0.18}
+        minPolarAngle={Math.PI / 2 - 0.35}
+        maxPolarAngle={Math.PI / 2 + 0.24}
       />
       <IdleCameraDrift />
       {zoomOutScrollsPage ? (
