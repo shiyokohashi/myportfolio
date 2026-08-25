@@ -1,7 +1,8 @@
 "use client";
 
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeEvent } from "@react-three/fiber";
 import { Text, useTexture } from "@react-three/drei";
+import { useRouter } from "next/navigation";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -126,6 +127,7 @@ function WallCard({
   texture,
   title,
   subtitle,
+  href,
   side,
   slot,
   pairCount,
@@ -135,18 +137,21 @@ function WallCard({
   texture: THREE.Texture;
   title: string;
   subtitle: string;
+  href: string;
   side: Side;
   slot: number;
   pairCount: number;
   hero: boolean;
   yOffset: number;
 }) {
+  const router = useRouter();
   const groupRef = useRef<THREE.Group>(null);
   const imageMat = useRef<THREE.MeshBasicMaterial>(null);
   const shadowMat = useRef<THREE.MeshBasicMaterial>(null);
   const underShadowMat = useRef<THREE.MeshBasicMaterial>(null);
   const titleRef = useRef<THREE.Mesh>(null);
   const subtitleRef = useRef<THREE.Mesh>(null);
+  const pointerDown = useRef<{ x: number; y: number } | null>(null);
   const viewScratch = useMemo(
     () => ({
       normal: new THREE.Vector3(),
@@ -162,6 +167,17 @@ function WallCard({
   const height = hero ? CARD_H * 1.28 : CARD_H;
   const titleSize = hero ? 0.38 : 0.32;
   const subtitleSize = hero ? 0.22 : 0.18;
+
+  const openProject = (event: ThreeEvent<PointerEvent>) => {
+    event.stopPropagation();
+    const start = pointerDown.current;
+    pointerDown.current = null;
+    if (!href || !start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.hypot(dx, dy) > CLICK_DRAG_PX) return;
+    router.push(href);
+  };
 
   useFrame((state) => {
     const group = groupRef.current;
@@ -265,7 +281,24 @@ function WallCard({
           </mesh>
         </>
       ) : null}
-      <mesh renderOrder={1}>
+      <mesh
+        renderOrder={1}
+        onPointerOver={(event) => {
+          event.stopPropagation();
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "auto";
+        }}
+        onPointerDown={(event) => {
+          event.stopPropagation();
+          pointerDown.current = { x: event.clientX, y: event.clientY };
+        }}
+        onPointerUp={openProject}
+        onPointerMissed={() => {
+          pointerDown.current = null;
+        }}
+      >
         <planeGeometry args={[width, height]} />
         <meshBasicMaterial
           ref={imageMat}
@@ -343,6 +376,7 @@ function CorridorWalls({ sources }: { sources: BannerSource[] }) {
             texture={texture}
             title={banner.title}
             subtitle={banner.subtitle}
+            href={banner.href}
             side={banner.side}
             slot={banner.slot}
             pairCount={pairCount}
