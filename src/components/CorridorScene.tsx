@@ -9,25 +9,15 @@ import { ZoomOutToPageScroll } from "@/components/ZoomOutToPageScroll";
 import { HORSE_YAW } from "@/components/horseSceneConstants";
 
 const HORSE_POS: [number, number, number] = [0, 4.2, 0];
-/** Aim below the horse so the composition sits higher / more centered. */
-const LOOK_AT: [number, number, number] = [0.4, 1.6, 0.5];
+/** Aim through the midsection so legs and head both clear the frame. */
+const LOOK_AT: [number, number, number] = [0, 2.2, 0];
 export const CORRIDOR_MAX_DISTANCE = 50;
 
-/** Same three-quarter front-left bearing as the preferred load angle. */
-const VIEW_DIR = (() => {
-  const from = { x: -9.2, y: 1.6, z: 15.5 };
-  const dx = from.x - LOOK_AT[0];
-  const dy = from.y - LOOK_AT[1];
-  const dz = from.z - LOOK_AT[2];
-  const len = Math.hypot(dx, dy, dz) || 1;
-  return { x: dx / len, y: dy / len, z: dz / len };
-})();
-
-const CAMERA_POS: [number, number, number] = [
-  LOOK_AT[0] + VIEW_DIR.x * CORRIDOR_MAX_DISTANCE,
-  LOOK_AT[1] + VIEW_DIR.y * CORRIDOR_MAX_DISTANCE,
-  LOOK_AT[2] + VIEW_DIR.z * CORRIDOR_MAX_DISTANCE,
-];
+/**
+ * Open framing: true side-on profile facing right (not running-at).
+ * Camera sits in the aisle so the far wall of cards reads behind the horse.
+ */
+const CAMERA_POS: [number, number, number] = [-32, 2.5, 0.6];
 
 type CorridorSceneProps = {
   /** When true, zooming out past maxDistance scrolls the page to intro. */
@@ -35,7 +25,7 @@ type CorridorSceneProps = {
 };
 
 /**
- * Default load: preferred angle, zoomed out to maxDistance.
+ * Default load: side-on horse profile with cards behind.
  */
 export function CorridorScene({
   zoomOutScrollsPage = false,
