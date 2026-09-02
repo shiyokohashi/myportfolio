@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { ABOUT } from "@/data/about";
 import { HOME_INTRO } from "@/data/home";
@@ -214,13 +214,41 @@ const ABOUT_FILE_DEFAULT = {
 };
 
 const STABLE_WINDOW_DEFAULT = {
-  width: 380,
-  height: 520,
-  minWidth: 300,
-  minHeight: 360,
+  width: 300,
+  height: 480,
+  minWidth: 240,
+  minHeight: 280,
   x: 160,
   y: 88,
 };
+
+/** Stable sits on Secretaryat's right edge, overlapping slightly below the header. */
+const STABLE_TOP_INSET = 40;
+const STABLE_OVERLAP = 48;
+const STABLE_WIDTH_RATIO = 0.34;
+const STABLE_MIN_WIDTH = 240;
+const STABLE_MAX_WIDTH = 320;
+
+function fitStableBesideSecretaryat(
+  secretaryatPosition: { x: number; y: number },
+  secretaryatSize: { width: number; height: number },
+  canvasWidth: number,
+  canvasHeight: number,
+) {
+  const width = Math.round(
+    Math.max(STABLE_MIN_WIDTH, Math.min(STABLE_MAX_WIDTH, secretaryatSize.width * STABLE_WIDTH_RATIO)),
+  );
+  const height = Math.max(STABLE_WINDOW_DEFAULT.minHeight, secretaryatSize.height - STABLE_TOP_INSET);
+  const x = secretaryatPosition.x + secretaryatSize.width - STABLE_OVERLAP;
+  const y = secretaryatPosition.y + STABLE_TOP_INSET;
+
+  return {
+    width,
+    height,
+    x: Math.max(8, Math.min(x, canvasWidth - width - 8)),
+    y: Math.max(8, Math.min(y, canvasHeight - height - SECRETARYAT_BOTTOM_INSET)),
+  };
+}
 
 type DesktopShellProps = {
   openSecretaryatOnLoad?: boolean;
@@ -330,6 +358,7 @@ export function DesktopShell({
   const secretaryatIframeRef = useRef<HTMLIFrameElement>(null);
   const secretaryatAutoOpenedRef = useRef(false);
   const stableIframeRef = useRef<HTMLIFrameElement>(null);
+  const stableWindowRef = useRef(stableWindow);
   const canvasRef = useRef<HTMLDivElement>(null);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
@@ -337,6 +366,7 @@ export function DesktopShell({
   appPositionsRef.current = appPositions;
   stableSizeRef.current = stableSize;
   stablePositionRef.current = stablePosition;
+  stableWindowRef.current = stableWindow;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -399,6 +429,36 @@ export function DesktopShell({
       secretaryat: { x: frame.x, y: frame.y },
     }));
   }, [appWindows.secretaryat.open, canvasSize.width, canvasSize.height]);
+
+  useLayoutEffect(() => {
+    if (!stableWindow.open || stableWindow.minimized) return;
+    if (canvasSize.width === 0 || canvasSize.height === 0) return;
+
+    const layout = fitStableBesideSecretaryat(
+      appPositions.secretaryat,
+      appSizes.secretaryat,
+      canvasSize.width,
+      canvasSize.height,
+    );
+
+    setStableSize((prev) =>
+      prev.width === layout.width && prev.height === layout.height
+        ? prev
+        : { width: layout.width, height: layout.height },
+    );
+    setStablePosition((prev) =>
+      prev.x === layout.x && prev.y === layout.y ? prev : { x: layout.x, y: layout.y },
+    );
+  }, [
+    stableWindow.open,
+    stableWindow.minimized,
+    appPositions.secretaryat.x,
+    appPositions.secretaryat.y,
+    appSizes.secretaryat.width,
+    appSizes.secretaryat.height,
+    canvasSize.width,
+    canvasSize.height,
+  ]);
 
   const nextZIndex = () => {
     zCounter.current += 1;
@@ -655,12 +715,25 @@ export function DesktopShell({
   }, []);
 
   const toggleStableWindow = useCallback(() => {
-    setStableWindow((prev) => {
-      if (prev.open && !prev.minimized) {
-        return { ...prev, open: false, minimized: false };
-      }
-      return { open: true, minimized: false, zIndex: nextZIndex() };
-    });
+    const prev = stableWindowRef.current;
+    if (prev.open && !prev.minimized) {
+      setStableWindow({ ...prev, open: false, minimized: false });
+      return;
+    }
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const layout = fitStableBesideSecretaryat(
+        appPositionsRef.current.secretaryat,
+        appSizesRef.current.secretaryat,
+        canvas.clientWidth,
+        canvas.clientHeight,
+      );
+      setStableSize({ width: layout.width, height: layout.height });
+      setStablePosition({ x: layout.x, y: layout.y });
+    }
+
+    setStableWindow({ open: true, minimized: false, zIndex: nextZIndex() });
   }, []);
 
   const closeStableWindow = useCallback(() => {
