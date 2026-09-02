@@ -26,9 +26,9 @@ export function HeroExitReveal({
   heroSelector = ".horse-corridor-hero",
 }: HeroExitRevealProps) {
   const { ref, inView } = useInView<HTMLDivElement>({
-    rootMargin: "0px 0px -4% 0px",
-    threshold: 0.08,
-    once: false,
+    rootMargin: "200px 0px 0px 0px",
+    threshold: 0,
+    once: true,
   });
   const [heroClear, setHeroClear] = useState(false);
   const [revealed, setRevealed] = useState(false);
@@ -53,15 +53,8 @@ export function HeroExitReveal({
       const el = hero as HTMLElement;
       const travel = Math.max(1, el.offsetHeight - window.innerHeight);
       const progress = Math.min(1, Math.max(0, window.scrollY / travel));
-      const scrollingUp = el.dataset.scrollDir === "up";
 
-      // Hide intro while returning so it doesn't sit on top of a clear horse.
-      if (scrollingUp && progress < 0.98) {
-        setHeroClear(false);
-        return;
-      }
-
-      setHeroClear(progress >= 0.55);
+      setHeroClear(window.scrollY > 6 || progress > 0.02);
     };
 
     sync();
@@ -73,7 +66,7 @@ export function HeroExitReveal({
     };
   }, [heroSelector]);
 
-  const shouldShow = heroClear && inView;
+  const shouldShow = heroClear || inView;
 
   useEffect(() => {
     if (reduceMotion) {
@@ -81,22 +74,7 @@ export function HeroExitReveal({
       return;
     }
 
-    if (!shouldShow) {
-      setRevealed(false);
-      return;
-    }
-
-    // Ensure a paint at opacity 0 before transitioning in.
-    setRevealed(false);
-    let outer = 0;
-    let inner = 0;
-    outer = window.requestAnimationFrame(() => {
-      inner = window.requestAnimationFrame(() => setRevealed(true));
-    });
-    return () => {
-      window.cancelAnimationFrame(outer);
-      window.cancelAnimationFrame(inner);
-    };
+    setRevealed(shouldShow);
   }, [shouldShow, reduceMotion]);
 
   if (reduceMotion) {
@@ -111,7 +89,7 @@ export function HeroExitReveal({
     <div
       ref={ref}
       className={cn(
-        "transition-[opacity,transform] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,transform]",
+        "transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity,transform]",
         revealed ? "opacity-100" : "opacity-0",
         className,
       )}

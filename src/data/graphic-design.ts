@@ -380,7 +380,6 @@ export const ADOBE_CAMPUS_CASE_STUDY: PortfolioWork = {
 /** Graphic design work — migrated from shiyoohashi.com/projects. */
 export const GRAPHIC_DESIGN: PortfolioWork[] = [
   TRITON_TRADING_GROUP,
-  ADOBE_CAMPUS_CASE_STUDY,
   {
     slug: "kitchens-for-good",
     title: "Kitchens for Good",

@@ -1,14 +1,19 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-import { PAGE_GUTTER } from "@/lib/layout";
+import { PAGE_GUTTER, SITE_SURFACE } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import type { PortfolioWork } from "@/types/portfolio";
+
+import { ProjectNavigation } from "@/components/ProjectNavigation";
 
 const IMG = "/images/projects/brisbane-2032";
 
 type BrisbaneCaseStudyProps = {
   work: PortfolioWork;
+  prev?: PortfolioWork;
+  next?: PortfolioWork;
+  navBasePath?: string;
 };
 
 function CaseStudyMeta({
@@ -129,9 +134,14 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 /** Brisbane 2032 — editorial case study built from the Adwave production deck. */
-export function BrisbaneCaseStudy({ work }: BrisbaneCaseStudyProps) {
+export function BrisbaneCaseStudy({
+  work,
+  prev,
+  next,
+  navBasePath = "/projects",
+}: BrisbaneCaseStudyProps) {
   return (
-    <main className="relative z-10 bg-white pb-32 pt-24 sm:pb-40 sm:pt-28">
+    <main className={cn("relative z-10 pb-32 pt-24 sm:pb-40 sm:pt-28", SITE_SURFACE)}>
       <div className={cn("mx-auto max-w-6xl", PAGE_GUTTER)}>
         <header className="border-b border-zinc-200 pb-10 sm:pb-12">
           <p className="text-sm text-zinc-400">
@@ -337,6 +347,8 @@ export function BrisbaneCaseStudy({ work }: BrisbaneCaseStudyProps) {
             </ul>
           </div>
         ) : null}
+
+        <ProjectNavigation prev={prev} next={next} basePath={navBasePath} />
       </div>
     </main>
   );

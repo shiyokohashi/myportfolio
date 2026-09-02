@@ -13,13 +13,14 @@ import { useSmoothBackgroundSaturation } from "@/hooks/useSmoothBackgroundSatura
  */
 export function VideoBackground() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const showGrassBackground =
+    pathname === "/" || pathname.startsWith("/lab/home/");
   const { speedRef } = useHorseSpeed();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useSmoothBackgroundSaturation(speedRef, videoRef);
 
-  if (!isHome) {
+  if (!showGrassBackground) {
     return null;
   }
 

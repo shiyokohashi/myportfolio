@@ -34,7 +34,7 @@ export function getVideoPoster(slugOrId?: string): string | undefined {
     return "/images/projects/aeon/interaction-design.png";
   }
   if (slugOrId.includes("graduaid")) {
-    return "/images/projects/graduaid/hero-light.png";
+    return "/images/projects/graduaid/overview.png";
   }
   if (slugOrId.includes("imployed")) {
     return "/images/projects/imployed/poster.png";

@@ -5,7 +5,9 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 
 import { CorridorScene } from "@/components/CorridorScene";
+import { HomeIterationsPanel } from "@/components/HomeIterationsPanel";
 import { HorseSceneEffects } from "@/components/HorseSceneEffects";
+import type { CorridorPreset } from "@/config/corridorPresets";
 import "./HorseCorridorHero.css";
 
 function smoothstep(edge0: number, edge1: number, x: number) {
@@ -39,7 +41,11 @@ function FrameLoopBridge({
  * Homepage hero — fixed canvas (no pin jumps). Fade only on scroll-down;
  * scroll-up restores a fully clear scene.
  */
-export function HorseCorridorHero() {
+export function HorseCorridorHero({
+  preset = "wide",
+}: {
+  preset?: CorridorPreset;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const runningRef = useRef(true);
@@ -58,7 +64,6 @@ export function HorseCorridorHero() {
     const sync = () => {
       const y = window.scrollY;
       const delta = y - lastScrollYRef.current;
-      // Hysteresis so tiny trackpad jitter doesn't flip direction.
       if (delta < -2) scrollDirRef.current = "up";
       else if (delta > 2) scrollDirRef.current = "down";
       lastScrollYRef.current = y;
@@ -66,22 +71,13 @@ export function HorseCorridorHero() {
 
       const travel = Math.max(1, container.offsetHeight - window.innerHeight);
       const progress = Math.min(1, Math.max(0, y / travel));
-      const pastHero = progress >= 0.995;
 
-      // Down: dissolve. Up: fully clear until we've left the hero entirely.
-      const opacity =
-        scrollDirRef.current === "up"
-          ? pastHero
-            ? 0
-            : 1
-          : 1 - smoothstep(0.48, 0.96, progress);
+      const opacity = 1 - smoothstep(0.04, 0.55, progress);
 
       viewport.style.opacity = String(opacity);
-      viewport.style.visibility = opacity < 0.01 ? "hidden" : "visible";
-      viewport.style.pointerEvents = opacity < 0.08 ? "none" : "auto";
+      viewport.style.pointerEvents = opacity < 0.12 ? "none" : "auto";
 
-      // Keep WebGL warm near the hero; only sleep deep in the page.
-      const shouldRun = y < travel + window.innerHeight * 0.35;
+      const shouldRun = y < travel + window.innerHeight * 0.2;
       if (shouldRun !== runningRef.current) {
         runningRef.current = shouldRun;
         frameLoopRef.current?.(shouldRun);
@@ -114,6 +110,7 @@ export function HorseCorridorHero() {
       aria-label="Glass horse portfolio corridor"
     >
       <div ref={viewportRef} className="horse-corridor-viewport">
+        <HomeIterationsPanel />
         <Canvas
           dpr={[1, 1.75]}
           frameloop="always"
@@ -139,7 +136,7 @@ export function HorseCorridorHero() {
           />
           <Environment preset="studio" environmentIntensity={0.14} />
           <Suspense fallback={null}>
-            <CorridorScene zoomOutScrollsPage />
+            <CorridorScene zoomOutScrollsPage preset={preset} />
           </Suspense>
           <HorseSceneEffects />
         </Canvas>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { NAV_ITEMS } from "@/config/navigation";
 import { HOME_CONTACT } from "@/data/home";
-import { HOME_TYPE, PAGE_END_PB, PAGE_GUTTER, WORKS_MAX } from "@/lib/layout";
+import { HOME_TYPE, PAGE_END_PB, PAGE_GUTTER, SITE_SURFACE, WORKS_MAX } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 /** Contact as a large closing section — footer sits at the page foot. */
@@ -13,7 +13,8 @@ export function HomeContact() {
       id="contact"
       aria-labelledby="contact-heading"
       className={cn(
-        "relative z-40 scroll-mt-24 border-t border-zinc-200 bg-white",
+        "relative z-40 scroll-mt-24 border-t border-zinc-200",
+        SITE_SURFACE,
         PAGE_GUTTER,
       )}
     >

@@ -10,6 +10,7 @@
 @layer base {
   body {
     @apply font-sans font-normal tracking-[-0.011em] text-zinc-900;
+    background-color: #faf9f7;
   }
 
   h1,

@@ -1,0 +1,215 @@
+.dk-app {
+  --dk-bg: #ffffff;
+  --dk-muted: #f5f5f7;
+  --dk-text: #1d1d1f;
+  --dk-secondary: #6e6e73;
+  --dk-accent: #0071e3;
+  --dk-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --dk-display: "EB Garamond", "Apple Garamond", Georgia, serif;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--dk-bg);
+  color: var(--dk-text);
+  font-family: var(--dk-font);
+  font-size: 14px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+}
+
+.dk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px 10px;
+}
+
+.dk-header-start {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.dk-header h1 {
+  margin: 0;
+  font-family: var(--dk-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  transform: scaleX(0.96);
+  transform-origin: left center;
+}
+
+.dk-mode-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  background: var(--dk-muted);
+}
+
+.dk-mode-tabs button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dk-secondary);
+  cursor: pointer;
+}
+
+.dk-mode-tabs button.is-active {
+  background: #fff;
+  color: var(--dk-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.dk-count {
+  font-size: 13px;
+  color: var(--dk-secondary);
+}
+
+.dk-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  min-height: 280px;
+}
+
+.dk-status {
+  margin: 0;
+  color: var(--dk-secondary);
+}
+
+.dk-file-card {
+  width: min(100%, 420px);
+  text-align: center;
+}
+
+.dk-file-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: var(--dk-muted);
+  overflow: hidden;
+}
+
+.dk-file-thumb {
+  max-width: 100%;
+  max-height: 220px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.dk-file-name {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dk-file-meta {
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--dk-secondary);
+}
+
+.dk-file-meta div {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.dk-file-meta dt {
+  font-weight: 500;
+}
+
+.dk-file-meta dd {
+  margin: 0;
+}
+
+.dk-footer {
+  padding: 0 24px 20px;
+}
+
+.dk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.dk-actions button {
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dk-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.dk-actions button:not(:disabled):hover {
+  background: var(--dk-muted);
+}
+
+.dk-undo {
+  color: var(--dk-accent);
+}
+
+.dk-folder-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.dk-folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 88px;
+  padding: 8px 4px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dk-folder:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.dk-folder.is-glass-folder-hoverable:not(:disabled):hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dk-folder-name {
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--dk-text);
+}

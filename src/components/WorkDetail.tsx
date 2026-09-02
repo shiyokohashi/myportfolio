@@ -2,11 +2,12 @@ import Image from "next/image";
 
 import { EditorialHero } from "@/components/EditorialHero";
 import { MediaCover } from "@/components/MediaCover";
+import { ProjectNavigation } from "@/components/ProjectNavigation";
 import { StoryboardExecutionVideo } from "@/components/StoryboardExecutionVideo";
 import { WorkflowSteps } from "@/components/WorkflowSteps";
 import { cn } from "@/lib/utils";
 import { isVideoSrc, shouldUseUnoptimized } from "@/lib/media";
-import { CONTENT_MAX, PAGE_GUTTER } from "@/lib/layout";
+import { CONTENT_MAX, PAGE_GUTTER, SITE_SURFACE } from "@/lib/layout";
 import type {
   PortfolioSection,
   PortfolioSectionItem,
@@ -18,6 +19,9 @@ type WorkDetailProps = {
   work: PortfolioWork;
   /** Show images at natural aspect ratio without cropping. */
   naturalImages?: boolean;
+  prev?: PortfolioWork;
+  next?: PortfolioWork;
+  navBasePath?: string;
 };
 
 const SUBSECTION_HEADING =
@@ -718,6 +722,9 @@ function StandardSection({
 export function WorkDetail({
   work,
   naturalImages = false,
+  prev,
+  next,
+  navBasePath = "/projects",
 }: WorkDetailProps) {
   const meta = [work.year, work.role ?? work.medium, work.group].filter(Boolean);
   const hasSections = work.sections && work.sections.length > 0;
@@ -729,6 +736,7 @@ export function WorkDetail({
     <main
       className={cn(
         "relative z-10 pb-40 sm:pb-44",
+        SITE_SURFACE,
         hasEditorialHero ? "pt-0" : "pt-24 sm:pt-28",
       )}
     >
@@ -876,6 +884,10 @@ export function WorkDetail({
             workTitle={work.title}
           />
         ))}
+
+      <div className={cn("mx-auto", CONTENT_MAX, PAGE_GUTTER)}>
+        <ProjectNavigation prev={prev} next={next} basePath={navBasePath} />
+      </div>
 
       <div className="min-h-[40vh]" aria-hidden />
     </main>

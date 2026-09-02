@@ -28,7 +28,7 @@ export function BreadcrumbNav({
         "max-w-[min(72vw,28rem)] text-sm leading-snug",
         lightText
           ? "text-white/45 drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]"
-          : "text-zinc-400",
+          : "text-zinc-400/90",
         className,
       )}
     >

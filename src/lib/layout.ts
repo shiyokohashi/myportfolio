@@ -1,3 +1,7 @@
+/** Site-wide surface color — cream paper. */
+export const SITE_SURFACE = "bg-[#faf9f7]";
+export const SITE_SURFACE_HEX = "#faf9f7";
+
 /** Responsive horizontal padding for page sections. */
 export const PAGE_GUTTER = "px-[clamp(1.75rem,7vw,6.5rem)] sm:px-[clamp(3rem,10vw,9rem)]";
 

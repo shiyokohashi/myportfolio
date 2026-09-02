@@ -35,6 +35,7 @@ export const WORK_CATEGORIES: SelectedWorksCategory[] = [
     title: "Projects",
     href: "/projects",
     entries: [
+      { slug: "graduaid", layout: "featured" },
       { slug: "secretaryat", layout: "featured" },
       { slug: "brisbane-2032" },
       { slug: "deskkeeper" },
@@ -43,15 +44,6 @@ export const WORK_CATEGORIES: SelectedWorksCategory[] = [
     ],
     blurb: "Product, brand, and interaction design — tools, campaigns, and experiments.",
     gridColumns: 2,
-  },
-  {
-    title: "Graphic Design",
-    href: "/graphic-design",
-    entries: [
-      { slug: "adobe-campus-case-study" },
-    ],
-    blurb:
-      "Visual identities, brand systems, and campaign work — mostly for clubs, publications, and side clients.",
   },
 ];
 

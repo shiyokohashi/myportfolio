@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { BrisbaneCaseStudy } from "@/components/BrisbaneCaseStudy";
 import { WorkDetail } from "@/components/WorkDetail";
 import { GRAPHIC_DESIGN } from "@/data/graphic-design";
-import { getWorkBySlug, getWorkSlugs } from "@/lib/portfolio";
+import { getWorkBySlug, getWorkSlugs, getAdjacentWorks } from "@/lib/portfolio";
 
 type GraphicDesignWorkPageProps = {
   params: Promise<{ slug: string }>;
@@ -21,9 +21,12 @@ export default async function GraphicDesignWorkPage({
 
   if (!work) notFound();
 
+  const { prev, next } = getAdjacentWorks(GRAPHIC_DESIGN, slug);
+  const nav = { prev, next, navBasePath: "/graphic-design" as const };
+
   if (slug === "brisbane-2032") {
-    return <BrisbaneCaseStudy work={work} />;
+    return <BrisbaneCaseStudy work={work} {...nav} />;
   }
 
-  return <WorkDetail work={work} />;
+  return <WorkDetail work={work} {...nav} />;
 }

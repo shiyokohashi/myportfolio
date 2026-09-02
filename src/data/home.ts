@@ -5,9 +5,9 @@ export const HOME_INTRO = {
   name: "Shiyo Ohashi",
   /** One-line positioning — who you help + what you do. */
   positioning:
-    "I build brands, visual identities, and digital experiences.",
+    "Designer building brands, identities & digital experiences.",
   proof:
-    "Currently leading creative & marketing at Triton Trading Group while studying Cognitive Science & Design at UC San Diego.",
+    "Currently: leading creative & marketing at Triton Trading Group, creating community as an Adobe Student Ambassador, and studying Cognitive Science & Design at UC San Diego.",
   primaryCta: {
     label: "Email",
     href: `mailto:${ABOUT.connect.email}`,
@@ -15,6 +15,11 @@ export const HOME_INTRO = {
   secondaryLinks: [
     { label: "LinkedIn", href: ABOUT.connect.linkedin.href, external: true },
     { label: "Resume", href: ABOUT.connect.resume.href, external: true },
+  ],
+  browseLinks: [
+    { label: "All projects", href: "/projects" },
+    { label: "All paintings", href: "/paintings" },
+    { label: "All illustrations", href: "/illustrations" },
   ],
 } as const;
 
@@ -37,6 +42,14 @@ export const HOME_SELECTED_WORK = {
   title: "Selected Work",
   viewAll: { label: "View all work", href: "/projects" },
   items: [
+    {
+      title: "Graduaid",
+      roles: "Product · UX · Web",
+      blurb:
+        "UCSD degree planner that validates every course placement against prerequisites and quarter offerings.",
+      href: "/projects/graduaid",
+      featured: true,
+    },
     {
       title: "Secretaryat",
       roles: "Product · Desktop",

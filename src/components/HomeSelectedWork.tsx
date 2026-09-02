@@ -13,6 +13,7 @@ import {
   HOME_GRID_GAP,
   PAGE_GUTTER,
   SECTION_PY,
+  SITE_SURFACE,
   WORKS_MAX,
 } from "@/lib/layout";
 import {
@@ -29,7 +30,7 @@ export function HomeSelectedWork() {
     <section
       id="work"
       aria-labelledby="work-heading"
-      className={cn("relative z-40 scroll-mt-24 bg-white", SECTION_PY, PAGE_GUTTER)}
+      className={cn("relative z-40 scroll-mt-24", SITE_SURFACE, SECTION_PY, PAGE_GUTTER)}
     >
       <div className={cn("mx-auto w-full", WORKS_MAX)}>
         <ScrollReveal>

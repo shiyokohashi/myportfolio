@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import { PortfolioGrid } from "@/components/PortfolioGrid";
-import { CONTENT_MAX, PAGE_GUTTER } from "@/lib/layout";
+import { CONTENT_MAX, PAGE_GUTTER, SITE_SURFACE } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import type { PortfolioWork } from "@/types/portfolio";
 
@@ -20,7 +20,7 @@ export function PortfolioCategoryPage({
   intro,
 }: PortfolioCategoryPageProps) {
   return (
-    <main className={cn("relative z-10 pt-28 pb-48 sm:pt-32 sm:pb-52 lg:pb-56", PAGE_GUTTER)}>
+    <main className={cn("relative z-10 pt-28 pb-48 sm:pt-32 sm:pb-52 lg:pb-56", SITE_SURFACE, PAGE_GUTTER)}>
       <div className={cn("mx-auto", CONTENT_MAX)}>
         <h1 className="text-4xl tracking-tight text-zinc-900 sm:text-5xl">
           {title}

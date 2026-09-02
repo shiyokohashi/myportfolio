@@ -18,6 +18,7 @@ export function ZoomOutToPageScroll({ maxDistance }: ZoomOutToPageScrollProps) {
     (state) => state.controls as OrbitControlsImpl | null,
   );
   const controlsRef = useRef(controls);
+  const pageScrollRef = useRef(false);
   controlsRef.current = controls;
 
   useEffect(() => {
@@ -28,14 +29,21 @@ export function ZoomOutToPageScroll({ maxDistance }: ZoomOutToPageScrollProps) {
       if (!orbit) return;
 
       const distance = orbit.getDistance();
-      const atMaxZoomOut = distance >= maxDistance - 0.08;
+      const atMaxZoomOut = distance >= maxDistance - 0.04;
       const zoomingOut = event.deltaY > 0;
+      const zoomingIn = event.deltaY < 0;
 
-      if (!atMaxZoomOut || !zoomingOut) return;
+      if (pageScrollRef.current && zoomingIn && window.scrollY <= 2) {
+        pageScrollRef.current = false;
+      }
 
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      window.scrollBy({ top: event.deltaY, left: 0, behavior: "auto" });
+      if (pageScrollRef.current || (atMaxZoomOut && zoomingOut)) {
+        pageScrollRef.current = true;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.scrollBy({ top: event.deltaY, left: 0, behavior: "auto" });
+        return;
+      }
     };
 
     el.addEventListener("wheel", onWheel, { passive: false, capture: true });

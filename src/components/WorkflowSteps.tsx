@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { PAGE_GUTTER } from "@/lib/layout";
+import { PAGE_GUTTER, SITE_SURFACE } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 import { shouldUseUnoptimized } from "@/lib/media";
 import type { PortfolioWorkflow } from "@/types/portfolio";
@@ -19,7 +19,8 @@ export function WorkflowSteps({
   return (
     <section
       className={cn(
-        "border-t border-zinc-200 bg-white py-16 md:py-24",
+        "border-t border-zinc-200 py-16 md:py-24",
+        SITE_SURFACE,
         className,
       )}
     >

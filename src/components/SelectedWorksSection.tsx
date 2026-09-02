@@ -12,6 +12,7 @@ import {
   PAGE_GUTTER,
   SECTION_PY,
   SECTION_PY_COMPACT,
+  SITE_SURFACE,
   WORKS_MAX,
 } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -146,7 +147,7 @@ function HomeWorksBlock({ id, eyebrow, title, groups }: HomeWorksBlockProps) {
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="relative z-40 scroll-mt-24 bg-white"
+      className={cn("relative z-40 scroll-mt-24", SITE_SURFACE)}
     >
       <WorksContainer>
         <header className="pb-8 pt-28 sm:pb-10 sm:pt-32 lg:pb-12 lg:pt-36">

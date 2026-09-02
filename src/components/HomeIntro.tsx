@@ -1,72 +1,72 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import favicon from "@/app/icon.png";
 import { HeroExitReveal } from "@/components/HeroExitReveal";
 import { HOME_INTRO } from "@/data/home";
-import { HOME_TYPE, PAGE_GUTTER } from "@/lib/layout";
+import { HOME_TYPE, PAGE_GUTTER, SITE_SURFACE } from "@/lib/layout";
 import { cn } from "@/lib/utils";
 
 /** About / Intro — name, positioning, proof, clear CTA. */
-export function HomeIntro() {
+export function HomeIntro({ layout = "corridor" }: { layout?: "corridor" | "desktop" }) {
+  const isDesktop = layout === "desktop";
+
   return (
     <section
       id="intro"
       aria-labelledby="intro-heading"
       className={cn(
-        "relative z-40 flex min-h-screen scroll-mt-20 items-center justify-center bg-[#faf9f7] pt-44 pb-48 sm:pt-52 sm:pb-56 lg:pt-56 lg:pb-64",
+        "relative z-40 flex scroll-mt-20 items-center",
+        SITE_SURFACE,
+        isDesktop
+          ? "min-h-[58vh] py-16 pb-20 sm:py-20 sm:pb-24"
+          : "-mt-[52vh] min-h-[88vh] py-16 sm:py-20",
         PAGE_GUTTER,
       )}
     >
-      <HeroExitReveal className="mx-auto w-full max-w-5xl text-center" offsetY={14}>
+      <HeroExitReveal className="mx-auto w-full max-w-3xl text-center" offsetY={14}>
+        <div
+          className={cn(
+            "flex flex-col items-center",
+            isDesktop ? "gap-5 sm:gap-6" : "gap-6 sm:gap-8",
+          )}
+        >
         <Image
           src={favicon}
           alt=""
-          width={240}
-          height={240}
+          width={160}
+          height={160}
           priority
-          className="mx-auto mb-14 size-40 object-cover sm:mb-16 sm:size-52 lg:mb-20 lg:size-60"
+          className="size-24 object-cover sm:size-28"
         />
 
         <h1 id="intro-heading" className={cn(HOME_TYPE.name, "text-zinc-900")}>
           {HOME_INTRO.name}
         </h1>
 
-        <p className={cn(HOME_TYPE.body, "mx-auto mt-12 max-w-xl text-zinc-600 sm:mt-14")}>
+        <p className={cn(HOME_TYPE.body, "mx-auto max-w-xl text-zinc-600")}>
           {HOME_INTRO.positioning}
         </p>
 
-        <p className={cn(HOME_TYPE.body, "mx-auto mt-10 max-w-xl text-zinc-500")}>
+        <p className={cn(HOME_TYPE.body, "mx-auto max-w-2xl text-zinc-600")}>
           {HOME_INTRO.proof}
         </p>
 
-        <p
-          className={cn(
-            HOME_TYPE.meta,
-            "mt-12 flex flex-wrap items-baseline justify-center gap-x-6 gap-y-3 text-zinc-500 sm:gap-x-8",
-          )}
-        >
+        <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>
+          <Link href="/projects" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
+            Projects
+          </Link>
+          <span aria-hidden className="px-2">
+            ·
+          </span>
           <a
             href={HOME_INTRO.primaryCta.href}
-            className={cn(
-              HOME_TYPE.item,
-              "text-zinc-900 transition-opacity hover:opacity-60",
-            )}
+            className="transition-opacity hover:text-zinc-900 hover:opacity-100"
           >
-            {HOME_INTRO.primaryCta.label}
+            Contact
           </a>
-          {HOME_INTRO.secondaryLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              {...(link.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="transition-opacity hover:opacity-60"
-            >
-              {link.label}
-            </a>
-          ))}
         </p>
+        </div>
       </HeroExitReveal>
     </section>
   );

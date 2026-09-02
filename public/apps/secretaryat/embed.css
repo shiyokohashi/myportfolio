@@ -1,0 +1,14 @@
+html.is-embedded,
+html.is-embedded body {
+  background: transparent;
+}
+
+html.is-embedded .embed-resize {
+  display: none;
+}
+
+html.is-embedded .stable-app {
+  height: 100%;
+  min-height: 100%;
+  border: 1px solid rgba(28, 23, 20, 0.32);
+}

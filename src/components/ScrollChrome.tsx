@@ -1,15 +1,18 @@
 "use client";
 
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { BreadcrumbNav } from "@/components/BreadcrumbNav";
 import { NAV_ITEMS } from "@/config/navigation";
+import { SITE_SURFACE } from "@/lib/layout";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { cn } from "@/lib/utils";
 
 function isNavItemActive(pathname: string, href: string, hash: string): boolean {
+  if (href.startsWith("mailto:")) return false;
   if (href.startsWith("/#")) {
     if (pathname !== "/") return false;
     return hash === href.slice(1);
@@ -91,10 +94,10 @@ function SiteNav({
         aria-haspopup="true"
         onFocus={openMenu}
         className={cn(
-          "text-sm font-medium tracking-[-0.01em] transition-opacity hover:opacity-70",
+          "text-sm font-normal tracking-[-0.01em] transition-opacity hover:opacity-70",
           lightText
-            ? "text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
-            : "text-zinc-900",
+            ? "text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
+            : "text-zinc-600/80",
         )}
       >
         Menu
@@ -115,20 +118,24 @@ function SiteNav({
       >
         {NAV_ITEMS.map(({ label, href }) => {
           const isActive = isNavItemActive(pathname, href, hash);
+          const className = cn(
+            "block whitespace-nowrap text-right text-sm font-normal leading-none tracking-[-0.01em] transition-opacity hover:opacity-70",
+            lightText
+              ? "text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
+              : "text-zinc-600/80",
+            isActive && "underline underline-offset-4",
+          );
+
+          if (href.startsWith("mailto:")) {
+            return (
+              <a key={href} href={href} onClick={close} className={className}>
+                {label}
+              </a>
+            );
+          }
 
           return (
-            <Link
-              key={href}
-              href={href}
-              onClick={close}
-              className={cn(
-                "block whitespace-nowrap text-right text-sm font-medium leading-none tracking-[-0.01em] transition-opacity hover:opacity-70",
-                lightText
-                  ? "text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]"
-                  : "text-zinc-900",
-                isActive && "underline underline-offset-4",
-              )}
-            >
+            <Link key={href} href={href} onClick={close} className={className}>
               {label}
             </Link>
           );
@@ -143,24 +150,45 @@ function SiteNav({
  * Other pages: fixed white background with the same nav treatment.
  */
 export function ScrollChrome() {
+  return (
+    <Suspense fallback={null}>
+      <ScrollChromeInner />
+    </Suspense>
+  );
+}
+
+function ScrollChromeInner() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const searchParams = useSearchParams();
+  const [framed, setFramed] = useState(false);
   const { lightNav } = useScrollReveal();
-  const lightText = isHome && lightNav;
+
+  useEffect(() => {
+    setFramed(window.self !== window.top);
+  }, []);
+
+  if (pathname === "/" || pathname.startsWith("/lab/home/draft")) return null;
+  if (framed || searchParams.get("embedded") === "1") return null;
+
+  const isHome = pathname === "/";
+  const isGrassLab = pathname.startsWith("/lab/home/");
+  const lightText = isGrassLab || (isHome && lightNav);
 
   return (
     <>
-      {!isHome ? <div aria-hidden className="fixed inset-0 z-0 bg-white" /> : null}
+      {!isHome ? <div aria-hidden className={cn("fixed inset-0 z-0", SITE_SURFACE)} /> : null}
 
-      <BreadcrumbNav
-        pathname={pathname}
-        lightText={lightText}
-        className="fixed left-0 top-0 z-[100] max-w-[min(72vw,28rem)] p-[clamp(1.25rem,4vw,2rem)]"
-      />
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[100] flex items-start justify-between gap-6 bg-white/[0.03] p-[clamp(1.25rem,4vw,2rem)] backdrop-blur-[2px]">
+        <BreadcrumbNav
+          pathname={pathname}
+          lightText={lightText}
+          className="pointer-events-auto max-w-[min(72vw,28rem)]"
+        />
 
-      <header className="fixed right-0 top-0 z-[100] p-[clamp(1.25rem,4vw,2rem)] text-right">
-        <SiteNav key={pathname} pathname={pathname} lightText={lightText} />
-      </header>
+        <header className="pointer-events-auto shrink-0 text-right">
+          <SiteNav key={pathname} pathname={pathname} lightText={lightText} />
+        </header>
+      </div>
     </>
   );
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>secretaryat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="embed.css" />
+  </head>
+  <body>
+    <div class="app">
+      <section class="pasture" aria-label="Pasture">
+        <div class="pasture-bg" aria-hidden="true"></div>
+        <div id="apples" class="apples" aria-hidden="true"></div>
+        <div id="horses" class="horses" aria-hidden="true"></div>
+      </section>
+
+      <header class="chrome">
+        <div class="drag-region">
+          <p class="brand">secretaryat</p>
+        </div>
+        <div class="window-actions">
+          <button type="button" id="feed-horses-btn" class="chrome-action chrome-action--compact">
+            Feed
+          </button>
+          <button type="button" id="see-stable-btn" class="chrome-action">
+            See Stable
+          </button>
+          <button type="button" id="minimize-btn" aria-label="Minimize">−</button>
+          <button type="button" id="close-btn" aria-label="Close">×</button>
+        </div>
+      </header>
+
+      <aside class="task-panel" aria-label="Tasks">
+        <form id="task-form" class="task-form" autocomplete="off">
+          <label class="sr-only" for="task-input">New task</label>
+          <input
+            id="task-input"
+            name="task"
+            type="text"
+            maxlength="80"
+            placeholder="type a task…"
+            required
+          />
+          <button type="submit">Add</button>
+        </form>
+
+        <ul id="task-list" class="task-list" aria-live="polite"></ul>
+        <p id="empty-hint" class="empty-hint">Nothing grazing yet.</p>
+      </aside>
+
+      <div
+        id="stable-overlay"
+        class="stable-overlay"
+        hidden
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="stable-title"
+      >
+        <div class="stable-app stable-app--overlay">
+          <header class="stable-overlay__chrome">
+            <p id="stable-title" class="brand">stable</p>
+            <button type="button" id="stable-close-btn" class="stable-overlay__close" aria-label="Back to pasture">
+              ×
+            </button>
+          </header>
+          <main class="stable-panel">
+            <ul id="stable-list" class="stable-list" aria-live="polite"></ul>
+            <p id="stable-empty-hint" class="empty-hint">The stable is empty.</p>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <template id="horse-template">
+      <div class="horse" data-state="grazing">
+        <div class="horse-sprite" aria-hidden="true"></div>
+        <p class="horse-caption"></p>
+      </div>
+    </template>
+
+    <script src="web-shim.js"></script>
+    <script src="stable-view.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

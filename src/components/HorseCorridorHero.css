@@ -1,7 +1,7 @@
 .horse-corridor-hero {
   position: relative;
   z-index: 35;
-  height: 280vh;
+  height: 150vh;
   /* Spacer only — the canvas is always fixed */
   background: #faf9f7;
   pointer-events: none;
