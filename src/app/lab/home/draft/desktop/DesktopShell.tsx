@@ -1280,7 +1280,6 @@ export function DesktopShell({
                     onClick={minimizeWelcome}
                   />
                 </div>
-                <p className="desktop-window__title">Welcome</p>
               </header>
               <div className="desktop-window__content">
                 <div className="welcome-window">
