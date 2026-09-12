@@ -121,6 +121,75 @@ export const PROJECTS: PortfolioWork[] = [
     ],
   },
   {
+    slug: "tabl",
+    title: "tabl",
+    summary:
+      "A desktop studio table for creative projects — papers, stickies, and sketchbooks arranged on wood.",
+    description: [
+      "tabl is a macOS app for keeping creative work visible. Instead of burying files in folders, everything lives on a studio table you can rearrange like a real desk.",
+      "Open tabl and drop in papers, sticky notes, index cards, and a sketchbook. Finished work tucks into a folder on the side. Persistence stays local, so the table is yours alone until you clear it.",
+      "Built with Electron, React, and a small motion layer — meant to feel quiet and tactile, not like another project-management dashboard.",
+    ],
+    year: "2026",
+    role: "Design & development",
+    tags: ["Desktop", "App", "Electron"],
+    color: "#8b6914",
+    thumbnail: "/images/projects/tabl.png",
+    mediaAspect: { width: 1600, height: 1000 },
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "The table",
+        description:
+          "A wood desk surface holds your active work — sketchbooks, loose papers, and notes you can drag around freely.",
+        layout: "full",
+        items: [
+          {
+            image: "/images/projects/tabl/ui-main.png",
+            width: 1600,
+            height: 1000,
+          },
+        ],
+      },
+      {
+        title: "App icon",
+        description:
+          "Warm wood grain and a simple mark — closer to a desk object than a SaaS logo.",
+        layout: "narrow",
+        items: [
+          {
+            image: "/images/projects/tabl/icon-card.png",
+            width: 1024,
+            height: 1024,
+          },
+        ],
+      },
+      {
+        title: "Objects on the desk",
+        description:
+          "Sketchbooks, paper, and finished folders are first-class objects — not rows in a list.",
+        layout: "wide",
+        items: [
+          {
+            image: "/images/projects/tabl/sketchbook-v2.png",
+            width: 735,
+            height: 588,
+          },
+          {
+            image: "/images/projects/tabl/folder-finished.png",
+            width: 512,
+            height: 512,
+          },
+          {
+            image: "/images/projects/tabl/paper.png",
+            width: 400,
+            height: 520,
+          },
+        ],
+      },
+    ],
+  },
+  {
     slug: "imployed",
     title: "Imployed",
     summary:

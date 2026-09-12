@@ -5,6 +5,7 @@ export default function ProjectsPage() {
   return (
     <PortfolioCategoryPage
       title="Projects"
+      intro="Apps, product experiments, and brand work — from desktop tools to campaign systems."
       items={PROJECTS}
       basePath="/projects"
     />
