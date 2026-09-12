@@ -4,7 +4,7 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Personal Projects", href: "/projects" },
+  { label: "Projects", href: "/projects" },
   { label: "Graphic Design", href: "/graphic-design" },
   { label: "Paintings", href: "/paintings" },
   { label: "Journalism", href: "/journalism" },

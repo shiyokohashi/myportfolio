@@ -34,11 +34,11 @@ export const SELECTED_WORKS_CATEGORIES: SelectedWorksCategory[] = [
     title: "Personal Projects",
     href: "/projects",
     entries: [
-      { slug: "deskkeeper", layout: "featured" },
+      { slug: "tabl", layout: "featured" },
+      { slug: "deskkeeper" },
       { slug: "graduaid" },
-      { slug: "portfolio-sketchbook" },
     ],
-    blurb: "PLACEHOLDER PLACEHOLDER PLACEHOLDER",
+    blurb: "Desktop apps and tools I design and build end-to-end.",
     gridColumns: 2,
   },
   {

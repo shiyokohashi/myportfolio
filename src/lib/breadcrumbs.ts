@@ -18,7 +18,7 @@ type CategoryRoute = {
 const CATEGORY_ROUTES: Record<string, CategoryRoute> = {
   projects: {
     href: "/projects",
-    label: "all projects",
+    label: "projects",
     works: PROJECTS,
   },
   "graphic-design": {
