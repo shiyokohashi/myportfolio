@@ -231,6 +231,15 @@ const ABOUT_FILE_DEFAULT = {
   minHeight: 260,
 };
 
+const WELCOME_WINDOW_DEFAULT = {
+  width: 380,
+  height: 168,
+  minWidth: 300,
+  minHeight: 140,
+  x: 120,
+  y: 120,
+};
+
 const STABLE_WINDOW_DEFAULT = {
   width: 300,
   height: 480,
@@ -327,6 +336,19 @@ export function DesktopShell({
     y: ABOUT_FILE_DEFAULT.iconY,
   });
   const [aboutIconZ, setAboutIconZ] = useState(0);
+  const [welcomeWindow, setWelcomeWindow] = useState<WindowState>({
+    open: true,
+    minimized: false,
+    zIndex: 20,
+  });
+  const [welcomeSize, setWelcomeSize] = useState({
+    width: WELCOME_WINDOW_DEFAULT.width,
+    height: WELCOME_WINDOW_DEFAULT.height,
+  });
+  const [welcomePosition, setWelcomePosition] = useState({
+    x: WELCOME_WINDOW_DEFAULT.x,
+    y: WELCOME_WINDOW_DEFAULT.y,
+  });
   const [stableWindow, setStableWindow] = useState<WindowState>({
     open: false,
     minimized: false,
@@ -375,6 +397,7 @@ export function DesktopShell({
   } | null>(null);
   const secretaryatIframeRef = useRef<HTMLIFrameElement>(null);
   const secretaryatAutoOpenedRef = useRef(false);
+  const welcomeCenteredRef = useRef(false);
   const stableIframeRef = useRef<HTMLIFrameElement>(null);
   const stableWindowRef = useRef(stableWindow);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -403,6 +426,15 @@ export function DesktopShell({
     observer.observe(canvas);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (welcomeCenteredRef.current || canvasSize.width === 0 || canvasSize.height === 0) return;
+    welcomeCenteredRef.current = true;
+    setWelcomePosition({
+      x: Math.max(16, Math.round((canvasSize.width - WELCOME_WINDOW_DEFAULT.width) / 2)),
+      y: Math.max(24, Math.round((canvasSize.height - WELCOME_WINDOW_DEFAULT.height) / 2) - 40),
+    });
+  }, [canvasSize.width, canvasSize.height]);
 
   useEffect(() => {
     if (!openSecretaryatOnLoad || canvasSize.width === 0 || canvasSize.height === 0) return;
@@ -654,6 +686,29 @@ export function DesktopShell({
   const bringAboutIconToFront = useCallback(() => {
     aboutIconZCounter.current += 1;
     setAboutIconZ(aboutIconZCounter.current);
+  }, []);
+
+  const closeWelcome = useCallback(() => {
+    setWelcomeWindow((prev) => ({
+      ...prev,
+      open: false,
+      minimized: false,
+    }));
+  }, []);
+
+  const minimizeWelcome = useCallback(() => {
+    setWelcomeWindow((prev) => ({
+      ...prev,
+      minimized: true,
+    }));
+  }, []);
+
+  const bringWelcomeToFront = useCallback(() => {
+    const zIndex = nextZIndex();
+    setWelcomeWindow((prev) => ({
+      ...prev,
+      zIndex,
+    }));
   }, []);
 
   const launchApp = useCallback((id: string) => {
@@ -944,8 +999,6 @@ export function DesktopShell({
     [resumeWindow.minimized, resumeWindow.open],
   );
 
-  const anyAppOpen = APP_IDS.some((id) => appWindows[id].open && !appWindows[id].minimized);
-
   return (
     <DesktopHoverTipProvider>
     <div
@@ -955,11 +1008,6 @@ export function DesktopShell({
     >
       {showMenuBar ? <DesktopMenuBar /> : null}
       <div ref={canvasRef} className="desktop-shell__canvas">
-        {!anyAppOpen ? (
-          <p className="desktop-shell__hint" aria-live="polite">
-            Click on apps to try them
-          </p>
-        ) : null}
         {folderIconPositions
           ? FOLDER_IDS.map((id) => {
               const folder = DESKTOP_FOLDERS[id];
@@ -1230,6 +1278,32 @@ export function DesktopShell({
             onSizeChange={(width, height) => setAboutSize({ width, height })}
           >
             <AboutWindowContents />
+          </DesktopWindow>
+        ) : null}
+
+        {welcomeWindow.open ? (
+          <DesktopWindow
+            key="welcome"
+            title="Welcome"
+            width={welcomeSize.width}
+            height={welcomeSize.height}
+            minWidth={WELCOME_WINDOW_DEFAULT.minWidth}
+            minHeight={WELCOME_WINDOW_DEFAULT.minHeight}
+            x={welcomePosition.x}
+            y={welcomePosition.y}
+            zIndex={welcomeWindow.zIndex}
+            minimized={welcomeWindow.minimized}
+            contentDraggable
+            onClose={closeWelcome}
+            onMinimize={minimizeWelcome}
+            onFocus={bringWelcomeToFront}
+            onPositionChange={(x, y) => setWelcomePosition({ x, y })}
+            onSizeChange={(width, height) => setWelcomeSize({ width, height })}
+          >
+            <div className="welcome-window">
+              <p className="welcome-window__title">Welcome!</p>
+              <p className="welcome-window__body">Click on apps to try them</p>
+            </div>
           </DesktopWindow>
         ) : null}
       </div>
