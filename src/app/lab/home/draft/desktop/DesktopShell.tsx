@@ -944,6 +944,8 @@ export function DesktopShell({
     [resumeWindow.minimized, resumeWindow.open],
   );
 
+  const anyAppOpen = APP_IDS.some((id) => appWindows[id].open && !appWindows[id].minimized);
+
   return (
     <DesktopHoverTipProvider>
     <div
@@ -953,6 +955,11 @@ export function DesktopShell({
     >
       {showMenuBar ? <DesktopMenuBar /> : null}
       <div ref={canvasRef} className="desktop-shell__canvas">
+        {!anyAppOpen ? (
+          <p className="desktop-shell__hint" aria-live="polite">
+            Click on apps to try them
+          </p>
+        ) : null}
         {folderIconPositions
           ? FOLDER_IDS.map((id) => {
               const folder = DESKTOP_FOLDERS[id];
