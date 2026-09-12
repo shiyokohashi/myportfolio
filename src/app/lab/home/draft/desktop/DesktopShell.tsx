@@ -23,7 +23,7 @@ import { DesktopHoverTipProvider } from "./DesktopHoverTip";
 
 import "./desktop.css";
 
-type AppId = "secretaryat" | "deskkeeper";
+type AppId = "secretaryat" | "deskkeeper" | "tabl";
 
 type WindowState = {
   open: boolean;
@@ -70,6 +70,18 @@ const APP_CONFIG: Record<
     x: 420,
     y: 48,
   },
+  tabl: {
+    label: "tabl",
+    icon: "/images/projects/tabl/icon.png",
+    title: "tabl",
+    hint: PROJECTS.find((project) => project.slug === "tabl")?.summary ?? "",
+    width: 960,
+    height: 640,
+    minWidth: 640,
+    minHeight: 440,
+    x: 120,
+    y: 56,
+  },
 };
 
 const APP_IDS = Object.keys(APP_CONFIG) as AppId[];
@@ -112,6 +124,7 @@ const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encod
 const INITIAL_APP_WINDOWS: Record<AppId, WindowState> = {
   secretaryat: { open: false, minimized: false, zIndex: 10 },
   deskkeeper: { open: false, minimized: false, zIndex: 11 },
+  tabl: { open: false, minimized: false, zIndex: 12 },
 };
 
 const INITIAL_FOLDER_WINDOWS: Record<FolderId, WindowState> = {
@@ -129,6 +142,10 @@ const INITIAL_APP_SIZES = {
     width: APP_CONFIG.deskkeeper.width,
     height: APP_CONFIG.deskkeeper.height,
   },
+  tabl: {
+    width: APP_CONFIG.tabl.width,
+    height: APP_CONFIG.tabl.height,
+  },
 } as const;
 
 const INITIAL_FOLDER_SIZES = Object.fromEntries(
@@ -138,6 +155,7 @@ const INITIAL_FOLDER_SIZES = Object.fromEntries(
 const INITIAL_APP_POSITIONS = {
   secretaryat: { x: APP_CONFIG.secretaryat.x, y: APP_CONFIG.secretaryat.y },
   deskkeeper: { x: APP_CONFIG.deskkeeper.x, y: APP_CONFIG.deskkeeper.y },
+  tabl: { x: APP_CONFIG.tabl.x, y: APP_CONFIG.tabl.y },
 } as const;
 
 const INITIAL_FOLDER_WINDOW_POSITIONS = Object.fromEntries(
@@ -1060,7 +1078,7 @@ export function DesktopShell({
               y={appPositions[id].y}
               zIndex={state.zIndex}
               minimized={state.minimized}
-              contentDraggable
+              contentDraggable={id === "deskkeeper"}
               onClose={() => closeApp(id)}
               onMinimize={() => minimizeApp(id)}
               onFocus={() => bringAppToFront(id)}
@@ -1077,7 +1095,15 @@ export function DesktopShell({
                 }))
               }
             >
-              <DeskkeeperApp />
+              {id === "tabl" ? (
+                <iframe
+                  title="tabl"
+                  className="desktop-window__iframe"
+                  src="/apps/tabl/index.html"
+                />
+              ) : (
+                <DeskkeeperApp />
+              )}
             </DesktopWindow>
           );
         })}
