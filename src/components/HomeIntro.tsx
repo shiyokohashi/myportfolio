@@ -50,7 +50,13 @@ export function HomeIntro({ layout = "corridor" }: { layout?: "corridor" | "desk
 
         <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>
           <Link href="/projects" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
-            Projects
+            All projects
+          </Link>
+          <span aria-hidden className="px-2">
+            ·
+          </span>
+          <Link href="/paintings" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
+            All art
           </Link>
           <span aria-hidden className="px-2">
             ·
