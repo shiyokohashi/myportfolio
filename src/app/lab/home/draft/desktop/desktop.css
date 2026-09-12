@@ -464,6 +464,26 @@
   border: 0;
 }
 
+.desktop-welcome-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 24px 120px;
+  pointer-events: none;
+}
+
+.desktop-window--welcome {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  pointer-events: auto;
+  max-width: min(100%, 420px);
+}
+
 .welcome-window {
   display: flex;
   flex-direction: column;

@@ -232,10 +232,10 @@ const ABOUT_FILE_DEFAULT = {
 };
 
 const WELCOME_WINDOW_DEFAULT = {
-  width: 380,
-  height: 168,
+  width: 420,
+  height: 200,
   minWidth: 300,
-  minHeight: 140,
+  minHeight: 160,
   x: 120,
   y: 120,
 };
@@ -341,14 +341,6 @@ export function DesktopShell({
     minimized: false,
     zIndex: 20,
   });
-  const [welcomeSize, setWelcomeSize] = useState({
-    width: WELCOME_WINDOW_DEFAULT.width,
-    height: WELCOME_WINDOW_DEFAULT.height,
-  });
-  const [welcomePosition, setWelcomePosition] = useState({
-    x: WELCOME_WINDOW_DEFAULT.x,
-    y: WELCOME_WINDOW_DEFAULT.y,
-  });
   const [stableWindow, setStableWindow] = useState<WindowState>({
     open: false,
     minimized: false,
@@ -397,7 +389,6 @@ export function DesktopShell({
   } | null>(null);
   const secretaryatIframeRef = useRef<HTMLIFrameElement>(null);
   const secretaryatAutoOpenedRef = useRef(false);
-  const welcomeCenteredRef = useRef(false);
   const stableIframeRef = useRef<HTMLIFrameElement>(null);
   const stableWindowRef = useRef(stableWindow);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -426,15 +417,6 @@ export function DesktopShell({
     observer.observe(canvas);
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (welcomeCenteredRef.current || canvasSize.width === 0 || canvasSize.height === 0) return;
-    welcomeCenteredRef.current = true;
-    setWelcomePosition({
-      x: Math.max(16, Math.round((canvasSize.width - WELCOME_WINDOW_DEFAULT.width) / 2)),
-      y: Math.max(24, Math.round((canvasSize.height - WELCOME_WINDOW_DEFAULT.height) / 2) - 40),
-    });
-  }, [canvasSize.width, canvasSize.height]);
 
   useEffect(() => {
     if (!openSecretaryatOnLoad || canvasSize.width === 0 || canvasSize.height === 0) return;
@@ -700,14 +682,6 @@ export function DesktopShell({
     setWelcomeWindow((prev) => ({
       ...prev,
       minimized: true,
-    }));
-  }, []);
-
-  const bringWelcomeToFront = useCallback(() => {
-    const zIndex = nextZIndex();
-    setWelcomeWindow((prev) => ({
-      ...prev,
-      zIndex,
     }));
   }, []);
 
@@ -1281,30 +1255,41 @@ export function DesktopShell({
           </DesktopWindow>
         ) : null}
 
-        {welcomeWindow.open ? (
-          <DesktopWindow
-            key="welcome"
-            title="Welcome"
-            width={welcomeSize.width}
-            height={welcomeSize.height}
-            minWidth={WELCOME_WINDOW_DEFAULT.minWidth}
-            minHeight={WELCOME_WINDOW_DEFAULT.minHeight}
-            x={welcomePosition.x}
-            y={welcomePosition.y}
-            zIndex={welcomeWindow.zIndex}
-            minimized={welcomeWindow.minimized}
-            contentDraggable
-            onClose={closeWelcome}
-            onMinimize={minimizeWelcome}
-            onFocus={bringWelcomeToFront}
-            onPositionChange={(x, y) => setWelcomePosition({ x, y })}
-            onSizeChange={(width, height) => setWelcomeSize({ width, height })}
-          >
-            <div className="welcome-window">
-              <p className="welcome-window__title">Welcome!</p>
-              <p className="welcome-window__body">Click on apps to try them</p>
-            </div>
-          </DesktopWindow>
+        {welcomeWindow.open && !welcomeWindow.minimized ? (
+          <div className="desktop-welcome-layer" role="presentation">
+            <section
+              className="desktop-window desktop-window--welcome"
+              aria-label="Welcome"
+              style={{
+                width: WELCOME_WINDOW_DEFAULT.width,
+                height: WELCOME_WINDOW_DEFAULT.height,
+              }}
+            >
+              <header className="desktop-window__titlebar">
+                <div className="desktop-window__controls">
+                  <button
+                    type="button"
+                    className="desktop-window__dot desktop-window__dot--close"
+                    aria-label="Close Welcome"
+                    onClick={closeWelcome}
+                  />
+                  <button
+                    type="button"
+                    className="desktop-window__dot desktop-window__dot--minimize"
+                    aria-label="Minimize Welcome"
+                    onClick={minimizeWelcome}
+                  />
+                </div>
+                <p className="desktop-window__title">Welcome</p>
+              </header>
+              <div className="desktop-window__content">
+                <div className="welcome-window">
+                  <p className="welcome-window__title">Welcome!</p>
+                  <p className="welcome-window__body">Click on apps to try them</p>
+                </div>
+              </div>
+            </section>
+          </div>
         ) : null}
       </div>
 

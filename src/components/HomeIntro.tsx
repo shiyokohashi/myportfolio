@@ -44,10 +44,6 @@ export function HomeIntro({ layout = "corridor" }: { layout?: "corridor" | "desk
           {HOME_INTRO.name}
         </h1>
 
-        <p className={cn(HOME_TYPE.body, "mx-auto max-w-xl text-zinc-600")}>
-          {HOME_INTRO.positioning}
-        </p>
-
         <p className={cn(HOME_TYPE.body, "mx-auto max-w-2xl text-zinc-600")}>
           {HOME_INTRO.proof}
         </p>
