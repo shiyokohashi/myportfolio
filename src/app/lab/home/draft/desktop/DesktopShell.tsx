@@ -1258,29 +1258,27 @@ export function DesktopShell({
         {welcomeWindow.open && !welcomeWindow.minimized ? (
           <div className="desktop-welcome-layer" role="presentation">
             <section
-              className="desktop-window desktop-window--welcome"
+              className="desktop-window desktop-window--welcome desktop-window--welcome-chrome"
               aria-label="Welcome"
               style={{
                 width: WELCOME_WINDOW_DEFAULT.width,
                 height: WELCOME_WINDOW_DEFAULT.height,
               }}
             >
-              <header className="desktop-window__titlebar">
-                <div className="desktop-window__controls">
-                  <button
-                    type="button"
-                    className="desktop-window__dot desktop-window__dot--close"
-                    aria-label="Close Welcome"
-                    onClick={closeWelcome}
-                  />
-                  <button
-                    type="button"
-                    className="desktop-window__dot desktop-window__dot--minimize"
-                    aria-label="Minimize Welcome"
-                    onClick={minimizeWelcome}
-                  />
-                </div>
-              </header>
+              <div className="desktop-window__controls desktop-window__controls--overlay">
+                <button
+                  type="button"
+                  className="desktop-window__dot desktop-window__dot--close"
+                  aria-label="Close"
+                  onClick={closeWelcome}
+                />
+                <button
+                  type="button"
+                  className="desktop-window__dot desktop-window__dot--minimize"
+                  aria-label="Minimize"
+                  onClick={minimizeWelcome}
+                />
+              </div>
               <div className="desktop-window__content">
                 <div className="welcome-window">
                   <p className="welcome-window__title">Welcome!</p>
