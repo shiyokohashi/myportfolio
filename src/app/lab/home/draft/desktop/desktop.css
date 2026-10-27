@@ -121,6 +121,7 @@
 }
 
 .desktop-window__dot {
+  position: relative;
   width: 12px;
   height: 12px;
   border: none;
@@ -129,8 +130,22 @@
   cursor: pointer;
 }
 
+/* Invisible hit area around each 12px dot, so a near-miss doesn't grab the
+   titlebar and start a drag instead. Sideways it stops at half the 8px gap so
+   neighbouring dots never overlap. */
+.desktop-window__dot::before {
+  content: "";
+  position: absolute;
+  inset: -9px -4px;
+}
+
 .desktop-window__dot--close {
   background: #ff5f57;
+}
+
+/* Close is first in the row, so it can reach further left. */
+.desktop-window__dot--close::before {
+  left: -10px;
 }
 
 .desktop-window__dot--minimize {
@@ -467,7 +482,9 @@
 .desktop-welcome-layer {
   position: absolute;
   inset: 0;
-  z-index: 210;
+  /* Just under the first opened window (DesktopShell's zCounter starts at 12),
+     so apps launched from the dock land on top of the Welcome card. */
+  z-index: 12;
   display: flex;
   align-items: center;
   justify-content: center;
