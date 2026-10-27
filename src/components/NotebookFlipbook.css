@@ -1,0 +1,216 @@
+/* Home notebook — open spread of cream paper, no covers. */
+
+.nb-root {
+  /* Break out of the intro's narrow column to 80% of the viewport. */
+  width: 80vw;
+  max-width: none;
+  margin-inline: calc((100% - 80vw) / 2);
+  outline: none;
+}
+
+/* Book lying on the page: tight contact edge plus soft ambient falloff, light from above. */
+.nb-stage {
+  position: relative;
+  box-shadow:
+    0 1px 2px rgb(40 30 20 / 0.12),
+    0 6px 14px -4px rgb(40 30 20 / 0.14),
+    0 24px 48px -16px rgb(40 30 20 / 0.18);
+}
+
+/* Darker pool just under the bottom edge, where the book meets the surface. */
+.nb-stage::after {
+  content: "";
+  position: absolute;
+  inset: auto 3% -14px;
+  height: 28px;
+  background: radial-gradient(ellipse at center, rgb(40 30 20 / 0.22), transparent 70%);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.nb-mount,
+.nb-book {
+  width: 100%;
+}
+
+.nb-leaf {
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---- Paper ----------------------------------------------------------- */
+
+.nb-paper {
+  position: relative;
+  background-color: #f8f3e8;
+  --nb-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --nb-gutter: transparent;
+  background-image: var(--nb-gutter), var(--nb-grain);
+}
+
+/* Curvature into the spine, plus a soft edge on the fore-edge side. */
+.nb-paper.nb-side-left {
+  --nb-gutter: linear-gradient(
+    270deg,
+    rgb(60 45 25 / 0.28) 0,
+    rgb(60 45 25 / 0.08) 5%,
+    transparent 13%,
+    transparent 97%,
+    rgb(60 45 25 / 0.06) 100%
+  );
+}
+
+.nb-paper.nb-side-right {
+  --nb-gutter: linear-gradient(
+    90deg,
+    rgb(60 45 25 / 0.28) 0,
+    rgb(60 45 25 / 0.08) 5%,
+    transparent 13%,
+    transparent 97%,
+    rgb(60 45 25 / 0.06) 100%
+  );
+}
+
+.nb-image {
+  position: absolute;
+  inset: 9% 10% 11%;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.nb-stack {
+  position: absolute;
+  inset: 7% 9% 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6%;
+  pointer-events: none;
+}
+
+.nb-stack-sketch {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+  object-position: center top;
+  mix-blend-mode: multiply;
+}
+
+/* Printed photo glued onto the page: slight tilt, contact shadow. */
+.nb-print {
+  flex: none;
+  width: 100%;
+  height: auto;
+  transform: rotate(-1.2deg);
+  box-shadow:
+    0 1px 1px rgb(40 30 20 / 0.18),
+    0 4px 10px -2px rgb(40 30 20 / 0.22);
+}
+
+/* Final drawn straight onto the page, matching the sketch ink. */
+.nb-print-ink {
+  flex: none;
+  width: 42%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.nb-image--top {
+  object-position: center top;
+}
+
+.nb-image--bleed {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: normal;
+}
+
+/* Quiet "view project" at the foot of a sketch page. */
+.nb-link {
+  position: absolute;
+  bottom: 3%;
+  right: 9%;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: clamp(0.4rem, 0.55vw, 0.5rem);
+  letter-spacing: 0.06em;
+  color: rgb(60 50 40 / 0.32);
+  text-decoration: none;
+  transition: color 150ms;
+  z-index: 1;
+  /* Bigger hit area, so a near-miss doesn't turn the page instead. */
+  padding: 0.8em 0.6em;
+  margin: -0.8em -0.6em;
+}
+
+.nb-link:hover {
+  color: rgb(60 50 40 / 0.75);
+}
+
+/* Several finished pieces glued in as rows. */
+.nb-gallery {
+  --nb-gap: 4cqw;
+  position: absolute;
+  inset: 8% 9% 9%;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--nb-gap);
+  pointer-events: none;
+}
+
+.nb-gallery-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--nb-gap);
+}
+
+.nb-gallery-item {
+  height: var(--nb-row-h);
+  width: auto;
+  transform: rotate(var(--nb-tilt, 0deg));
+}
+
+/* Handwritten text in groups, spread down the page. */
+.nb-writing {
+  position: absolute;
+  inset: 10% 6% 11% 6.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.nb-writing-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+}
+
+.nb-writing-line img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+/* Index lines link to their sections; keep the hover quiet, like pencil. */
+.nb-writing-link {
+  pointer-events: auto;
+  transition: opacity 150ms;
+  /* Taller hit area than the ink, so a near-miss doesn't turn the page. */
+  padding-block: 0.25em;
+  margin-block: -0.25em;
+}
+
+.nb-writing-link:hover {
+  opacity: 0.55;
+}

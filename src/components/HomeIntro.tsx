@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import favicon from "@/app/icon.png";
 import { HeroExitReveal } from "@/components/HeroExitReveal";
+import { NotebookFlipbook } from "@/components/NotebookFlipbook";
 import { HOME_INTRO } from "@/data/home";
 import { HOME_TYPE, PAGE_GUTTER, SITE_SURFACE } from "@/lib/layout";
 import { cn } from "@/lib/utils";
@@ -31,43 +32,56 @@ export function HomeIntro({ layout = "corridor" }: { layout?: "corridor" | "desk
             isDesktop ? "gap-5 sm:gap-6" : "gap-6 sm:gap-8",
           )}
         >
-        <Image
-          src={favicon}
-          alt=""
-          width={160}
-          height={160}
-          priority
-          className="size-24 object-cover sm:size-28"
-        />
+        {isDesktop ? (
+          <>
+            {/* The notebook carries the bio, index and contact; keep the heading for screen readers and SEO. */}
+            <h1 id="intro-heading" className="sr-only">
+              {HOME_INTRO.name}
+            </h1>
+            <NotebookFlipbook className="mt-12 mb-10 sm:mt-20 sm:mb-14" />
+          </>
+        ) : (
+          // Archived corridor iteration keeps its original intro.
+          <>
+            <Image
+              src={favicon}
+              alt=""
+              width={160}
+              height={160}
+              priority
+              className="size-24 object-cover sm:size-28"
+            />
 
-        <h1 id="intro-heading" className={cn(HOME_TYPE.name, "text-zinc-900")}>
-          {HOME_INTRO.name}
-        </h1>
+            <h1 id="intro-heading" className={cn(HOME_TYPE.name, "text-zinc-900")}>
+              {HOME_INTRO.name}
+            </h1>
 
-        <p className={cn(HOME_TYPE.body, "mx-auto max-w-2xl text-zinc-600")}>
-          {HOME_INTRO.proof}
-        </p>
+            <p className={cn(HOME_TYPE.body, "mx-auto max-w-2xl text-zinc-600")}>
+              {HOME_INTRO.proof}
+            </p>
 
-        <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>
-          <Link href="/projects" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
-            All projects
-          </Link>
-          <span aria-hidden className="px-2">
-            ·
-          </span>
-          <Link href="/paintings" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
-            All art
-          </Link>
-          <span aria-hidden className="px-2">
-            ·
-          </span>
-          <a
-            href={HOME_INTRO.primaryCta.href}
-            className="transition-opacity hover:text-zinc-900 hover:opacity-100"
-          >
-            Contact
-          </a>
-        </p>
+            <p className={cn(HOME_TYPE.meta, "text-zinc-500")}>
+              <Link href="/projects" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
+                All projects
+              </Link>
+              <span aria-hidden className="px-2">
+                ·
+              </span>
+              <Link href="/paintings" className="transition-opacity hover:text-zinc-900 hover:opacity-100">
+                All art
+              </Link>
+              <span aria-hidden className="px-2">
+                ·
+              </span>
+              <a
+                href={HOME_INTRO.primaryCta.href}
+                className="transition-opacity hover:text-zinc-900 hover:opacity-100"
+              >
+                Contact
+              </a>
+            </p>
+          </>
+        )}
         </div>
       </HeroExitReveal>
     </section>

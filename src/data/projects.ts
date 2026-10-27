@@ -267,6 +267,49 @@ export const PROJECTS: PortfolioWork[] = [
     ],
   },
   {
+    slug: "enro",
+    title: "Enro",
+    summary: "Hackathon build — Enro uses your phone's sensors to predict if you'll be late, then calls to get you moving.",
+    description: [
+      "En route. On time. Enro is a hackathon project that uses your phone's sensors to predict if you'll be late — then calls to get you moving.",
+      "It reads your calendar and email to learn what you have planned, so the nudge comes before you're already behind. Less checking the time, more being on time.",
+    ],
+    year: "2026",
+    role: "Hackathon — design & development",
+    tags: ["Hackathon", "Web", "Product"],
+    color: "#7aa7e8",
+    thumbnail: "/videos/enro-demo-loop.mp4",
+    mediaAspect: { width: 1280, height: 788 },
+    externalUrl: "https://public-lemon-six-37.vercel.app/",
+    detailLayout: "editorial",
+    sections: [
+      {
+        title: "Demo",
+        description: "The logo's radar sweep opens into a sample morning: Enro reads your calendar and email to see what you have planned.",
+        layout: "full",
+        items: [
+          {
+            video: "/videos/enro-demo-loop.mp4",
+            width: 1280,
+            height: 788,
+          },
+        ],
+      },
+      {
+        title: "Logo sketches",
+        description: "En route, on time — the mark started as a clock face and became a radar sweep.",
+        layout: "narrow",
+        items: [
+          {
+            image: "/images/notebook/enro.webp",
+            width: 1400,
+            height: 968,
+          },
+        ],
+      },
+    ],
+  },
+  {
     slug: "aeon",
     title: "aeon",
     summary:
