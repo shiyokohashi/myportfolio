@@ -5,6 +5,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { ABOUT } from "@/data/about";
 import { HOME_INTRO } from "@/data/home";
 import { PROJECTS } from "@/data/projects";
+import { workHref } from "@/data/works";
 import { AboutWindowContents } from "./AboutWindowContents";
 import { DeskkeeperApp } from "../deskkeeper/DeskkeeperApp";
 import { DesktopDock, type DockApp, type DockLink } from "./DesktopDock";
@@ -549,7 +550,7 @@ export function DesktopShell({
   }, []);
 
   const openProjectInTab = useCallback((slug: string) => {
-    window.open(`/projects/${slug}`, "_blank", "noopener,noreferrer");
+    window.open(workHref(slug), "_blank", "noopener,noreferrer");
   }, []);
 
   const bringProjectToFront = useCallback((id: DesktopProjectId) => {

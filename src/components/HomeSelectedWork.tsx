@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MediaCover } from "@/components/MediaCover";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { HOME_SELECTED_WORK } from "@/data/home";
-import { PROJECTS } from "@/data/projects";
+import { findWork } from "@/data/works";
 import {
   HOME_TYPE,
   HOME_CARD_MEDIA,
@@ -21,7 +21,6 @@ import {
   isVideoSrc,
   shouldUseUnoptimized,
 } from "@/lib/media";
-import { getWorkBySlug } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 /** Selected Work — large media, consistent titles and body. */
@@ -59,7 +58,7 @@ export function HomeSelectedWork() {
         <ul className={cn(HOME_GRID_GAP, "items-start sm:grid-cols-2")}>
           {HOME_SELECTED_WORK.items.map((item, index) => {
             const slug = item.href.split("/").filter(Boolean).pop() ?? "";
-            const work = getWorkBySlug(PROJECTS, slug);
+            const work = findWork(slug);
             const thumbnail = work?.thumbnail ?? item.thumbnail;
             const thumbnailFit =
               work?.thumbnailFit ?? item.thumbnailFit ?? "cover";

@@ -1,4 +1,4 @@
-import { PROJECTS } from "@/data/projects";
+import { findWork } from "@/data/works";
 import { getCarouselDisplaySrc, getVideoPoster, isVideoSrc } from "@/lib/media";
 
 export type DesktopProjectId =
@@ -26,19 +26,19 @@ export type DesktopProjectConfig = {
 };
 
 function projectThumb(slug: string): string {
-  const project = PROJECTS.find((entry) => entry.slug === slug);
+  const project = findWork(slug);
   if (!project?.thumbnail) return "";
   return getCarouselDisplaySrc(project.thumbnail, slug) ?? getVideoPoster(slug) ?? project.thumbnail;
 }
 
 function projectVideoThumb(slug: string): string | undefined {
-  const project = PROJECTS.find((entry) => entry.slug === slug);
+  const project = findWork(slug);
   if (!project?.thumbnail || !isVideoSrc(project.thumbnail)) return undefined;
   return project.thumbnail;
 }
 
 function projectHint(slug: string): string {
-  return PROJECTS.find((entry) => entry.slug === slug)?.summary ?? "";
+  return findWork(slug)?.summary ?? "";
 }
 
 export const DESKTOP_PROJECTS: Record<DesktopProjectId, DesktopProjectConfig> = {

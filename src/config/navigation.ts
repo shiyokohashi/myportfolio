@@ -8,10 +8,11 @@ export type NavItem = {
 /** Main site menu — routes to real pages (homepage intro is the only hash link). */
 export const NAV_ITEMS: NavItem[] = [
   { label: "About", href: "/#intro" },
-  { label: "Work", href: "/projects" },
-  { label: "Journalism", href: "/journalism" },
+  { label: "Webdev & Apps", href: "/projects" },
+  { label: "Branding", href: "/graphic-design" },
   { label: "Paintings", href: "/paintings" },
   { label: "Illustrations", href: "/illustrations" },
+  { label: "Cartoons", href: "/journalism" },
   { label: "Contact", href: `mailto:${ABOUT.connect.email}` },
 ];
 

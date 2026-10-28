@@ -4,7 +4,8 @@ import { JOURNALISM } from "@/data/journalism";
 export default function JournalismPage() {
   return (
     <PortfolioCategoryPage
-      title="Journalism"
+      title="Editorial & Digital Cartoons"
+      intro="High school – present: editorial cartoons, feature art, and commissions."
       items={JOURNALISM}
       basePath="/journalism"
     />

@@ -4,8 +4,8 @@ import { PROJECTS } from "@/data/projects";
 export default function ProjectsPage() {
   return (
     <PortfolioCategoryPage
-      title="Projects"
-      intro="Apps, product experiments, and brand work — from desktop tools to campaign systems."
+      title="Webdev & Apps"
+      intro="My personal favs — sites, apps, and tools I designed and built."
       items={PROJECTS}
       basePath="/projects"
     />
