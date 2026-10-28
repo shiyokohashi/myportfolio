@@ -19,12 +19,12 @@ type CategoryRoute = {
 const CATEGORY_ROUTES: Record<string, CategoryRoute> = {
   projects: {
     href: "/projects",
-    label: "Projects",
+    label: "Webdev & Apps",
     works: PROJECTS,
   },
   "graphic-design": {
     href: "/graphic-design",
-    label: "Graphic design",
+    label: "Branding",
     works: GRAPHIC_DESIGN,
   },
   paintings: {
@@ -39,7 +39,7 @@ const CATEGORY_ROUTES: Record<string, CategoryRoute> = {
   },
   journalism: {
     href: "/journalism",
-    label: "Journalism",
+    label: "Cartoons",
     works: JOURNALISM,
   },
 };

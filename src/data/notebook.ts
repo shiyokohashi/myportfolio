@@ -112,7 +112,7 @@ const INTRO: NotebookPage = {
 const PROJECTS: NotebookProject[] = [
   {
     name: "Brisbane 2032",
-    href: "/projects/brisbane-2032",
+    href: "/graphic-design/brisbane-2032",
     sketch: {
       image: "/images/notebook/brisbane-2032.webp",
       alt: "Production case study notes and sketches: Olympics design and branding for Brisbane Summer 2032, research, logo explorations and billboard ideas",
@@ -169,6 +169,7 @@ const PROJECTS: NotebookProject[] = [
   },
   {
     name: "Adobe Zine",
+    href: "/graphic-design/adobe-campus-case-study",
     sketch: {
       image: "/images/notebook/adobe-zine.webp",
       alt: "Adobe Zine storyboard: campus creative scene, Sun God statue, Me x AI workflow",
@@ -212,7 +213,7 @@ const PROJECTS: NotebookProject[] = [
   },
   {
     name: "TTG Recruitment",
-    href: "/projects/triton-trading-group",
+    href: "/graphic-design/triton-trading-group",
     sketch: {
       image: "/images/notebook/ttg-recruitment.webp",
       alt: "TTG Recruitment Fall 2026 sketches: coming soon, scoreboard, schedule, golf flag",
@@ -249,7 +250,7 @@ const PROJECTS: NotebookProject[] = [
   },
   {
     name: "TFG monograms",
-    href: "/projects/triton-trading-group",
+    href: "/graphic-design/triton-trading-group",
     sketch: {
       image: "/images/notebook/tfg-monograms.webp",
       alt: "TFG monogram lettering explorations",
@@ -262,6 +263,7 @@ const PROJECTS: NotebookProject[] = [
   },
   {
     name: "Brandy Melville",
+    href: "/graphic-design/brandy-x-yrb",
     sketch: {
       image: "/images/notebook/brandy-melville.webp",
       alt: "Notes: Brandy Melville x Yellow Rat Bastard campaign, to-do lists, visual directions",
@@ -300,6 +302,7 @@ const PROJECTS: NotebookProject[] = [
   },
   {
     name: "IronMind",
+    href: "/graphic-design/ironmind",
     sketch: {
       image: "/images/notebook/ironmind.webp",
       alt: "IronMind AI sketch: retractable banner and trifold brochure layouts — inside panels, front, back with contact info, inside cover with the challenge",

@@ -4,6 +4,7 @@ import { ILLUSTRATIONS } from "@/data/illustrations";
 import { JOURNALISM } from "@/data/journalism";
 import { PAINTINGS } from "@/data/paintings";
 import { PROJECTS } from "@/data/projects";
+import { findWork } from "@/data/works";
 import { getWorkBySlug } from "@/lib/portfolio";
 import type { PortfolioWork } from "@/types/portfolio";
 
@@ -117,10 +118,9 @@ export function getSelectedWorksGroups(
     footerLink: category.footerLink,
     items: category.entries
       .map((entry) => {
-        const work = getWorkBySlug(
-          SOURCE_BY_PATH[category.href] ?? [],
-          entry.slug,
-        );
+        // Fall back to any section, so a work that moved (e.g. AEON → Branding) still shows.
+        const work =
+          getWorkBySlug(SOURCE_BY_PATH[category.href] ?? [], entry.slug) ?? findWork(entry.slug);
         if (!work) return undefined;
 
         return {
